@@ -17,19 +17,18 @@ student will investigate this hypothesis and also analyse the content of tweets
 with respect to the sentiment and opinion.
 
 #### TODO (roughly)
-* Setup repo
 * Setup doc folder and master thesis files. 
 * find out about Sentiment Analysis(SA)
 * Read articles from NTNU. 
 * SA associated with finance.
 * SA and finance
-* nlkt for python
+* nltk for python - http://nltk.org/
 
 #### Buss words
 * Sentiment analysis
 * Moving average
 * NLP
-* classification 
+* SA classification 
 
 #### Quotes
 * The trend is your friend

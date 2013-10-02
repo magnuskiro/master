@@ -8,16 +8,20 @@
 \documentclass[12pt, a4paper]{article}
 
 % packages to be used. needed to use images and such things. 
-\usepackage[pdfborder=0 0 0]{hyperref}
+\usepackage[hidelinks, pdfborder=0 0 0]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{graphicx}
+\usepackage{glossaries}
+\usepackage{listing}
+\usepackage{listings}
+\usepackage[options]{natbib}
 \PassOptionsToPackage{hyphens}{url}
 
 % hides the section numbering. 
 \setcounter{secnumdepth}{-1}
 
-% Graphics/image lications and extensions. 
+% Graphics/image locations and extensions. 
 \DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
 \graphicspath{{./images/}}
 
@@ -28,75 +32,72 @@
 % Author
 \author{
 	Magnus L Kirø \\
+	kiro@stud.ntnu.no \\
 	Student, IDI, IME, NTNU \\
 	\\
-	CO authors here.
+	% todo fix contact info etc. 
+	\underline{Supervisor:}\\
+    Pinar Öztürk\\
+    \\
+	\underline{Co Supervisor:}\\
+	Arvid Holme\\
+	\\
 }
 \date{\today}
 
+\hypersetup{
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=red,
+    urlcolor=blue,
+	citecolor=magenta
+}
+
 \begin{document}
+\pagenumbering{RomanType}
 \maketitle
+
+% Abstract
+\begin{abstract}\label{abstract}
+    \input{abstract}
+\end{abstract}
+\newpage
+
+% Acknowledgements and thanks to people that helped me. 
+\renewcommand{\abstractname}{Acknowledgements}
+	\input{acknowledgements}
+\renewcommand{\abstractname}{Metadata}
+	\input{metadata}
+\newpage
+
 \pagenumbering{arabic}
 
-\begin{abstract}
-Twitter har become mainstream and it's significance in the financial world is
-increasing. This makes tweets interesting as a source of stock predictions.
+% listings
+\tableofcontents
+\listoffigures
+\listoflistings
 
-This article will look at the state of the art techniques that exist and
-compare them. Keeping in mind the trends that crystalises from the underlying
-sentiment analysis of stock exchange relevant tweets. 
+\newpage
 
-What is state of the art in sentiment analysis with twitter as the datasource? 
+% sections
+\input{introduction}
+\input{stateOfTheArt}
+\input{data}
+\input{sentimentAnalysis}
+\input{trending}
+\input{results}
+\input{conclusion}
+\input{futureWork}
 
-A summary of relevant research will be provided. And thoughts of missing
-aspects of the current results will uttered. 
+\appendix
+\include{articles/slr}
 
-\end{abstract}
-
-\section{Introduction}
-Log test
-
-\paragraph{Outline}
-The remainder of this article is organized as follows.
-Section~\ref{previous work} gives account of previous work.
-Our new and exciting results are described in Section~\ref{results}.
-Finally, Section~\ref{conclusions} gives the conclusions.
-
-\section{Previous work}\label{previous work}
-A much longer \LaTeXe{} example was written by Gil~\cite{Gil:02}.
-
-\section{Results}\label{results}
-In this section we describe the results.
-
-\section{Conclusions}\label{conclusions}
-We worked hard, and achieved very little.
-
-% The following has nothing to do with structure or content. It's just nice to have easily available without googling. 
-\section{Useful stuffs}
-
-% basic table
-% http://en.wikibooks.org/wiki/LaTeX/Tables
-% the "{ l c r }" part decides if the content of a cell should be at the center, left or right. 
-\begin{tabular}{ l c r }
-  1 & 2 & 3 \\
-  4 & 5 & 6 \\
-  7 & 8 & 9 \\
-\end{tabular}
-
-$_This is subscript$
-$^This is Superscript$
-
-% imgae example. 
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=\textwidth]{nameOfImageFile} 
-    \caption{The text that shows under the image, image text.}
-    \label{fig:FigureLableName}
-\end{figure}
-
-
-\bibliographystyle{abbrv}
-\bibliography{main}
+%Bibliography
+\newpage
+\bibliographystyle{plainnat}
+\addcontentsline{toc}{section}{References}
+\bibliography{bibliography}
 
 \end{document}
 This is never printed

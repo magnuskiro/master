@@ -1,0 +1,165 @@
+\section{State of the Art / background / related work}
+	% a summary of the newest techniques and inventions in the field
+	% of twitter research related to finance. 
+
+\subsection{Twitter}
+Twitter is a social and information networking. It's a real-time service that
+connects users to the latest stories, their interests, ideas and much more. The
+microblogging site allows users to find and follow accounts that the user has
+an interest in. 
+
+At the core of Twitter you have the Tweet. The Tweet is the 140 character
+message. These bursts of information combined are the life blood of Twitter.
+Tweets lets you communicate with other users, share photos, post all kinds of
+information. The small size of the tweets are not a hindrance for the flow of
+information. 
+% todo move links from footnotes to bibliography?
+\footnote{About Twitter: \url{https://twitter.com/about}}
+
+The fast growing messaging service handles 1.6 billion searches every day.
+As of 2012 the 500 million users would generate 3.2 queries each on any given
+day. 340 million tweets were posted every day. 
+\footnote{Wikipedia: \url{http://en.wikipedia.org/wiki/Twitter}} 
+
+Today most medium and large companies are on Twitter. Posts can contain
+any type of information, from promotional content to service status to
+financial reports.  
+
+Companies use twitter for feedback and customer relations. Questions can be
+asked with a hashtag of to a specific user. This makes it easy to sort filter
+the messages, and therefore easier to get in contact with the customer. Best
+Buy demonstrated the successfulness of twitter in customer relations by
+answering questions with a specific hashtag. In 2009 they had answered nearly
+20 thousand questions using twitter. \cite[p1]{Li2013206}
+Market Intelligence is also a major aspect of the microbloggin sphere.
+
+Twitter represents one of the largest and most dynamic datasets of user
+generated content. Along with Facebook twitter data is real time. This has major
+implications for anyone who are interested in sentiment, public opinion or
+customer interaction. \cite[]{sperious11}
+
+Companies who use twitter. \cite[]{annikajubbega11:twitter_driver_stock_price}
+
+\subsection{Sentiment}
+
+Opinion mining on the web is not a new phenomenon. But in resent years it has
+become much more attractive to traders in the financial world. Twitter and the
+social media's opinion is on the rise. This means a surplus of raw data with
+easy access. Companies all over the world has started to use twitter and
+readily available tweets to their benefit. Trading with social media is part of
+the trend. Although there are some drawbacks and shortcomings. Noise and
+garbage is one of them. It's difficult to accurately sort through all the data
+and get only the information relevant for your use. Even if your right 80\% of
+the time, the last 20\% can prove devastating.
+\cite[]{stevenson12:social_media_stock_pickers}
+
+Sentiment broadly refers to the state of mind a person has. Whereas negative of
+positive. Based on the current state of mind the person will do optimistic or
+pessimistic choices. A positive state of mind leads to optimistic judgements of
+future events. And a negative state of mind leads to pessimistic judgements.
+\cite[p4]{doukas10:sentiment_and_momentum}
+
+The intention of users are also a part of the driver in user activity on
+microbloggs. The users may have different roles and intentions in different
+communities in the microblogging sphere \cite[]{java07}. This might also be a
+factor in the sentiment analysis.
+
+\subsubsection{Sentiment Analysis}
+\cite[]{Li2013206} approaches the classification of sentiment in tweets in four
+steps. First is the topic detection. The topic is the overall theme of the
+message. This step extracts and identifies the topics associated with the
+queries of users. Following that the classification of opinion happens. This
+judges the polarity of the sentiment. The state of mind of the user can be
+recorded.
+
+A problem that arises is the credibility of the expresser. \cite[]{Li2013206} addresses this to
+get a better summary of the sentiment. Then aggregates, the
+three previously described parts of the classification, to get a truer
+reflection of the opinions.
+
+\cite[]{barbosa10} looks upon the problem of noise in biased and noisy data. 
+They focus on noisy labels and add features to the tweets to increase the
+classification properties of the tweets. Then the tweets are classified as
+subjective or objective. This is to filter out the tweets that don't project a
+sentiment. The subjective tweets are then classified as positive or negative.
+Then \cite[]{barbosa10} generalise the classification of tweets by using meta
+data about the tweets and how tweets are written. This results in a more
+abstract representation of tweets and the classification. \cite[]{barbosa10}
+provides a better way to classify tweets.
+
+Another approach to the sentiment challenges with twitter is explored by
+\cite[]{becker13}. Their explorations techniques for Contextual Polarity Disambiguation
+and Message Polarity Classification. Constrained and supervised learning is
+utilised to create models of classification. They describe a system that solves
+these tasks with the help of polarity lexicons and dependency parsers. 
+Expanded vocabulary is one of the main aspects of their success, as they say in
+their findings: "We hypothesize this performance is largely due to the expanded vocabulary
+obtained via unlabeled data and the richer syntactic context captured with
+dependency path representations." \cite[]{becker13}
+
+From a bit earlier \cite[]{sperious11} have researched the polarity classification of tweets. 
+In contrast to \cite[]{becker13}, \cite[]{sperious11} has used distant
+supervision and labeled propagation on a graph based data structure. The data
+structure represents users with tweets as nodes. And tweets with bigrams,
+unigrams, hashtags, etc as subnodes of the tweets. A label propagation approach
+rivals a model supervised with in-domain annotated tweets and outperforms the
+noisily supervised classifier and a lexicon-based polarity ratio classifier.
+\cite[]{sperious11} 
+
+\subsubsection{Sentiment in Finance}
+
+Use of sentiment can predict changes and momentum in the market.
+Bad news in an optimistic period creates cognitive dissonance in the small
+investors. This impacts the market by slowing down the selling rate of loosing
+stocks. \cite[p29]{doukas10:sentiment_and_momentum}
+
+Further we can see that optimistic sentiment has a 2\% monthly average return.
+While the investor sentiment is pessimistic we see a drastic reduction in
+returns. Down to 0.34\%.\cite[p5]{doukas10:sentiment_and_momentum}
+After optimistic periods it is indicated that the monthly return is reduced to
+-0.49\%. On the contrary there is no equivalent change after a pessimistic
+period. \cite[p6-7]{doukas10:sentiment_and_momentum}
+Momentum profits are only significant when the sentiment is optimistic.
+\cite[p29]{doukas10:sentiment_and_momentum}
+
+Hope and fear is used by \cite[]{Zhang201155} to decide the movement of the
+market. The sentiment is aggregated to be hopeful of fearful. This basically
+focuses on positivity and negativity of the sentiment of that particular day.
+The daily sentiment is then compared to the market indicators of the same day
+to create a prediction of the market. \cite[]{Zhang201155} finds that calm
+times give little hope or other emotions. Little turmoil results in few fluctuations in the market. 
+And opposite, lots of emotions(hope, worry, fear), gives speed to the market.
+
+\cite[p3]{Brown20041} indicates that the sentiment does not cause subsequent
+market returns. For a short-term marketing timing this is bad news. However
+with the changes in social media over the last decade how is the situation
+today? With the microblogging sphere of today we can easily see the
+correlation of sentiment and the market indicators [todo:Citation]. But
+does the sentiment cause changes in the market-return?
+\cite[p3]{Brown20041} also says that optimism is associated with overvaluation and subsequent low returns.
+
+\cite[p]{Brown20041} concludes that aggregated sentiment measures has strong
+co-movement with changes in the market. He also indicates that sentiment
+doesn't appear to be a good trading strategy. This, in the view of
+\cite[]{Zhang201155} indicates a leap in sentiment research and what is possible
+with the microblogging of today.
+
+\subsection{Finance and Trading}
+%Finance and Trading on and with twitter. 
+%\cite[p.2]{annikajubbega11:twitter_driver_stock_price}
+
+%Sites like \href{http://stocktwits.com}{StockTwits.com}
+
+\cite[p2]{Brown20041} writes the following on over-reaction of investors: "
+He(Siegel (1992)) concludes that shifts in investor sentiment are correlated with market
+returns around the crash. Intuitively, sentiment represents the expectations of market participants
+relative to a norm: a bullish (bearish) investor expects returns to be above
+(below) average, whatever ‘‘average’’ may be.". In the light of resent changes
+in the financial world and the utilisation of sentiment from social media, the
+notion that opinions and sentiment of investors and market actors affect the
+market is not a new observation.
+
+\subsection{Trending}
+What is happening in the world on trending ? 
+
+

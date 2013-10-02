@@ -19,7 +19,7 @@
 \PassOptionsToPackage{hyphens}{url}
 
 % hides the section numbering. 
-\setcounter{secnumdepth}{-1}
+%\setcounter{secnumdepth}{-1}
 
 % Graphics/image locations and extensions. 
 \DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
@@ -71,7 +71,6 @@
 	\input{metadata}
 \newpage
 
-\pagenumbering{arabic}
 
 % listings
 \tableofcontents
@@ -79,6 +78,7 @@
 \listoflistings
 
 \newpage
+\pagenumbering{arabic}
 
 % sections
 \input{introduction}
@@ -90,14 +90,17 @@
 \input{conclusion}
 \input{futureWork}
 
-\appendix
-\include{articles/slr}
-
 %Bibliography
 \newpage
-\bibliographystyle{plainnat}
 \addcontentsline{toc}{section}{References}
+\bibliographystyle{plainnat}
 \bibliography{bibliography}
+
+% appendixes 
+\newpage
+\appendix
+\input{articles/slr}
+\input{appendix/tweetUsageOverview}
 
 \end{document}
 This is never printed

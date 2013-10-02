@@ -53,10 +53,7 @@ Meeting Notes
 
 ### meeting: date. 
 
-### previous meeting. 
-* How to write this section?
-http://www.umiacs.umd.edu/~saif/WebPages/Abstracts/NRC-SentimentAnalysis.htm
-
+### -
 #### Begynne artikkellesing med spm. 
 * Hvordan tweets blir brukt i den spesifikke artikkelen. 
 * event detection. Omhandler tweeten merging? 
@@ -72,8 +69,8 @@ http://www.umiacs.umd.edu/~saif/WebPages/Abstracts/NRC-SentimentAnalysis.htm
 * Kan man bruke sentiment analyse med twitter til å bestemme en trend. 
 
 #### State of the art 
-- Hva er sentiment analyse.
 - hva er twitter
+- Hva er sentiment analyse.
 - hvordan bruke sentiment analyse i trading. 
 - generelt om øko og trading. 
 - trending

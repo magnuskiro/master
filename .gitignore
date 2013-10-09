@@ -38,3 +38,7 @@ nosetests.xml
 *.blg
 *.bbl
 *.swp
+*.lof
+*.log
+*.out
+*.toc

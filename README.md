@@ -43,17 +43,54 @@ with respect to the sentiment and opinion.
 * Moving average
 * NLP
 * Classification 
+* Trend detection/analysis
 
 ### Quotes
 * The trend is your friend
 
+### Forgotten themes
+* Event detection of epidemics on twitter. 
+* In finance, change in tweet volume indicates a change in price direction. 
 
 Meeting Notes 
 ======
 
 ### meeting: date. 
 
-### -
+### Now
+* not article, Thesis! 
+* research question: ... in the stock market. both questions. How does these
+  trends compare to the technical analysis in the stock market. 
+* navn, innhold, sitering. 
+* 4.'sentiment analysis'
+* 4.1 remove. 
+* 4.2 The use of sentiment for me. 
+* 6. Results and discussion. 
+* 3. heading, ==> Data retrieval, 
+* 4 prototyping and such tings also. 
+* 1.1.1, specify the questions 
+* 4 = experiments. 
+* 1.1.1 which parts of twitter are most useful. 
+* 1.1.1 which parts of the twitter sphere results in the best exoeriment
+  results. Which twitter sources are most suitable for trend prediction in the
+stock market. 
+* 1.1.1 look at what sort of credibility level has to be attained to certify
+  the quality of the trend prediction. 
+* what a stock is is useless information. 
+* Physical presentation of twitter and usage. Searches and queries
+* om twitter and typical twitter messages. 
+* technical analysis 
+* experiment with the time frame for the trend. 
+* What experiments can and should I do. 
+* state of the art, in sentiment, methods used and tagging of words, labeling. 
+* 1.1.1 use sentiment analysis on tweets. 
+* positive negative terms. <-- get it into the research questions.>
+
+* Literature review to get word lists. 
+* stop word list for finance. 
+* Positive and negative word list. 
+
+
 #### Begynne artikkellesing med spm. 
 * Hvordan tweets blir brukt i den spesifikke artikkelen. 
 * event detection. Omhandler tweeten merging? 

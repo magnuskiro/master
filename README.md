@@ -57,7 +57,19 @@ Meeting Notes
 
 ### meeting: date. 
 
-### Now
+
+### 05.12
+### 28.11
+### 21.11
+### 14.11
+###  7.11
+### 31.10
+### 24.10
+### 17.10
+### 10.10
+
+
+### 03.10
 * not article, Thesis! 
 * research question: ... in the stock market. both questions. How does these
   trends compare to the technical analysis in the stock market. 

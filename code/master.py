@@ -11,10 +11,6 @@ def hello_world():
 def description():
     return 'description'
 
-@app.route('/twtr/me')
-def getTweet():
-    cont = twitter.getTweet()
-    return str(cont)
 
 
 # starting the app.

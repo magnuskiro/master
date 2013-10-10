@@ -11,10 +11,11 @@ def hello_world():
 def description():
     return 'description'
 
-@app.route('/tweet')
+@app.route('/twtr/me')
 def getTweet():
     cont = twitter.getTweet()
     return str(cont)
+
 
 # starting the app.
 if __name__ == '__main__':

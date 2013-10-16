@@ -18,7 +18,7 @@ def creds():
 @app.route('/twtr/search/')
 @app.route('/twtr/search/<term>')
 def search(term=None):
-    return str(twtr.serach(term=term))
+    return str(twtr.search(term=term))
 
 # starting the app.
 if __name__ == '__main__':

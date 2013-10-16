@@ -33,12 +33,4 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
-*.aux
-*.lol
-*.blg
-*.bbl
-*.swp
-*.lof
-*.log
-*.out
-*.toc
+

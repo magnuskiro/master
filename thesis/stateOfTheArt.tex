@@ -1,5 +1,5 @@
 \section{State of the Art / Background }
-	% a summary of the newest techniques and inventions in the field
+	% todo a summary of the newest techniques and inventions in the field
 	% of twitter research related to finance. 
 
 \subsection{Twitter}
@@ -13,7 +13,6 @@ message. These bursts of information combined are the life blood of Twitter.
 Tweets lets you communicate with other users, share photos, post all kinds of
 information. The small size of the tweets are not a hindrance for the flow of
 information. 
-% todo move links from footnotes to bibliography?
 \footnote{About Twitter: \url{https://twitter.com/about}}
 
 The fast growing messaging service handles 1.6 billion searches every day.
@@ -39,10 +38,59 @@ generated content. Along with Facebook twitter data is real time. This has major
 implications for anyone who are interested in sentiment, public opinion or
 customer interaction. \cite[]{sperious11}
 
-% todo write
-% about twitter and typical twitter messages.
-% physical representation of twitter and tweets. Pictures etc. 
-% Searches and queries. Searching for stuff on twitter. The API.
+A typical tweet contains about 11 words and provides an opinion or state of
+mind or a piece of information. Tweets can contain hashtags: #something, user:
+@username, or other adaptations of prefixes such as \$STO which represents a
+stock. The different prefixes or tags (\$, \#, @) easily distinguishes the
+content of the tweet. This also makes it easier to search and classify the
+content of tweets. Examples of tweets can be found in figure:\ref{fig:sto} and
+figure:\ref{fig:tweet1}.
+
+The retrieval of tweets seems like a challenge and practically impossible with
+a web scraper. But Twitter has made this easy by providing an API
+\footnote{API: Application programming interface}. With the API you can write
+tweets and update the status of a user. But the best part of the API is that it
+provides search capabilities. To get a certain subset of all tweets, we can use
+the search function and view only the tweets we want. 
+
+On the front page of twitter we have the search function at the top right of
+the page. The search provides the ability to limit the tweets you look at and
+gives you the opportunity to find the information you are looking for. 
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{STO} 
+    \caption{Typical tweet from Twitter.}
+    \label{fig:sto}
+\end{figure}
+
+%\begin{figure}[htb]
+%    \centering
+%    \includegraphics[width=\textwidth]{STO2} 
+%    \caption{The text that shows under the image, image text.}
+%    \label{fig:sto2}
+%\end{figure}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{tweet1} 
+    \caption{Typical tweet from Twitter.}
+    \label{fig:tweet1}
+\end{figure}
+
+%\begin{figure}[htb]
+%    \centering
+%    \includegraphics[width=\textwidth]{tweet2} 
+%    \caption{The text that shows under the image, image text.}
+%    \label{fig:tweet2}
+%\end{figure}
+%
+%\begin{figure}[htb]
+%    \centering
+%    \includegraphics[width=\textwidth]{tweet3} 
+%    \caption{The text that shows under the image, image text.}
+%    \label{fig:tweet3}
+%\end{figure}
 
 \subsection{Sentiment}
 
@@ -53,11 +101,11 @@ easy access. Companies all over the world has started to use twitter and
 readily available tweets to their benefit. Trading with social media is part of
 the trend. Although there are some drawbacks and shortcomings. Noise and
 garbage is one of them. It's difficult to accurately sort through all the data
-and get only the information relevant for your use. Even if your right 80\% of
+and get only the information relevant for your use. Even if you're right 80\% of
 the time, the last 20\% can prove devastating.
 \cite[]{stevenson12:social_media_stock_pickers}
 
-Sentiment broadly refers to the state of mind a person has. Whereas negative of
+Sentiment broadly refers to the state of mind a person has. Whereas negative or
 positive. Based on the current state of mind the person will do optimistic or
 pessimistic choices. A positive state of mind leads to optimistic judgements of
 future events. And a negative state of mind leads to pessimistic judgements.
@@ -65,15 +113,17 @@ future events. And a negative state of mind leads to pessimistic judgements.
 
 The intention of users are also a part of the driver in user activity on
 microbloggs. The users may have different roles and intentions in different
-communities in the microblogging sphere \cite[]{java07}. This might also be a
+communities in the microblogging sphere, \cite[]{java07}. This might also be a
 factor in the sentiment analysis.
 
 \subsubsection{Sentiment Analysis}
 
 % todo This should be present: 
 % methods used
+	% adding features to the tweet.
+	% Lexicon, positive / negative.
+	% labeled graph propagation.
 % tagging of words 
-% labeling
 
 \cite[]{Li2013206} approaches the classification of sentiment in tweets in four
 steps. First is the topic detection. The topic is the overall theme of the
@@ -100,14 +150,14 @@ provides a better way to classify tweets.
 Another approach to the sentiment challenges with twitter is explored by
 \cite[]{becker13}. Their explorations techniques for Contextual Polarity Disambiguation
 and Message Polarity Classification. Constrained and supervised learning is
-utilised to create models of classification. They describe a system that solves
+used to create models for classification. They describe a system that solves
 these tasks with the help of polarity lexicons and dependency parsers. 
 Expanded vocabulary is one of the main aspects of their success, as they say in
 their findings: "We hypothesize this performance is largely due to the expanded vocabulary
 obtained via unlabeled data and the richer syntactic context captured with
 dependency path representations." \cite[]{becker13}
 
-From a bit earlier \cite[]{sperious11} have researched the polarity classification of tweets. 
+Earlier \cite[]{sperious11} have researched the polarity classification of tweets. 
 In contrast to \cite[]{becker13}, \cite[]{sperious11} has used distant
 supervision and labeled propagation on a graph based data structure. The data
 structure represents users with tweets as nodes. And tweets with bigrams,
@@ -122,7 +172,7 @@ He(Siegel (1992)) concludes that shifts in investor sentiment are correlated
 with market returns around the crash. Intuitively, sentiment represents the
 expectations of market participants relative to a norm: a bullish (bearish)
 investor expects returns to be above (below) average, whatever ‘‘average’’ may
-be.". In the light of resent changes in the financial world and the utilisation
+be.". In the light of resent changes in the financial world and the use
 of sentiment from social media, the notion that opinions and sentiment of
 investors and market actors affect the market is not a new observation.
 
@@ -133,12 +183,12 @@ stocks. \cite[p29]{doukas10:sentiment_and_momentum}
 
 Further we can see that optimistic sentiment has a 2\% monthly average return.
 While the investor sentiment is pessimistic we see a drastic reduction in
-returns. Down to 0.34\%.\cite[p5]{doukas10:sentiment_and_momentum}
+returns. Down to 0.34\%,\cite[p5]{doukas10:sentiment_and_momentum}.
 After optimistic periods it is indicated that the monthly return is reduced to
 -0.49\%. On the contrary there is no equivalent change after a pessimistic
-period. \cite[p6-7]{doukas10:sentiment_and_momentum}
-Momentum profits are only significant when the sentiment is optimistic.
-\cite[p29]{doukas10:sentiment_and_momentum}
+period, \cite[p6-7]{doukas10:sentiment_and_momentum}.
+Momentum profits are only significant when the sentiment is optimistic,
+\cite[p29]{doukas10:sentiment_and_momentum}.
 
 Hope and fear is used by \cite[]{Zhang201155} to decide the movement of the
 market. The sentiment is aggregated to be hopeful or fearful. This basically
@@ -153,7 +203,8 @@ gives speed to the market.
 market returns. For a short-term marketing timing this is bad news. However
 with the changes in social media over the last decade how is the situation
 today? With the microblogging sphere of today we can easily see the
-correlation of sentiment and the market indicators [todo:Citation]. But
+correlation of sentiment and the market indicators,
+\cite[]{annikajubbega11:twitter_driver_stock_price}. But
 does the sentiment cause changes in the market-return?
 \cite[p3]{Brown20041} also says that optimism is associated with overvaluation
 and subsequent low returns.
@@ -161,7 +212,7 @@ and subsequent low returns.
 \cite[p]{Brown20041} concludes that aggregated sentiment measures has strong
 co-movement with changes in the market. He also indicates that sentiment
 doesn't appear to be a good trading strategy. This, in the view of
-\cite[]{Zhang201155} indicates a leap in sentiment research and what is possible
+\cite[]{Zhang201155}, indicates a leap in sentiment research and what is possible
 with the microblogging of today.
 
 \subsection{Finance and Trading}
@@ -172,7 +223,7 @@ with the microblogging of today.
 
 The management of assets or liabilities and the management of funds over a
 period of time is called Finance. In finance the valuation of assets are time
-dependant. The same asset is not worth the same now and in a bit. Assets are
+dependant. The same asset is not worth the same now and in a few minutes. Assets are
 priced based on expected returns and risk level. The three sub categories of
 finance are: personal, corporate and public. 
 \footnote{Wikipedia:\url{http://en.wikipedia.org/wiki/Finance}}.
@@ -200,8 +251,9 @@ to sovereign and sub-national entities
 National banks and the production of money are also categorised under this
 category.
 
-% Todo write about technical analysis. 
+% todo write about technical analysis. 
 Technical analysis in finance. 
+
 
 \subsection{The Trend}
 The trend is the general opinion of the masses. As defined by the Free

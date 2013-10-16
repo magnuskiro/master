@@ -1,0 +1,11 @@
+# Tex files. 
+*.aux
+*.lol
+*.blg
+*.bbl
+*.swp
+*.lof
+*.log
+*.out
+*.toc
+

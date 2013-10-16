@@ -71,6 +71,9 @@ A bit of twitter integration.
 Research questions update. 
 Some on state of the art. 
 
+Focusing on the twitter api and classification with positive/negative words
+until next time. 
+Also working on the state of the art part. 
 
 ### 03.10
 * not article, Thesis! 

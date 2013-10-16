@@ -65,8 +65,11 @@ Meeting Notes
 ###  7.11
 ### 31.10
 ### 24.10
-### 17.10
-### 10.10
+### 15.10
+Basic update. Not much done. 
+A bit of twitter integration. 
+Research questions update. 
+Some on state of the art. 
 
 
 ### 03.10
@@ -97,7 +100,7 @@ stock market.
 * state of the art, in sentiment, methods used and tagging of words, labeling. 
 * 1.1.1 use sentiment analysis on tweets. 
 * positive negative terms. <-- get it into the research questions.>
-
+:
 * Literature review to get word lists. 
 * stop word list for finance. 
 * Positive and negative word list. 

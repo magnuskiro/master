@@ -18,12 +18,12 @@ with respect to the sentiment and opinion.
 
 ### Schedule / Dates
 * nov 1: 25 pages. 
-* dec 1: 35 pages and some working code. 
+* dec 1: 35 pages and a working beta version of system.  
 * jan 10: 45 pages, working code. 
 * feb 1: 55 pages and reworked thesis. 
 * mar 1: 70 pages, just minor code changes creating results in march. 
 * apr 1: 85 pages, all code and results complete. 
-* may 1: 100 pages, only finishing touches left. 
+* may 1: 100 pages, only finishing touches and proof reading remain.  
 * jun 1: finished. 
 
 ### Finding relevant articles: 
@@ -65,6 +65,8 @@ Meeting Notes
 ###  7.11
 ### 31.10
 ### 24.10
+
+
 ### 15.10
 Basic update. Not much done. 
 A bit of twitter integration. 

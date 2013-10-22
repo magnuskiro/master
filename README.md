@@ -52,6 +52,9 @@ with respect to the sentiment and opinion.
 * Event detection of epidemics on twitter. 
 * In finance, change in tweet volume indicates a change in price direction. 
 
+### TODO / Stuff to remember 
+* Deploying: http://flask.pocoo.org/docs/quickstart/#deploying-to-a-web-server
+
 Meeting Notes 
 ======
 

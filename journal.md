@@ -1,4 +1,10 @@
 
+## 22.10.13
+
+Working on the application. Learning flask and refreshing on python. 
+Now getting tweets from twitter. 
+
+
 ## 21.10.13
 
 #### Focus

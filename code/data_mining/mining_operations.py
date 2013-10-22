@@ -1,4 +1,22 @@
-from twitter_integration import twtr
+from app import app, db
+from models import User
+from flask_peewee.rest import RestAPI
 
-def search(term = 'default'):
-    return "latest data %s" % term
+api = RestAPI(app)
+
+def data():
+    return 'this is the data part'
+
+@app.route('/data/get')
+def create_user(term = 'default'):
+    user = User('username1', 'message1')
+    db.session.add(user)
+    db.session.commit()
+    return "Created user"
+
+@app.route('/data/get')
+def get_user():
+    return User.query.all()
+
+
+

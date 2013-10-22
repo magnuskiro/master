@@ -4,7 +4,7 @@ import io
 
 # reading twitter data from config file
 # Default path is '.'i aka open needs the full path from home.
-conf = open('ntnu/master/code/twitter_integration/auth.cfg', 'r').read()
+conf = open('/home/kiro/ntnu/master/code/twitter_integration/auth.cfg', 'r').read()
 config = ConfigParser.RawConfigParser(allow_no_value=True)
 config.readfp(io.BytesIO(conf))
 

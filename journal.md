@@ -1,9 +1,18 @@
 
 ## 22.10.13
 
-Working on the application. Learning flask and refreshing on python. 
-Now getting tweets from twitter. 
+#### Focus
+Thesis restructuring, coding structure, searching for positive/negative
+corpora, work on state of the art, and reading articles.  
 
+#### done
+Restructuring the thesis to more compliant to standards from NTNU. 
+
+Code structure of the backend about complete. 
+Getting data from twitter. Need to separate tweets and store them for
+classification. 
+
+Working on the application. Learning flask and refreshing on python. 
 
 ## 21.10.13
 
@@ -15,7 +24,6 @@ Classify tweets from twitter.
 Chapter
 	section
 		sub section
-
 IMRAD
 
 Why?

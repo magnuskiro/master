@@ -59,7 +59,8 @@ Meeting Notes
 ======
 
 ### meeting: date. 
-
+* What has been done?
+* What todo the next week.  
 
 ### 05.12
 ### 28.11
@@ -79,7 +80,7 @@ Some on state of the art.
 Focusing on the twitter api and classification with positive/negative words
 until next time. 
 Also working on the state of the art part. 
-Update the thesis to comply with the AI-masters/ntnu thesis example. 
+Until next time: Update the thesis to comply with the AI-masters/ntnu thesis example. 
 
 ### 03.10
 * not article, Thesis! 

@@ -10,7 +10,7 @@ def make_shell_context():
     return dict(app=app, db=db)
 
 @manager.command
-def createdb():
+def create_db():
     from models import db
     db.create_all()
 

@@ -1,4 +1,6 @@
-from app import app, db
+from app import app
+
+#enables @app.route('path') that exists in views.py
 from views import *
 
 # starting the app.

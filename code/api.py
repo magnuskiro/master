@@ -5,6 +5,8 @@ from models import User
 
 api = RestAPI(app)
 
+# TODO get this to work.
+
 class UserResource(RestResource):
     exclude = 'password'
 

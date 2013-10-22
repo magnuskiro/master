@@ -17,15 +17,19 @@ OAUTH_TOKEN_SECRET = config.get('twtrauth', 'oauth_token_secret')
 # authentication on twitter.
 twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 
-def credentials():
+
+def get_credentials():
     credentials = twitter.verify_credentials()
     return credentials
 
-def timeline():
+
+def get_timeline():
     timeline = twitter.get_home_timeline()
     return timeline
 
+
 # Executing a search term(unicode string).
-def search(term):
+# TODO term default should be something intuitive.
+def search(term='NTNU'):
     result = twitter.search(q=term)
     return result

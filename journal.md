@@ -1,6 +1,9 @@
 
 ## 22.10.13
 
+#### Tomorrow
+Read articles and work on the state of the art part.
+
 #### Focus
 Thesis restructuring, coding structure, searching for positive/negative
 corpora, work on state of the art, and reading articles.  
@@ -13,6 +16,14 @@ Getting data from twitter. Need to separate tweets and store them for
 classification. 
 
 Working on the application. Learning flask and refreshing on python. 
+
+Found two articles and a slide set while looking for corpora of
+positive/negative words.\\ 
+http://www.slideshare.net/leonderczynski/twitie-ranlp2013 \\
+http://derczynski.com/sheffield/papers/twitter_pos.pdf \\
+https://gate.ac.uk/sale/ranlp2013/twitie/twitie-ranlp2013.pdf \\
+
+Emoticons are important in microblogging. 
 
 ## 21.10.13
 

@@ -5,7 +5,7 @@
 % reference manual(eng): http://ctan.uib.no/info/latex2e-help-texinfo/latex2e.html
 
 % The document class defines the type of document. Presentation, article, letter, etc. 
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt, a4paper]{report}
 
 % packages to be used. needed to use images and such things. 
 \usepackage[hidelinks, pdfborder=0 0 0]{hyperref}
@@ -25,44 +25,61 @@
 \DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
 \graphicspath{{./images/}}
 
-% Title or header for the document. 
-\title{
-	Sentiment analysis of Tweets in correlation with financial investments. 
-}
-% Author
-\author{
-	Magnus L Kirø \\
-	kiro@stud.ntnu.no \\
-	Student, IDI, IME, NTNU \\
-	\\
-	% todo fix contact info etc. 
-	\underline{Supervisor:}\\
-    Pinar Öztürk\\
-    \\
-	\underline{Co Supervisor:}\\
-	Arvid Holme\\
-	\\
-}
-\date{\today}
-
 \hypersetup{
+    pdfauthor={\thesisAuthor},
+    pdftitle={\thesisTitle},
+    pdfsubject={\thesisType},
     pdfnewwindow=true,
     colorlinks=true,
     linkcolor=black,
     filecolor=red,
     urlcolor=blue,
-	citecolor=magenta
+    citecolor=magenta
 }
 
+% Author, title and type
+% Used in the title page. 
+\newcommand{\thesisAuthor}{Magnus L. Kirø}
+\newcommand{\thesisTitle}{Sentiment analysis of Tweets in correlation with financial investments.}
+\newcommand{\thesisType}{Masters Thesis}
+
+% beginning of the document content, end of the configuration and setup. 
 \begin{document}
 \pagenumbering{RomanType}
-\maketitle
+
+% front page, contains: title, author, institution, and logo
+\begin{titlepage}
+    \noindent {\large \textbf{\thesisAuthor}}
+    \vspace{2cm}
+    
+    \noindent {\Huge \thesisTitle}
+    \vspace{2cm}
+
+	% todo removed on completion
+    \noindent {
+		\Huge \textbf{Work in progress}, 
+		\\ \Large to be completed by 1. jun 2014.
+		\\ \url{https://github.com/magnuskiro/master
+	}
+    \vspace{2cm}
+	% end todo remove. 
+    
+    \noindent \thesisType, \date{\today}
+    \vspace{2cm}
+    
+    \noindent 
+	Artificial Intelligence Group\\ 
+	Department of Computer and Information Science\\ 
+	Faculty of Information Technology, Mathematics and Electrical Engineering\\
+    
+    \vfill
+    \begin{center}
+ 		\includegraphics[]{NTNUlogo}
+    \end{center}
+\end{titlepage}
 
 % Abstract
-\begin{abstract}\label{abstract}
-    \input{abstract}
-\end{abstract}
-\newpage
+\input{abstract}
 
 % Acknowledgements and thanks to people that helped me. 
 \renewcommand{\abstractname}{Acknowledgements}
@@ -99,7 +116,7 @@
 % appendixes 
 \newpage
 \appendix
-\input{articles/slr}
+\input{articles/articles}
 \input{appendix/tweetUsageOverview}
 \input{appendix/systemSpecifications}
 \input{appendix/tweetStructure}

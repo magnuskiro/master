@@ -62,16 +62,37 @@ Meeting Notes
 * What has been done?
 * What todo the next week.  
 
-### 05.12
-### 28.11
-### 21.11
-### 14.11
-###  7.11
-### 31.10
-### 24.10
+## 05.12
+## 28.11
+## 21.11
+## 14.11
+## 07.11
+## 31.10
+## 24.10
+#### Since last time 
+Restructured the thesis, compliant with NTNU template. 
+Course about how to write academic English (Monday).
+Started coding. Structure and basic framework use.  
+Workstation setup. 
+Found article about PoS-tagging of tweets, gate plugin.
+Started a journal to keep track of progress on a daily basis. 
+
+#### Problems 
+Procrastination and disturbances --> more discipline. 
+Not found a word list. Considering to grab one from Gate or something(reverse
+engineering). 
+To little focus on articles and research. 
+
+#### The next week
+Write on the data section. 
+Rework the state of the art section. 
+Start coding the sentiment classification.  
+More focus on research and thesis. 
+
+#### Input from supervisor: 
 
 
-### 15.10
+## 15.10
 Basic update. Not much done. 
 A bit of twitter integration. 
 Research questions update. 
@@ -82,7 +103,7 @@ until next time.
 Also working on the state of the art part. 
 Until next time: Update the thesis to comply with the AI-masters/ntnu thesis example. 
 
-### 03.10
+## 03.10
 * not article, Thesis! 
 * research question: ... in the stock market. both questions. How does these
   trends compare to the technical analysis in the stock market. 

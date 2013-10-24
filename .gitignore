@@ -34,3 +34,6 @@ nosetests.xml
 .project
 .pydevproject
 
+# swap and temporary files
+*.swp
+

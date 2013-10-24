@@ -16,6 +16,7 @@
 \usepackage{listing}
 \usepackage{listings}
 \usepackage[options]{natbib}
+\usepackage{hyphenat}
 \PassOptionsToPackage{hyphens}{url}
 
 % hides the section numbering. 
@@ -51,9 +52,11 @@
 \begin{titlepage}
     \noindent {\large \textbf{\thesisAuthor}}
     \vspace{2cm}
-    
+
+\nohyphens{    
     \noindent {\Huge \thesisTitle}
     \vspace{2cm}
+}
 
 	% todo removed on completion
     \noindent {
@@ -63,15 +66,15 @@
 	}
     \vspace{2cm}
 	% end todo remove. 
-    
+   
     \noindent \thesisType, \date{\today}
     \vspace{2cm}
-    
+   
     \noindent 
 	Artificial Intelligence Group\\ 
 	Department of Computer and Information Science\\ 
 	Faculty of Information Technology, Mathematics and Electrical Engineering\\
-    
+
     \vfill
     \begin{center}
  		\includegraphics[]{NTNUlogo}

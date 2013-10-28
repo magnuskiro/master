@@ -90,6 +90,13 @@ Start coding the sentiment classification.
 More focus on research and thesis. 
 
 #### Input from supervisor: 
+Send pdf file each wednesday. 
+Separate with on lang code / country code. 
+Double negation? 
+Bi grams. 
+Important to write about the stuff I have thought about. 
+I focus on this and that. 
+Finish state of the art by monday 1800.   
 
 
 ## 15.10

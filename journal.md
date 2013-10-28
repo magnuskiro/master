@@ -11,6 +11,17 @@ dd.mm.yy
 --end Template
 Newest entries first.
 
+28.10.13
+-----
+#### Tomorrow
+Continue the tiresome work with reading and writing. Have to do something fun. 
+#### Problems
+motivation.
+#### Done
+practically nothing. 
+#### Focus
+Writing on the thesis. 
+
 
 24.10.13
 -----

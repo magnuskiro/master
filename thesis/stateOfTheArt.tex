@@ -117,45 +117,65 @@ communities in the microblogging sphere, \cite[]{java07}. This might also be a
 factor in the sentiment analysis.
 
 \subsection{Sentiment Analysis}
+There are two main categories of approaches to sentiment analysis. 
+	The first is to train a classifier. The classifier can use methods such as
+naive Byes, maximum entropy or support vector model \cite[]{Li2013206} This is
+typically a method where it would be natural to use machine learning of
+evolutionary algorithms to increase the classification correctness over time. 
+	Second, the use of linguistic resources. Such as corpora of negative and
+positive words. The developed linguistic resources are used to classify the
+sentiment of the text \cite[]{Li2013206}.
 
-% todo This should be present: 
-% methods used
-	% adding features to the tweet.
-	% Lexicon, positive / negative.
-	% labeled graph propagation.
-% tagging of words 
+Li and Li has created a framework for sentiment analysis. The system
+consists of four main steps  and is tested with experiments on twitter. 
+	First they do topic detection, identifying and extracting the topics
+mentioned in the tweet. 
+	Secondly opinions are classified. The polarity of the opinion is decided and
+the users impression is captured. 	
+	Third. Credibility is assessed. This creates a better summarization of the
+expresser's credibility. 
+	Fourth, step one, two, and three is aggregated to reflect the true opinion
+and point of view.
+	Combining the first three steps in the fourth results in a truer reflection of
+the expresser's opinion. \cite[]{Li2013206} 
 
-\cite[]{Li2013206} approaches the classification of sentiment in tweets in four
-steps. First is the topic detection. The topic is the overall theme of the
-message. This step extracts and identifies the topics associated with the
-queries of users. Following that the classification of opinion happens. This
-judges the polarity of the sentiment. The state of mind of the user can be
-recorded.
+One way of classifying tweets is to use predefined lexicon of positive and
+negative words. Consumer confidence and fluctuations of voting polls can be
+tracked in this way \cite[]{connor2010}.
 
-A problem that arises is the credibility of the expresser. \cite[]{Li2013206} addresses this to
-get a better summary of the sentiment. Then aggregates, the
-three previously described parts of the classification, to get a truer
-reflection of the opinions.
+In \cite[]{diakopoulos2010}, a methodology with visual representation. The
+intention of the system is to provide a better understanding of temporal
+dynamics of sentiment. This is investigated in the reaction to debate video.
+	Further \cite[]{diakopoulos2010} detects sentiment pulse and controversial
+topics with the help of visualisation and metrics. 
+	\cite[]{diakopoulos2010} used crowd-sourcing to classify batches of tweets.
+This was accomplished with Amazon Mechanical Turk, a crowd-sourcing
+site\footnote{Amazon Mechanical Turk (AMT): \url{https://www.mturk.com/mturk/}}.
 
-\cite[]{barbosa10} looks upon the problem of noise in biased and noisy data. 
+\cite[]{barbosa10} explores the problem of noise in biased and noisy data. 
 They focus on noisy labels and add features to the tweets to increase the
 classification properties of the tweets. Then the tweets are classified as
 subjective or objective. This is to filter out the tweets that don't project a
-sentiment. The subjective tweets are then classified as positive or negative.
-Then \cite[]{barbosa10} generalise the classification of tweets by using meta
-data about the tweets and how tweets are written. This results in a more
-abstract representation of tweets and the classification. \cite[]{barbosa10}
-provides a better way to classify tweets.
+sentiment. The subjective tweets are classified as positive or negative.
+
+Classification of tweets can be generalised by using features. Features are
+elements such as unigrams, bigrams, and part-of-speech tags. An abstract
+representation of a tweet would be beneficiary to the classification. In this
+abstract representation \cite[]{barbosa10} propose to use characteristics about
+how tweets are written and meta-information about the words in tweets. 
+Meta-features and tweet syntax features are further features that can improve
+classification. The tweet syntax features are things such as hashtags, retweet,
+reply, links, punctuation and emoticons \cite[]{barbosa10}. 
 
 Another approach to the sentiment challenges with twitter is explored by
-\cite[]{becker13}. Their explorations techniques for Contextual Polarity Disambiguation
-and Message Polarity Classification. Constrained and supervised learning is
-used to create models for classification. They describe a system that solves
-these tasks with the help of polarity lexicons and dependency parsers. 
-Expanded vocabulary is one of the main aspects of their success, as they say in
-their findings: "We hypothesize this performance is largely due to the expanded vocabulary
-obtained via unlabeled data and the richer syntactic context captured with
-dependency path representations." \cite[]{becker13}
+\cite[]{becker13}. Their explorations techniques for Contextual Polarity
+Disambiguation and Message Polarity Classification. Constrained and supervised
+learning is used to create models for classification. They describe a system
+that solves these tasks with the help of polarity lexicons and dependency
+parsers. Expanded vocabulary is one of the main aspects of their success, as
+they say in their findings: "We hypothesize this performance is largely due to
+the expanded vocabulary obtained via unlabeled data and the richer syntactic
+context captured with dependency path representations." \cite[]{becker13}
 
 Earlier \cite[]{sperious11} have researched the polarity classification of tweets. 
 In contrast to \cite[]{becker13}, \cite[]{sperious11} has used distant

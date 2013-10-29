@@ -11,6 +11,17 @@ dd.mm.yy
 --end Template
 Newest entries first.
 
+29.10.13
+-----
+#### Tomorrow
+Create todo elements and direction from meeting notes. 
+#### Problems
+Motivation. 
+#### Done
+nothing
+#### Focus
+Supervisor meeting. 
+
 28.10.13
 -----
 #### Tomorrow

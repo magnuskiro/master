@@ -67,7 +67,77 @@ Meeting Notes
 ## 21.11
 ## 14.11
 ## 07.11
-## 31.10
+## 29.10
+#### Done?
+State of the art is about done. 
+Nothing else is done since last time.
+#### Until next time: 
+Continue to work on the thesis. 
+Mode code.  
+#### Feedback
+* Programmere, bytte på med lesing og koding. 
+* R språk ?
+* bruke dictionaries, ordbøker i mail. pos/neg
+* 
+
+* trenger pos/neg ordbok. 
+* Finans relaterte tweets,
+* koble dem sammen
+
+* Lese en artikkel hver dag.
+
+* Begynnelsen av nytt fagonrpåde. 
+* Litt stykkevis og delt. 
+
+* Coding / system specification as chapter 6. 
+* reduserer egen innsats. 
+* min approach. 
+* Work on this, I know this part well. 
+
+* Skille artikler på machin learnin og statistisk.  
+
+* Naturlig språk / klassifisering. 
+*  -||- / kvantitative metoder. 
+
+* statistikk / naturlig språk. 
+* Se på artikler igjen og se på forrige punkt. 
+
+* pos => nlp. 
+
+* lerning / not learning
+
+* NLP på bearbeidingen. 
+
+* Gramar, sentences and such. ENGLISH!!
+
+* Clustering på innhold. Finance... 
+
+* læring, ja/nei
+* input til læringen? 
+* statistisk / nlp. 
+
+* Innholdet, hvor my av en tweet blir faktisk brukt. 
+
+* Viktig å vite hvilken bagasje vi har fra før av. 
+
+* Settning hvor et ord forekommer. 
+* explisitt om meta-features. 
+
+* Waht do i get out of each article. 
+* lessons learned. 
+* background in the articles, IMPORTANT!
+
+* kode med statistikken. 
+* Lese mer om sentiment, litt mer i bredden. 
+
+* Noder og kanter i grafene. 
+
+* Mer forståelse, gir bedre resultat. 
+
+* dependency path representation. 
+
+* Jobbe med thesen og koden parallellt. 
+
 ## 24.10
 #### Since last time 
 Restructured the thesis, compliant with NTNU template. 
@@ -97,6 +167,7 @@ Bi grams.
 Important to write about the stuff I have thought about. 
 I focus on this and that. 
 Finish state of the art by monday 1800.   
+
 
 
 ## 15.10

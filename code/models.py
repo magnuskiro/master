@@ -12,3 +12,12 @@ class User(db.Model):
 
     def __unicode__(self):
         return self.username
+
+
+class Tweet(db.Model):
+    id = db.Column(db.BIGINT, primary_key=True)
+    tweet = db.Column(db.String)
+
+    def __init__(self, id, tweet):
+        self.id = id
+        self.tweet = tweet

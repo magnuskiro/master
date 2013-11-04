@@ -17,6 +17,7 @@ class User(db.Model):
 class Tweet(db.Model):
     id = db.Column(db.BIGINT, primary_key=True)
     tweet = db.Column(db.String)
+	polarity = {} #  { 'pos':0, 'neg':0 }
 
     def __init__(self, id, tweet):
         self.id = id

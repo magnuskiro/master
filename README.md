@@ -78,7 +78,6 @@ Mode code.
 * Programmere, bytte på med lesing og koding. 
 * R språk ?
 * bruke dictionaries, ordbøker i mail. pos/neg
-* 
 
 * trenger pos/neg ordbok. 
 * Finans relaterte tweets,
@@ -86,7 +85,7 @@ Mode code.
 
 * Lese en artikkel hver dag.
 
-* Begynnelsen av nytt fagonrpåde. 
+* Begynnelsen av nytt fagområde. 
 * Litt stykkevis og delt. 
 
 * Coding / system specification as chapter 6. 

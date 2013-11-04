@@ -16,6 +16,10 @@ some events that may negatively effect the stock price of the company. The
 student will investigate this hypothesis and also analyse the content of tweets
 with respect to the sentiment and opinion.
 
+### Latest Release
+To be announced.
+Estimated 1. Jan 2014. 
+
 ### Schedule / Dates
 * nov 1: 25 pages. 
 * dec 1: 35 pages and a working beta version of system.  

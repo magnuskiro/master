@@ -11,6 +11,48 @@ dd.mm.yy
 --end Template
 Newest entries first.
 
+04.11.13
+-----
+way to much laziness! 
+#### Tomorrow
+* Supervisor meeting. 
+* Coding. Some user interface maybe. And get stuff to work with a DB, so I can store stuffs.   
+
+#### Problems / thoughts
+Always push the commits. 
+
+How do we sort financial tweets from the rest?
+How to sort out particular company tweets? Should I do this?
+
+Can we calculate the credibility/impact of a tweet based on the users amount of
+tweets and the similarity of that users tweets? 
+
+Can we select users based on location. Norwegian stock exchange, Norwegian
+tweets? How can the location be used to separate tweets?
+
+Remove tweets with less than three words. Improve accuracy?
+
+Have to create a method of collecting words that are not yet polarised. If I
+do not have the word in a dictionary, add it. 
+
+#### Done
+Read article. Added LICENSE.
+Coded the first version of the classifier. A user interface and some
+presentation javascript should come next.   
+#### Focus
+Articles. State of the art.
+Simple tweet classification.  
+
+31.10.13
+-----
+#### Tomorrow
+#### Problems
+#### Done
+Added dictionaries. Coded importing of the dictionaries.
+#### Focus
+dictionaries
+
+
 29.10.13
 -----
 #### Tomorrow

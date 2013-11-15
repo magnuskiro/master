@@ -11,6 +11,63 @@ dd.mm.yy
 --end Template
 Newest entries first.
 
+15.11.13
+-----
+#### Tomorrow
+Read an article. 
+#### Problems
+#### Done
+backlog. 
+#### Focus
+backlog. 
+organizing. 
+thesis. 
+
+
+12.11.13
+-----
+#### Tomorrow
+Thesis.
+#### Problems
+
+Supervisor meeting.
+#### Focus
+Thesis.
+
+
+11.11.13
+-----
+#### Tomorrow
+Supervisor meeting, reading. 
+#### Problems
+#### Done
+nothing
+#### Focus
+Reading, 
+Thesis: state of the art, system architecture, data.
+
+
+06.11.13
+-----
+#### Tomorrow
+Read articles. Report work.  
+#### Problems
+Need to figure out cron jobs in flask. 
+#### Done
+#### Focus
+Read articles working on the report. 
+
+
+05.11.13
+-----
+#### Tomorrow
+Writing state of the art, etc.
+#### Problems
+#### Done
+Something. 
+#### Focus
+
+
 04.11.13
 -----
 way to much laziness! 

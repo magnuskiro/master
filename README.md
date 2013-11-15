@@ -66,11 +66,65 @@ Meeting Notes
 * What has been done?
 * What todo the next week.  
 
+## 12.12
 ## 05.12
 ## 28.11
 ## 21.11
-## 14.11
-## 07.11
+## 12.11
+Snakke med Han i mailen om hva han holder på med. Og hvilket fokus han har. 
+
+Trend in Trade volume 
+
+"twitter can be used to predict trends" statement, or question?
+
+What is trend? Price or volume? 
+Tweet volume. 
+
+Metadata i twitter, hvor mange tweets produced today etc.
+Twitter volume, in relation to market volume?
+Change in volume is change in market volume. 
+
+RQ 1,2 is the same.
+How can we decide the sentiment of a tweet. 
+
+RQ: Alignment mellom tweet sentiment and stock market change. 
+
+Tweet sentiment --> market trend. 
+
+Se på sammenheng først, og prediction muligens senere. 
+
+Get metadata from twitter? 
+
+NLP: don't do dependency parsing. 
+NLP: part of speech. Spørre Gleb om pos, hands on. 
+
+Finne ut hvordan man uttrykker sentiment. 
+Hvordan sier jeg min mening? 
+ModalWeak/Strong 
+Hvorfor er disse sepparate. 
+
+Tukle med sentiment verdien til et gitt ord. 
+
+Man bruker innholdet i ordbøkene på forskjellige måter. 
+Negation. 
+
+Gå over artikler og se på NLP prosesseringen "ikke bra" "less good" "more good"
+etc. 
+
+Credibility, litt vekting muligens? 
+
+Do some experiments, get some results. 
+
+* tweet sentiment
+* tweet sentiment relation to trade.  
+* trend. 
+
+Sende oversikt over hva som er gjort siden sist på epost.
+
+Møtereferat.  
+
+## 05.11
+No meeting took place. Sending work to supervisor on the 7. 
 ## 29.10
 #### Done?
 State of the art is about done. 

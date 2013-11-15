@@ -2,7 +2,7 @@ from flask import render_template
 from app import app
 
 from data_mining import mining_operations
-from sentiment_classification import classifier
+from classification import classifier
 
 
 @app.route('/')

@@ -1,22 +1,23 @@
 # helpers to read and update dictionaries.
 from helpers import read_file
 
-# method to check if a word exists in any dictionary or not.  
+
+# method to check if a word exists in any dictionary or not.
 def find_word(word):
-	word = word.lower()
-	if word in get_positve_dict(): return True
-	if word in get_negative_dict(): return True
-	if word in get_Litigious_dict(): return True
-	if word in get_ModalStrong_dict(): return True
-	if word in get_ModalWeak_dict(): return True
-	if word in get_Uncertainty_dict(): return True
-	classify_word(word)	
-	return False
+    word = word.lower()
+    if word in get_positve_dict(): return True
+    if word in get_negative_dict(): return True
+    if word in get_Litigious_dict(): return True
+    if word in get_ModalStrong_dict(): return True
+    if word in get_ModalWeak_dict(): return True
+    if word in get_Uncertainty_dict(): return True
+    classify_word(word)
+    return False
 
 
 def classify_word(word):
-	with open("unclassified_words.txt", "a") as unclassified_words:
-		unclassified_words.write(word+'\n')
+    with open("unclassified_words.txt", "a") as unclassified_words:
+        unclassified_words.write(word+'\n')
 
 
 def get_positve_dict():

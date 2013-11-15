@@ -1,11 +1,11 @@
 
 def read_file(file_name):
-    file = open(file_name, 'r')
-    list = file.readlines()
-    for i in range(len(list)):
-        list[i] = list[i].rstrip()
-        list[i] = list[i].lower()
-    return list
+    input_file = open(file_name, 'r')
+    lines = input_file.readlines()
+    for i in range(len(lines)):
+        lines[i] = lines[i].rstrip()
+        lines[i] = lines[i].lower()
+    return lines
 
 
 

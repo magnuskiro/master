@@ -17,7 +17,7 @@ Newest entries first.
 Read an article. 
 #### Problems
 #### Done
-backlog. 
+Backlog. Organization of tasks. 
 #### Focus
 backlog. 
 organizing. 

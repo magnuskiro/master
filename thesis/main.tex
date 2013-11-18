@@ -49,37 +49,7 @@
 \pagenumbering{RomanType}
 
 % front page, contains: title, author, institution, and logo
-\begin{titlepage}
-    \noindent {\large \textbf{\thesisAuthor}}
-    \vspace{2cm}
-
-\nohyphens{    
-    \noindent {\Huge \thesisTitle}
-    \vspace{2cm}
-}
-
-	% todo removed on completion
-    \noindent {
-		\Huge \textbf{Work in progress}, 
-		\\ \Large to be completed by 1. jun 2014.
-		\\ \url{https://github.com/magnuskiro/master
-	}
-    \vspace{2cm}
-	% end todo remove. 
-   
-    \noindent \thesisType, \date{\today}
-    \vspace{2cm}
-   
-    \noindent 
-	Artificial Intelligence Group\\ 
-	Department of Computer and Information Science\\ 
-	Faculty of Information Technology, Mathematics and Electrical Engineering\\
-
-    \vfill
-    \begin{center}
- 		\includegraphics[]{NTNUlogo}
-    \end{center}
-\end{titlepage}
+\input{titlePage.tex}
 
 % Abstract
 \input{abstract}
@@ -90,7 +60,6 @@
 \renewcommand{\abstractname}{Metadata}
 	\input{metadata}
 \newpage
-
 
 % listings
 \tableofcontents
@@ -104,26 +73,27 @@
 % sections
 \input{introduction} % why 
 \input{stateOfTheArt} % why / what 
-\input{data} % how
+\input{dataAndSystem.tex} % how
 \input{sentimentAnalysis} % how
 \input{trending} % how
-\input{resultsAndDiscussion} % what
+\input{resultsAndDiscussion} % that
 \input{conclusion} % so what
 \input{futureWork} % what not
 
 %Bibliography
 \newpage
-\addcontentsline{toc}{section}{References}
+% TODO fix 
+\addcontentsline{toc}{chapter}{References}
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
 
 % appendixes 
 \newpage
 \appendix
-\input{articles/articles}
-\input{appendix/tweetUsageOverview}
-\input{appendix/systemSpecifications}
-\input{appendix/tweetStructure}
+\input{appendix/articles.tex}
+\input{appendix/tweetUsageOverview.tex}
+\input{appendix/webResources.tex}
+\input{appendix/tweetStructure.tex}
 
 \end{document}
 This is never printed

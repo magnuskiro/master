@@ -22,6 +22,7 @@ The todo list for everything.
 * RQ: tweet sentiment
 * RQ: Tweet sentiment relation to trade.
 * RQ: trend
+* References should be numbered the same way as everything else. main.tex 
 
 ## Experiments / research
 * Find out how much of a tweet is useful. 

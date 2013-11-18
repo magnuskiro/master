@@ -11,13 +11,26 @@ dd.mm.yy
 --end Template
 Newest entries first.
 
+dd.mm.yy
+-----
+#### Tomorrow
+Supervisor meeting. 
+#### Problems
+#### Done
+Minor restructuring.
+Organizing analog material.
+  
+#### Focus
+Thesis, coding. 
+
+
 15.11.13
 -----
 #### Tomorrow
 Read an article. 
 #### Problems
 #### Done
-Backlog. Organization of tasks. 
+Backlog. Organization of tasks. Revised abstract.  
 #### Focus
 backlog. 
 organizing. 

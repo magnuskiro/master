@@ -43,17 +43,23 @@ def search(term='NTNU', count=15, until='2013-1-1'):
 def cursor_extraction(query='twitter', max_tweets=15):
     count = 0
 
+    # opens new file with date today and time now as filename
     filename = strftime("%d-%b-%Y_%H:%M:%S")
     dataset_file = open(filename, 'a')
 
+    # queries twitter for tweets.
     results = twitter.cursor(twitter.search, q=query, count="100")
+
+    # for all the tweets in the seach result
     for result in results:
+        # if we reach the desired amount of tweets we stop getting more.
         if count >= max_tweets:
             break
         count += 1
         #print result['created_at']
         #print result['id_str']
         print result['id_str']
+        # store tweet to file for later use.
         dataset_file.write(str(result)+"\n")
 
     dataset_file.close()

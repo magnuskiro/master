@@ -4,7 +4,7 @@ import io
 from time import strftime
 
 # reading twitter data from config file
-# Default path is '.'i aka open needs the full path from home.
+# Default path is '.' aka open needs the full path from home.
 conf = open('/home/kiro/ntnu/master/code/twitter_integration/auth.cfg', 'r').read()
 config = ConfigParser.RawConfigParser(allow_no_value=True)
 config.readfp(io.BytesIO(conf))
@@ -84,13 +84,13 @@ def create_time_intervals():
     print len(intervals)
     return intervals
 
-def load_dataset():
+def load_dataset(filename = "27-Nov-2013_04:07:49"):
     tweets = []
-    dataset_file = open('27-Nov-2013_04:07:49', 'r')
+    dataset_file = open(filename, 'r')
     for line in dataset_file.readlines():
-        json_tweet = line.convert.to.object.with.json
-        tweets.append(json_tweet)
-
+        #json_tweet = line.convert.to.object.with.json
+        # TODO change to import each tweet directly to an object, not a string.
+        tweets.append(line)
 
 #mine()
 #print create_time_intervals()

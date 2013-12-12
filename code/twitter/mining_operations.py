@@ -6,7 +6,7 @@ from time import strftime
 # reading twitter data from config file
 # Default path is '.' aka open needs the full path from home.
 # on windows it would be something like: "c:\Users\username\project\code\folder\twitter.cfg"
-conf = open('/home/kiro/ntnu/master/code/twitter_integration/auth.cfg', 'r').read()
+conf = open('/home/kiro/ntnu/master/code/twitter_integration/auth.cfg').read()
 config = ConfigParser.RawConfigParser(allow_no_value=True)
 config.readfp(io.BytesIO(conf))
 
@@ -82,8 +82,13 @@ def cursor_extraction(query='twitter', max_tweets=15):
     print count
 
 
-# might be useful for getting tweets distributed over time.
 def create_time_intervals():
+    """
+    Creating a set of date intervals.
+    Might be useful for getting tweets distributed over time.
+
+    @return: list of intervals.
+    """
     # 100 queries
     # 100 tweets per query
     # resulting in 10k tweets.
@@ -100,6 +105,25 @@ def create_time_intervals():
     print len(intervals)
     return intervals
 
+
+def get_credentials():
+    """
+    Retrieving my credentials from twitter.
+
+    @return: the credentials object on json format.
+    """
+    credentials = twitter.verify_credentials()
+    return credentials
+
+
+def get_time_line():
+    """
+    Get the tweets from my timline on twitter.
+
+    @return: a list of json objects representing tweets from my timeline on twitter.com
+    """
+    time_line = twitter.get_home_timeline()
+    return time_line
 
 
 #mine()

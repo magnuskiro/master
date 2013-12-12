@@ -1,3 +1,4 @@
+from dictionaries import dictionaries
 
 # Save unpolarized words for classification.
 def classify_word(word):
@@ -5,7 +6,7 @@ def classify_word(word):
         unclassified_words.write(word+'\n')
 
 
-def classify(pos, neg, tweet):
+def pos_neg(pos, neg, tweet):
     tweet = tweet.lower()
 
     polarity = {'pos': 0, 'neg': 0}
@@ -26,4 +27,32 @@ def classify(pos, neg, tweet):
     return polarity['pos'] + polarity['neg']
 
 
+def prepare():
+    # todo
+    # strip
+    # tokenize
+    # mono-grams
+    # bi-grams
+    pass
+
+
+def classify(tweet):
+    # todo
+    # execute all classification methods and aggregate a total.
+
+    # text
+    ## get dictionaries
+
+    ## prepare tweet
+    prepare()
+
+    ## pos_neg count
+    pos_neg(dictionaries.get_positve_dict(), dictionaries.get_positve_dict(), "this is the tweet")
+
+    ## part of speech
+
+    # metadata
+    ## location
+    ## followers
+    ## ect
 

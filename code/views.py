@@ -1,24 +1,13 @@
 from flask import render_template
 from app import app
 
-from data_mining import mining_operations
-from classification import classifier
-
-
 @app.route('/')
 def homepage():
-    return 'Welcome to nothingness'
+    return render_template('main.html')
 
+# routes to be created
 
-@app.route('/data/')
-def data():
-    return str(mining_operations.data())
-
-
-@app.route('/tweet/')
-def classified():
-    tweet = "This is the tweet text to be classified as positive or negative."
-    return classifier.classify(tweet)
+# API routes to be created
 
 
 @app.errorhandler(404)

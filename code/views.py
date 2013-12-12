@@ -1,10 +1,12 @@
+
 from flask import render_template
 from app import app
 
 
-# API routes to be created
+# TODO api
+# API routes, returning tweets and other data in json format to ux
 
-#
+# Regular html routes, returning html/js only
 @app.route('/')
 def homepage():
     return render_template('main.html')

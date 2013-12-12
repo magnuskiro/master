@@ -74,7 +74,7 @@ def cursor_extraction(query='twitter', max_tweets=15):
         #print result['id_str']
         print result['id_str']
         # store tweet to file for later use.
-        dataset_file.write(str(result)+"\n")
+        dataset_file.write(str(result) + "\n")
 
     # closing datafile and twitter result object.
     dataset_file.close()
@@ -96,19 +96,18 @@ def create_time_intervals():
     intervals = []
     for mnd in range(1, 5):
         for day in range(1, 26):
-            intervals.append("2013-"+str(mnd)+"-"+str(day))
+            intervals.append("2013-" + str(mnd) + "-" + str(day))
     print len(intervals)
     return intervals
 
 
-# TODO finish method
-def load_dataset():
+def load_data(filename="27-Nov-2013_04:07:49"):
     tweets = []
-    dataset_file = open('27-Nov-2013_04:07:49', 'r')
-#    for line in dataset_file.readlines():
-#        json_tweet = line.convert.to.object.with.json
-#        tweets.append(json_tweet)
-
+    data_file = open(filename, 'r')
+    for line in data_file.readlines():
+        #json_tweet = line.convert.to.object.with.json
+        # TODO change to import each tweet directly to an object, not a string.
+        tweets.append(line)
 
 #mine()
 #print create_time_intervals()

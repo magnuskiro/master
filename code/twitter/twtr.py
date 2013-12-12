@@ -2,13 +2,13 @@ from twython import Twython
 import ConfigParser
 import io
 
-# reading twitter data from config file
+# reading twitter twitter from config file
 # Default path is '.'i aka open needs the full path from home.
 conf = open('/home/kiro/ntnu/master/code/twitter_integration/auth.cfg', 'r').read()
 config = ConfigParser.RawConfigParser(allow_no_value=True)
 config.readfp(io.BytesIO(conf))
 
-# configuration of twitter connection data.
+# configuration of twitter connection twitter.
 APP_KEY = config.get('twtrauth', 'app_key')
 APP_SECRET = config.get('twtrauth', 'app_secret')
 OAUTH_TOKEN = config.get('twtrauth', 'oauth_token')

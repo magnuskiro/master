@@ -35,7 +35,7 @@ The todo list for everything.
 * Can the topic detection of Watson be useful? 
 
 ## Code
-* Get two tweet dataset. 1k tweets. test and training. 
+* create first version of the prototype. 
 * Get meta data from twitter. 
 * POS: part of speech. 
 * Clustering of similar tweets.
@@ -45,6 +45,16 @@ The todo list for everything.
 * Take into consideration the different dictionaries. 
 * Take negation into consideration in the classification. 
 * Tweet credibility. (how much weight should credibility add?) 
-
+	* Based on followers
+	* http://people.fas.harvard.edu/~astorer/twitter/twitter.html
+		* 4.4.3 Getting a user and all their friends and followers
+	* The more the tweet is propagated info the social sphere the more weight it gets. 
+	*  
+* TwitterAPI/sample - how many tweets do we get?
+	* https://dev.twitter.com/docs/api/1.1/get/statuses/sample
+* Create a query set for acquiring data. 
+	* a query string that has different words to broaden the dataset. 
+	* 1000 chars. 
+	* this OR maybe OR that
 
 

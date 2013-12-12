@@ -39,15 +39,13 @@ contain hashtags and $STO stuffs, users.
 * 
 
 ## Code
-* create first version of the prototype. 
-* create a user guide of how to run my shit. 
+* get the prototype to 
 * Get two tweet dataset. 1k tweets. test and training. 
 * Get meta data from twitter. 
 * POS: part of speech. 
 * Clustering of similar tweets.
 * Clustering of tweets on users/location/language
 * topic detection of tweets, Finance? 
-* Find out what the language R is. 
 * Take into consideration the different dictionaries. 
 * Take negation into consideration in the classification. 
 * Tweet credibility. (how much weight should credibility add?) 

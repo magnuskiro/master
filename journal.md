@@ -11,6 +11,18 @@ dd.mm.yy
 --end Template
 Newest entries first.
 
+12.12.13
+-----
+#### Tomorrow
+More coding on the Prototype
+#### Problems
+#### Done
+Created the first alfa version og the prototype. Gui and backend ish working. 
+#### Focus
+* Coding
+* Data part. 
+
+
 05.12.13
 -----
 #### Tomorrow

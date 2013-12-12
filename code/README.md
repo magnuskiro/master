@@ -2,18 +2,18 @@ Code specifics
 -----
 
 ## Requirements
-Python 2.7
-python-pip
+* Python 2.7
+* python-pip
 
-twython
-Flask
-Flask-SqlAlchemy
-Flask-Assets
-Flask-peewee
-Flask-Script
+* twython
+* Flask
+* Flask-SqlAlchemy
+* Flask-Assets
+* Flask-peewee
+* Flask-Script
 
 Pip useage:
- python install <package name>
+```python install <package name>```
 
 
 ## Running the application:

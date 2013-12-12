@@ -3,17 +3,52 @@ The data. What used, how and why. Acquired data how and from where.
 
 System specification and solutions. 
 
-\section{Tweet structure}
+This section describes the data sources used in this thesis. 
+
+We describe the methods for acquiring data in each source. 
+
+Further, the structure, meta data, and characteristics of the data is
+described. 
+
+% data sources
+\section{The Sources}
+\paragraph Twitter 
+Twitter is the source of the base data for sentiment analysis.
+
+\paragraph Dictionaries
+The list of word used in the classification of tweets. 
+
+\paragraph <Finance Source>
+While <Finance Source> is where we get the stock exchange data which is used in
+comparison to the tweet trend TODO:ref -\ref{ref to tweet trend.}. 
+
+
+% The section about twitter. 
+\section{Twitter}
+
+Please note that Twitter's search service and, by extension, the Search API is
+not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
+or made available via the search interface. 
+
+% data acquisition
+\subsection{Twitter API}
+Simple guide to access the twitter api:  http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/
+
+This is a list of all the API calls that is used in this thesis. 
+\begin{itemize}
+\item[q:] A UTF-8, URL-encoded search query of 1,000 characters maximum, including
+operators. Queries may additionally be limited by complexity.
+
+\end{itemize}
+
+\subsection{The Tweet}
 There are a lot of meta data in the tweets. In fact most of the data in a tweet
 object is not the tweet content itself. 
 
-\section{What data was used}
-\section{How to Obtain the tweets}
-Simple guide to access the twitter api:  http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/
+\subsection{Problems with Twitter}
 
-\section{Data structure}
-\section{Problems and shortcomings}
 
+% describing the dictionaries used in the classification of tweets. 
 \section{Dictionaries}\label{sec:dict}
 
 Tim Loughran and Bill McDonald has a set of dictionaries available from the
@@ -37,4 +72,13 @@ category for the words. The words are not directly related to finance.
 There are a lot of words that are not classified yet. Those words should be
 stored and classified later. This to improve the classifiers potential to
 correctly classify tweets.  
+
+\subsection{Expanded dictionaries}
+When classifying a tweet we get a number of words that does not have a previous
+classification. These words are classified and added to the expanded
+dictionaries to form better results. 
+
+
+% The financial data used in the thesis. 
+\section{Financial source}
 

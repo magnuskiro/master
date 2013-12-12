@@ -1,18 +1,56 @@
-\chapter{Data retrieval and structure}
+\chapter{Data, retrieval and structure}
 The data. What used, how and why. Acquired data how and from where. 
 
 System specification and solutions. 
 
-\section{Tweet structure}
+\section{Twitter}
+short about the datasets. 
+
+\subsection{The Twitter API}
+Description of the api and which options we have with the search. 
+
+\subsection{Obtaining tweets} % data retrieval.
+%Simple guide to access the twitter api:  http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/
+
+Specifics about the api. 
+
+Volume
+
+Time constraints 
+
+Query constraints. 
+
+\subsection{Dataset(s)}
+We are aiming to use multiple sets of 10k tweets. 
+
+This many tweets in each set. etc. 
+
+Three sets based on three different search terms.
+Split the original three sets into 10 subsets. 
+Take one subset from each superset and manually classify them.Then
+automatically classify the 27 other sets.  
+
+\paragraph{10k-tweets-base}
+The first dataset.
+Based on tweets with the search term "Finance". 
+The interesting part is that 5206 of 10.000 tweets contain the word "finance".
+
+Usage. Splitting this dataset into 10 parts, so that I can use each set for a
+different version of the classification. 
+
+\subsection{Tweet structure}
 There are a lot of meta data in the tweets. In fact most of the data in a tweet
-object is not the tweet content itself. 
+object is not the tweet text itself.  
 
-\section{What data was used}
-\section{How to Obtain the tweets}
-Simple guide to access the twitter api:  http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/
+Tweets directly usable in python 
 
-\section{Data structure}
-\section{Problems and shortcomings}
+\subsection{Biased data}
+Due to the necessity of a search term in the query, we only get tweets that are
+related to the 
+
+\subsection{Problems and shortcomings}
+The potential problems and shortcomings of the data. 
+
 
 \section{Dictionaries}\label{sec:dict}
 
@@ -38,3 +76,8 @@ There are a lot of words that are not classified yet. Those words should be
 stored and classified later. This to improve the classifiers potential to
 correctly classify tweets.  
 
+\section{Financial data}
+* obtaining the data(potential mining operations)
+* about the dataset  
+* structure
+* potential problems 

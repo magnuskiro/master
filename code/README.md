@@ -18,7 +18,7 @@ Pip useage:
 
 ## Running the application:
 * run the following command in a terminal:  
- python manage.py runserver
+```python manage.py runserver```
 
 * Open 'localhost:5000/' in a webbrowser.
 

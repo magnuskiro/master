@@ -1,28 +1,27 @@
 The todo list for everything. 
 ## administrative
 * send meeting summary.
+* send thesis and summary of the work completed. 
 * process documents: q, startnotat
 
 ## Thesis
+* Correct from feedback. 
+* Tweet examples should be high quality financial tweets. Examples should
+contain hashtags and $STO stuffs, users. 
 * Find out how many articles I have to read. 
-* Write System specification
+* prototype: Write System specification
 * Re review the read articles with machine learning vs statistical classification in mind. 
 * Separate articles on statistical and NLP approaches. 
 * Expand in the matter of meta data / features in a tweet. 
-* Correct from feedback. 
 * Contact dude in mail and figure out what he works on. 
 * define what a trend is. (price or volume?)
 * "twitter can be used to predict trends", statement or question?
-* RQ: 1 and 2 is the same one.
-* RQ: how can we decide the sentiment of a tweet.
-* RQ: Alignment between tweet sentiment and stock market change. 
-* RQ: Tweet sentiment --> market trend.
 * How do I express a sentiment? 
 * Go over articles and look at NLP.
-* RQ: tweet sentiment
-* RQ: Tweet sentiment relation to trade.
-* RQ: trend
-* References should be numbered the same way as everything else. main.tex 
+* References chapter should be numbered the same way as everything else. main.tex 
+* Resume of what meta data exists in a tweet. Input to state of the art and data. 
+* Read more articles.  
+* RQ: Rewrite research questions. 
 
 ## Experiments / research
 * Find out how much of a tweet is useful. 
@@ -33,8 +32,14 @@ The todo list for everything.
 * figure out how I express sentiment. 
 * find out if IBM Watson has used some smart NLP algorithms or techniques fro classification of processing.  
 * Can the topic detection of Watson be useful? 
+* meta data: followers, retweets, etc. 
+* meta data: find out what other have used before.  
+* Compile an overview of the language used in twitter. 
+* What can be used as a substitute for stock price when creating a trend from tweet data?
+* 
 
 ## Code
+* create a user guide of how to run my shit. 
 * Get two tweet dataset. 1k tweets. test and training. 
 * Get meta data from twitter. 
 * POS: part of speech. 
@@ -44,7 +49,8 @@ The todo list for everything.
 * Find out what the language R is. 
 * Take into consideration the different dictionaries. 
 * Take negation into consideration in the classification. 
-* Tweet credibility. (how much weight should credibility add?) 
-
+* Tweet credibility. (how much weight should credibility add?)
+* Dictionary creation. Create from previously non classified words.
+* create a function to get all tweets between two dates.   
 
 

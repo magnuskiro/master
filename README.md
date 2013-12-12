@@ -21,13 +21,13 @@ To be announced.
 Estimated 1. Jan 2014. 
 
 ### Schedule / Dates
-* nov 1: 25 pages. 
-* dec 1: 35 pages and a working beta version of system.  
-* jan 10: 45 pages, working code. 
-* feb 1: 55 pages and reworked thesis. 
-* mar 1: 70 pages, just minor code changes creating results in march. 
-* apr 1: 85 pages, all code and results complete. 
-* may 1: 100 pages, only finishing touches and proof reading remain.  
+* nov 1: 25 pages. (not reached)
+* dec 1: 30 pages, basic classification of tweets, partially working system.
+* jan 10: 40 pages, working beta version of system.  
+* feb 1: 45 pages, reworked thesis. 
+* mar 1: 55 pages, just minor code changes creating results in march. 
+* apr 1: 65 pages, all code and results complete. 
+* may 1: 70 pages, only finishing touches and proof reading remain.  
 * jun 1: finished. 
 
 ### Finding relevant articles: 
@@ -67,9 +67,71 @@ Meeting Notes
 * What todo the next week.  
 
 ## 12.12
+Initiate skype meeting. 
+
 ## 05.12
-## 28.11
+#### What has been done?
+* datamining part. now has a dataset of 10k tweets. 
+* RQ has been updated. 
+
+#### next week
+* get a working prototype
+* create a scoring system for the twitter trend. 
+* search for an academic dataset. 
+* data sift?
+* create a search corpus. (list of finance words and Hashtags that my dataset can be made of)
+
 ## 21.11
+User guide.
+* config filer. 
+* Får ikke lagret filene. 
+
+
+RQ1: can extract knowledge from tweets to fint the sentiment. 
+Spåklig utfordrende. Kveliteter og finurligheter av å finne sentiment til en
+tweet. 
+
+RQ2: alle setningen til RQ1. 
+RQ2: skrive noe nytt.
+RQ2: kan vi bygge en trend kurve fra tweet data. 
+
+RQ3: technical analysis. 
+
+* Tweets example, financial tweets.
+
+* Followers, from a tweet. 
+* Sjekk hvilke metadata folk har brukt tidligere. 
+* retweet. 
+
+* Resyme over hvilke metadata som fins i en tweet --> inn i state of the art og
+  data. 
+ 
+* twitter api. Hvordan man fonner tweets.
+
+* Language overview. Of twitter. 
+
+* korte dokumenter er vanskelige å klassifisere.
+
+* Til Arvid: Sende lure linker til arvid om flask og webutvikling.
+
+* kode dictionary og tweet set. 
+* Hvilke ord er det som ikke er klassifisert fra før av. 
+
+* tagging i eksmpler. Hashtag, andre tags. 
+
+* Eksemplene skal være knallgode. 
+
+* $STO, tweet state of the art. 
+
+* Hva kan jeg bytte ut aksje prisen med fra twitter for å aggregere en trend.  
+
+* finne mer ut av hva andre gjør. 
+
+* Skype møte. 
+
+* Sender i løpet av tirsdag. 
+* Avtaler skype møte da. 
+
 ## 12.11
 Snakke med Han i mailen om hva han holder på med. Og hvilket fokus han har. 
 

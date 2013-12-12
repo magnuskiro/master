@@ -11,7 +11,42 @@ dd.mm.yy
 --end Template
 Newest entries first.
 
-dd.mm.yy
+05.12.13
+-----
+#### Tomorrow
+* Prototype
+#### Problems
+#### Done
+* email Arvid with twitter mining. (cc pinar) conf fil. 
+* email Rampapiaro, twitter mining?
+* Supervisor meeting. 
+#### Focus / todo
+* Supervisor meeting. 
+
+
+25.11.13
+-----
+#### Tomorrow
+Work on the dataset. 
+#### Problems
+#### Done
+Restructured the data section. 
+#### Focus
+Data and system specification parts.  
+
+
+24.11.13
+-----
+#### Tomorrow
+Report, code.  
+#### Problems
+Search terms. The twitter API do not allow wild card searches.
+#### Done
+#### Focus
+Coding, working on creating a dataset of 10k tweets. 
+
+
+18.11.13
 -----
 #### Tomorrow
 Supervisor meeting. 
@@ -19,9 +54,10 @@ Supervisor meeting.
 #### Done
 Minor restructuring.
 Organizing analog material.
-  
+Rewritten the research questions. 
+Revised sub goals in README.md
 #### Focus
-Thesis, coding. 
+Thesis. Getting a tweet dataset.  
 
 
 15.11.13

@@ -16,6 +16,12 @@ Pip useage:
  python install <package name>
 
 
+## Running the application:
+* run the following command in a terminal:  
+ python manage.py runserver
+
+* Open 'localhost:5000/' in a webbrowser.
+
 ## Twitter API
 * REST API v1.1 Resources 
 	* The possible API calls. 

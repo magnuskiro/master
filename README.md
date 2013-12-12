@@ -69,6 +69,22 @@ Meeting Notes
 ## 12.12
 Initiate skype meeting. 
 
+Gjort: 
+* Laga første utkast til prototyp. 
+* Skrevet noe mer på data biten. 
+
+Spm
+* Finansdata, mulighet for å kikke på det?
+	* eksisterende dataset?
+
+vidre
+* linke prototypen sammen så den fungerer bra og skaper resultater. 
+* skaffe flere dataset. 
+
+Tilbakemeldinger: 
+Keep up the good work. 
+
+
 ## 05.12
 #### What has been done?
 * datamining part. now has a dataset of 10k tweets. 

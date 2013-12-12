@@ -13,8 +13,7 @@ contain hashtags and $STO stuffs, users.
 * Re review the read articles with machine learning vs statistical classification in mind. 
 * Separate articles on statistical and NLP approaches. 
 * Expand in the matter of meta data / features in a tweet. 
-* Contact dude in mail and figure out what he works on. 
-* define what a trend is. (price or volume?)
+* define what a trend is. (price or volume, can compare with both)
 * "twitter can be used to predict trends", statement or question?
 * How do I express a sentiment? 
 * Go over articles and look at NLP.
@@ -33,10 +32,10 @@ contain hashtags and $STO stuffs, users.
 * find out if IBM Watson has used some smart NLP algorithms or techniques fro classification of processing.  
 * Can the topic detection of Watson be useful? 
 * meta data: followers, retweets, etc. 
-* meta data: find out what other have used before.  
 * Compile an overview of the language used in twitter. 
-* What can be used as a substitute for stock price when creating a trend from tweet data?
-* 
+* Create 7 additional datasets
+	* = 70k tweets
+	* then run some statistics on the datasets.
 
 ## Code
 * get the prototype to 
@@ -61,4 +60,7 @@ contain hashtags and $STO stuffs, users.
 	* 1000 chars. 
 	* this OR maybe OR that
 * Dictionary creation. Create from previously non classified words.
-
+* look into the time perspectives. tweets from today has to correlate with financial data from today. 
+* Trend aggregation: aggregate a trend based on classification data and other datapoints.  
+	* this is a pint based system where each part gives points to an aggregated whole. 
+	* this can then be compared to the financial data of the same day. 

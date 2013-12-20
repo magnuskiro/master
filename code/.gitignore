@@ -3,3 +3,4 @@
 *.idea/
 db/
 unclassified_words.txt
+server.log

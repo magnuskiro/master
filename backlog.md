@@ -60,3 +60,4 @@ contain hashtags and $STO stuffs, users.
 * Trend aggregation: aggregate a trend based on classification data and other datapoints.  
 	* this is a point(pint) based system where each part gives points to an aggregated whole. 
 	* this can then be compared to the financial data of the same day. 
+* stock exchange values: http://developer.yahoo.com/yql/

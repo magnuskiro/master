@@ -1,11 +1,8 @@
 The todo list for everything. 
 ## administrative
-* send meeting summary.
-* send thesis and summary of the work completed. 
 * process documents: q, startnotat
 
 ## Thesis
-* Correct from feedback. 
 * Tweet examples should be high quality financial tweets. Examples should
 contain hashtags and $STO stuffs, users. 
 * Find out how many articles I have to read. 
@@ -20,7 +17,7 @@ contain hashtags and $STO stuffs, users.
 * References chapter should be numbered the same way as everything else. main.tex 
 * Resume of what meta data exists in a tweet. Input to state of the art and data. 
 * Read more articles.  
-* RQ: Rewrite research questions. 
+* Add buzzwords/tags to the metadata part.
 
 ## Experiments / research
 * Find out how much of a tweet is useful. 
@@ -29,8 +26,6 @@ contain hashtags and $STO stuffs, users.
 * Is change in market volume related to change in tweet volume? Or the other way around?
 * why are the modal weak and modal strong separate? 
 * figure out how I express sentiment. 
-* find out if IBM Watson has used some smart NLP algorithms or techniques fro classification of processing.  
-* Can the topic detection of Watson be useful? 
 * meta data: followers, retweets, etc. 
 * Compile an overview of the language used in twitter. 
 * Create 7 additional datasets
@@ -38,8 +33,12 @@ contain hashtags and $STO stuffs, users.
 	* then run some statistics on the datasets.
 
 ## Code
-* get the prototype to 
-* Get two tweet dataset. 1k tweets. test and training. 
+* automate the classification process.
+	* datamining-->classificaton-->presentation-->verification  
+* Dictionary creation. Create from previously non classified words.
+* Expand classification methods. 
+	* Create 3 other ways of classifying tweets.  
+	* 80% accuracy is good enough  
 * Get meta data from twitter. 
 * POS: part of speech. 
 * Clustering of similar tweets.
@@ -52,15 +51,12 @@ contain hashtags and $STO stuffs, users.
 	* http://people.fas.harvard.edu/~astorer/twitter/twitter.html
 		* 4.4.3 Getting a user and all their friends and followers
 	* The more the tweet is propagated info the social sphere the more weight it gets. 
-	*  
-* TwitterAPI/sample - how many tweets do we get?
-	* https://dev.twitter.com/docs/api/1.1/get/statuses/sample
 * Create a query set for acquiring data. 
 	* a query string that has different words to broaden the dataset. 
 	* 1000 chars. 
 	* this OR maybe OR that
-* Dictionary creation. Create from previously non classified words.
+	* can @user be part of the search query?
 * look into the time perspectives. tweets from today has to correlate with financial data from today. 
 * Trend aggregation: aggregate a trend based on classification data and other datapoints.  
-	* this is a pint based system where each part gives points to an aggregated whole. 
+	* this is a point(pint) based system where each part gives points to an aggregated whole. 
 	* this can then be compared to the financial data of the same day. 

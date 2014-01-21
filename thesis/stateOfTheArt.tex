@@ -3,19 +3,19 @@
 	% of twitter research related to finance. 
 
 \section{Twitter}
-Twitter is a social and information networking. It's a real-time service that
-connects users to the latest stories, their interests, ideas and much more. The
-microblogging site allows users to find and follow accounts that the user has
-an interest in. 
+Twitter is a social and information network. 
+It's a real-time service for sharing and gathering small messages. These
+messages can represent everything form a persons opinion of ice cream, to the
+latest changes in the financial market or pictures from a Mars rover. 
 
 At the core of Twitter you have the Tweet. The Tweet is the 140 character
-message. These bursts of information combined are the life blood of Twitter.
-Tweets lets you communicate with other users, share photos, post all kinds of
+message. These small pieces of information combined are the life line of Twitter.
+Tweets lets you communicate with other users, share photos and post all kinds of
 information. The small size of the tweets are not a hindrance for the flow of
 information. 
 \footnote{About Twitter: \url{https://twitter.com/about}}
 
-The fast growing messaging service handles 1.6 billion searches every day.
+The fast growing messaging service handles 1.6 billion search queries every day.
 As of 2012 the 500 million users would generate 3.2 queries each on any given
 day. 340 million tweets were posted every day. 
 \footnote{Wikipedia: \url{http://en.wikipedia.org/wiki/Twitter}} 
@@ -26,7 +26,7 @@ financial reports. \cite[p8]{annikajubbega11:twitter_driver_stock_price} says
 that 77 of the Fortune 100 companies have a twitter account. 
 
 Companies use twitter for feedback and customer relations. Questions can be
-asked with a hashtag of to a specific user. This makes it easy to sort filter
+asked with a specific hashtag. Or with an at sign to target a specific user. This makes it easy to filter
 the messages, and therefore easier to get in contact with the customer. Best
 Buy demonstrated the successfulness of twitter in customer relations by
 answering questions with a specific hashtag. In 2009 they had answered nearly
@@ -34,7 +34,7 @@ answering questions with a specific hashtag. In 2009 they had answered nearly
 Market Intelligence is also a major aspect of the microbloggin sphere.
 
 Twitter represents one of the largest and most dynamic datasets of user
-generated content. Along with Facebook twitter data is real time. This has major
+generated content. Along with Facebook twitter data is in real time. This has major
 implications for anyone who are interested in sentiment, public opinion or
 customer interaction. \cite[]{sperious11}
 
@@ -46,7 +46,7 @@ content of the tweet. This also makes it easier to search and classify the
 content of tweets. Examples of tweets can be found in figure:\ref{fig:sto} and
 figure:\ref{fig:tweet1}.
 
-The retrieval of tweets seems like a challenge and practically impossible with
+The retrieval of tweets seems like a challenge and impractical with
 a web scraper. But Twitter has made this easy by providing an API
 \footnote{API: Application programming interface}. With the API you can write
 tweets and update the status of a user. But the best part of the API is that it
@@ -54,8 +54,8 @@ provides search capabilities. To get a certain subset of all tweets, we can use
 the search function and view only the tweets we want. 
 
 On the front page of twitter we have the search function at the top right of
-the page. The search provides the ability to limit the tweets you look at and
-gives you the opportunity to find the information you are looking for. 
+the page. The search provides the ability to specify which types of tweets you
+want. And gives you the opportunity to find the information you are looking for. 
 
 \begin{figure}[htb]
     \centering
@@ -95,34 +95,32 @@ gives you the opportunity to find the information you are looking for.
 \section{Sentiment}
 
 Opinion mining on the web is not a new phenomenon. But in resent years it has
-become much more attractive to traders in the financial world. Twitter and the
-social media's opinion is on the rise. This means a surplus of raw data with
-easy access. Companies all over the world has started to use twitter and
-readily available tweets to their benefit. Trading with social media is part of
-the trend. Although there are some drawbacks and shortcomings. Noise and
-garbage is one of them. It's difficult to accurately sort through all the data
-and get only the information relevant for your use. Even if you're right 80\% of
+become much more attractive to traders in the financial world. The usage of
+Twitter and other social media platforms is increasing. This means a surplus of raw data with
+easy access. Companies all over the world has started to use the social
+networks to their benefit. The use of information from social media has become
+part of the trend, although there are some drawbacks and shortcomings. Noise and
+garbage is one of them. The difficulty of the huge amount of available data is
+that it's difficult to find only the information relevant for your use. Even if you're right 80\% of
 the time, the last 20\% can prove devastating.
 \cite[]{stevenson12:social_media_stock_pickers}
 
-Sentiment broadly refers to the state of mind a person has. Whereas negative or
-positive. Based on the current state of mind the person will do optimistic or
+Sentiment broadly refers to a persons state of mind. Based on the state of mind the person will do optimistic or
 pessimistic choices. A positive state of mind leads to optimistic judgements of
-future events. And a negative state of mind leads to pessimistic judgements.
+future events, and a negative state of mind leads to pessimistic.
 \cite[p4]{doukas10:sentiment_and_momentum}
 
-The intention of users are also a part of the driver in user activity on
-microbloggs. The users may have different roles and intentions in different
-communities in the microblogging sphere, \cite[]{java07}. This might also be a
-factor in the sentiment analysis.
+The users may have different roles and intentions in different
+communities in the microblogging sphere, \cite[]{java07}. 
+A users intentions and its reasons for participation might be a factor in the sentiment analysis.
 
-\subsection{Sentiment Analysis}
+\subsection{What is Sentiment Analysis}
 There are two main categories of approaches to sentiment analysis. 
-	The first is to train a classifier. The classifier can use methods such as
+	The first is to use a classifier. The classifier can use methods such as
 naive Byes, maximum entropy or support vector model \cite[]{Li2013206} This is
 typically a method where it would be natural to use machine learning of
 evolutionary algorithms to increase the classification correctness over time. 
-	Second, the use of linguistic resources. Such as corpora of negative and
+	The other is to use linguistic resources, such as corpora of negative and
 positive words. The developed linguistic resources are used to classify the
 sentiment of the text \cite[]{Li2013206}.
 
@@ -143,20 +141,24 @@ One way of classifying tweets is to use predefined lexicon of positive and
 negative words. Consumer confidence and fluctuations of voting polls can be
 tracked in this way \cite[]{connor2010}.
 
-In \cite[]{diakopoulos2010}, a methodology with visual representation. The
-intention of the system is to provide a better understanding of temporal
-dynamics of sentiment. This is investigated in the reaction to debate video.
+The work of \cite[]{diakopoulos2010} describes a methodology for better
+understanding of temporal dynamics of sentiment. 
+The system uses visual representation to achieve this. 
+This is investigated in the reaction to debate video.
 	Further \cite[]{diakopoulos2010} detects sentiment pulse and controversial
 topics with the help of visualisation and metrics. 
-	\cite[]{diakopoulos2010} used crowd-sourcing to classify batches of tweets.
-This was accomplished with Amazon Mechanical Turk, a crowd-sourcing
+	\cite[]{diakopoulos2010} used crowdsourcing\footnote{Crowdsourcing is the
+practice of obtaining needed services, ideas, or content by soliciting
+contributions from a large group of people, and especially from an online
+community, rather than from traditional employees or suppliers.
+\url{http://en.wikipedia.org/wiki/Crowdsourcing}} to classify batches of tweets.
+This was accomplished with Amazon Mechanical Turk, a crowdsourcing
 site\footnote{Amazon Mechanical Turk (AMT): \url{https://www.mturk.com/mturk/}}.
 
 \cite[]{barbosa10} explores the problem of noise in biased and noisy data. 
 They focus on noisy labels and add features to the tweets to increase the
-classification properties of the tweets. Then the tweets are classified as
-subjective or objective. This is to filter out the tweets that don't project a
-sentiment. The subjective tweets are classified as positive or negative.
+classification properties of the tweets. To filter out tweets that don't project a
+sentiment tweets are classified as subjective or objective. The subjective tweets are classified as positive or negative.
 
 Classification of tweets can be generalised by using features. Features are
 elements such as unigrams, bigrams, and part-of-speech tags. An abstract
@@ -164,12 +166,13 @@ representation of a tweet would be beneficiary to the classification. In this
 abstract representation \cite[]{barbosa10} propose to use characteristics about
 how tweets are written and meta-information about the words in tweets. 
 Meta-features and tweet syntax features are further features that can improve
-classification. The tweet syntax features are things such as hashtags, retweet,
+classification. Meta-features are information about the tweet, such as
+location, language, and number of retweets. The tweet syntax features are things such as hashtags, retweet,
 reply, links, punctuation and emoticons \cite[]{barbosa10}. 
 
 Another approach to the sentiment challenges with twitter is explored by
-\cite[]{becker13}. Their explorations techniques for Contextual Polarity
-Disambiguation and Message Polarity Classification. Constrained and supervised
+\cite[]{becker13}. They explore techniques for contextual polarity
+disambiguation and message polarity classification. Constrained and supervised
 learning is used to create models for classification. They describe a system
 that solves these tasks with the help of polarity lexicons and dependency
 parsers. Expanded vocabulary is one of the main aspects of their success, as
@@ -177,7 +180,6 @@ they say in their findings: "We hypothesize this performance is largely due to
 the expanded vocabulary obtained via unlabeled data and the richer syntactic
 context captured with dependency path representations." \cite[]{becker13}
 
-Earlier \cite[]{sperious11} have researched the polarity classification of tweets. 
 In contrast to \cite[]{becker13}, \cite[]{sperious11} has used distant
 supervision and labeled propagation on a graph based data structure. The data
 structure represents users with tweets as nodes. And tweets with bigrams,
@@ -186,13 +188,14 @@ rivals a model supervised with in-domain annotated tweets and outperforms the
 noisily supervised classifier and a lexicon-based polarity ratio classifier.
 \cite[]{sperious11} 
 
-\subsection{Sentiment in Finance}
-\cite[p2]{Brown20041} writes the following on over-reaction of investors: "
-He(Siegel (1992)) concludes that shifts in investor sentiment are correlated
+\subsection{Sentiment analysis in Finance}
+\cite[p2]{Brown20041} writes the following on over-reaction of investors: 
+"\textit{He(Siegel (1992)) concludes that shifts in investor sentiment are correlated
 with market returns around the crash. Intuitively, sentiment represents the
 expectations of market participants relative to a norm: a bullish (bearish)
 investor expects returns to be above (below) average, whatever ‘‘average’’ may
-be.". In the light of resent changes in the financial world and the use
+be."}. 
+In the light of resent changes in the financial world and the use
 of sentiment from social media, the notion that opinions and sentiment of
 investors and market actors affect the market is not a new observation.
 
@@ -200,7 +203,6 @@ Use of sentiment can predict changes and momentum in the market.
 Bad news in an optimistic period creates cognitive dissonance in the small
 investors. This impacts the market by slowing down the selling rate of loosing
 stocks. \cite[p29]{doukas10:sentiment_and_momentum}
-
 Further we can see that optimistic sentiment has a 2\% monthly average return.
 While the investor sentiment is pessimistic we see a drastic reduction in
 returns. Down to 0.34\%,\cite[p5]{doukas10:sentiment_and_momentum}.
@@ -255,22 +257,6 @@ Financial instruments can be stocks, bonds, derivatives or commodities
 Trades takes place in markets,  stock markets, derivatives markets or commodity
 markets.
 
-Personal finance touches on the problems of handling the funds to make ends
-meet in your personal life. This can be things like tax policies, pension
-funds, heirlooms etc. Personal finance has a big element of economy. This is
-the control of income and expenses and the ending result of your total usage of
-money.  
-
-Corporate finance deals more in terms of investments over time and the
-financial position of assets to generate the maximum revenue. This is more of a
-strategic game of money placement and capital management. 
-
-The public finance are the money countries and states use. The finance related
-to sovereign and sub-national entities
-\footnote{Wikipedia:\url{http://en.wikipedia.org/wiki/Finance#Public_finance}}.
-National banks and the production of money are also categorised under this
-category.
-
 % todo write about technical analysis. 
 Technical analysis in finance. 
 
@@ -280,8 +266,8 @@ The trend is the general opinion of the masses. As defined by the Free
 Dictionary:  
 "The direction and momentum of a market, price, economy, or other measure. For
 example, if the price of a security is going mainly downward with only a few
-gains here and there, it is said to be on a downward trend. Identifying and
-predicting trends is important to finding the right moment to buy and sell
+gains, it is said to be on a downward trend. Identifying and
+predicting trends is important finding the right moment to buy and sell
 securities. Trends are especially important in technical analysis, which
 recommends buying at the bottom of a downward trend and selling at the top of an
 upward trend."
@@ -291,8 +277,7 @@ It's often talk about the fashion trend or the music trend when regular people
 talk about the trend. Or just the general direction of which a subject or
 subculture are moving. 
 
-Trends work in much the same way as opinions on any other ting. One person
-comes first and says something. Then others start to think the same thing or
+Trends work in much the same way as opinions. An opinion is uttered then others start to think the same thing or
 feel the same way. The first group of people that move in the same direction
 are called trend setters. They are the people that show others how this trend works and
 what this trend is about. 

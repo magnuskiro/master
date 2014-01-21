@@ -75,7 +75,7 @@ ko.bindingHandlers.lineChart = {
             .duration(750)
             .call(xAxis);
 
-        // drwa the y-axis on the canvas
+        // draw the y-axis on the canvas
         svg.select("g.y.axis")
             .transition()
             .duration(750)

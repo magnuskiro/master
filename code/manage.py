@@ -11,6 +11,11 @@ def make_shell_context():
 
 @manager.command
 def create_db():
+    """
+    Run this to initialize the database.
+    Make sure that the file exists. (create it with 'touch db/db.db')
+    The database is described in models.py
+    """
     from models import db
     db.create_all()
 

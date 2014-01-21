@@ -6,6 +6,6 @@ pos = dictionaries.get_positve_dict()
 
 tweet = "Todays winners are wrongfully wrong! Valuable" 
 
-polarity = classifier.classify(pos, neg, tweet)
+polarity = classifier.classify(tweet, pos, neg)
 print 'score:', polarity
 

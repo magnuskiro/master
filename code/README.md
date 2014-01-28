@@ -12,7 +12,7 @@ Code specifics
 * Flask-peewee
 * Flask-Script
 
-Pip useage:
+Pip usage:
 ```python install <package name>```
 
 
@@ -20,7 +20,7 @@ Pip useage:
 * run the following command in a terminal:  
 ```python manage.py runserver```
 
-* Open 'localhost:5000/' in a webbrowser.
+* Open 'localhost:5000/' in a web browser.
 
 ## Twitter API
 * REST API v1.1 Resources 

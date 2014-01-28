@@ -1,25 +1,37 @@
 
 from app import db
 
-
-class User(db.Model):
+class Tweet(db.Model):
+    """
+    The classified tweet object that contains the metadata and classification data of a tweet.
+    @param id:
+    @param tweet: the original json tweet object.
+    """
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
-    message = db.Column(db.String)
+    original = db.Column(db.String)
+    positive_words = db.Column(db.Integer)
+    negative_words = db.Column(db.Integer)
+    sanitized_text = db.Column(db.String)
+    polarity = db.Column(db.Boolean)
+    polarity_value = db.Column(db.Integer)
 
-    def __init__(self, username, message):
-        self.username = username
-        self.message = message
+    # tokens / mono-grams
+    def monograms(self):
+        return self.sanitized_text.lower().split(' ')
+
+    def bigrams(self):
+        monograms = self.monograms()
+        # bi-grams
+        bigrams = []
+        for i in range(0, len(monograms)-1):
+            bigrams.append(monograms[i]+" "+monograms[i+1])
+            #print bigrams[-1] # probably not working.
+        return bigrams
+
+    def __init__(self, tweet):
+        #self.original = tweet
+        self.original = "{ hei: { new : 20 }, old : 10 }"
+        self.id = int(tweet['id'])
 
     def __unicode__(self):
-        return self.username
-
-
-class Tweet(db.Model):
-    id = db.Column(db.BIGINT, primary_key=True)
-    tweet = db.Column(db.String)
-    polarity = {} #{ 'pos':0, 'neg':0 }
-
-    def __init__(self, id, tweet):
-        self.id = id
-        self.tweet = tweet
+        return self.id

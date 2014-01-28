@@ -4,3 +4,4 @@
 db/
 unclassified_words.txt
 server.log
+twitter/dataset-*

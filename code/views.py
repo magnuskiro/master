@@ -1,5 +1,6 @@
 
-from flask import render_template
+from time import sleep
+from flask import render_template, request
 from app import app
 from classification import classifier
 from models import *
@@ -16,10 +17,22 @@ def trend_data():
     return "{ trend: { date : 15-01-14, sentiment-value : 401, stock-value : 405 } }"
 
 
-@app.route('/dataset')
-def datasets():
-    print "the content of the json put variable."
-    return "created new dataset"
+@app.route('/dataset', methods=['POST'])
+def new_dataset():
+    """
+    @return:
+    """
+    assert request.path == '/dataset'
+    assert request.method == 'POST'
+    if "Twitter search Query" not in request.data:
+        data_controller.create_new_data_set(request.data)
+    sleep(10)
+    return
+
+
+@app.route('/newdataset')
+def newdataset():
+    data_controller.create_new_data_set("Financial times")
 
 
 @app.route('/classify')
@@ -50,7 +63,7 @@ def homepage():
 
 @app.route('/tweets')
 def tweets():
-    datasets = data_controller.get_dataset_names()
+    datasets = data_controller.get_data_set_names()
     return render_template('tweets.html', datasets=datasets)
 
 

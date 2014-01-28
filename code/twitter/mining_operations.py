@@ -50,7 +50,7 @@ def cursor_extraction(query='twitter', max_tweets=15):
     """
     creates a dataset with 'max_tweets' amount of tweets.
     limited by the 'query'
-    tweets are stored in a file.
+    tweets are stored in a file, one tweet per line.
 
     @param query: the search term that decides what data you get from twitter.
     @param max_tweets: the amount of tweets that are retrieved from tiwtter and stored.
@@ -58,11 +58,13 @@ def cursor_extraction(query='twitter', max_tweets=15):
     count = 0
 
     # opens new file with today's date and time now as filename
-    filename = "dataset-" + strftime("%d-%b-%Y_%H:%M:%S") # getting data-time string
-    dataset_file = open(filename, 'a') # opens the file for appending.
+    filename = "./twitter/dataset-" + strftime("%d-%b-%Y_%H:%M:%S") # getting data-time string
+    data_set = open(filename, 'a') # opens the file for appending.
 
     # executes query on twitter, creating a result object that yields tweets.
     results = twitter.cursor(twitter.search, q=query, count="100")
+
+    #print query
 
     # for tweets yielded by the result object.
     for result in results:
@@ -74,19 +76,18 @@ def cursor_extraction(query='twitter', max_tweets=15):
         #print result['id_str']
         #print result['id_str']
         # store tweet to file for later use.
-        dataset_file.write(str(result) + "\n")
+        data_set.write(str(result) + "\n")
 
     # closing datafile and twitter result object.
-    dataset_file.close()
+    data_set.close()
     results.close()
-    print count
+    #print count
 
     # create metadata file for each dataset
     meta_file = open(filename+".meta", 'a') # opens the file for appending.
     meta_file.write("query:"+query+"\n")
-    meta_file.write("count:"+count)
+    meta_file.write("count:"+str(count))
     meta_file.close()
-
 
 
 def create_time_intervals():
@@ -112,28 +113,7 @@ def create_time_intervals():
     print len(intervals)
     return intervals
 
-
-def get_credentials():
-    """
-    Retrieving my credentials from twitter.
-
-    @return: the credentials object on json format.
-    """
-    credentials = twitter.verify_credentials()
-    return credentials
-
-
-def get_time_line():
-    """
-    Get the tweets from my timline on twitter.
-
-    @return: a list of json objects representing tweets from my timeline on twitter.com
-    """
-    time_line = twitter.get_home_timeline()
-    return time_line
-
-
 #mine()
 #print create_time_intervals()
 #search("Finance")
-cursor_extraction("Finance", 1000)
+#cursor_extraction("Finance", 1000)

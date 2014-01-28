@@ -33,7 +33,26 @@
             {% endfor %}
         </p>
 
-        <a href="#" class="btn btn-primary btn-small">Create new dataset</a>
+        <input id="query" name="query" type="text" value="Twitter search Query"/>
+        <a href="" class="btn btn-primary btn-small" onclick="save()">Create new dataset</a>
     </div>
+
+    <script>
+        function myFunction(){
+            alert(document.getElementById('query').value);
+        }
+
+        function save() {
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(document.getElementById('query').value),
+                contentType: 'application/json',
+                url: '/dataset'
+            });
+
+        };
+
+    </script>
 
     {% endblock %}

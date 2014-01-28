@@ -21,8 +21,9 @@ def create_db():
 
 @manager.command
 def runserver():
-    main.app.run(host='0.0.0.0', debug=False)  # unsafe
-    #main.app.run(debug=True)
+    main.app.run(host='0.0.0.0', debug=False)  # Quite safe
+    main.app.run(host='0.0.0.0', debug=True)  # unsafe
+    #main.app.run(debug=True) # safe
 
 if __name__ == "__main__":
     manager.run()

@@ -6,7 +6,7 @@ from time import strftime
 # reading twitter data from config file
 # Default path is '.' aka open needs the full path from home.
 # on windows it would be something like: "c:\Users\username\project\code\folder\twitter.cfg"
-conf = open('/home/kiro/ntnu/master/code/twitter_integration/auth.cfg').read()
+conf = open('/home/kiro/ntnu/master/code/twitter/auth.cfg').read()
 config = ConfigParser.RawConfigParser(allow_no_value=True)
 config.readfp(io.BytesIO(conf))
 
@@ -58,7 +58,7 @@ def cursor_extraction(query='twitter', max_tweets=15):
     count = 0
 
     # opens new file with today's date and time now as filename
-    filename = strftime("%d-%b-%Y_%H:%M:%S") # getting data-time string
+    filename = "dataset-" + strftime("%d-%b-%Y_%H:%M:%S") # getting data-time string
     dataset_file = open(filename, 'a') # opens the file for appending.
 
     # executes query on twitter, creating a result object that yields tweets.
@@ -72,7 +72,7 @@ def cursor_extraction(query='twitter', max_tweets=15):
         count += 1
         #print result['created_at']
         #print result['id_str']
-        print result['id_str']
+        #print result['id_str']
         # store tweet to file for later use.
         dataset_file.write(str(result) + "\n")
 
@@ -80,6 +80,13 @@ def cursor_extraction(query='twitter', max_tweets=15):
     dataset_file.close()
     results.close()
     print count
+
+    # create metadata file for each dataset
+    meta_file = open(filename+".meta", 'a') # opens the file for appending.
+    meta_file.write("query:"+query+"\n")
+    meta_file.write("count:"+count)
+    meta_file.close()
+
 
 
 def create_time_intervals():
@@ -129,4 +136,4 @@ def get_time_line():
 #mine()
 #print create_time_intervals()
 #search("Finance")
-cursor_extraction("Finance", 100)
+cursor_extraction("Finance", 1000)

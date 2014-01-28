@@ -2,23 +2,7 @@
 {% block content %}
 <div class="container">
 
-    <!-- Tweet list -->
-    <div class="hero-unit">
-        <h4>List of tweets</h4>
-
-        <ul>
-            <ul>
-                <li>This is a tweet</li>
-                <li>This is a tweet with a #hashtag</li>
-                <li>And this with a stock tag $STO</li>
-            </ul>
-        </ul>
-        <p>
-            <a href="#" class="btn btn-primary btn-small">more tweets &raquo;</a>
-        </p>
-    </div>
-
-    <!-- Metadata about the tweet -->
+    <!-- Tweet metadata -->
     <div class="hero-unit">
         <h4>Tweet metadata</h4>
 
@@ -33,4 +17,23 @@
         </p>
     </div>
 
-{% endblock %}
+    <div class="hero-unit">
+        <h4>Datasets</h4>
+
+        <p>
+                <a href="">Name of dataset</a>
+                - 'The query for getting tweets'
+                - 'Count, number of tweets in the datset'
+            {% for set in datasets %}
+            <li>
+                <a href="dataset/{{ set.name }}">{{ set.name }}</a>
+                - {{ set.metadata.query }}
+                - {{ set.metadata.count }}
+            </li>
+            {% endfor %}
+        </p>
+
+        <a href="#" class="btn btn-primary btn-small">Create new dataset</a>
+    </div>
+
+    {% endblock %}

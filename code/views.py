@@ -1,10 +1,46 @@
 
 from flask import render_template
 from app import app
+from classification import classifier
+from models import *
+from twitter import data_controller
+#API routes and other internal tools.
 
 
-# TODO api
-# API routes, returning tweets and other data in json format to ux
+@app.route('/trend_data')
+def trend_data():
+    """
+    Returns the json object that represents a datapoint i the trend graph.
+    @return:
+    """
+    return "{ trend: { date : 15-01-14, sentiment-value : 401, stock-value : 405 } }"
+
+
+@app.route('/dataset')
+def datasets():
+    print "the content of the json put variable."
+    return "created new dataset"
+
+
+@app.route('/classify')
+def classify():
+    """
+    Runs the classification process that gets the sentiment from tweets.
+    @return:
+    """
+    tweet_list = data_controller.load_tweets()
+    for tweet in tweet_list:
+        # create tweet object
+        classified_tweet = Tweet(tweet)
+
+        # classify the tweet
+        classified_tweet = classifier.classify(classified_tweet)
+        print classified_tweet.id, ":", classified_tweet.polarity
+        # todo save
+        data_controller.save_tweet(classified_tweet)
+
+    return "classification complete"
+
 
 # Regular html routes, returning html/js only
 @app.route('/')
@@ -14,12 +50,18 @@ def homepage():
 
 @app.route('/tweets')
 def tweets():
-    return render_template('tweets.html')
+    datasets = data_controller.get_dataset_names()
+    return render_template('tweets.html', datasets=datasets)
 
 
 @app.route('/sentiment')
 def sentiment():
-    return render_template('sentiment.html')
+    """
+    Views the sentiment page with a tweet and its sentiment classification.
+    @return:
+    """
+    tweet = data_controller.get_one_tweet()
+    return render_template('sentiment.html', tweet=tweet)
 
 
 @app.route('/trend')

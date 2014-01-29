@@ -2,26 +2,77 @@
 {% block content %}
 <div class="container">
 
-    <!-- Tweet list -->
+    <!-- Tweet classification statistics-->
     <div class="hero-unit">
-        <h4>Tweet - ID:92398237489</h4>
+        <h4>Classification Statistics</h4>
+        <div class="span2">
+            <h5>Total amount of Tweets</h5>
+            <p>5000</p>
+        </div>
+        <div class="span2">
+            <h5>Automatically classified</h5>
+            <p>4500</p>
+        </div>
+        <div class="span2">
+            <h5>Manually classified</h5>
+            <p>100</p>
+        </div>
+        <div class="span2">
+            <h5>Accuracy</h5>
+            <p>0.5</p>
+        </div>
+        <div class="span2">
+            <!--
+            <input class="btn btn-primary btn-small" value="Refresh" onclick="refresh()"/>
+            -->
+            <input class="btn btn-primary btn-small" value="Refresh" onclick="test()"/>
+        </div>
+        <hr>
+        <script>
+            function test(){
+                alert("Test");
+            }
 
-        List of metadata and the result of the sentiment classification of a tweet.
-        <ul>
-            <li>One sentiment result</li>
-            <li>another part of the sentiment</li>
-            <li>another meta data</li>
-        </ul>
+            function refresh() {
+                $.ajax({
+                    type: 'GET',
+                    data: JSON.stringify(document.getElementById('query').value),
+                    contentType: 'application/json',
+                    url: '/classification_statistics'
+                });
 
-        <h4>Result: <i>Positive</i></h4>
+            };
+
+        </script>
+    </div>
+
+    <!-- Manual classification of a tweet -->
+    <div class="hero-unit">
+        <h4>Manual clasification of Tweets</h4>
+
+        <h4>Tweet text:</h4>
+        <p>{{ tweet.text }}</p>
+
+        <h4>Metadata from the tweet</h4>
+        <p>{{ tweet.metadata }}</p>
+
+        <h4>Polarity</h4>
+        <p>Positive - 0.7</p>
 
         <p>
-            {{ tweet }}
-        </p>
-
-        <p>
-            <a href="#" class="btn btn-primary btn-small">more tweets &raquo;</a>
+            <a href="#" class="btn btn-primary btn-small">Previous tweet</a>
+            <a href="#" class="btn btn-primary btn-small">Positive</a>
+            <a href="#" class="btn btn-primary btn-small">Negative</a>
+            <a href="#" class="btn btn-primary btn-small">Next tweet &raquo;</a>
         </p>
     </div>
 
-{% endblock %}
+    <!-- Example of a tweet -->
+    <div class="hero-unit">
+        <h4>Example of a tweet, id: {{ tweet.id }}</h4>
+        <p>
+            {{ tweet }}
+        </p>
+    </div>
+
+    {% endblock %}

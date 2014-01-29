@@ -2,21 +2,21 @@
 {% block content %}
 <div class="container">
 
-    <!-- Tweet metadata -->
+    <!-- create new dataset -->
     <div class="hero-unit">
-        <h4>Tweet metadata</h4>
-
-        <label>text</label> <p>This is the text</p>
-        <label>info1</label><p>This is the first metadata info.</p>
-
-        <p>
-            <a href="#" class="btn btn-primary btn-small">Previous tweet</a>
-            <a href="#" class="btn btn-primary btn-small">Positive</a>
-            <a href="#" class="btn btn-primary btn-small">Negative</a>
-            <a href="#" class="btn btn-primary btn-small">Next tweet &raquo;</a>
-        </p>
+        <h4>Tweet metadata and statistics about it</h4>
     </div>
 
+    <!-- create new dataset -->
+    <div class="hero-unit">
+        <h4>Create new Dataset</h4>
+        <form action="/dataset" method="post">
+            <input id="query" name="query" type="text" value="Twitter search Query"/>
+            <input type="submit" class="btn btn-primary btn-small" value="Create new dataset" />
+        </form>
+    </div>
+
+    <!-- list all datasets -->
     <div class="hero-unit">
         <h4>Datasets</h4>
 
@@ -32,29 +32,6 @@
             </li>
             {% endfor %}
         </p>
-
-        <form action="/dataset" method="post">
-            <input id="query" name="query" type="text" value="Twitter search Query"/>
-            <input type="submit" class="btn btn-primary btn-small" value="Create new dataset" />
-        </form>
     </div>
-
-    <script>
-        function myFunction(){
-            alert(document.getElementById('query').value);
-        }
-
-        function save() {
-
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(document.getElementById('query').value),
-                contentType: 'application/json',
-                url: '/dataset'
-            });
-
-        };
-
-    </script>
 
     {% endblock %}

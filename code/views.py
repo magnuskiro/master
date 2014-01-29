@@ -12,14 +12,22 @@ from twitter import data_controller
 @app.route('/trend_data')
 def trend_data():
     """
-    Returns the json object that represents a datapoint i the trend graph.
-    @return:
+    Returns the json object that represents a data point i the trend graph.
+    @return: a json object
     """
     return "{ trend: { date : 15-01-14, sentiment-value : 401, stock-value : 405 } }"
 
+@app.route('/classification_statistics')
+def classification_statistics():
+    """
+    Calculates the statistics of the classification as of now and returns it.
+    @return: a json object with statistics
+    """
+    return "{ 'statistics': 100 }"
+
 
 @app.route('/dataset', methods=['POST'])
-def new_dataset():
+def create_new_data_set():
     """
     @return:
     """
@@ -29,12 +37,6 @@ def new_dataset():
     if "Twitter search Query" not in query:
         data_controller.create_new_data_set(query)
     return redirect("/tweets", code=302)
-
-
-@app.route('/newdataset')
-def newdataset():
-    data_controller.create_new_data_set("Financial times")
-    return 200
 
 
 @app.route('/classify')

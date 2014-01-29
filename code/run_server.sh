@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# todo fix pid file thingy.
 
 echo "old: " `cat pidfile`
 rm -rf pidfile

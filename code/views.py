@@ -67,6 +67,7 @@ def homepage():
 
 @app.route('/tweets')
 def tweets():
+    # todo add metadata to the template
     datasets = data_controller.get_data_set_names()
     return render_template('tweets.html', datasets=datasets)
 

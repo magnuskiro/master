@@ -1,3 +1,4 @@
+import codecs
 from twython import Twython
 import ConfigParser
 import io
@@ -84,7 +85,7 @@ def cursor_extraction(query='twitter', max_tweets=15):
     #print count
 
     # create metadata file for each dataset
-    meta_file = open(filename+".meta", 'a') # opens the file for appending.
+    meta_file = codecs.open(filename + ".meta", "a", "utf-8") # opens the file for appending.
     meta_file.write("query:"+query+"\n")
     meta_file.write("count:"+str(count))
     meta_file.close()

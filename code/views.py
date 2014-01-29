@@ -1,6 +1,7 @@
 
 from time import sleep
 from flask import render_template, request
+from werkzeug.utils import redirect
 from app import app
 from classification import classifier
 from models import *
@@ -24,15 +25,16 @@ def new_dataset():
     """
     assert request.path == '/dataset'
     assert request.method == 'POST'
-    if "Twitter search Query" not in request.data:
-        data_controller.create_new_data_set(request.data)
-    sleep(10)
-    return
+    query = request.form['query']
+    if "Twitter search Query" not in query:
+        data_controller.create_new_data_set(query)
+    return redirect("/tweets", code=302)
 
 
 @app.route('/newdataset')
 def newdataset():
     data_controller.create_new_data_set("Financial times")
+    return 200
 
 
 @app.route('/classify')

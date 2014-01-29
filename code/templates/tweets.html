@@ -33,8 +33,10 @@
             {% endfor %}
         </p>
 
-        <input id="query" name="query" type="text" value="Twitter search Query"/>
-        <a href="" class="btn btn-primary btn-small" onclick="save()">Create new dataset</a>
+        <form action="/dataset" method="post">
+            <input id="query" name="query" type="text" value="Twitter search Query"/>
+            <input type="submit" class="btn btn-primary btn-small" value="Create new dataset" />
+        </form>
     </div>
 
     <script>

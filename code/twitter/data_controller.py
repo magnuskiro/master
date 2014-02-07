@@ -7,7 +7,8 @@ from twitter.mining_operations import cursor_extraction
 # loading and storing data to local disk.
 #cursor = mysql.get_db().cursor()
 
-base = "./twitter/"
+#base = "./twitter/"
+base = "/home/kiro/ntnu/master/code/twitter/"
 default_data_set = "testset"
 
 

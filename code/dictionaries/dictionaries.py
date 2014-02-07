@@ -1,6 +1,7 @@
 # helpers to read and update dictionaries.
 from helpers import read_file
 
+base = "/home/kiro/ntnu/master/code/dictionaries/"
 
 # method to check if a word exists in any dictionary or not.
 def find_word(word):
@@ -21,7 +22,7 @@ def classify_word(word):
 
 
 def get_positve_dict():
-    lines = read_file('dictionaries/LoughranMcDonald_Positive.csv')
+    lines = read_file(base + 'LoughranMcDonald_Positive.csv')
     words = {}
     for l in lines:
         words[l] = 1
@@ -29,7 +30,7 @@ def get_positve_dict():
 
 
 def get_negative_dict():
-    lines = read_file('dictionaries/LoughranMcDonald_Negative.csv')
+    lines = read_file(base + 'LoughranMcDonald_Negative.csv')
     words = {}
     for l in lines:
         words[l] = -1

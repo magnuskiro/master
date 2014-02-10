@@ -37,6 +37,26 @@ def pos_neg(words):
     return polarity
 
 
+def a1():
+    # TODO create
+    return True
+
+
+def a2():
+    # TODO create
+    return False
+
+
+def a3():
+    # TODO create
+    return True
+
+
+def a4():
+    # TODO create
+    return False
+
+
 def sanitize_tweet(tweet):
     """
     Sanitize and remove unwanted parts of a tweet.

@@ -1,4 +1,7 @@
+
 import ast
+from datetime import datetime
+import re
 from app import db
 
 class Tweet(db.Model):
@@ -9,6 +12,7 @@ class Tweet(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     original = db.Column(db.String)
+    date = db.Column(db.DateTime)
     positive_words = db.Column(db.Integer)
     negative_words = db.Column(db.Integer)
     sanitized_text = db.Column(db.String)
@@ -37,6 +41,15 @@ class Tweet(db.Model):
         self.original = str(tweet)
         # store the ID.
         self.id = int(tweet['id'])
+        # set date
+        #datetime.strptime( string , format )datetime
+
+        time = tweet['created_at']
+        # stripping the tweet of unwanted characters.
+        regex = u"\+\d\d\d\d "
+        replacement = ""
+        time = re.sub(regex, replacement, time)
+        self.date = datetime.strptime(time, "%a %b %d %X %Y")
 
     def __unicode__(self):
         return self.id

@@ -78,7 +78,7 @@ def sentiment():
     """
     tweet = data_controller.get_random_unclassified_tweet()
     if tweet is None:
-        tweet = Tweet(ast.literal_eval('''{  u'text': u'There are no unclassified tweets', u'id': 0 }'''))
+        tweet = Tweet(ast.literal_eval('''{  u'text': u'There are no unclassified tweets', u'id': 0, u'created_at': u'Thu Nov 28 19:18:12 +0000 2013'}'''))
 
     # todo fix statistics
     num_tweets = 1
@@ -91,7 +91,6 @@ def sentiment():
                    'positive_tweets': positive_tweets,
                    'negative_tweets': negative_tweets,
                    'accuracy': accuracy}
-
 
     return render_template('sentiment.html', tweet=tweet.get_original_as_dict(), statistics=statistics)
 

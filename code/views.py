@@ -31,7 +31,7 @@ def test_load():
     @return:
     """
     tweet = data_controller.get_random_tweet()
-    return str(tweet.id)
+    return str(tweet.id) +":"+ str(tweet.manual_polarity)
 
 
 @app.route('/trend_data')
@@ -50,6 +50,14 @@ def classification_statistics():
     """
     return "{ 'statistics': 100 }"
 
+@app.route('/manual_classification', methods=['POST'])
+def manual_classification():
+    assert request.path == '/manual_classification'
+    assert request.method == 'POST'
+    tweet = Tweet.query.get(request.form['id'])
+    tweet.manual_polarity = bool(request.form['polarity'])
+    data_controller.save_tweet(tweet)
+    return redirect("/sentiment", code=302)
 
 @app.route('/dataset', methods=['POST'])
 def create_new_data_set():
@@ -78,9 +86,7 @@ def classify():
         # classify the tweet
         classified_tweet = classifier.classify(classified_tweet)
         print classified_tweet.id, ":", classified_tweet.polarity
-        # todo save
         data_controller.save_tweet(classified_tweet)
-
     return "classification complete"
 
 
@@ -103,8 +109,10 @@ def sentiment():
     Views the sentiment page with a tweet and its sentiment classification.
     @return:
     """
-    tweet = data_controller.get_random_tweet()
-    return render_template('sentiment.html', tweet=tweet)
+    tweet = data_controller.get_random_unclassified_tweet()
+    if tweet is None:
+        tweet = Tweet(ast.literal_eval('''{  u'text': u'There are no unclassified tweets', u'id': 0 }'''))
+    return render_template('sentiment.html', tweet=tweet.get_original_as_dict())
 
 
 @app.route('/trend')

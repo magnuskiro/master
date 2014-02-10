@@ -36,6 +36,12 @@ def get_random_tweet():
     tweet = random.choice(tweets)
     return tweet
 
+def get_random_unclassified_tweet():
+    """
+    returns the first unclassified tweet metadata object.
+    @return: a tweet metadata object.
+    """
+    return Tweet.query.filter_by(manual_polarity=None).first()
 
 def save_tweet(tweet):
     """
@@ -44,12 +50,12 @@ def save_tweet(tweet):
     @return: nothing.
     """
     if isinstance(tweet, Tweet):
-        if not Tweet.query.get(tweet.id):
-            #print "new tweet"
-            db.session.add(tweet)
-            db.session.commit()
-        else:
-            print "already exists"
+        # if the tweet metadata object already exists, delete it
+        if Tweet.query.get(tweet.id):
+            db.session.delete(tweet)
+        # save tweet metadata object to db.
+        db.session.add(tweet)
+        db.session.commit()
     else:
         print "not a tweet metadata object: "
         #print "not a tweet metadata object: ", str(tweet)

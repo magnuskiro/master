@@ -1,21 +1,11 @@
 
-import codecs
 import re
 from classification import aggregator
 from dictionaries import dictionaries
-
+from dictionaries.dictionaries import classify_word
 
 neg = dictionaries.get_negative_dict()
 pos = dictionaries.get_positve_dict()
-
-# Save unpolarized words for classification.
-def classify_word(word):
-    """
-
-    @param word:
-    """
-    with codecs.open("dictionaries/unclassified_words.txt", "a", "utf-8") as unclassified_words:
-        unclassified_words.write(word+'\n')
 
 
 def pos_neg(words):
@@ -54,7 +44,7 @@ def sanitize_tweet(tweet):
     @param tweet: the tweet metadata object.
     @return: the tweet metadata object.
     """
-    text = unicode(tweet.original['text'])
+    text = unicode(tweet.get_original_as_dict()['text'])
 
     # stripping the tweet of unwanted characters.
     regex = u"[\u2013\u2026+()\.:',-]"

@@ -1,4 +1,5 @@
 # helpers to read and update dictionaries.
+import codecs
 from helpers import read_file
 
 base = "/home/kiro/ntnu/master/code/dictionaries/"
@@ -16,8 +17,12 @@ def find_word(word):
     return False
 
 
+# Save unpolarized words for classification.
 def classify_word(word):
-    with open("unclassified_words.txt", "a") as unclassified_words:
+    """
+    @param word:
+    """
+    with codecs.open(base+"unclassified_words.txt", "a", "utf-8") as unclassified_words:
         unclassified_words.write(word+'\n')
 
 

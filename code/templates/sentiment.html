@@ -47,24 +47,22 @@
 
     <!-- Manual classification of a tweet -->
     <div class="hero-unit">
-        <h4>Manual clasification of Tweets</h4>
-
-        <h4>Tweet text:</h4>
+        <h4>Manual clasification of a Tweet:</h4>
         <p>{{ tweet.text }}</p>
 
-        <h4>Metadata from the tweet</h4>
-        <p>{{ tweet.metadata }}</p>
+        <form action="/manual_classification" method="post" class="span1">
+            <input id="tweetid" name="id" type="hidden" value="{{ tweet.id }}"/>
+            <input id="polarity" name="polarity" type="hidden" value="True"/>
+            <input type="submit" class="btn btn-primary" value="Positive" />
+        </form>
+        <form action="/manual_classification" method="post" class="span1">
+            <input id="tweetid" name="id" type="hidden" value="{{ tweet.id }}"/>
+            <input id="polarity" name="polarity" type="hidden" value="False"/>
+            <input type="submit" class="btn btn-primary" value="Negative" />
+        </form>
 
-        <h4>Polarity</h4>
-        <p>Positive - 0.7</p>
-
-        <p>
-            <a href="#" class="btn btn-primary btn-small">Previous tweet</a>
-            <a href="#" class="btn btn-primary btn-small">Positive</a>
-            <a href="#" class="btn btn-primary btn-small">Negative</a>
-            <a href="#" class="btn btn-primary btn-small">Next tweet &raquo;</a>
-        </p>
     </div>
+
 
     <!-- Example of a tweet -->
     <div class="hero-unit">

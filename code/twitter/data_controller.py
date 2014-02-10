@@ -44,10 +44,15 @@ def save_tweet(tweet):
     @return: nothing.
     """
     if isinstance(tweet, Tweet):
-        db.session.add(tweet)
-        db.session.commit()
+        if not Tweet.query.get(tweet.id):
+            #print "new tweet"
+            db.session.add(tweet)
+            db.session.commit()
+        else:
+            print "already exists"
     else:
-        print "not a tweet metadata object: ", str(tweet)
+        print "not a tweet metadata object: "
+        #print "not a tweet metadata object: ", str(tweet)
     return
 
 

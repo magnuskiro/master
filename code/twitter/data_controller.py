@@ -1,5 +1,6 @@
 import codecs
 import os
+import random
 from models import *
 import ast
 from twitter.mining_operations import cursor_extraction
@@ -12,7 +13,7 @@ base = "/home/kiro/ntnu/master/code/twitter/"
 default_data_set = "testset"
 
 
-def load_tweets(filename=default_data_set):
+def load_tweets_from_file(filename=default_data_set):
     """
     Reading data from file and returning those tweets.
     @param filename:
@@ -26,23 +27,27 @@ def load_tweets(filename=default_data_set):
     return tweets
 
 
-def get_one_tweet():
-    tweet = load_tweets(default_data_set)[1]
-    # todo get random tweet object from database.
-
+def get_random_tweet():
+    """
+    returns a randomly selected tweet metadata object.
+    @return: a tweet metadata object.
+    """
+    tweets = Tweet.query.all()
+    tweet = random.choice(tweets)
     return tweet
 
 
 def save_tweet(tweet):
     """
-
-    @param tweet:
-    @return:
+    stores a tweet object to the database.
+    @param tweet: a tweet metadata obejct.
+    @return: nothing.
     """
-    # todo store tweets to database.
-    print tweet
-    db.session.add(tweet)
-    db.session.commit()
+    if isinstance(tweet, Tweet):
+        db.session.add(tweet)
+        db.session.commit()
+    else:
+        print "not a tweet metadata object: ", str(tweet)
     return
 
 

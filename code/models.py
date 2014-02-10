@@ -1,4 +1,4 @@
-
+import ast
 from app import db
 
 class Tweet(db.Model):
@@ -28,9 +28,13 @@ class Tweet(db.Model):
             #print bigrams[-1] # probably not working.
         return bigrams
 
+    def get_original_as_dict(self):
+        return ast.literal_eval(self.original)
+
     def __init__(self, tweet):
-        #self.original = tweet
-        self.original = "{ hei: { new : 20 }, old : 10 }"
+        # store the original as a string.
+        self.original = str(tweet)
+        # store the ID.
         self.id = int(tweet['id'])
 
     def __unicode__(self):

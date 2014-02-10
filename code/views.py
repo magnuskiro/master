@@ -16,15 +16,6 @@ def trend_data():
     return "{ trend: { date : 15-01-14, sentiment-value : 401, stock-value : 405 } }"
 
 
-@app.route('/classification_statistics')
-def classification_statistics():
-    """
-    Calculates the statistics of the classification as of now and returns it.
-    @return: a json object with statistics
-    """
-    return "{ 'statistics': 100 }"
-
-
 @app.route('/manual_classification', methods=['POST'])
 def manual_classification():
     assert request.path == '/manual_classification'
@@ -88,7 +79,21 @@ def sentiment():
     tweet = data_controller.get_random_unclassified_tweet()
     if tweet is None:
         tweet = Tweet(ast.literal_eval('''{  u'text': u'There are no unclassified tweets', u'id': 0 }'''))
-    return render_template('sentiment.html', tweet=tweet.get_original_as_dict())
+
+    # todo fix statistics
+    num_tweets = 1
+    manually_classified_tweets = 1
+    positive_tweets = 1
+    negative_tweets = 1
+    accuracy = 0.5
+    statistics = { 'num_tweets': num_tweets,
+                   'manually_classified_tweets':manually_classified_tweets,
+                   'positive_tweets': positive_tweets,
+                   'negative_tweets': negative_tweets,
+                   'accuracy': accuracy}
+
+
+    return render_template('sentiment.html', tweet=tweet.get_original_as_dict(), statistics=statistics)
 
 
 @app.route('/trend')

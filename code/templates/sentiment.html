@@ -6,43 +6,25 @@
         <h4>Classification Statistics</h4>
         <div class="span2">
             <h5>Total amount of Tweets</h5>
-            <p>5000</p>
-        </div>
-        <div class="span2">
-            <h5>Automatically classified</h5>
-            <p>4500</p>
+            <p>{{ statistics.num_tweets }}</p>
         </div>
         <div class="span2">
             <h5>Manually classified</h5>
-            <p>100</p>
+            <p>{{ statistics.manually_classified_tweets }}</p>
+        </div>
+        <div class="span2">
+            <h5>Positive tweets</h5>
+            <p>{{ statistics.positive_tweets }}</p>
+        </div>
+        <div class="span2">
+            <h5>Negative tweets</h5>
+            <p>{{ statistics.negative_tweets }}</p>
         </div>
         <div class="span2">
             <h5>Accuracy</h5>
-            <p>0.5</p>
-        </div>
-        <div class="span2">
-            <!--
-            <input class="btn btn-primary btn-small" value="Refresh" onclick="refresh()"/>
-            -->
-            <input class="btn btn-primary btn-small" value="Refresh" onclick="test()"/>
+            <p>{{ statistics.accuracy}}</p>
         </div>
         <hr>
-        <script>
-            function test(){
-                alert("Test");
-            }
-
-            function refresh() {
-                $.ajax({
-                    type: 'GET',
-                    data: JSON.stringify(document.getElementById('query').value),
-                    contentType: 'application/json',
-                    url: '/classification_statistics'
-                });
-
-            };
-
-        </script>
     </div>
 
     <!-- Manual classification of a tweet -->

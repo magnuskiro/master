@@ -8,13 +8,11 @@ neg = dictionaries.get_negative_dict()
 pos = dictionaries.get_positve_dict()
 
 
-def pos_neg(words):
+def get_pos_neg_word_count(words):
     """
-    @type tweet: tweet
-    @param pos: corpus of positive words
-    @param neg: corpus of negative words
-    @param tweet: the python dictionary of a tweet.
-    @return: a dictionary with counted positive and negative words.
+
+    @param words:
+    @return: a dict with counted positive and negative words.
     """
     polarity = {'pos': 0, 'neg': 0}
 
@@ -28,33 +26,40 @@ def pos_neg(words):
             polarity['pos'] -= 1
             #print neg[word]
             word_is_pos_or_neg = True
-        # if the word don't appear in either dictionaries store it to be classified.
+            # if the word don't appear in either dictionaries store it to be classified.
         if not word_is_pos_or_neg:
             classify_word(word)
-        #print word
+            #print word
 
     #return polarity['pos'] + polarity['neg']
     return polarity
 
 
-def a1():
-    # TODO create
-    return True
+def a1(tweet):
+    p1 = get_pos_neg_word_count(tweet.monograms())
+    p2 = get_pos_neg_word_count(tweet.bigrams())
+
+    # positive monograms and bigrams divided by negative monograms and bigrams.
+    # gives us the ratio of positive over negative words in the sentence.
+    if (p1['pos'] == 0 and p2['pos'] == 0) or (p1['neg'] == 0 and p2['neg'] == 0):
+        return "N/A"
+    else:
+        return (p1['pos'] + p2['pos']) / (p1['neg'] + p2['neg'])
 
 
 def a2():
     # TODO create
-    return False
+    return "N/A"
 
 
 def a3():
     # TODO create
-    return True
+    return "N/A"
 
 
 def a4():
     # TODO create
-    return False
+    return "N/A"
 
 
 def sanitize_tweet(tweet):
@@ -88,8 +93,8 @@ def classify(tweet):
 
     # todo classify polarity based on 4 different algorithms, not just the pos/neg one.
     ## pos_neg count
-    monogram_count = pos_neg(tweet.monograms())
-    bigram_count = pos_neg(tweet.bigrams())
+    monogram_count = get_pos_neg_word_count(tweet)
+    bigram_count = get_pos_neg_word_count(tweet)
     tweet.negative_words = monogram_count['neg'] + bigram_count['neg']
     tweet.positive_words = monogram_count['pos'] + bigram_count['pos']
 

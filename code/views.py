@@ -45,6 +45,8 @@ def classify():
     Runs the classification process that gets the sentiment from tweets.
     @return:
     """
+    # todo fix so that we take input and classify each dataset.
+    # todo fix classification datetime for each dataset.
     tweet_list = data_controller.load_tweets_from_file()
     for tweet in tweet_list:
         # create tweet object
@@ -143,28 +145,3 @@ def test_load():
     """
     tweet = data_controller.get_random_tweet()
     return str(tweet.id) + ":" + str(tweet.manual_polarity)
-
-
-@app.route('/test_classification')
-def test_classification():
-    string = "tweet id | " \
-             "first algorithm result | " \
-             "second algorithm result | " \
-             "third algorithm result | " \
-             "forth algorithm result<br>"
-
-    tweets = data_controller.load_tweets_from_file()
-    for tweet in tweets:
-        string += str(tweet['id'])+"" \
-                  " | " \
-                  "A1: " + str(classifier.a1()) + \
-                  " | " \
-                  "A2: " + str(classifier.a2()) + \
-                  " | " \
-                  "A3: " + str(classifier.a3()) + \
-                  " | " \
-                  "A4: " + str(classifier.a4()) + \
-                  " | " \
-                  "A4: True" \
-                  "<br>"
-    return string

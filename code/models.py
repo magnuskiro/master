@@ -13,12 +13,13 @@ class Tweet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     original = db.Column(db.String)
     date = db.Column(db.DateTime)
+
+    sanitized_text = db.Column(db.String)
     positive_words = db.Column(db.Integer)
     negative_words = db.Column(db.Integer)
-    sanitized_text = db.Column(db.String)
-    classified_polarity = db.Column(db.Boolean)
     polarity_value = db.Column(db.Integer)
     manual_polarity = db.Column(db.Boolean)
+    classified_polarity = db.Column(db.Boolean)
 
     # tokens / mono-grams
     def monograms(self):

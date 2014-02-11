@@ -21,7 +21,8 @@ def manual_classification():
     assert request.path == '/manual_classification'
     assert request.method == 'POST'
     tweet = Tweet.query.get(request.form['id'])
-    tweet.manual_polarity = bool(request.form['polarity'])
+    tweet.manual_polarity = ast.literal_eval(request.form['polarity'])
+    #print request.form['polarity']
     data_controller.save_tweet(tweet)
     return redirect("/sentiment", code=302)
 
@@ -54,7 +55,7 @@ def classify():
 
         # classify the tweet
         classified_tweet = classifier.classify(classified_tweet)
-        print classified_tweet.id, ":", classified_tweet.polarity
+        #print classified_tweet.id, ":", classified_tweet.polarity
         data_controller.save_tweet(classified_tweet)
     return "classification complete"
 
@@ -82,12 +83,11 @@ def sentiment():
     if tweet is None:
         tweet = Tweet(ast.literal_eval('''{  u'text': u'There are no unclassified tweets', u'id': 0, u'created_at': u'Thu Nov 28 19:18:12 +0000 2013'}'''))
 
-    # todo fix statistics
-    num_tweets = 1
-    manually_classified_tweets = 1
-    positive_tweets = 1
-    negative_tweets = 1
-    accuracy = 0.5
+    num_tweets = len(Tweet.query.all())
+    manually_classified_tweets = len(Tweet.query.filter_by(manual_polarity=True or False).all())
+    positive_tweets = str(len(Tweet.query.filter_by(classified_polarity=True).all())) + " / " + str(len(Tweet.query.filter_by(manual_polarity=True).all()))
+    negative_tweets = str(len(Tweet.query.filter_by(classified_polarity=False).all())) + " / " + str(len(Tweet.query.filter_by(manual_polarity=False).all()))
+    accuracy = 0.0
     statistics = { 'num_tweets': num_tweets,
                    'manually_classified_tweets':manually_classified_tweets,
                    'positive_tweets': positive_tweets,

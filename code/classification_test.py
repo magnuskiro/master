@@ -29,13 +29,12 @@ def run_classify():
     for tweet in tweets:
         print str(tweet.id) + "" \
                               " | " \
-                              "A1: " + str(classifier.a1(tweet)) + \
+                              "A1: " + str(classifier.positive_vs_negative_words_classification(tweet)) + \
               " | " \
               "A2: " + str(classifier.a2()) + \
               " | " \
               "A3: " + str(classifier.a3()) + \
               " | " \
               "A4: " + str(classifier.a4())
-
 
 run_classify()

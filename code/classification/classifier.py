@@ -35,7 +35,12 @@ def get_pos_neg_word_count(words):
     return polarity
 
 
-def a1(tweet):
+def positive_vs_negative_words_classification(tweet):
+    """
+    Classifies the text of a tweet by counting positive and negative words.
+    @param tweet:
+    @return:
+    """
     p1 = get_pos_neg_word_count(tweet.monograms())
     p2 = get_pos_neg_word_count(tweet.bigrams())
 
@@ -93,8 +98,8 @@ def classify(tweet):
 
     # todo classify polarity based on 4 different algorithms, not just the pos/neg one.
     ## pos_neg count
-    monogram_count = get_pos_neg_word_count(tweet)
-    bigram_count = get_pos_neg_word_count(tweet)
+    monogram_count = get_pos_neg_word_count(tweet.monograms())
+    bigram_count = get_pos_neg_word_count(tweet.bigrams())
     tweet.negative_words = monogram_count['neg'] + bigram_count['neg']
     tweet.positive_words = monogram_count['pos'] + bigram_count['pos']
 
@@ -104,6 +109,7 @@ def classify(tweet):
     ## followers
     ## ect
 
+    # todo aggregation
     # set polarity
     tweet.polarity = aggregator.get_aggregated_polarity(tweet)
     tweet.polarity_value = aggregator.get_aggregated_polarity_value(tweet)

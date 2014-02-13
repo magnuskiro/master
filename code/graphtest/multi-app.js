@@ -6,7 +6,7 @@ var D3KD = this.D3KD || {};
 
 (function () {
     "use strict";
-    var dataViewModel = new D3KD.lineDataViewModel();
+    var dataViewModel = new D3KD.multiDataViewModel();
 
     ko.applyBindings(dataViewModel);
 }());

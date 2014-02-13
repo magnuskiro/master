@@ -58,7 +58,7 @@ ko.bindingHandlers.lineChart = {
             .scale(y)
             .orient("left");
 
-        var line = d3.svg.line()
+        var line = d3.svg.price()
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.close); });
 
@@ -67,6 +67,8 @@ ko.bindingHandlers.lineChart = {
         var data = ko.unwrap(valueAccessor());
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
+
+        //
         y.domain([0, d3.max(data, function(d) { return d.close; })]);
 
         // draw the x-axis on the canvas
@@ -81,7 +83,8 @@ ko.bindingHandlers.lineChart = {
             .duration(750)
             .call(yAxis);
 
-        svg.select("path.line.data")
+        // draw the graph price on the canvas
+        svg.select("path.price.data")
             .datum(data)
             .transition()
             .duration(750)

@@ -1,8 +1,16 @@
-.bar {
+.neg {
     fill: steelblue;
 }
 
-.bar:hover {
+.neg:hover {
+    fill: brown;
+}
+
+.pos {
+    fill: green;
+}
+
+.pos:hover {
     fill: brown;
 }
 
@@ -37,9 +45,29 @@
     fill: brown;
 }
 
-/* line chart specifics.*/
+/* price chart specifics.*/
 .line {
     fill: none;
     stroke: steelblue;
+    stroke-width: 1.5px;
+}
+.priceLine{
+    fill: none;
+    stroke: red;
+    stroke-width: 1.5px;
+}
+.volumeLine{
+    fill: none;
+    stroke: green;
+    stroke-width: 1.5px;
+}
+.sentimentLine{
+    fill: none;
+    stroke: #ffba1c;
+    stroke-width: 1.5px;
+}
+.trendLine{
+    fill: none;
+    stroke: #318075;
     stroke-width: 1.5px;
 }

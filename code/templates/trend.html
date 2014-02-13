@@ -5,7 +5,9 @@
     <h4>Trend Graph</h4>
 
     <div class="row">
-        <div class="col-lg-12 smallChart" data-bind="lineChart: lineChartData"></div>
+        <!--<div class="col-lg-12 smallChart" data-bind="lineChart: lineChartData"></div>-->
+        <div class="col-lg-12 smallChart" data-bind="multiChart: multiChartData"></div>
+
     </div>
 
 </div>
@@ -36,10 +38,10 @@
 </div>
 
 <!-- D3 + knockout imports -->
-<script type='text/javascript' src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script type='text/javascript' src="http://knockoutjs.com/downloads/knockout-3.0.0.js" charset="utf-8"></script>
-<script type='text/javascript' src='/static/js/data-view-model.js'></script>
-<script type='text/javascript' src='/static/js/line-chart-binding-handler.js'></script>
-<script type='text/javascript' src='/static/js/app.js'></script>
+<script type='text/javascript' src="/static/js/d3.v3.min.js" charset="utf-8"></script>
+<script type='text/javascript' src="../static/js/knockout-3.0.0.js" charset="utf-8"></script>
+<script type='text/javascript' src='/static/js/multi-data-view-model.js'></script>
+<script type='text/javascript' src='/static/js/multi-chart-binding-handler.js'></script>
+<script type='text/javascript' src='/static/js/multi-app.js'></script>
 
 {% endblock %}

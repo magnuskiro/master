@@ -6,11 +6,10 @@ import ast
 from twitter.mining_operations import cursor_extraction
 
 # loading and storing data to local disk.
-#cursor = mysql.get_db().cursor()
 
 #base = "./twitter/"
 base = "/home/kiro/ntnu/master/code/twitter/"
-default_data_set = "testset"
+default_data_set = "dataset-testset"
 
 
 def load_tweets_from_file(filename=default_data_set):
@@ -22,7 +21,7 @@ def load_tweets_from_file(filename=default_data_set):
     tweets = []
     data_file = open(base + filename)
     for line in data_file.readlines():
-        # 'ast.literal_eval(line)' interprets the json tweet string as a dictionary.
+        # 'ast.literal_eval(price)' interprets the json tweet string as a dictionary.
         tweets.append(ast.literal_eval(line))
     return tweets
 
@@ -36,12 +35,28 @@ def get_random_tweet():
     tweet = random.choice(tweets)
     return tweet
 
+
 def get_random_unclassified_tweet():
     """
     returns the first unclassified tweet metadata object.
     @return: a tweet metadata object.
     """
     return Tweet.query.filter_by(manual_polarity=None).first()
+
+
+def save_tweets(tweets):
+    mymap = []
+
+    # todo debug thoroughly. this might be a bit buggy with more the 100 tweets to save.
+    for tweet in tweets:
+        #print t.id
+        if tweet.id not in mymap:
+            mymap.append(tweet.id)
+            db.session.add(tweet)
+
+    db.session.commit()
+
+    return
 
 def save_tweet(tweet):
     """
@@ -51,16 +66,16 @@ def save_tweet(tweet):
     """
     if isinstance(tweet, Tweet):
         # if the tweet metadata object already exists, delete it
-        if Tweet.query.get(tweet.id):
-            db.session.delete(tweet)
-        # save tweet metadata object to db.
+        #if Tweet.query.get(tweet.id):
+        #    db.session.delete(tweet)
+        #    db.session.commit()
+            # save tweet metadata object to db.
         db.session.add(tweet)
         db.session.commit()
     else:
         print "not a tweet metadata object: "
         #print "not a tweet metadata object: ", str(tweet)
     return
-
 
 def get_data_set_names():
     """
@@ -103,19 +118,3 @@ def create_new_data_set(query, count=2000):
     """
     cursor_extraction(query, count)
     return
-
-
-#def data():
-#    # get 15 tweets and return them
-#    create_user()
-#    tweets = twtr.search()
-#    users = User.query.all()
-#    print users[0].username
-#    return tweets
-
-
-#def create_user(term = 'default'):
-#    user = User('username1', 'message1')
-#    db.session.add(user)
-#    db.session.commit()
-#    print "Created user"

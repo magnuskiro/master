@@ -111,7 +111,7 @@ def classify(tweet):
 
     # todo aggregation
     # set polarity
-    tweet.polarity = aggregator.get_aggregated_polarity(tweet)
+    tweet.classified_polarity = aggregator.get_aggregated_polarity(tweet)
     tweet.polarity_value = aggregator.get_aggregated_polarity_value(tweet)
     return tweet
 

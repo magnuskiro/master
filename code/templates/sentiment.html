@@ -30,15 +30,15 @@
     <!-- Manual classification of a tweet -->
     <div class="hero-unit">
         <h4>Manual clasification of a Tweet:</h4>
-        <p>{{ tweet.text }}</p>
+        <p>{{ tweet_text }}</p>
 
         <form action="/manual_classification" method="post" class="span1">
-            <input id="tweetid" name="id" type="hidden" value="{{ tweet.id }}"/>
+            <input id="tweetid" name="id" type="hidden" value="{{ tweet_id }}"/>
             <input id="polarity" name="polarity" type="hidden" value="True"/>
             <input type="submit" class="btn btn-primary" value="Positive" />
         </form>
         <form action="/manual_classification" method="post" class="span1">
-            <input id="tweetid" name="id" type="hidden" value="{{ tweet.id }}"/>
+            <input id="tweetid" name="id" type="hidden" value="{{ tweet_id }}"/>
             <input id="polarity" name="polarity" type="hidden" value="False"/>
             <input type="submit" class="btn btn-primary" value="Negative" />
         </form>
@@ -48,9 +48,9 @@
 
     <!-- Example of a tweet -->
     <div class="hero-unit">
-        <h4>Example of a tweet, id: {{ tweet.id }}</h4>
+        <h4>Example of a tweet as JSON: </h4>
         <p>
-            {{ tweet }}
+            {{ tweet_example }}
         </p>
     </div>
 

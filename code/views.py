@@ -7,12 +7,20 @@ from models import Tweet
 from twitter import data_controller
 
 
-@app.route('/trend_data')
+@app.route('/grap_data_point')
 def trend_data():
     """
     Returns the json object that represents a data point i the trend graph.
     @return: a json object
     """
+#- innhente finnansdata
+#    - volume
+#    - pris
+
+    positive_tweets = str(len(Tweet.query.filter_by(classified_polarity=True).all())) + " / " + str(
+        len(Tweet.query.filter_by(manual_polarity=True).all()))
+    negative_tweets = str(len(Tweet.query.filter_by(classified_polarity=False).all())) + " / " + str(
+        len(Tweet.query.filter_by(manual_polarity=False).all()))
     return "{ trend: { date : 15-01-14, sentiment-value : 401, stock-value : 405 } }"
 
 
@@ -81,18 +89,21 @@ def sentiment():
     """
     tweet = data_controller.get_random_unclassified_tweet()
     if tweet is None:
-        tweet = Tweet(ast.literal_eval('''{  u'text': u'There are no unclassified tweets', u'id': 0, u'created_at': u'Thu Nov 28 19:18:12 +0000 2013'}'''))
+        tweet = Tweet(ast.literal_eval(
+            '''{  u'text': u'There are no unclassified tweets', u'id': 0, u'created_at': u'Thu Nov 28 19:18:12 +0000 2013'}'''))
 
     num_tweets = len(Tweet.query.all())
     manually_classified_tweets = len(Tweet.query.filter_by(manual_polarity=True or False).all())
-    positive_tweets = str(len(Tweet.query.filter_by(classified_polarity=True).all())) + " / " + str(len(Tweet.query.filter_by(manual_polarity=True).all()))
-    negative_tweets = str(len(Tweet.query.filter_by(classified_polarity=False).all())) + " / " + str(len(Tweet.query.filter_by(manual_polarity=False).all()))
+    positive_tweets = str(len(Tweet.query.filter_by(classified_polarity=True).all())) + " / " + str(
+        len(Tweet.query.filter_by(manual_polarity=True).all()))
+    negative_tweets = str(len(Tweet.query.filter_by(classified_polarity=False).all())) + " / " + str(
+        len(Tweet.query.filter_by(manual_polarity=False).all()))
     accuracy = 0.0
-    statistics = { 'num_tweets': num_tweets,
-                   'manually_classified_tweets':manually_classified_tweets,
-                   'positive_tweets': positive_tweets,
-                   'negative_tweets': negative_tweets,
-                   'accuracy': accuracy}
+    statistics = {'num_tweets': num_tweets,
+                  'manually_classified_tweets': manually_classified_tweets,
+                  'positive_tweets': positive_tweets,
+                  'negative_tweets': negative_tweets,
+                  'accuracy': accuracy}
 
     return render_template('sentiment.html', tweet=tweet.get_original_as_dict(), statistics=statistics)
 

@@ -23,11 +23,13 @@
                 <a href="">Name of dataset</a>
                 - 'The query for getting tweets'
                 - 'Count, number of tweets in the datset'
+                - 'Classification button'
             {% for set in datasets %}
             <li>
                 <a href="dataset/{{ set.name }}">{{ set.name }}</a>
                 - {{ set.metadata.query }}
                 - {{ set.metadata.count }}
+                - <a href="/classify/{{ set.name }}" class="btn btn-primary btn-small" >Classify</a>
             </li>
             {% endfor %}
         </p>

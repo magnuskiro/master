@@ -1,4 +1,5 @@
 import ast
+import example
 from flask import render_template, request
 from werkzeug.utils import redirect
 from app import app
@@ -26,6 +27,10 @@ def trend_data():
 
 @app.route('/manual_classification', methods=['POST'])
 def manual_classification():
+    """
+    Stores the manual input of tweet polarity. positive or negative.
+    @return: redirect back to previous page.
+    """
     assert request.path == '/manual_classification'
     assert request.method == 'POST'
     tweet = Tweet.query.get(request.form['id'])
@@ -48,37 +53,66 @@ def create_new_data_set():
     return redirect("/tweets", code=302)
 
 
-@app.route('/classify')
-def classify():
+@app.route('/classify/<string:dataset>')
+def classify(dataset):
     """
     Runs the classification process that gets the sentiment from tweets.
     @return:
     """
-    # todo fix so that we take input and classify each dataset.
     # todo fix classification datetime for each dataset.
-    tweet_list = data_controller.load_tweets_from_file()
+    tweet_list = data_controller.load_tweets_from_file(dataset)
+    tweets = []
     for tweet in tweet_list:
-        # create tweet object
-        classified_tweet = Tweet(tweet)
-
         # classify the tweet
-        classified_tweet = classifier.classify(classified_tweet)
+        tweet = classifier.classify(Tweet(tweet))
         #print classified_tweet.id, ":", classified_tweet.polarity
-        data_controller.save_tweet(classified_tweet)
-    return "classification complete"
+
+        #print len(tweets)
+        tweets.append(tweet)
+
+    data_controller.save_tweets(tweets)
+#    return redirect("/tweets", code=302)
+    return "classification complete: " + dataset
 
 
 # Regular html routes, returning html/js only
 @app.route('/')
 def homepage():
+    """
+    the main entry point to the webapp /
+    @return:
+    """
     return render_template('main.html')
 
 
 @app.route('/tweets')
 def tweets():
     # todo add metadata to the template
+    """
+    The page where we view and create collection of tweets.
+    @return:
+    """
     datasets = data_controller.get_data_set_names()
     return render_template('tweets.html', datasets=datasets)
+
+
+def calculate_accuracy():
+    """
+    calculates the accuracy of the polarity classification as of now.
+    @return:
+    """
+    correct = 0
+    all_tweets = Tweet.query.all()
+
+    for tweet in all_tweets:
+        if (not tweet.classified_polarity is None and not tweet.manual_polarity is None) and \
+                (tweet.classified_polarity == tweet.manual_polarity):
+            correct += 1
+
+    #print "correct: " + str(correct) + " - all: " + str(len(all_tweets))
+    if len(all_tweets) == 0 or correct == 0:
+        return 0
+    return correct / float(len(all_tweets))
 
 
 @app.route('/sentiment')
@@ -90,22 +124,25 @@ def sentiment():
     tweet = data_controller.get_random_unclassified_tweet()
     if tweet is None:
         tweet = Tweet(ast.literal_eval(
-            '''{  u'text': u'There are no unclassified tweets', u'id': 0, u'created_at': u'Thu Nov 28 19:18:12 +0000 2013'}'''))
+            '''{  u'text': u'There are no unclassified tweets',
+            u'id': 0, u'created_at': u'Thu Nov 28 19:18:12 +0000 2013'}'''))
 
     num_tweets = len(Tweet.query.all())
-    manually_classified_tweets = len(Tweet.query.filter_by(manual_polarity=True or False).all())
+    manually_classified_tweets = len(Tweet.query.filter_by(manual_polarity=True).all()) + len(
+        Tweet.query.filter_by(manual_polarity=False).all())
     positive_tweets = str(len(Tweet.query.filter_by(classified_polarity=True).all())) + " / " + str(
         len(Tweet.query.filter_by(manual_polarity=True).all()))
     negative_tweets = str(len(Tweet.query.filter_by(classified_polarity=False).all())) + " / " + str(
         len(Tweet.query.filter_by(manual_polarity=False).all()))
-    accuracy = 0.0
+    accuracy = float(calculate_accuracy())
     statistics = {'num_tweets': num_tweets,
                   'manually_classified_tweets': manually_classified_tweets,
                   'positive_tweets': positive_tweets,
                   'negative_tweets': negative_tweets,
                   'accuracy': accuracy}
 
-    return render_template('sentiment.html', tweet=tweet.get_original_as_dict(), statistics=statistics)
+    example = '''{u'contributors': None, u'truncated': False, u'text': u"Venezuela central bank denies transactions with Wall Street: Venezuela's central bank president denied on Thur... http://t.co/Zs9IXzDMuy", u'in_reply_to_status_id': None, u'id': 406139574092455936, u'favorite_count': 0, u'source': u'<a href="http://twitterfeed.com" rel="nofollow">twitterfeed</a>', u'retweeted': False, u'coordinates': None, u'entities': {u'symbols': [], u'user_mentions': [], u'hashtags': [], u'urls': [{u'url': u'http://t.co/Zs9IXzDMuy', u'indices': [114, 136], u'expanded_url': u'http://yhoo.it/1iXfyOw', u'display_url': u'yhoo.it/1iXfyOw'}]}, u'in_reply_to_screen_name': None, u'in_reply_to_user_id': None, u'retweet_count': 0, u'id_str': u'406139574092455936', u'favorited': False, u'user': {u'follow_request_sent': False, u'profile_use_background_image': True, u'contributors_enabled': False, u'id': 2211968749, u'verified': False, u'profile_text_color': u'333333', u'profile_image_url_https': u'https://pbs.twimg.com/profile_images/378800000782570899/e333fe58fe55038f02bc41c179318dab_normal.jpeg', u'profile_sidebar_fill_color': u'EFEFEF', u'entities': {u'description': {u'urls': []}}, u'followers_count': 246, u'profile_sidebar_border_color': u'FFFFFF', u'location': u'Jakarta, ID', u'default_profile_image': False, u'id_str': u'2211968749', u'utc_offset': None, u'statuses_count': 5413, u'description': u'light as air, soft as feathers, calm like water, angry like fire, still as the earth, and I was like that', u'friends_count': 16, u'profile_link_color': u'FF0000', u'profile_image_url': u'http://pbs.twimg.com/profile_images/378800000782570899/e333fe58fe55038f02bc41c179318dab_normal.jpeg', u'notifications': False, u'geo_enabled': False, u'profile_background_color': u'642D8B', u'profile_banner_url': u'https://pbs.twimg.com/profile_banners/2211968749/1385272996', u'profile_background_image_url': u'http://a0.twimg.com/profile_background_images/378800000123761396/d534bacab5afe04bc652ebe621e187c0.jpeg', u'screen_name': u'SahlJr', u'lang': u'en', u'following': False, u'profile_background_tile': True, u'favourites_count': 2, u'name': u'Sahl As-Siroj Jr.', u'url': None, u'created_at': u'Sun Nov 24 05:54:07 +0000 2013', u'profile_background_image_url_https': u'https://si0.twimg.com/profile_background_images/378800000123761396/d534bacab5afe04bc652ebe621e187c0.jpeg', u'time_zone': None, u'protected': False, u'default_profile': False, u'is_translator': False, u'listed_count': 0}, u'geo': None, u'in_reply_to_user_id_str': None, u'possibly_sensitive': False, u'lang': u'en', u'created_at': u'Thu Nov 28 19:16:34 +0000 2013', u'in_reply_to_status_id_str': None, u'place': None, u'metadata': {u'iso_language_code': u'en', u'result_type': u'recent'}} '''
+    return render_template('sentiment.html', tweet_id=tweet.id, tweet_text=tweet.sanitized_text, tweet_example=example, statistics=statistics)
 
 
 @app.route('/trend')

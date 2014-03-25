@@ -1,6 +1,7 @@
+
 import ast
-import example
-from flask import render_template, request
+import random
+from flask import render_template, request, json
 from werkzeug.utils import redirect
 from app import app
 from classification import classifier
@@ -14,7 +15,14 @@ def trend_data():
     Returns the json object that represents a data point i the trend graph.
     @return: a json object
     """
-    return "{ trend: { date : 15-01-14, sentiment-value : 401, stock-value : 405 } }"
+    graph_data = {'date': str(random.random()*5)+"-May-12", 'price': random.random()*500, 'volume': random.random()*500, \
+    'pos': random.random()*10, 'neg': random.random()*10, 'sentiment': random.random()*500, \
+           'trend': random.random()*500}
+
+    #example = {date: "1-May-12", price: 582.13, volume: 1, pos: 402.13, neg: 500, sentiment: 762.13, trend: 492.13},
+    #{date: new Date(), close: Math.random()*100}
+    j = json.dumps(graph_data)
+    return j
 
 
 @app.route('/manual_classification', methods=['POST'])

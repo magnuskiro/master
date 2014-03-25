@@ -26,16 +26,16 @@ def classify_word(word):
         unclassified_words.write(word+'\n')
 
 
-def get_positve_dict():
-    lines = read_file(base + 'LoughranMcDonald_Positive.csv')
+def get_positve_dict(dict=base+'positive.csv'):
+    lines = read_file(dict)
     words = {}
     for l in lines:
         words[l] = 1
     return words
 
 
-def get_negative_dict():
-    lines = read_file(base + 'LoughranMcDonald_Negative.csv')
+def get_negative_dict(dict=base+'negative.csv'):
+    lines = read_file(dict)
     words = {}
     for l in lines:
         words[l] = -1
@@ -73,10 +73,20 @@ def get_Emoticons_dict():
     return emoticons
 
 
-#print get_positve_dict()
-#print get_negative_dict()
-#print get_Litigious_dict()
-#rint get_ModalStrong_dict()
-#print get_ModalWeak_dict()
-#print get_Uncertainty_dict()
-#print get_Emoticons_dict()
+def clean_dcictionary(dctionary):
+    return
+
+
+# utils
+# combine word lists.
+def file_to_lower(filename, output):
+    out = codecs.open(output, "a", "utf-8")
+    for line in open(filename).readlines():
+        out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~]\r\n')+"\n")
+
+
+if __name__ == "__main__":
+    file_to_lower("negative.txt-old","negative.txt")
+    file_to_lower("positive.txt-old","positive.txt")
+    file_to_lower("LoughranMcDonald_Negative.csv","negative.txt")
+    file_to_lower("LoughranMcDonald_Positive.csv","positive.txt")

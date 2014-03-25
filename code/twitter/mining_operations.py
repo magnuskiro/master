@@ -47,23 +47,26 @@ def search(term='NTNU', count=15, until='2013-1-1'):
     return results['statuses']
 
 
-def cursor_extraction(query='twitter', max_tweets=15):
+def cursor_extraction(query='twitter', language='en', max_tweets=15, destination_folder="./twitter"):
     """
     creates a dataset with 'max_tweets' amount of tweets.
     limited by the 'query'
     tweets are stored in a file, one tweet per line.
 
+    @param destination_folder: the folder to store the dataset we create.
     @param query: the search term that decides what data you get from twitter.
     @param max_tweets: the amount of tweets that are retrieved from tiwtter and stored.
     """
+    # used to keep track of the number of tweets acquired
     count = 0
 
     # opens new file with today's date and time now as filename
-    filename = "./twitter/dataset-" + strftime("%d-%b-%Y_%H:%M:%S") # getting data-time string
-    data_set = open(filename, 'a') # opens the file for appending.
+    filename = destination_folder+"/dataset-" + strftime("%d-%b-%Y_%H:%M:%S") # getting data-time string
+    # opens the file for appending.
+    data_set = open(filename, 'a')
 
     # executes query on twitter, creating a result object that yields tweets.
-    results = twitter.cursor(twitter.search, q=query, count="100")
+    results = twitter.cursor(twitter.search, q=query, count="100", lauage=language)
 
     #print query
 
@@ -87,6 +90,7 @@ def cursor_extraction(query='twitter', max_tweets=15):
     # create metadata file for each dataset
     meta_file = codecs.open(filename + ".meta", "a", "utf-8") # opens the file for appending.
     meta_file.write("query:"+query+"\n")
+    meta_file.write("language:"+language+"\n")
     meta_file.write("count:"+str(count))
     meta_file.close()
 
@@ -114,7 +118,11 @@ def create_time_intervals():
     print len(intervals)
     return intervals
 
-#mine()
-#print create_time_intervals()
-#search("Finance")
-#cursor_extraction("Finance", 1000)
+if __name__ == "__main__":
+    query = raw_input("input search query, press enter for standard. \n")
+    if query == '':
+        query = "Finance OR Investment OR Economy OR Growth OR $STO"
+
+    language = "no"
+
+    cursor_extraction(query, language, 1000, ".")

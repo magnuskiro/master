@@ -3,7 +3,7 @@ import codecs
 #from classification import aggregator
 #from dictionaries import dictionaries
 #from dictionaries.dictionaries import classify_word
-from classification.utils import get_word_count, sanitize_tweet, export_word_list
+from utils import get_word_count, sanitize_tweet, export_word_list
 
 #negative_words = dictionaries.get_negative_dict()
 #positive_words = dictionaries.get_positve_dict()
@@ -46,11 +46,11 @@ def a4():
     return "N/A"
 
 
-def a2(tweets_list, negative_dict, positive_dict):
+def word_count_classification(tweets_list, negative_dict, positive_dict):
     positive_counts = []
     negative_counts = []
     for tweet in tweets_list:
-        tweet = sanitize_tweet(tweet)
+        #tweet = sanitize_tweet(tweet) # this line makes a huge difference. but why?
         words = tweet.lower().split(' ')
         word_count = len(words) * 1.0
 
@@ -80,7 +80,7 @@ def classify_obama():
     tweets = open("../twitter/obama_tweets.txt").read().split("\n")
     negative_words = open("../dictionaries/negative.txt").read().split("\n")
     positive_words = open("../dictionaries/positive.txt").read().split("\n")
-    print a2(tweets, negative_words, positive_words)
+    print word_count_classification(tweets, negative_words, positive_words)
 
 if __name__ == "__main__":
     classify_obama()

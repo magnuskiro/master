@@ -1,6 +1,6 @@
 
 import codecs
-from classification.utils import load_data, export_word_list, sanitize_tweet
+from utils import load_data, export_word_list, sanitize_tweet
 
 __author__ = 'kiro'
 

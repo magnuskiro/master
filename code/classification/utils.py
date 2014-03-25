@@ -15,7 +15,7 @@ def load_data():
     if filename == '':
         filename = base+"dataset-testset"
 
-    data_file = open(base + filename)
+    data_file = open(filename)
     # load all tweets in the file.
     tweets = []
 

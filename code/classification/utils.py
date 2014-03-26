@@ -13,9 +13,9 @@ def load_data():
     # input filename
     filename = raw_input("input the filename of the file containing tweets: \n")
     if filename == '':
-        filename = base+"dataset-testset"
+        filename = "dataset-testset"
 
-    data_file = open(filename)
+    data_file = open(base+filename)
     # load all tweets in the file.
     tweets = []
 
@@ -49,15 +49,17 @@ def sanitize_tweet(tweet):
     replacement = ""
 
     # stripping the tweet of unwanted characters.
-    regex = u"[\u2013\u2026+()!\"\#$%&'\()*+,-./:;<=>?@[]^_`{|}~]"
+    regex = u"[\u2013\u2026+()!\"\#$%&'\()*+,-./:;<=>?@[]^_`{|}~\r\n]"
     text = re.sub(regex, replacement, text)
 
     # remove usernames from tweet
-    username_regex = u"@.* "
+    # matches from @ until and not space.
+    username_regex = u"@[^\s]+"
     text = re.sub(username_regex, replacement, text)
 
     # remove links from tweet
-    link_regex = u"http://[^ ]*"
+    # matches everything including http:// until and not space.
+    link_regex = u"http[s]*://[^ ]*"
     text = re.sub(link_regex, replacement, text)
     return text
 

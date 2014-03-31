@@ -1,3 +1,4 @@
+
 import codecs
 from twython import Twython
 import ConfigParser
@@ -70,12 +71,17 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
 
     #print query
 
+    # TODO create rate limit check.
+    #print twitter.get_application_rate_limit_status()
+    #exit()
+
     # for tweets yielded by the result object.
     for result in results:
         # if we reach the desired amount of tweets we stop getting more.
         if count >= max_tweets:
             break
         count += 1
+
         #print result['created_at']
         #print result['id_str']
         #print result['id_str']
@@ -85,7 +91,7 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     # closing datafile and twitter result object.
     data_set.close()
     results.close()
-    #print count
+    print "Complete: ", count
 
     # create metadata file for each dataset
     meta_file = codecs.open(filename + ".meta", "a", "utf-8") # opens the file for appending.
@@ -93,6 +99,7 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     meta_file.write("language:"+language+"\n")
     meta_file.write("count:"+str(count))
     meta_file.close()
+    print "Metadata file created"
 
 
 def create_time_intervals():
@@ -121,7 +128,8 @@ def create_time_intervals():
 if __name__ == "__main__":
     query = raw_input("input search query, press enter for standard. \n")
     if query == '':
-        query = "Finance OR Investment OR Economy OR Growth OR $STO"
+        # all tweets containing one of the words and not 'RT'
+        query = "Finance OR Investment OR Economy OR Growth AND -RT"
 
     language = "no"
 

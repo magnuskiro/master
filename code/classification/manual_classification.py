@@ -1,6 +1,7 @@
 
 import codecs
 import re
+import sys
 from utils import load_data, export_word_list, sanitize_tweet
 
 __author__ = 'kiro'
@@ -20,7 +21,7 @@ def get_previous_tweets(filename):
 
     return tweets
 
-def classify():
+def classify(filename):
     """
     Running manual classification.
     printing tweet, asking for y or n for positive or negative.
@@ -28,16 +29,16 @@ def classify():
     @return:
     """
     manually_classified_tweets = codecs.open("tweets_classified_manually", "a", "utf-8")
+    previous_tweets_list = get_previous_tweets("tweets_classified_manually")
 
     count = 0
     rt = 0
-    for tweet in load_data():
+    for tweet in load_data(filename):
 
         print count
         count += 1
 
         # skip previously labeled tweets
-        previous_tweets_list = get_previous_tweets("tweets_classified_manually")
         if str(tweet['id']) in str(previous_tweets_list):
             continue
 
@@ -70,4 +71,7 @@ def classify():
     return
 
 if __name__ == "__main__":
-    classify()
+    if sys.argv[1]:
+        classify(sys.argv[1])
+    else:
+        classify("")

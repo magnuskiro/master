@@ -9,9 +9,13 @@ __author__ = 'kiro'
 base = "/home/kiro/ntnu/master/code/twitter/"
 
 
-def load_data():
-    # input filename
-    filename = raw_input("input the filename of the file containing tweets: \n")
+def load_data(filename):
+
+    # if filename not give, get it.
+    if filename == '':
+        filename = raw_input("input the filename of the file containing tweets: \n")
+
+    # if filename not given, use default data
     if filename == '':
         filename = "dataset-testset"
 
@@ -76,17 +80,3 @@ def export_word_list(words, polarity, bigram):
         out = codecs.open("auto"+bigram+"-negative.txt", "a", "utf-8")
     for w in words:
         out.write(w+"\n")
-
-
-def bigrams(monograms):
-    # bi-grams
-    """
-    Generate all bigrams from a tweet
-    @param monograms:
-    @return:
-    """
-    bigrams = []
-    for i in range(0, len(monograms)-1):
-        bigrams.append(monograms[i]+" "+monograms[i+1])
-        #print bigrams[-1] # probably not working.
-    return bigrams

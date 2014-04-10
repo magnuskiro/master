@@ -41,6 +41,8 @@ def classify(filename):
         # skip previously labeled tweets
         if str(tweet['id']) in str(previous_tweets_list):
             continue
+        else:
+            previous_tweets_list.append(tweet['id'])
 
         # skip retweets "^RT"
         if re.search(r"^RT", tweet['text']):
@@ -60,10 +62,14 @@ def classify(filename):
         print text
         input_argument = raw_input("-----\nPos/neg/neither? y/n\n")
         if input_argument == "y":
+            # save verdict to file
             manually_classified_tweets.write("1,"+str(tweet['id'])+","+text+"\n")
+            # save positive words
             export_word_list(text.split(' '), True, "")
         elif input_argument == "n":
+            # save verdict to file
             manually_classified_tweets.write("-1,"+str(tweet['id'])+","+text+"\n")
+            # save positive words
             export_word_list(text.split(' '), False, "")
         else:
             manually_classified_tweets.write("0,"+str(tweet['id'])+","+text+"\n")

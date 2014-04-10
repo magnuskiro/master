@@ -1,9 +1,10 @@
-
+import ast
 import codecs
+import datetime
 from twython import Twython
 import ConfigParser
 import io
-from time import strftime
+from time import strftime, sleep
 
 # reading twitter data from config file
 # Default path is '.' aka open needs the full path from home.
@@ -23,7 +24,7 @@ twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 
 
 # getting 'count' amount of tweets before 'until', with 'term' as search word.
-def search(term='NTNU', count=15, until='2013-1-1'):
+def search(term='NTNU', count=15, until='2014-1-1'):
     """
 
     @param term: the search term. decides what tweets you get back.
@@ -48,6 +49,16 @@ def search(term='NTNU', count=15, until='2013-1-1'):
     return results['statuses']
 
 
+def date_range(start, end):
+    # yyyy-mm-dd
+    start = datetime.date(2014, 01, 01)
+    end = datetime.date(2014, 04, 01)
+
+    r = (end + datetime.timedelta(days=1) - start).days
+    return [start + datetime.timedelta(days=i) for i in range(r)]
+    #dateList = date_range(start, end)
+
+
 def cursor_extraction(query='twitter', language='en', max_tweets=15, destination_folder="./twitter"):
     """
     creates a dataset with 'max_tweets' amount of tweets.
@@ -58,46 +69,70 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     @param query: the search term that decides what data you get from twitter.
     @param max_tweets: the amount of tweets that are retrieved from tiwtter and stored.
     """
-    # used to keep track of the number of tweets acquired
-    count = 0
 
     # opens new file with today's date and time now as filename
-    filename = destination_folder+"/dataset-" + strftime("%d-%b-%Y_%H:%M:%S") # getting data-time string
+    filename = destination_folder + "/dataset-" + strftime("%d-%b-%Y_%H:%M:%S")  # getting data-time string
     # opens the file for appending.
     data_set = open(filename, 'a')
 
-    # executes query on twitter, creating a result object that yields tweets.
-    results = twitter.cursor(twitter.search, q=query, count="100", lauage=language)
+    # list of tweets we already have for this wuery.
+    previous_tweets_list = []
 
-    #print query
+    # total amount of tweets mined this execution
+    totcount = 0
 
-    # TODO create rate limit check.
-    #print twitter.get_application_rate_limit_status()
-    #exit()
+    for i in range(max_tweets / 100):
+        totcount = i
 
-    # for tweets yielded by the result object.
-    for result in results:
-        # if we reach the desired amount of tweets we stop getting more.
-        if count >= max_tweets:
-            break
-        count += 1
+        # executes query on twitter, creating a result object that yields tweets.
+        if len(previous_tweets_list)>0:
+            results = twitter.cursor(twitter.search, q=query, count="100", lauage=language,
+                                     max_id=min(previous_tweets_list))
+        else:
+            results = twitter.cursor(twitter.search, q=query, count="100", lauage=language)
 
-        #print result['created_at']
-        #print result['id_str']
-        #print result['id_str']
-        # store tweet to file for later use.
-        data_set.write(str(result) + "\n")
+        # create rate limit check. if less then 90 queries remain, sleep 5 sec.
+        status = ast.literal_eval(str(twitter.get_application_rate_limit_status()))
+        remaining_quota = status['resources']['search']['/search/tweets']['remaining']
+
+        if remaining_quota <= 90:
+            sleep(5)
+        #exit()
+
+        # used to keep track of the number of tweets acquired
+        count = 0
+        #print "-------------------- NEW QUERY"
+        #print min(previous_tweets_list)
+
+        # for tweets yielded by the result object.
+        for result in results:
+            # if we reach the desired amount of tweets we stop getting more.
+            if count >= 99:
+                break
+            count += 1
+
+            # skip previously labeled tweets
+            if str(result['id_str']) in str(previous_tweets_list):
+                continue
+            else:
+                previous_tweets_list.append(result['id_str'])
+
+            #print result['id_str']
+            # store tweet to file for later use.
+            data_set.write(str(result) + "\n")
+
+        results.close()
 
     # closing datafile and twitter result object.
     data_set.close()
-    results.close()
-    print "Complete: ", count
+
+    print "Complete: ", count*totcount
 
     # create metadata file for each dataset
-    meta_file = codecs.open(filename + ".meta", "a", "utf-8") # opens the file for appending.
-    meta_file.write("query:"+query+"\n")
-    meta_file.write("language:"+language+"\n")
-    meta_file.write("count:"+str(count))
+    meta_file = codecs.open(filename + ".meta", "a", "utf-8")  # opens the file for appending.
+    meta_file.write("query:" + query + "\n")
+    meta_file.write("language:" + language + "\n")
+    meta_file.write("count:" + str(count))
     meta_file.close()
     print "Metadata file created"
 
@@ -125,7 +160,16 @@ def create_time_intervals():
     print len(intervals)
     return intervals
 
-if __name__ == "__main__":
+
+def get_search_quota():
+    # create rate limit check. if less then 90 queries remain, sleep 5 sec.
+    status = ast.literal_eval(str(twitter.get_application_rate_limit_status()))
+    limit = status['resources']['search']['/search/tweets']['limit']
+    remaining_quota = status['resources']['search']['/search/tweets']['remaining']
+    return limit, remaining_quota
+
+
+def start_minig():
     query = raw_input("input search query, press enter for standard. \n")
     if query == '':
         # all tweets containing one of the words and not 'RT'
@@ -134,3 +178,10 @@ if __name__ == "__main__":
     language = "no"
 
     cursor_extraction(query, language, 1000, ".")
+
+
+if __name__ == "__main__":
+    start_minig()
+    print "(limit, remaining)\n", get_search_quota()
+
+

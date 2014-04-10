@@ -1,5 +1,5 @@
-from flask.ext.script import Manager
 
+from flask.ext.script import Manager
 from app import app, db
 import main
 

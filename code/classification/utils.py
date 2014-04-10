@@ -52,9 +52,11 @@ def sanitize_tweet(tweet):
     text = tweet.lower()
     replacement = ""
 
+    # TODO fix character replacement.
     # stripping the tweet of unwanted characters.
     regex = u"[\u2013\u2026+()!\"\#$%&'\()*+,-./:;<=>?@[]^_`{|}~\r\n]"
-    text = re.sub(regex, replacement, text)
+    # should use space so we don't create more words.
+    text = re.sub(regex, " ", text)
 
     # remove usernames from tweet
     # matches from @ until and not space.

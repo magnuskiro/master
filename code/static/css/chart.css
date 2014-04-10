@@ -1,9 +1,9 @@
 .neg {
-    fill: steelblue;
+    fill: brown;
 }
 
 .neg:hover {
-    fill: brown;
+    fill: #2d44ff;
 }
 
 .pos {
@@ -11,7 +11,7 @@
 }
 
 .pos:hover {
-    fill: brown;
+    fill: #2d44ff;
 }
 
 .axis {

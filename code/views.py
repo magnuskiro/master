@@ -1,12 +1,12 @@
-
 import ast
-import random
-from flask import render_template, request, json
+
+from flask import render_template, request
 from werkzeug.utils import redirect
+
 from app import app
 from classification import classifier
+import data_controller
 from models import Tweet
-from twitter import data_controller
 
 
 @app.route('/grap_data_point')

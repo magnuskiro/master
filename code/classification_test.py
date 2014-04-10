@@ -1,6 +1,7 @@
+
 from classification import classifier
+import data_controller
 from models import Tweet
-from twitter import data_controller
 
 
 def create_metadata_objects(tweets):
@@ -12,7 +13,7 @@ def create_metadata_objects(tweets):
     return return_tweets
 
 
-def run_classify():
+def run_classify(dataset):
     """
     Runs the test for the classification algorithms.
     @return: a string for printing.
@@ -23,7 +24,7 @@ def run_classify():
           "third | " \
           "forth algorithm"
 
-    tweets = data_controller.load_tweets_from_file()
+    tweets = data_controller.load_tweets_from_file(dataset)
     tweets = create_metadata_objects(tweets)
 
     for tweet in tweets:
@@ -31,10 +32,10 @@ def run_classify():
                               " | " \
                               "A1: " + str(classifier.positive_vs_negative_words_classification(tweet)) + \
               " | " \
-              "A2: " + str(classifier.a2()) + \
+              "A2: " + str(classifier.word_count_classification()) + \
               " | " \
               "A3: " + str(classifier.a3()) + \
               " | " \
-              "A4: " + str(classifier.a4())
+              "A4: " + str(classifier.bigram_classification())
 
-run_classify()
+run_classify("dataset-testset")

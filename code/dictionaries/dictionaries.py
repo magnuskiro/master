@@ -1,8 +1,9 @@
 # helpers to read and update dictionaries.
 import codecs
-from helpers import read_file
+from dict_utils import read_file
 
 base = "/home/kiro/ntnu/master/code/dictionaries/"
+
 
 # method to check if a word exists in any dictionary or not.
 def find_word(word):
@@ -77,16 +78,24 @@ def clean_dcictionary(dctionary):
     return
 
 
-# utils
-# combine word lists.
 def file_to_lower(filename, output):
+    """
+    Changes all entries to lower case.
+    @param filename: the file to convert
+    @param output: the new file that is created.
+    """
     out = codecs.open(output, "a", "utf-8")
     for line in open(filename).readlines():
         out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~]\r\n')+"\n")
 
 
-if __name__ == "__main__":
+# Test code
+def to_lower():
     file_to_lower("negative.txt-old","negative.txt")
     file_to_lower("positive.txt-old","positive.txt")
     file_to_lower("LoughranMcDonald_Negative.csv","negative.txt")
     file_to_lower("LoughranMcDonald_Positive.csv","positive.txt")
+
+if __name__ == "__main__":
+
+    exit()

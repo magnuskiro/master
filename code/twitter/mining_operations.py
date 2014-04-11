@@ -179,7 +179,6 @@ def start_minig():
 
     cursor_extraction(query, language, 1000, ".")
 
-
 if __name__ == "__main__":
     start_minig()
     print "(limit, remaining)\n", get_search_quota()

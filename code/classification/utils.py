@@ -1,3 +1,4 @@
+# coding=utf-8
 import ast
 import codecs
 import re
@@ -10,7 +11,6 @@ base = "/home/kiro/ntnu/master/code/twitter/"
 
 
 def load_data(filename):
-
     # if filename not give, get it.
     if filename == '':
         filename = raw_input("input the filename of the file containing tweets: \n")
@@ -19,7 +19,7 @@ def load_data(filename):
     if filename == '':
         filename = "dataset-testset"
 
-    data_file = open(base+filename)
+    data_file = open(base + filename)
     # load all tweets in the file.
     tweets = []
 
@@ -28,6 +28,7 @@ def load_data(filename):
         tweets.append(ast.literal_eval(line))
 
     return tweets
+
 
 def get_word_count(dictionary, words):
     """
@@ -42,32 +43,42 @@ def get_word_count(dictionary, words):
             count += 1
     return count
 
+
 def sanitize_tweet(tweet):
     """
     Sanitize and remove unwanted parts of a tweet.
 
-    @param tweet: the tweet metadata object.
-    @return: the tweet metadata object.
+    @param tweet: the tweet text
+    @return: the sanitized text.
     """
+    #print tweet, "\n----"
     text = tweet.lower()
-    replacement = ""
-
-    # TODO fix character replacement.
-    # stripping the tweet of unwanted characters.
-    regex = u"[\u2013\u2026+()!\"\#$%&'\()*+,-./:;<=>?@[]^_`{|}~\r\n]"
-    # should use space so we don't create more words.
-    text = re.sub(regex, " ", text)
+    replacement = " "
 
     # remove usernames from tweet
     # matches from @ until and not space.
-    username_regex = u"@[^\s]+"
-    text = re.sub(username_regex, replacement, text)
+    pattern = u"@[^\s]+"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
 
     # remove links from tweet
     # matches everything including http:// until and not space.
-    link_regex = u"http[s]*://[^ ]*"
-    text = re.sub(link_regex, replacement, text)
+    pattern = u"http[s]*://[^ ]*"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # stripping the tweet of unwanted characters.
+    pattern = u"[!\"\%&\*+,-./:…;<=>?@~\r\n|\\[\\]}{)(]"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # remove unnecessary spaces.
+    pattern = u" +"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
     return text
+
 
 def export_word_list(words, polarity, bigram):
     """
@@ -77,8 +88,8 @@ def export_word_list(words, polarity, bigram):
     @param polarity:
     """
     if polarity:
-        out = codecs.open("auto"+bigram+"-positive.txt", "a", "utf-8")
+        out = codecs.open("auto" + bigram + "-positive.txt", "a", "utf-8")
     else:
-        out = codecs.open("auto"+bigram+"-negative.txt", "a", "utf-8")
+        out = codecs.open("auto" + bigram + "-negative.txt", "a", "utf-8")
     for w in words:
-        out.write(w+"\n")
+        out.write(w + "\n")

@@ -75,6 +75,7 @@ def get_word_count(dictionary, words):
 
 
 def sanitize_tweet(tweet):
+    # TODO should use clean_text() in dict_utils
     """
     Sanitize and remove unwanted parts of a tweet.
 

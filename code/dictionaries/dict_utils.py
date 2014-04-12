@@ -11,34 +11,34 @@ def clean_word(text):
     """
     # words must have two or more characters.
     if len(text) <= 1:
-        return
+        return None
 
     replacement = ""
     # stripping unwanted characters.
-    pattern = u"[!\"\%&\*+,-./:…;<=>?@~\r\n|\\[\\]}{)(]→"
+    pattern = u"[!\"\%&\*+,-./:…;<=>?@~\r\n|\\[\\]}{)(→']"
     regex = re.compile(pattern, re.MULTILINE)
     text = regex.sub(replacement, text)
 
     # pre and post spaces
     text.strip()
 
-    # stemming
-    # TODO use nltk.stem possibly.
-
     return text
 
 
 def write_array_entries_to_file(array, filename):
     """
-    writes all entries in an array to file.
-    @param array: all the items
+    writes all entries in an array to file, if the entry is not in the file already.
+    @param array: all the items to write.
     @param filename: the name of the output file
     @return: null
     """
     # TODO this can be done quite elegantly in some oneliner way.
-    output = codecs.open(filename, "a", "utf-8")
+    output = codecs.open(filename, "rw", "utf-8")
+    content = output.readlines()
     for item in array:
-        output.write(item +"\n")
+        if not item in content:
+            output.write(item + "\n")
+    output.close()
     return
 
 
@@ -52,6 +52,7 @@ def read_file(file_name):
     lines = input_file.readlines()
     for i in range(len(lines)):
         lines[i] = lines[i].rstrip().lower()
+    input_file.close()
     return lines
 
 
@@ -63,6 +64,7 @@ def file_to_lower(filename, output):
     """
     out = codecs.open(output, "a", "utf-8")
     for line in open(filename).readlines():
-        out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~]\r\n')+"\n")
+        out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~]\r\n') + "\n")
+    out.close()
 
 

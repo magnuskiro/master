@@ -74,11 +74,21 @@ def get_Emoticons_dict():
     return emoticons
 
 
-def compile_dcictionary_from_file(filename, output_name):
+def compile_dictionary_from_file(filename, output_name):
+    """
+    Reads a file and stores unique and clean words to output file.
+    @param filename: the file to gets entries from
+    @param output_name: the file to store processed entries
+    @return: nothing
+    """
     lines = read_file(filename)
     words = []
     for w in lines:
-        if clean_word(w):
+        # clear out noise and garbage words.
+        w = clean_word(w)
+        if w:
+            #print w
+            # if we don't have the word already store it
             if w not in words:
                 #print w
                 words.append(w)
@@ -97,6 +107,16 @@ def to_lower():
     file_to_lower("LoughranMcDonald_Positive.csv", "positive.txt")
 
 
+def compile_auto_generated_dictionaries():
+    """
+    Compiles dictionaries from word of the manually labeled tweets.
+    @return:
+    """
+    classification_base = "/home/kiro/ntnu/master/code/classification/"
+    compile_dictionary_from_file(classification_base+"auto-positive.txt", "compiled-positive.txt")
+    compile_dictionary_from_file(classification_base+"auto-negative.txt", "compiled-negative.txt")
+    return
+
 if __name__ == "__main__":
-    compile_dcictionary_from_file("test_dict", "out_dict_test")
+    compile_auto_generated_dictionaries()
     exit()

@@ -3,7 +3,7 @@
 #from dictionaries import dictionaries
 #from dictionaries.dictionaries import classify_word
 from nltk import bigrams
-from utils import get_word_count, sanitize_tweet, export_word_list
+from utils import get_word_count, export_word_list
 
 #negative_words = dictionaries.get_negative_dict()
 #positive_words = dictionaries.get_positve_dict()

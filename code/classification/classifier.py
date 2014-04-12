@@ -1,5 +1,4 @@
-
-import codecs
+# coding=utf-8
 #from classification import aggregator
 #from dictionaries import dictionaries
 #from dictionaries.dictionaries import classify_word
@@ -29,8 +28,8 @@ def get_pos_neg_word_count(words, pos, neg):
             word_is_pos_or_neg = True
             #print neg[word]
             # if the word don't appear in either dictionaries store it to be classified.
-        # uncomment later.
-        #if not word_is_pos_or_neg:
+            # uncomment later.
+            #if not word_is_pos_or_neg:
             #classify_word(word)
             #print word
 
@@ -47,7 +46,8 @@ def bigram_classification(tweets_list, negative_dict, positive_dict):
     negative_counts = []
     for tweet in tweets_list:
         #tweet = sanitize_tweet(tweet) # this line makes a huge difference. but why?
-        words = bigrams(tweet.lower().split(' ')) # needs to be tested to see how (1,2) are combined, [(1, 2), (2, 3), (3, 4), (4, 5)]
+        words = bigrams(tweet.lower().split(
+            ' '))  # needs to be tested to see how (1,2) are combined, [(1, 2), (2, 3), (3, 4), (4, 5)]
         word_count = len(words) * 1.0
 
         #print get_word_count(positive_dict, words), " / ", get_word_count(negative_dict, words)
@@ -109,6 +109,7 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
 
     return pos, neg, na
 
+
 # Test function
 def classify_obama():
     tweets = open("../twitter/obama_tweets.txt").read().split("\n")
@@ -122,6 +123,7 @@ def classify_obama_bigram():
     negative_words = open("../dictionaries/negative-bigrams.txt").read().split("\n")
     positive_words = open("../dictionaries/positive-bigrams.txt").read().split("\n")
     print bigram_classification(tweets, negative_words, positive_words)
+
 
 if __name__ == "__main__":
     classify_obama()

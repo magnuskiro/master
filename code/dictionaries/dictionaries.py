@@ -1,6 +1,6 @@
 # helpers to read and update dictionaries.
 import codecs
-from dict_utils import read_file, file_to_lower
+from dict_utils import read_file, file_to_lower, write_array_entries_to_file, clean_word
 
 base = "/home/kiro/ntnu/master/code/dictionaries/"
 
@@ -74,7 +74,18 @@ def get_Emoticons_dict():
     return emoticons
 
 
-def clean_dcictionary(dctionary):
+def compile_dcictionary_from_file(filename, output_name):
+    lines = read_file(filename)
+    words = []
+    for w in lines:
+        if clean_word(w):
+            if w not in words:
+                #print w
+                words.append(w)
+
+    # Write all words to file.
+    write_array_entries_to_file(words, output_name)
+
     return
 
 
@@ -87,4 +98,5 @@ def to_lower():
 
 
 if __name__ == "__main__":
+    compile_dcictionary_from_file("test_dict", "out_dict_test")
     exit()

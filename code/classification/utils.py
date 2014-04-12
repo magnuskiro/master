@@ -1,4 +1,3 @@
-
 # coding=utf-8
 import ast
 import codecs
@@ -6,12 +5,18 @@ import re
 
 __author__ = 'kiro'
 
-# base folder to look for files.
-# needs to be changed to your specific path.
-base = "/home/kiro/ntnu/master/code/twitter/"
-
 
 def load_data(filename):
+    """
+    Loads a dataset from disk.
+    @param filename: the name of the file to load.
+    @return: an array with dictionary tweet objects.
+    """
+
+    # base folder to look for files.
+    # needs to be changed to your specific path.
+    base = "/home/kiro/ntnu/master/code/twitter/"
+
     # if filename not give, get it.
     if filename == '':
         filename = raw_input("input the filename of the file containing tweets: \n")

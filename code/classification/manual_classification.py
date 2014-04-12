@@ -2,30 +2,17 @@
 import codecs
 import re
 import sys
-from utils import load_data, export_word_list, sanitize_tweet
+from utils import load_data, export_word_list, sanitize_tweet, get_previous_tweets
 
 __author__ = 'kiro'
 
-
-def get_previous_tweets(filename):
-    tweets = []
-    data_file = open(filename)
-
-    #count = 0
-    for line in data_file.readlines():
-        # 'ast.literal_eval(price)' interprets the json tweet string as a dictionary.
-        #print line
-        #count += 1
-        #print count
-        tweets.append(line.split(",")[1])
-
-    return tweets
 
 def classify(filename):
     """
     Running manual classification.
     printing tweet, asking for y or n for positive or negative.
     Automatically exports positive and negative words to dictionaries.
+    @param filename:
     @return:
     """
     manually_classified_tweets = codecs.open("tweets_classified_manually", "a", "utf-8")
@@ -63,18 +50,22 @@ def classify(filename):
         input_argument = raw_input("-----\nPos/neg/neither? y/n\n")
         if input_argument == "y":
             # save verdict to file
-            manually_classified_tweets.write("1,"+str(tweet['id'])+","+text+"\n")
+            manually_classified_tweets.write("1," + str(tweet['id']) + "," + text + "\n")
             # save positive words
             export_word_list(text.split(' '), True, "")
         elif input_argument == "n":
             # save verdict to file
-            manually_classified_tweets.write("-1,"+str(tweet['id'])+","+text+"\n")
+            manually_classified_tweets.write("-1," + str(tweet['id']) + "," + text + "\n")
             # save positive words
             export_word_list(text.split(' '), False, "")
         else:
-            manually_classified_tweets.write("0,"+str(tweet['id'])+","+text+"\n")
+            manually_classified_tweets.write("0," + str(tweet['id']) + "," + text + "\n")
+
+    manually_classified_tweets.close()
+
     print "rt: ", rt
     return
+
 
 if __name__ == "__main__":
     if sys.argv[1]:

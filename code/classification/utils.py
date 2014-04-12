@@ -6,6 +6,28 @@ import re
 __author__ = 'kiro'
 
 
+def get_previous_tweets(filename):
+    """
+    Get IDs of manually labeled tweets.
+    @param filename: file with manually labeled tweets.
+    @return: array with tweet ids.
+    """
+    tweets = []
+    data_file = open(filename)
+
+    #count = 0
+    for line in data_file.readlines():
+        # 'ast.literal_eval(price)' interprets the json tweet string as a dictionary.
+        #print line
+        #count += 1
+        #print count
+        tweets.append(line.split(",")[1])
+
+    data_file.close()
+
+    return tweets
+
+
 def load_data(filename):
     """
     Loads a dataset from disk.
@@ -32,6 +54,8 @@ def load_data(filename):
     for line in data_file.readlines():
         # 'ast.literal_eval(price)' interprets the json tweet string as a dictionary.
         tweets.append(ast.literal_eval(line))
+
+    data_file.close()
 
     return tweets
 
@@ -99,3 +123,4 @@ def export_word_list(words, polarity, bigram):
         out = codecs.open("auto" + bigram + "-negative.txt", "a", "utf-8")
     for w in words:
         out.write(w + "\n")
+    out.close()

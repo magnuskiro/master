@@ -61,7 +61,7 @@ def file_to_lower(filename, output):
     """
     out = codecs.open(output, "a", "utf-8")
     for line in open(filename).readlines():
-        out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~]\r\n') + "\n")
+        out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~\r\n]') + "\n")
     out.close()
 
 

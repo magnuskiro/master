@@ -1,7 +1,10 @@
 # helpers to read and update dictionaries.
 import codecs
-from dict_utils import read_file, file_to_lower, write_array_entries_to_file, clean_word, \
-    remove_duplicates_from_dictionaries
+import re
+from nltk import bigrams
+from dict_utils import get_lines_from_file, file_to_lower, write_array_entries_to_file, clean_text, \
+    remove_duplicates_between_dictionaries, get_positive_negative_tweets_from_manually_labeled_tweets, \
+    get_bigrams_from_text
 
 base = "/home/kiro/ntnu/master/code/dictionaries/"
 
@@ -29,7 +32,7 @@ def classify_word(word):
 
 
 def get_positve_dict(dict=base + 'positive.csv'):
-    lines = read_file(dict)
+    lines = get_lines_from_file(dict)
     words = {}
     for l in lines:
         words[l] = 1
@@ -37,7 +40,7 @@ def get_positve_dict(dict=base + 'positive.csv'):
 
 
 def get_negative_dict(dict=base + 'negative.csv'):
-    lines = read_file(dict)
+    lines = get_lines_from_file(dict)
     words = {}
     for l in lines:
         words[l] = -1
@@ -45,27 +48,27 @@ def get_negative_dict(dict=base + 'negative.csv'):
 
 
 def get_Litigious_dict():
-    lines = read_file('LoughranMcDonald_Litigious.csv')
+    lines = get_lines_from_file('LoughranMcDonald_Litigious.csv')
     return lines
 
 
 def get_ModalStrong_dict():
-    lines = read_file('LoughranMcDonald_ModalStrong.csv')
+    lines = get_lines_from_file('LoughranMcDonald_ModalStrong.csv')
     return lines
 
 
 def get_ModalWeak_dict():
-    lines = read_file('LoughranMcDonald_ModalWeak.csv')
+    lines = get_lines_from_file('LoughranMcDonald_ModalWeak.csv')
     return lines
 
 
 def get_Uncertainty_dict():
-    lines = read_file('LoughranMcDonald_Uncertainty.csv')
+    lines = get_lines_from_file('LoughranMcDonald_Uncertainty.csv')
     return lines
 
 
 def get_Emoticons_dict():
-    lines = read_file('emoticon_polarity.tsv')
+    lines = get_lines_from_file('emoticon_polarity.tsv')
     emoticons = {}
     for l in lines:
         split = l.split('\t')
@@ -75,29 +78,92 @@ def get_Emoticons_dict():
     return emoticons
 
 
-def compile_dictionary_from_file(filename, output_name):
+def compile_and_write_dictionary_from_array(array, output_name):
     """
-    Reads a file and stores unique and clean words to output file.
-    @param filename: the file to gets entries from
+    Takes an array of word to store, removed duplicates and, the unique and clean words are written to the output file.
+    @param array: The array of words to store.
     @param output_name: the file to store processed entries
-    @return: nothing
+    @return:
     """
-    lines = read_file(filename)
     words = []
-    for w in lines:
+    # for all lines in file. (one word per line)
+    for w in array:
         # clear out noise and garbage words.
-        w = clean_word(w)
+        w = clean_text(w)
         if w:
             #print w
-            # if we don't have the word already store it
+            # if we don't have the word already, store it
             if w not in words:
                 #print w
-                words.append(w)
+                words.append(w+"\n")
 
     # Write all words to file.
     write_array_entries_to_file(words, output_name)
 
     return
+
+
+def compile_monogram_dictionaries():
+    """
+    Compiles dictionaries of words from the manually labeled tweets.
+    @return:
+    """
+    classification_base = "/home/kiro/ntnu/master/code/classification/"
+
+    # compile dictionaries
+    compile_and_write_dictionary_from_array(get_lines_from_file(classification_base + "auto-positive.txt"),
+                                            "compiled-positive.txt")
+    compile_and_write_dictionary_from_array(get_lines_from_file(classification_base + "auto-negative.txt"),
+                                            "compiled-negative.txt")
+
+    # remove duplicates
+    remove_duplicates_between_dictionaries("compiled-positive.txt", "compiled-negative.txt")
+
+    return
+
+
+def compile_bigram_dictionaries(tweet_file):
+    """
+    reads labeled tweets and creates bigram dictionaries for positive and negative words.
+    @param tweet_file: the file containing manually labeled tweets.
+    @return:
+    """
+    classification_base = "/home/kiro/ntnu/master/code/classification/"
+
+    # get labeled tweets
+    # tweets[0] are the positive ones, tweets[1] are the negative ones.
+    tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + tweet_file)
+
+    positive_bigrams = []
+    negative_bigrams = []
+
+    # positive
+    for text in tweets[0]:
+        bigrams_list = get_bigrams_from_text(text)
+        positive_bigrams = positive_bigrams + bigrams_list
+    # negative
+    for text in tweets[1]:
+        bigrams_list = get_bigrams_from_text(text)
+        negative_bigrams = negative_bigrams + bigrams_list
+
+    #print positive_bigrams
+    #print negative_bigrams
+
+    # removing duplicates for each dictionary and writing to file.
+    compile_and_write_dictionary_from_array(positive_bigrams, "bigram-compiled-positive.txt")
+    compile_and_write_dictionary_from_array(negative_bigrams, "bigram-compiled-negative.txt")
+
+    # remove duplicates
+    remove_duplicates_between_dictionaries("bigram-compiled-positive.txt", "bigram-compiled-negative.txt")
+    return
+
+
+def compile_dictionaries():
+    """
+    helper to run monogram and bigram dictionary compilations in one go.
+    """
+    compile_monogram_dictionaries()
+    compile_bigram_dictionaries("tweets_classified_manually_test")
 
 
 # Test code
@@ -109,22 +175,6 @@ def to_lower():
     file_to_lower("LoughranMcDonald_Positive.csv", "positive.txt")
 
 
-def compile_auto_generated_dictionaries():
-    """
-    Compiles dictionaries from word of the manually labeled tweets.
-    @return:
-    """
-    classification_base = "/home/kiro/ntnu/master/code/classification/"
-
-    # compile dictionaries
-    compile_dictionary_from_file(classification_base+"auto-positive.txt", "compiled-positive.txt")
-    compile_dictionary_from_file(classification_base+"auto-negative.txt", "compiled-negative.txt")
-
-    # remove duplicates
-    remove_duplicates_from_dictionaries("compiled-positive.txt", "compiled-negative.txt")
-
-    return
-
 if __name__ == "__main__":
-    compile_auto_generated_dictionaries()
+    compile_dictionaries()
     exit()

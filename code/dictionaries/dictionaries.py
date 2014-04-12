@@ -1,6 +1,7 @@
 # helpers to read and update dictionaries.
 import codecs
-from dict_utils import read_file, file_to_lower, write_array_entries_to_file, clean_word
+from dict_utils import read_file, file_to_lower, write_array_entries_to_file, clean_word, \
+    remove_duplicates_from_dictionaries
 
 base = "/home/kiro/ntnu/master/code/dictionaries/"
 
@@ -101,8 +102,9 @@ def compile_dictionary_from_file(filename, output_name):
 
 # Test code
 def to_lower():
-    file_to_lower("negative.txt-old", "negative.txt")
-    file_to_lower("positive.txt-old", "positive.txt")
+    # TODO filename changed.
+    #file_to_lower("negative.txt-old", "negative.txt")
+    #file_to_lower("positive.txt-old", "positive.txt")
     file_to_lower("LoughranMcDonald_Negative.csv", "negative.txt")
     file_to_lower("LoughranMcDonald_Positive.csv", "positive.txt")
 
@@ -113,8 +115,14 @@ def compile_auto_generated_dictionaries():
     @return:
     """
     classification_base = "/home/kiro/ntnu/master/code/classification/"
+
+    # compile dictionaries
     compile_dictionary_from_file(classification_base+"auto-positive.txt", "compiled-positive.txt")
     compile_dictionary_from_file(classification_base+"auto-negative.txt", "compiled-negative.txt")
+
+    # remove duplicates
+    remove_duplicates_from_dictionaries("compiled-positive.txt", "compiled-negative.txt")
+
     return
 
 if __name__ == "__main__":

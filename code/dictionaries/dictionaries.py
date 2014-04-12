@@ -163,7 +163,7 @@ def compile_dictionaries():
     helper to run monogram and bigram dictionary compilations in one go.
     """
     compile_monogram_dictionaries()
-    compile_bigram_dictionaries("tweets_classified_manually_test")
+    compile_bigram_dictionaries("tweets_classified_manually")
 
 
 # Test code

@@ -10,17 +10,49 @@ def clean_word(text):
     @return: the clean word.
     """
     # words must have two or more characters.
+    # skip all sanitation if it to short.
     if len(text) <= 1:
         return None
 
     replacement = ""
-    # stripping unwanted characters.
-    pattern = u"[!\"\%&\*+,-./:…;<=>?@~\r\n|\\[\\]}{)(→']"
-    regex = re.compile(pattern, re.MULTILINE)
-    text = regex.sub(replacement, text)
 
     # pre and post spaces
     text.strip()
+
+    # remove plurals 's
+    pattern = u"'s"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # don't want retweet
+    pattern = u"^rt"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # don't want to start with http, it's a link removal gone wrong.
+    pattern = u"http[s]*[^ ]*"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # don't want money.
+    pattern = u"\$\d+"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # stripping unwanted characters.
+    pattern = u"[!\"\%&\*+,-_./:…;<=>?@~\r\n|\\[\\]}{)(→'“”’]"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # don't want to start with digit, that's not a word.
+    pattern = u"^\d+"
+    regex = re.compile(pattern, re.MULTILINE)
+    text = regex.sub(replacement, text)
+
+    # words must have two or more characters.
+    # recheck if we removed something that made the word to short.
+    if len(text) <= 1:
+        return None
 
     return text
 
@@ -32,23 +64,22 @@ def write_array_entries_to_file(array, filename):
     @param filename: the name of the output file
     @return: null
     """
-    # TODO this can be done quite elegantly in some oneliner way.
-    output = codecs.open(filename, "rw", "utf-8")
-    content = output.readlines()
+    output = codecs.open(filename, "a", "utf-8")
+    content = read_file(filename)
     for item in array:
         if not item in content:
-            output.write(item + "\n")
+            output.write(item+"\n")
     output.close()
     return
 
 
-def read_file(file_name):
+def read_file(filename):
     """
     Reads a file and returns all lines as array.
-    @param file_name: the location and name of the file.
+    @param filename: the location and name of the file.
     @return: array of lines from file.
     """
-    input_file = codecs.open(file_name, 'r', "utf-8")
+    input_file = codecs.open(filename, 'r', "utf-8")
     lines = input_file.readlines()
     for i in range(len(lines)):
         lines[i] = lines[i].rstrip().lower()

@@ -98,7 +98,7 @@ def sanitize_tweet(tweet):
     text = regex.sub(replacement, text)
 
     # stripping the tweet of unwanted characters.
-    pattern = u"[!\"\%&\*+,-./:…;<=>?@~\r\n|\\[\\]}{)(]"
+    pattern = u"[!\"\%&\*+,-_./:…;<=>?@~\r\n|\\[\\]}{)(]"
     regex = re.compile(pattern, re.MULTILINE)
     text = regex.sub(replacement, text)
 

@@ -1,6 +1,6 @@
 # helpers to read and update dictionaries.
 import codecs
-from dict_utils import read_file
+from dict_utils import read_file, file_to_lower
 
 base = "/home/kiro/ntnu/master/code/dictionaries/"
 
@@ -23,11 +23,11 @@ def classify_word(word):
     """
     @param word:
     """
-    with codecs.open(base+"unclassified_words.txt", "a", "utf-8") as unclassified_words:
-        unclassified_words.write(word+'\n')
+    with codecs.open(base + "unclassified_words.txt", "a", "utf-8") as unclassified_words:
+        unclassified_words.write(word + '\n')
 
 
-def get_positve_dict(dict=base+'positive.csv'):
+def get_positve_dict(dict=base + 'positive.csv'):
     lines = read_file(dict)
     words = {}
     for l in lines:
@@ -35,7 +35,7 @@ def get_positve_dict(dict=base+'positive.csv'):
     return words
 
 
-def get_negative_dict(dict=base+'negative.csv'):
+def get_negative_dict(dict=base + 'negative.csv'):
     lines = read_file(dict)
     words = {}
     for l in lines:
@@ -78,24 +78,13 @@ def clean_dcictionary(dctionary):
     return
 
 
-def file_to_lower(filename, output):
-    """
-    Changes all entries to lower case.
-    @param filename: the file to convert
-    @param output: the new file that is created.
-    """
-    out = codecs.open(output, "a", "utf-8")
-    for line in open(filename).readlines():
-        out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~]\r\n')+"\n")
-
-
 # Test code
 def to_lower():
-    file_to_lower("negative.txt-old","negative.txt")
-    file_to_lower("positive.txt-old","positive.txt")
-    file_to_lower("LoughranMcDonald_Negative.csv","negative.txt")
-    file_to_lower("LoughranMcDonald_Positive.csv","positive.txt")
+    file_to_lower("negative.txt-old", "negative.txt")
+    file_to_lower("positive.txt-old", "positive.txt")
+    file_to_lower("LoughranMcDonald_Negative.csv", "negative.txt")
+    file_to_lower("LoughranMcDonald_Positive.csv", "positive.txt")
+
 
 if __name__ == "__main__":
-
     exit()

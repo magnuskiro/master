@@ -14,7 +14,6 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
 
     for tweet in tweets_list:
         # sanitize text.
-        # this line makes a huge difference. but why?
         tweet = sanitize_tweet(tweet)
 
         # get word count for tweet
@@ -30,10 +29,7 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
         #export_words(tweet, (True if negative_counts[-1] < positive_counts[-1] else False))
 
     # result aggregation
-    # TODO should maybe store this to file somehow
-    pos = 0
-    neg = 0
-    na = 0
+    pos, neg, na = 0, 0, 0
     for i in range(len(positive_counts)):
         if positive_counts[i] > negative_counts[i]:
             pos += 1

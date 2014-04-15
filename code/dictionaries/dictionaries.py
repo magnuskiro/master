@@ -93,7 +93,7 @@ def compile_and_write_dictionary_from_array(array, output_name):
         if w:
             #print w
             # if we don't have the word already, store it
-            if w not in words:
+            if w not in str(words):
                 #print w
                 words.append(w+"\n")
 
@@ -163,18 +163,17 @@ def compile_dictionaries():
     helper to run monogram and bigram dictionary compilations in one go.
     """
     compile_monogram_dictionaries()
-    compile_bigram_dictionaries("tweets_classified_manually")
+    #compile_bigram_dictionaries("tweets_classified_manually")
 
 
 # Test code
 def to_lower():
-    # TODO filename changed.
-    #file_to_lower("negative.txt-old", "negative.txt")
-    #file_to_lower("positive.txt-old", "positive.txt")
-    file_to_lower("LoughranMcDonald_Negative.csv", "negative.txt")
-    file_to_lower("LoughranMcDonald_Positive.csv", "positive.txt")
+    file_to_lower("LoughranMcDonald_Negative.csv", "LoughranMcDonald_lower_negative.txt")
+    file_to_lower("LoughranMcDonald_Positive.csv", "LoughranMcDonald_lower_positive.txt")
 
 
 if __name__ == "__main__":
     compile_dictionaries()
+    #to_lower()
+    #remove_duplicates_between_dictionaries("compiled-positive.txt", "compiled-negative.txt")
     exit()

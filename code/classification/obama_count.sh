@@ -6,5 +6,5 @@ let sum=$pos+$neg
 let tot=$pos+$neg+$neu
 
 echo "Manual classification: obama_tweets_classified_manually"
-echo "(pos, neg, neu)" 
+echo "(pos, neg, na)" 
 echo "($pos, $neg, $neu)" 

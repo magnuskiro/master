@@ -8,7 +8,7 @@ let sum=$pos+$neg
 let tot=$pos+$neg+$neu
 
 echo "Manual classification: tweets_classified_manually"
-echo "(pos, neg, neu)" 
+echo "(pos, neg, na)" 
 echo "($pos, $neg, $neu)" 
 echo "sum pos+neg: $sum"
 echo "total: $tot" 

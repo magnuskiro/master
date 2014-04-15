@@ -67,8 +67,36 @@ def classify(filename):
     return
 
 
+def classify_obama():
+    filename = "obama_tweets_classified.txt"
+    manually_classified_tweets = codecs.open("obama_tweets_classified_manually", "a", "utf-8")
+    count = 0
+
+    for text in open(filename).readlines():
+
+        count += 1
+        print count
+        # if I mess up something it's easy to start the script again and get right back where i left off.
+        if count < 1355:
+            continue
+
+        print text
+        input_argument = raw_input("-----\nPos/neg/neither? y/n\n")
+        # positive
+        if input_argument == "y":
+            # save verdict to file
+            manually_classified_tweets.write("1," + text)
+        # negative
+        elif input_argument == "n":
+            # save verdict to file
+            manually_classified_tweets.write("-1," + text)
+
+    manually_classified_tweets.close()
+    return
+
 if __name__ == "__main__":
-    if sys.argv[1]:
-        classify(sys.argv[1])
-    else:
-        classify("")
+    #if sys.argv[1]:
+    #    classify(sys.argv[1])
+    #else:
+    #   classify("")
+    classify_obama()

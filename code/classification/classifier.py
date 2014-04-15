@@ -8,7 +8,15 @@ def a3():
     return "N/A"
 
 
-def word_count_classification(tweets_list, negative_dict, positive_dict):
+def word_count_classification(tweets_list, negative_dict, positive_dict, results):
+    """
+    Classifies tweets based on the given dictionaries.
+    @param tweets_list: list of tweets to classify.
+    @param negative_dict: list of negative words.
+    @param positive_dict: list of positive words.
+    @param results: the results of manual labeling.
+    @return: the results: number of positive tweets, number of negative tweets, number of unclassified ones, accuracy by %.
+    """
     positive_counts = []
     negative_counts = []
 
@@ -38,22 +46,41 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
         else:
             na += 1
 
-    return pos, neg, na
+    # calculating accuracy just for nice print out:
+    accuracy = 1 - ((abs(results[0] - pos) / (results[0] * 1.0) + abs(results[1] - neg) / (results[1] * 1.0)) / 2)
+
+    return pos, neg, na, "%.2f" % accuracy
 
 
 # Test function
-def classify_obama(pos_dict, neg_dict, text):
+def classify_obama(pos_dict, neg_dict, text, results):
+    """
+    Loads the obama tweets data to then call classification of tweets. Prints the results of the classification.
+    @param pos_dict: name of file with positive words.
+    @param neg_dict: name of file with negative words.
+    @param text: the text to be printed for each classification run.
+    @param results: the results of manual classification of the given dataset.
+    @return: noting.
+    """
     tweets = open("../twitter/obama_tweets.txt").read().split("\n")
     positive_words = open("../dictionaries/" + pos_dict).read().split("\n")
     negative_words = open("../dictionaries/" + neg_dict).read().split("\n")
 
     print text
-    print "(pos, neg, na)"
-    print word_count_classification(tweets, negative_words, positive_words)
+    print "(pos, neg, na, acc(%))"
+    print word_count_classification(tweets, negative_words, positive_words, results)
     return
 
 
-def classify_kiro_labeled(pos_dict, neg_dict, text):
+def classify_kiro_labeled(pos_dict, neg_dict, text, results):
+    """
+    Loads the dataset I have acquired and then call classification of tweets. Prints the results of the classification.
+    @param pos_dict: name of file with positive words.
+    @param neg_dict: name of file with negative words.
+    @param text: the text to be printed for each classification run.
+    @param results: the results of manual classification of the given dataset.
+    @return: noting.
+    """
     classification_base = "/home/kiro/ntnu/master/code/classification/"
     dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"
 
@@ -69,42 +96,54 @@ def classify_kiro_labeled(pos_dict, neg_dict, text):
     positive_words = get_lines_from_file(dictionary_base + pos_dict)
     negative_words = get_lines_from_file(dictionary_base + neg_dict)
     print text
-    print "(pos, neg, na)"
-    print word_count_classification(tweets, negative_words, positive_words)
+    print "(pos, neg, na, acc(%))"
+    print word_count_classification(tweets, negative_words, positive_words, results)
     return
 
 # easy running
 if __name__ == "__main__":
+    kiro_tweet_results = [575, 422, 0]
+    obama_tweet_results = [507, 858, 0]
     print "--- Kiro"
     classify_kiro_labeled("compiled-positive.txt",
                           "compiled-negative.txt",
-                          "Kiro, Monogram, self compile")
+                          "Kiro, Monogram, self compile",
+                          kiro_tweet_results)
     classify_kiro_labeled("obama-negative.txt",
                           "obama-positive.txt",
-                          "Kiro, Monogram, obama")
+                          "Kiro, Monogram, obama",
+                          kiro_tweet_results)
     classify_kiro_labeled("LoughranMcDonald_lower_positive.txt",
                           "LoughranMcDonald_lower_negative.txt",
-                          "Kiro, Monogram LoughranMcDonald")
+                          "Kiro, Monogram LoughranMcDonald",
+                          kiro_tweet_results)
     classify_kiro_labeled("positive.txt",
                           "negative.txt",
-                          "Kiro, Monogram, combined Obama and LoughranMcDonald")
+                          "Kiro, Monogram, combined Obama and LoughranMcDonald",
+                          kiro_tweet_results)
     classify_kiro_labeled("bigram-compiled-positive.txt",
                           "bigram-compiled-negative.txt",
-                          "Kiro, Bigram wordcount")
+                          "Kiro, Bigram wordcount",
+                          kiro_tweet_results)
     print "--- OBAMA"
     classify_obama("compiled-positive.txt",
                    "compiled-negative.txt",
-                   "Obama, Monogram, self compile")
+                   "Obama, Monogram, self compile",
+                   obama_tweet_results)
     classify_obama("obama-negative.txt",
                    "obama-positive.txt",
-                   "Obama, Monogram, obama")
+                   "Obama, Monogram, obama",
+                   obama_tweet_results)
     classify_obama("LoughranMcDonald_lower_positive.txt",
                    "LoughranMcDonald_lower_negative.txt",
-                   "Obama, Monogram LoughranMcDonald")
+                   "Obama, Monogram LoughranMcDonald",
+                   obama_tweet_results)
     classify_obama("positive.txt",
                    "negative.txt",
-                   "Obama, Monogram, combined Obama and LoughranMcDonald")
+                   "Obama, Monogram, combined Obama and LoughranMcDonald",
+                   obama_tweet_results)
     classify_obama("bigram-compiled-positive.txt",
                    "bigram-compiled-negative.txt",
-                   "Obama, Bigram wordcount")
+                   "Obama, Bigram wordcount",
+                   obama_tweet_results)
 

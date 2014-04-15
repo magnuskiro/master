@@ -1,8 +1,6 @@
 # helpers to read and update dictionaries.
 import codecs
-import re
-from nltk import bigrams
-from dict_utils import get_lines_from_file, file_to_lower, write_array_entries_to_file, clean_text, \
+from dict_utils import get_lines_from_file, write_array_entries_to_file, clean_text, \
     remove_duplicates_between_dictionaries, get_positive_negative_tweets_from_manually_labeled_tweets, \
     get_bigrams_from_text
 
@@ -166,14 +164,6 @@ def compile_dictionaries():
     #compile_bigram_dictionaries("tweets_classified_manually")
 
 
-# Test code
-def to_lower():
-    file_to_lower("LoughranMcDonald_Negative.csv", "LoughranMcDonald_lower_negative.txt")
-    file_to_lower("LoughranMcDonald_Positive.csv", "LoughranMcDonald_lower_positive.txt")
-
-
 if __name__ == "__main__":
     compile_dictionaries()
-    #to_lower()
-    #remove_duplicates_between_dictionaries("compiled-positive.txt", "compiled-negative.txt")
     exit()

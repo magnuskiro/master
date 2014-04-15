@@ -7,9 +7,9 @@ err=`cat tweets_classified_manually | grep ^[\^-01] | wc -l`
 let sum=$pos+$neg
 let tot=$pos+$neg+$neu
 
-echo "neg: $neg" 
-echo "pos: $pos" 
-echo "neu: $neu" 
+echo "Manual classification: tweets_classified_manually"
+echo "(pos, neg, neu)" 
+echo "($pos, $neg, $neu)" 
 echo "sum pos+neg: $sum"
 echo "total: $tot" 
-echo "error lines: $err" 
+

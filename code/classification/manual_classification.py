@@ -2,7 +2,7 @@
 import codecs
 import re
 import sys
-from utils import load_data, export_word_list, sanitize_tweet, get_previous_tweets
+from utils import load_data, export_words, sanitize_tweet, get_previous_tweets
 
 __author__ = 'kiro'
 
@@ -52,12 +52,12 @@ def classify(filename):
             # save verdict to file
             manually_classified_tweets.write("1," + str(tweet['id']) + "," + text + "\n")
             # save positive words
-            export_word_list(text.split(' '), True, "")
+            export_words(text.split(' '), True, "")
         elif input_argument == "n":
             # save verdict to file
             manually_classified_tweets.write("-1," + str(tweet['id']) + "," + text + "\n")
             # save positive words
-            export_word_list(text.split(' '), False, "")
+            export_words(text.split(' '), False, "")
         else:
             manually_classified_tweets.write("0," + str(tweet['id']) + "," + text + "\n")
 

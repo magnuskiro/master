@@ -60,16 +60,19 @@ def load_data(filename):
     return tweets
 
 
-def get_word_count(dictionary, words):
+def get_word_count(dictionary, text):
     """
     counts the number of words from a tweet that is present in the given dictionary.
+    @param text:
     @param dictionary:
-    @param words:
     @return:
     """
     count = 0
-    for word in words:
-        if word in dictionary:
+    for word in dictionary:
+        #print word, count
+        #print word, "----", count
+        if word in text:
+            #print word
             count += 1
     return count
 
@@ -111,17 +114,61 @@ def sanitize_tweet(tweet):
     return text
 
 
-def export_word_list(words, polarity, bigram):
+def export_words(text, polarity):
     """
     Appending negative or positive words to the auto-dictionary file.
     @param bigram: give the bigram parameter string as 'bigram' to save bigrams.
     @param words:
     @param polarity:
     """
-    if polarity:
-        out = codecs.open("auto" + bigram + "-positive.txt", "a", "utf-8")
-    else:
-        out = codecs.open("auto" + bigram + "-negative.txt", "a", "utf-8")
-    for w in words:
-        out.write(w + "\n")
-    out.close()
+    #if polarity:
+    #    out = codecs.open("auto" + bigram + "-positive.txt", "a", "utf-8")
+    #else:
+    #    out = codecs.open("auto" + bigram + "-negative.txt", "a", "utf-8")
+    #for w in words:
+    #    out.write(w + "\n")
+    #out.close()
+    return
+
+
+def get_positive_negative_tweets_from_manually_labeled_tweets(filename):
+    """
+    From manually labeled tweets get positive and negative tweets.
+    @param filename: file with manually labeled tweets
+    @return: return an array with two lists, positive and negative tweets.
+    """
+    pos = []
+    neg = []
+
+    # labeled tweet file format:
+    # polarity,id,text
+    # -1,578123, content, content content , content
+    # 1,17823017,word, word word word, word
+    # 0,76125391, word, word word word, word
+
+    # for all manually labeled tweets
+    for line in get_lines_from_file(filename):
+        params = line.split(",")
+        # if tweet is labeled negative
+        if params[0] == '-1':
+            neg.append(''.join(params[2:]))
+        # if tweet is labeled positive
+        elif params[0] == '1':
+            pos.append(''.join(params[2:]))
+    return pos, neg
+
+
+def get_lines_from_file(filename):
+    """
+    Reads a file and returns all lines as array.
+    @param filename: the location and name of the file.
+    @return: array of lines from file.
+    """
+    # TODO fix lambda elegance.
+    input_file = codecs.open(filename, 'r', "utf-8")
+    lines = input_file.readlines()
+    for i in range(len(lines)):
+        # be wary of the \n new line. might or might not be needed.
+        lines[i] = lines[i].lower().strip("\n")
+    input_file.close()
+    return lines

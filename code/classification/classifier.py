@@ -1,39 +1,6 @@
 # coding=utf-8
-#from classification import aggregator
-#from dictionaries import dictionaries
-#from dictionaries.dictionaries import classify_word
-from nltk import bigrams
-from utils import get_word_count, export_word_list
-
-#negative_words = dictionaries.get_negative_dict()
-#positive_words = dictionaries.get_positve_dict()
-
-
-def get_pos_neg_word_count(words, pos, neg):
-    """
-
-    @param words:
-    @return: a dict with counted positive and negative words.
-    """
-    word_count_dict = {'pos': 0, 'neg': 0}
-
-    word_is_pos_or_neg = False
-    for word in words:
-        if word in pos:
-            word_count_dict['pos'] += 1
-            word_is_pos_or_neg = True
-            #print pos[word]
-        if word in neg:
-            word_count_dict['pos'] -= 1
-            word_is_pos_or_neg = True
-            #print neg[word]
-            # if the word don't appear in either dictionaries store it to be classified.
-            # uncomment later.
-            #if not word_is_pos_or_neg:
-            #classify_word(word)
-            #print word
-
-    return word_count_dict
+from utils import get_word_count, export_words, sanitize_tweet, \
+    get_positive_negative_tweets_from_manually_labeled_tweets, get_lines_from_file
 
 
 def a3():
@@ -41,58 +8,26 @@ def a3():
     return "N/A"
 
 
-def bigram_classification(tweets_list, negative_dict, positive_dict):
-    positive_counts = []
-    negative_counts = []
-    for tweet in tweets_list:
-        #tweet = sanitize_tweet(tweet) # this line makes a huge difference. but why?
-        words = bigrams(tweet.lower().split(
-            ' '))  # needs to be tested to see how (1,2) are combined, [(1, 2), (2, 3), (3, 4), (4, 5)]
-        word_count = len(words) * 1.0
-
-        #print get_word_count(positive_dict, words), " / ", get_word_count(negative_dict, words)
-        positive_counts.append(get_word_count(positive_dict, words) / word_count)
-        negative_counts.append(get_word_count(negative_dict, words) / word_count)
-
-        # store classified words from a tweet
-        if positive_counts[-1] > negative_counts[-1]:
-            export_word_list(words, True, "")
-        else:
-            export_word_list(words, False, "")
-
-    # result aggregation
-    # TODO should maybe store this to file somehow
-    pos = 0
-    neg = 0
-    na = 0
-    for i in range(len(positive_counts)):
-        if positive_counts[i] > negative_counts[i]:
-            pos += 1
-        elif positive_counts[i] < negative_counts[i]:
-            neg += 1
-        else:
-            na += 1
-
-    return pos, neg, na
-
-
 def word_count_classification(tweets_list, negative_dict, positive_dict):
     positive_counts = []
     negative_counts = []
+
     for tweet in tweets_list:
-        #tweet = sanitize_tweet(tweet) # this line makes a huge difference. but why?
-        words = tweet.lower().split(' ')
-        word_count = len(words) * 1.0
+        # sanitize text.
+        # this line makes a huge difference. but why?
+        tweet = sanitize_tweet(tweet)
 
-        #print get_word_count(positive_dict, words), " / ", get_word_count(negative_dict, words)
-        positive_counts.append(get_word_count(positive_dict, words) / word_count)
-        negative_counts.append(get_word_count(negative_dict, words) / word_count)
+        # get word count for tweet
+        word_count = len(tweet.split(' ')) * 1.0
 
+        # get word count of pos/neg words.
+        positive_counts.append(get_word_count(positive_dict, tweet) / word_count)
+        negative_counts.append(get_word_count(negative_dict, tweet) / word_count)
+
+        #print positive_counts[-1]
+        #print negative_counts[-1]
         # store classified words from a tweet
-        if positive_counts[-1] > negative_counts[-1]:
-            export_word_list(words, True, "")
-        else:
-            export_word_list(words, False, "")
+        #export_words(tweet, (True if negative_counts[-1] < positive_counts[-1] else False))
 
     # result aggregation
     # TODO should maybe store this to file somehow
@@ -111,20 +46,69 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
 
 
 # Test function
-def classify_obama():
+def classify_obama(pos_dict, neg_dict, text):
     tweets = open("../twitter/obama_tweets.txt").read().split("\n")
-    negative_words = open("../dictionaries/negative.txt").read().split("\n")
-    positive_words = open("../dictionaries/positive.txt").read().split("\n")
+    positive_words = open("../dictionaries/" + pos_dict).read().split("\n")
+    negative_words = open("../dictionaries/" + neg_dict).read().split("\n")
+
+    print text
+    print "(pos, neg, na)"
     print word_count_classification(tweets, negative_words, positive_words)
+    return
 
 
-def classify_obama_bigram():
-    tweets = open("../twitter/obama_tweets.txt").read().split("\n")
-    negative_words = open("../dictionaries/negative-bigrams.txt").read().split("\n")
-    positive_words = open("../dictionaries/positive-bigrams.txt").read().split("\n")
-    print bigram_classification(tweets, negative_words, positive_words)
+def classify_kiro_labeled(pos_dict, neg_dict, text):
+    classification_base = "/home/kiro/ntnu/master/code/classification/"
+    dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"
 
+    # get labeled tweets
+    # tweets[0] are the positive ones, tweets[1] are the negative ones.
+    tweets = get_positive_negative_tweets_from_manually_labeled_tweets(
+        classification_base + "tweets_classified_manually")
 
+    #print len(tweets[0]), len(tweets[1])
+    tweets = tweets[0] + tweets[1]
+    #print len(tweets)
+
+    positive_words = get_lines_from_file(dictionary_base + pos_dict)
+    negative_words = get_lines_from_file(dictionary_base + neg_dict)
+    print text
+    print "(pos, neg, na)"
+    print word_count_classification(tweets, negative_words, positive_words)
+    return
+
+# easy running
 if __name__ == "__main__":
-    classify_obama()
-    #classify_obama_bigram()
+    print "--- Kiro"
+    classify_kiro_labeled("compiled-positive.txt",
+                          "compiled-negative.txt",
+                          "Kiro, Monogram, self compile")
+    classify_kiro_labeled("obama-negative.txt",
+                          "obama-positive.txt",
+                          "Kiro, Monogram, obama")
+    classify_kiro_labeled("LoughranMcDonald_lower_positive.txt",
+                          "LoughranMcDonald_lower_negative.txt",
+                          "Kiro, Monogram LoughranMcDonald")
+    classify_kiro_labeled("positive.txt",
+                          "negative.txt",
+                          "Kiro, Monogram, combined Obama and LoughranMcDonald")
+    classify_kiro_labeled("bigram-compiled-positive.txt",
+                          "bigram-compiled-negative.txt",
+                          "Kiro, Bigram wordcount")
+    print "--- OBAMA"
+    classify_obama("compiled-positive.txt",
+                   "compiled-negative.txt",
+                   "Obama, Monogram, self compile")
+    classify_obama("obama-negative.txt",
+                   "obama-positive.txt",
+                   "Obama, Monogram, obama")
+    classify_obama("LoughranMcDonald_lower_positive.txt",
+                   "LoughranMcDonald_lower_negative.txt",
+                   "Obama, Monogram LoughranMcDonald")
+    classify_obama("positive.txt",
+                   "negative.txt",
+                   "Obama, Monogram, combined Obama and LoughranMcDonald")
+    classify_obama("bigram-compiled-positive.txt",
+                   "bigram-compiled-negative.txt",
+                   "Obama, Bigram wordcount")
+

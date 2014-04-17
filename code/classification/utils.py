@@ -28,7 +28,7 @@ def get_previous_tweets(filename):
     return tweets
 
 
-def load_data(filename):
+def load_tweet_data_file(filename):
     """
     Loads a dataset from disk.
     @param filename: the name of the file to load.
@@ -131,6 +131,55 @@ def export_words(text, polarity):
     return
 
 
+def aggregate_results(tweets, results):
+    """
+    Aggregates results based on actual tweet labeling and the classified sentiment.
+    @param tweets: the list of labeled tweets.
+    @param results: the results form the classification.
+    @return:
+    """
+    #print "INFO -- Aggregating results"
+    classification_results = []
+    # for all tweets
+    for i in range(len(tweets)):
+        # append the boolean value representing correct classification of the given tweet.
+        classification_results.append(tweets[i][1] == results[i])
+
+    # compiling the counts of correct and false classification
+    counts = dict((k, classification_results.count(k)) for k in set(classification_results))
+    # calculating the accuracy of the classifier
+
+    accuracy = (counts[True]*1.0) / (counts[False]+counts[True])
+
+    return counts, accuracy
+
+
+def load_manually_labeled_tweets(filename):
+    """
+    Loads tweets from file and returns them in the right format.
+    @param filename: the file to load tweets from.
+    @return:
+    """
+    # load tweets
+    tweets = get_positive_negative_tweets_from_manually_labeled_tweets(filename)
+
+    all_tweets = []
+    # for all positive tweets
+    for tweet in tweets[0]:
+        # get words of two or more characters.
+        words_filtered = [e.lower() for e in sanitize_tweet(tweet).split() if len(e) >= 2]
+        # add (words, sentiment) tuple to list of tweets.
+        all_tweets.append((words_filtered, True))
+    # for all negative tweets
+    for tweet in tweets[1]:
+        # get words of two or more characters.
+        words_filtered = [e.lower() for e in sanitize_tweet(tweet).split() if len(e) >= 2]
+        # add (words, sentiment) tuple to list of tweets.
+        all_tweets.append((words_filtered, False))
+
+    return all_tweets
+
+
 def get_positive_negative_tweets_from_manually_labeled_tweets(filename):
     """
     From manually labeled tweets get positive and negative tweets.
@@ -164,11 +213,7 @@ def get_lines_from_file(filename):
     @param filename: the location and name of the file.
     @return: array of lines from file.
     """
-    # TODO fix lambda elegance.
     input_file = codecs.open(filename, 'r', "utf-8")
-    lines = input_file.readlines()
-    for i in range(len(lines)):
-        # be wary of the \n new line. might or might not be needed.
-        lines[i] = lines[i].lower().strip("\n")
+    lines = [line.strip("\n") for line in input_file.readlines()]
     input_file.close()
     return lines

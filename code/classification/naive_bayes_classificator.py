@@ -34,8 +34,8 @@ def extract_features_from_text(text):
     document_words = set(text)
     features = {}
     # TODO might be optimized by changing directions by checking words in dictionary rather than words in text.
-    for word in dictionary:
-        features['contains(%s)' % word] = (word in document_words)
+    for word in document_words:
+        features['contains(%s)' % word] = (word in dictionary)
     return features
 
 

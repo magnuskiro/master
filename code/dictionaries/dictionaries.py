@@ -1,8 +1,8 @@
 # helpers to read and update dictionaries.
 import codecs
-from dict_utils import get_lines_from_file, write_array_entries_to_file, clean_text, \
+from dictionary_utils import get_lines_from_file, write_array_entries_to_file, clean_text, \
     remove_duplicates_between_dictionaries, get_positive_negative_tweets_from_manually_labeled_tweets, \
-    get_bigrams_from_text
+    get_bigrams_from_text, file_to_lower
 
 base = "/home/kiro/ntnu/master/code/dictionaries/"
 
@@ -166,4 +166,5 @@ def compile_dictionaries():
 
 if __name__ == "__main__":
     compile_dictionaries()
-    exit()
+    #file_to_lower("LoughranMcDonald_Negative.csv", "LoughranMcDonald_Negative.txt")
+    #file_to_lower("LoughranMcDonald_Positive.csv", "LoughranMcDonald_Positive.txt")

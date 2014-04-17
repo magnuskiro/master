@@ -1,6 +1,6 @@
 
 import nltk
-from utils import get_lines_from_file, load_manually_labeled_tweets, aggregate_results
+from classification_utils import get_lines_from_file, load_manually_labeled_tweets, aggregate_results
 
 __author__ = 'kiro'
 

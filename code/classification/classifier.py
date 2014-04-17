@@ -1,5 +1,5 @@
 # coding=utf-8
-from utils import get_word_count, export_words, sanitize_tweet, \
+from classification_utils import get_word_count, export_words, sanitize_tweet, \
     get_positive_negative_tweets_from_manually_labeled_tweets, get_lines_from_file, load_manually_labeled_tweets, aggregate_results
 
 

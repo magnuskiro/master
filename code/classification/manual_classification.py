@@ -2,7 +2,7 @@
 import codecs
 import re
 import sys
-from utils import load_data, export_words, sanitize_tweet, get_previous_tweets
+from classification_utils import load_tweet_data_file, export_words, sanitize_tweet, get_previous_tweets
 
 __author__ = 'kiro'
 
@@ -20,7 +20,7 @@ def classify(filename):
 
     count = 0
     rt = 0
-    for tweet in load_data(filename):
+    for tweet in load_tweet_data_file(filename):
 
         print count
         count += 1

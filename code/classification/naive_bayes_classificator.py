@@ -76,7 +76,6 @@ def classify(classifier_class, tweets):
         # classify the tweet and append the result to list.
         # runs classify() on the given classifier class in the nltk library.
         results.append(classifier.classify(extract_features_from_text(tweet)))
-    # return classification results
     return results
 
 
@@ -105,7 +104,7 @@ def test_classifier(tweet_file, classifier_class, text):
 # easy running
 if __name__ == "__main__":
     # run the testing of the classifier.
-    #test_classifier("tweets_classified_manually", nltk.NaiveBayesClassifier, "Kiro tweets, Naive Bayes")
+    test_classifier("tweets_classified_manually", nltk.NaiveBayesClassifier, "Kiro tweets, Naive Bayes")
     test_classifier("obama_tweets_classified_manually", nltk.NaiveBayesClassifier, "Obama tweets, Naive Bayes")
     # this takes a freakishly long time.
     #kiro_test(nltk.DecisionTreeClassifier, "Kiro tweets, Decision Tree")

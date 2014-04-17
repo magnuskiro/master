@@ -33,7 +33,7 @@ def extract_features_from_text(text):
     dictionary = get_list_of_possible_words_in_tweets()
     document_words = set(text)
     features = {}
-    # TODO might be optimized by changing directions by checking words in dictionary rather than words in text.
+    # more precision to iterate the word of a tweet then the whole dictionary.
     for word in document_words:
         features['contains(%s)' % word] = (word in dictionary)
     return features

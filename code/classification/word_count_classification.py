@@ -1,6 +1,7 @@
 # coding=utf-8
-from classification_utils import get_word_count, export_words, sanitize_tweet, \
-    get_positive_negative_tweets_from_manually_labeled_tweets, get_lines_from_file, load_manually_labeled_tweets, aggregate_results
+from classification_utils import get_word_count, sanitize_tweet, \
+    get_positive_negative_tweets_from_manually_labeled_tweets, get_lines_from_file, load_manually_labeled_tweets, \
+    aggregate_results
 
 
 def word_count_classification(tweets_list, negative_dict, positive_dict):
@@ -9,7 +10,7 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
     @param tweets_list: list of tweets to classify.
     @param negative_dict: list of negative words.
     @param positive_dict: list of positive words.
-    @return: the results: number of positive tweets, number of negative tweets, number of unclassified ones, accuracy by %.
+    @return: list of true/false values that represent the sentiment of a tweet, the result of the classification.
     """
 
     # loading dictionaries
@@ -44,8 +45,8 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
             # negative tweet
             results.append(False)
 
-        # store classified words from a tweet
-        #export_words(tweet, (True if negative_counts[-1] < positive_counts[-1] else False))
+            # store classified words from a tweet
+            #export_words(tweet, (True if negative_counts[-1] < positive_counts[-1] else False))
 
     return results
 
@@ -64,22 +65,25 @@ def test_classifier(tweet_file, positive_dict, negative_dict, text):
     tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + tweet_file)
 
     # classifying all tweets as positive or negative.
-    sentiment_classification = word_count_classification(tweets[0]+tweets[1], negative_dict, positive_dict)
+    sentiment_classification = word_count_classification(tweets[0] + tweets[1], negative_dict, positive_dict)
 
     # aggregate results
     counts, accuracy = aggregate_results(load_manually_labeled_tweets(tweet_file), sentiment_classification)
 
     print "INFO -- ", text
     print "{failed classifications, correct classifications}, accuracy of the classifier"
-    print counts, "%.2f" % accuracy, "\n"
+    print counts, "%.4f" % accuracy, "\n"
 
 
-def run_banal_classification():
+def run_classification():
+    """
+    Run all the classification tests.
+    """
     print "--- Kiro dataset"
     test_classifier("tweets_classified_manually",
                     "compiled-positive.txt",
                     "compiled-negative.txt",
-                    "Kiro, Monogram, self compile")
+                    "Kiro, Monogram, self compiled")
     test_classifier("tweets_classified_manually",
                     "obama-negative.txt",
                     "obama-positive.txt",
@@ -100,7 +104,7 @@ def run_banal_classification():
     test_classifier("obama_tweets_classified_manually",
                     "compiled-positive.txt",
                     "compiled-negative.txt",
-                    "Obama, Monogram, self compile")
+                    "Obama, Monogram, self compiled")
     test_classifier("obama_tweets_classified_manually",
                     "obama-negative.txt",
                     "obama-positive.txt",
@@ -120,4 +124,4 @@ def run_banal_classification():
 
 # easy running
 if __name__ == "__main__":
-    run_banal_classification()
+    run_classification()

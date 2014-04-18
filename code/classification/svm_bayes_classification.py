@@ -2,7 +2,7 @@
 import nltk
 from classification_utils import get_lines_from_file, load_manually_labeled_tweets, aggregate_results
 
-from sklearn.svm import LinearSVC, libsvm, NuSVC, NuSVR, OneClassSVM, SVC, SVR
+from sklearn.svm import LinearSVC, NuSVC, NuSVR, OneClassSVM, SVC, SVR
 from nltk.classify.scikitlearn import SklearnClassifier
 
 __author__ = 'kiro'
@@ -10,13 +10,15 @@ __author__ = 'kiro'
 
 def get_list_of_possible_words_in_tweets():
     """
-    Create frequency distribution of words from tweets.
-    aka returning the dictionary consisting of all interesting words in the tweet set.
-    @return: list of words
+    Create frequency distribution of words from dictionaries.
+    aka setting the dictionary consisting of all interesting words in the tweet set.
+    @param negative_dict: list of positive words
+    @param positive_dict: list of negative words
+    @return:
     """
-    # TODO use full data from the input tweets, rather then the dictionaries.
-    # TODO get dictionaries as input
-    positive_dict, negative_dict = "compiled-positive.txt", "compiled-negative.txt"
+    # TODO fix the shortcomings of not having the option of dynamically changing the feature we use.
+    #positive_dict, negative_dict = "compiled-positive.txt", "compiled-negative.txt"
+    positive_dict, negative_dict = "bigram-compiled-positive.txt", "bigram-compiled-negative.txt"
 
     dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"
     positive_dict = get_lines_from_file(dictionary_base + positive_dict)
@@ -82,7 +84,7 @@ def classify(classifier_class, tweets):
     return results
 
 
-def test_classifier(tweet_file, classifier_class, text):
+def run_classifier(tweet_file, classifier_class, text):
     """
     Run the test of the classifier, so we can get some results.
     @param tweet_file: the file to load tweets from.
@@ -120,20 +122,30 @@ def test_svm_classes():
     for c in classifiers:
         print c
         classifier = SklearnClassifier(c)
-        test_classifier("tweets_classified_manually", classifier, "Kiro tweets, SVM")
+        run_classifier("tweets_classified_manually", classifier, "Kiro tweets, SVM")
+
 
 # easy running
 if __name__ == "__main__":
-    # Naive Bayes classification
-    classification_class = nltk.NaiveBayesClassifier
+    # list of [filename, description]
+    tweet_sets = [
+        ["tweets_classified_manually", "Kiro compiled dataset"],
+        ["obama_tweets_classified_manually", "Obama tweet set"]
+    ]
 
-    # SVM, Linear Support Vector Classification
-    classification_class = SklearnClassifier(libsvm())
+    classification_classes = [
+        # Decision Tree classification.
+        # Using this takes so long that I have always canceled the execution.
+        #nltk.DecisionTreeClassifier,
 
-    # Decision Tree classification.
-    # Using this takes so long that I have always canceled the execution.
-    #classifier = nltk.DecisionTreeClassifier
+        # Naive Bayes classification
+        nltk.NaiveBayesClassifier,
 
-    # running the classification
-    test_classifier("tweets_classified_manually", classification_class, "Kiro tweets, Naive Bayes")
-    test_classifier("obama_tweets_classified_manually", classification_class, "Obama tweets, Naive Bayes")
+        # SVM, Linear Support Vector Classification
+        SklearnClassifier(LinearSVC())
+    ]
+
+    for classification_class in classification_classes:
+        for data_file, description in tweet_sets:
+            print "--", description, "--"
+            run_classifier(data_file, classification_class, str(classification_class))

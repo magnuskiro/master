@@ -1,8 +1,8 @@
-
+# coding=utf-8
 import nltk
 from classification_utils import get_lines_from_file, load_manually_labeled_tweets, aggregate_results
 
-from sklearn.svm import LinearSVC, SVR, NuSVR
+from sklearn.svm import LinearSVC, libsvm, NuSVC, NuSVR, OneClassSVM, SVC, SVR
 from nltk.classify.scikitlearn import SklearnClassifier
 
 __author__ = 'kiro'
@@ -58,7 +58,7 @@ def initialize_classifier(classifier_class, tweets):
     print "INFO -- Training classifier, this might take some time."
     classifier = classifier_class.train(training_set)
 
-    print "INFO -- Training complete. "
+    print "INFO -- Training complete."
     return classifier
 
 
@@ -104,16 +104,36 @@ def test_classifier(tweet_file, classifier_class, text):
     print counts, "%.4f" % accuracy, "\n"
 
 
+def test_svm_classes():
+    """
+    Testing all the possible classes of the sklearn.svm library.
+    """
+    # SVM, Linear Support Vector Classification
+    classifiers = [
+        LinearSVC(),
+        NuSVC(),
+        NuSVR(),
+        OneClassSVM(),
+        SVC(),
+        SVR()
+    ]
+    for c in classifiers:
+        print c
+        classifier = SklearnClassifier(c)
+        test_classifier("tweets_classified_manually", classifier, "Kiro tweets, SVM")
+
 # easy running
 if __name__ == "__main__":
     # Naive Bayes classification
-    #test_classifier("tweets_classified_manually", nltk.NaiveBayesClassifier, "Kiro tweets, Naive Bayes")
-    #test_classifier("obama_tweets_classified_manually", nltk.NaiveBayesClassifier, "Obama tweets, Naive Bayes")
+    classification_class = nltk.NaiveBayesClassifier
 
     # SVM, Linear Support Vector Classification
-    #test_classifier("tweets_classified_manually", SklearnClassifier(LinearSVC), "Kiro tweets, SVM")
-    #test_classifier("obama_tweets_classified_manually", SklearnClassifier(LinearSVC), "Obama tweets, SVM")
+    classification_class = SklearnClassifier(libsvm())
 
-    #
-    # this takes a freakishly long time.
-    test_classifier("obama_tweets_classified_manually", nltk.DecisionTreeClassifier, "Kiro tweets, Decision Tree")
+    # Decision Tree classification.
+    # Using this takes so long that I have always canceled the execution.
+    #classifier = nltk.DecisionTreeClassifier
+
+    # running the classification
+    test_classifier("tweets_classified_manually", classification_class, "Kiro tweets, Naive Bayes")
+    test_classifier("obama_tweets_classified_manually", classification_class, "Obama tweets, Naive Bayes")

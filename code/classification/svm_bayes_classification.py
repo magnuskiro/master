@@ -17,8 +17,8 @@ def get_list_of_possible_words_in_tweets():
     @return:
     """
     # TODO fix the shortcomings of not having the option of dynamically changing the feature we use.
-    #positive_dict, negative_dict = "compiled-positive.txt", "compiled-negative.txt"
-    positive_dict, negative_dict = "bigram-compiled-positive.txt", "bigram-compiled-negative.txt"
+    positive_dict, negative_dict = "compiled-positive.txt", "compiled-negative.txt"
+    #positive_dict, negative_dict = "bigram-compiled-positive.txt", "bigram-compiled-negative.txt"
 
     dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"
     positive_dict = get_lines_from_file(dictionary_base + positive_dict)
@@ -53,14 +53,14 @@ def initialize_classifier(classifier_class, tweets):
     """
 
     # get the training set.
-    print "INFO -- Compile training set for the classifier"
+    #print "INFO -- Compile training set for the classifier"
     training_set = nltk.classify.apply_features(extract_features_from_text, tweets)
 
     # create the classifier.
-    print "INFO -- Training classifier, this might take some time."
+    #print "INFO -- Training classifier, this might take some time."
     classifier = classifier_class.train(training_set)
 
-    print "INFO -- Training complete."
+    #print "INFO -- Training complete."
     return classifier
 
 
@@ -74,7 +74,7 @@ def classify(classifier_class, tweets):
     # instantiate the classifier
     classifier = initialize_classifier(classifier_class, tweets)
 
-    print "INFO -- Classifying tweets, this might take some time."
+    #print "INFO -- Classifying tweets, this might take some time."
     results = []
     # for all tweets
     for tweet in [tweet[0] for tweet in tweets]:

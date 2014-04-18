@@ -1,0 +1,45 @@
+Using mongram dictionaries
+----------
+-- Kiro compiled dataset --
+INFO -- Naive bayes
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 29, True: 968} 0.9709 
+
+-- Obama tweet set --
+INFO -- Naive bayes
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 59, True: 1306} 0.9568 
+
+-- Kiro compiled dataset --
+INFO -- SVM 
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 7, True: 990} 0.9930 
+
+-- Obama tweet set --
+INFO -- SVM 
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 35, True: 1330} 0.9744 
+
+
+Using Bigram dictionaries. 
+----------
+-- Kiro compiled dataset --
+INFO -- Naive bayes
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 29, True: 968} 0.9709 
+
+-- Obama tweet set --
+INFO -- Naive Bayes
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 59, True: 1306} 0.9568 
+
+-- Kiro compiled dataset --
+INFO -- SVM 
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 422, True: 575} 0.5767 
+
+-- Obama tweet set --
+INFO -- SVM
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 507, True: 858} 0.6286 
+

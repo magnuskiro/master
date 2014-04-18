@@ -1,0 +1,64 @@
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss=l2, multi_class=ovr, penalty=l2,
+     random_state=None, tol=0.0001, verbose=0)
+INFO -- Compile training set for the classifier
+INFO -- Training complete.
+INFO -- Classifying tweets, this might take some time.
+INFO --  Kiro tweets, SVM
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 7, True: 990} 0.9930 
+
+NuSVC(cache_size=200, coef0=0.0, degree=3, gamma=0.0, kernel=rbf, max_iter=-1,
+   nu=0.5, probability=False, random_state=None, shrinking=True, tol=0.001,
+   verbose=False)
+INFO -- Compile training set for the classifier
+INFO -- Training classifier, this might take some time.
+INFO -- Training complete.
+INFO -- Classifying tweets, this might take some time.
+INFO --  Kiro tweets, SVM
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 29, True: 968} 0.9709 
+
+NuSVR(C=1.0, cache_size=200, coef0=0.0, degree=3, gamma=0.0, kernel=rbf,
+   max_iter=-1, nu=0.5, probability=False, random_state=None,
+   shrinking=True, tol=0.001, verbose=False)
+INFO -- Compile training set for the classifier
+INFO -- Training classifier, this might take some time.
+INFO -- Training complete.
+INFO -- Classifying tweets, this might take some time.
+INFO --  Kiro tweets, SVM
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 422, True: 575} 0.5767 
+
+OneClassSVM(cache_size=200, coef0=0.0, degree=3, gamma=0.0, kernel=rbf,
+      max_iter=-1, nu=0.5, random_state=None, shrinking=True, tol=0.001,
+      verbose=False)
+INFO -- Compile training set for the classifier
+INFO -- Training classifier, this might take some time.
+INFO -- Training complete.
+INFO -- Classifying tweets, this might take some time.
+INFO --  Kiro tweets, SVM
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 575, True: 422} 0.4233 
+
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
+  kernel=rbf, max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+INFO -- Compile training set for the classifier
+INFO -- Training classifier, this might take some time.
+INFO -- Training complete.
+INFO -- Classifying tweets, this might take some time.
+INFO --  Kiro tweets, SVM
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 422, True: 575} 0.5767 
+
+SVR(C=1.0, cache_size=200, coef0=0.0, degree=3, epsilon=0.1, gamma=0.0,
+  kernel=rbf, max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+INFO -- Compile training set for the classifier
+INFO -- Training classifier, this might take some time.
+INFO -- Training complete.
+INFO -- Classifying tweets, this might take some time.
+INFO --  Kiro tweets, SVM
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 422, True: 575} 0.5767

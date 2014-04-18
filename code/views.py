@@ -4,7 +4,7 @@ from flask import render_template, request
 from werkzeug.utils import redirect
 
 from app import app
-from classification import classifier
+from classification import word_count_classification
 import data_controller
 from models import Tweet
 
@@ -65,7 +65,7 @@ def classify(dataset):
     tweets = []
     for tweet in tweet_list:
         # classify the tweet
-        tweet = classifier.classify(Tweet(tweet))
+        tweet = word_count_classification.classify(Tweet(tweet))
         #print classified_tweet.id, ":", classified_tweet.polarity
 
         #print len(tweets)

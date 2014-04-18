@@ -2,6 +2,9 @@
 import nltk
 from classification_utils import get_lines_from_file, load_manually_labeled_tweets, aggregate_results
 
+from sklearn.svm import LinearSVC, SVR, NuSVR
+from nltk.classify.scikitlearn import SklearnClassifier
+
 __author__ = 'kiro'
 
 
@@ -96,15 +99,21 @@ def test_classifier(tweet_file, classifier_class, text):
     # aggregate results
     counts, accuracy = aggregate_results(tweets, sentiment_classification)
 
-    print "INFO -- Done", text
+    print "INFO -- ", text
     print "{failed classifications, correct classifications}, accuracy of the classifier"
-    print counts, "%.2f" % accuracy, "\n"
+    print counts, "%.4f" % accuracy, "\n"
 
 
 # easy running
 if __name__ == "__main__":
-    # run the testing of the classifier.
-    test_classifier("tweets_classified_manually", nltk.NaiveBayesClassifier, "Kiro tweets, Naive Bayes")
-    test_classifier("obama_tweets_classified_manually", nltk.NaiveBayesClassifier, "Obama tweets, Naive Bayes")
+    # Naive Bayes classification
+    #test_classifier("tweets_classified_manually", nltk.NaiveBayesClassifier, "Kiro tweets, Naive Bayes")
+    #test_classifier("obama_tweets_classified_manually", nltk.NaiveBayesClassifier, "Obama tweets, Naive Bayes")
+
+    # SVM, Linear Support Vector Classification
+    #test_classifier("tweets_classified_manually", SklearnClassifier(LinearSVC), "Kiro tweets, SVM")
+    #test_classifier("obama_tweets_classified_manually", SklearnClassifier(LinearSVC), "Obama tweets, SVM")
+
+    #
     # this takes a freakishly long time.
-    #kiro_test(nltk.DecisionTreeClassifier, "Kiro tweets, Decision Tree")
+    test_classifier("obama_tweets_classified_manually", nltk.DecisionTreeClassifier, "Kiro tweets, Decision Tree")

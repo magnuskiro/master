@@ -1,5 +1,5 @@
 
-from classification import classifier
+from classification import word_count_classification
 import data_controller
 from models import Tweet
 
@@ -8,7 +8,7 @@ def create_metadata_objects(tweets):
     return_tweets = []
     for tweet in tweets:
         tweet = Tweet(tweet)
-        tweet = classifier.sanitize_tweet(tweet)
+        tweet = word_count_classification.sanitize_tweet(tweet)
         return_tweets.append(tweet)
     return return_tweets
 
@@ -30,12 +30,12 @@ def run_classify(dataset):
     for tweet in tweets:
         print str(tweet.id) + "" \
                               " | " \
-                              "A1: " + str(classifier.positive_vs_negative_words_classification(tweet)) + \
+                              "A1: " + str(word_count_classification.positive_vs_negative_words_classification(tweet)) + \
               " | " \
-              "A2: " + str(classifier.word_count_classification()) + \
+              "A2: " + str(word_count_classification.word_count_classification()) + \
               " | " \
-              "A3: " + str(classifier.a3()) + \
+              "A3: " + str(word_count_classification.a3()) + \
               " | " \
-              "A4: " + str(classifier.bigram_classification())
+              "A4: " + str(word_count_classification.bigram_classification())
 
 run_classify("dataset-testset")

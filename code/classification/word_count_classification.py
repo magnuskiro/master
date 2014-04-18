@@ -51,13 +51,13 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
     return results
 
 
-def test_classifier(tweet_file, positive_dict, negative_dict, text):
+def test_classifier(tweet_file, positive_dict, negative_dict, info_text):
     """
     Loads the dataset I have acquired and then call classification of tweets. Prints the results of the classification.
     @param tweet_file: the name of the file to load tweets from.
     @param positive_dict: name of file with positive words.
     @param negative_dict: name of file with negative words.
-    @param text: the text to be printed for each classification run.
+    @param info_text: the text to be printed for each classification run.
     @return: noting.
     """
     # load tweets
@@ -70,7 +70,7 @@ def test_classifier(tweet_file, positive_dict, negative_dict, text):
     # aggregate results
     counts, accuracy = aggregate_results(load_manually_labeled_tweets(tweet_file), sentiment_classification)
 
-    print "INFO -- ", text
+    print "Info -- ", info_text
     print "{failed classifications, correct classifications}, accuracy of the classifier"
     print counts, "%.4f" % accuracy, "\n"
 
@@ -79,48 +79,27 @@ def run_classification():
     """
     Run all the classification tests.
     """
-    print "--- Kiro dataset"
-    test_classifier("tweets_classified_manually",
-                    "compiled-positive.txt",
-                    "compiled-negative.txt",
-                    "Kiro, Monogram, self compiled")
-    test_classifier("tweets_classified_manually",
-                    "obama-negative.txt",
-                    "obama-positive.txt",
-                    "Kiro, Monogram, obama")
-    test_classifier("tweets_classified_manually",
-                    "LoughranMcDonald_Positive.txt",
-                    "LoughranMcDonald_Negative.txt",
-                    "Kiro, Monogram LoughranMcDonald")
-    test_classifier("tweets_classified_manually",
-                    "positive.txt",
-                    "negative.txt",
-                    "Kiro, Monogram, combined Obama and LoughranMcDonald")
-    test_classifier("tweets_classified_manually",
-                    "bigram-compiled-positive.txt",
-                    "bigram-compiled-negative.txt",
-                    "Kiro, Bigram wordcount")
-    print "--- OBAMA dataset"
-    test_classifier("obama_tweets_classified_manually",
-                    "compiled-positive.txt",
-                    "compiled-negative.txt",
-                    "Obama, Monogram, self compiled")
-    test_classifier("obama_tweets_classified_manually",
-                    "obama-negative.txt",
-                    "obama-positive.txt",
-                    "Obama, Monogram, obama")
-    test_classifier("obama_tweets_classified_manually",
-                    "LoughranMcDonald_Positive.txt",
-                    "LoughranMcDonald_Negative.txt",
-                    "Obama, Monogram LoughranMcDonald")
-    test_classifier("obama_tweets_classified_manually",
-                    "positive.txt",
-                    "negative.txt",
-                    "Obama, Monogram, combined Obama and LoughranMcDonald")
-    test_classifier("obama_tweets_classified_manually",
-                    "bigram-compiled-positive.txt",
-                    "bigram-compiled-negative.txt",
-                    "Obama, Bigram wordcount")
+    # list of [filename, description]
+    tweet_sets = [
+        ["tweets_classified_manually", "Kiro compiled dataset"],
+        ["obama_tweets_classified_manually", "Obama tweet set"]
+    ]
+
+    # static data defining filename of dictionaries and output text.
+    dictionary_combinations = [
+        ["compiled-positive.txt", "compiled-negative.txt", "Monogram, self compiled"],
+        ["obama-negative.txt", "obama-positive.txt", "Monogram, obama"],
+        ["LoughranMcDonald_Positive.txt", "LoughranMcDonald_Negative.txt", "Monogram LoughranMcDonald"],
+        ["positive.txt", "negative.txt", "Monogram, combined Obama and LoughranMcDonald"],
+        ["bigram-compiled-positive.txt", "bigram-compiled-negative.txt", "Bigram wordcount"]
+    ]
+
+    # executing classification
+    for filename, description in tweet_sets:
+        print "--", description, "--"
+        for combo in dictionary_combinations:
+            positive_dict, negative_dict, info_text = combo
+            test_classifier(filename, positive_dict, negative_dict, info_text)
 
 # easy running
 if __name__ == "__main__":

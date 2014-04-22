@@ -10,25 +10,18 @@ We describe the methods for acquiring data in each source.
 Further, the structure, meta data, and characteristics of the data is
 described. 
 
-% data sources
-\section{The Sources}
-\paragraph Twitter 
-Twitter is the source of the base data for sentiment analysis.
-
-\paragraph Dictionaries
-The list of word used in the classification of tweets. 
-
-\paragraph <Finance Source>
-While <Finance Source> is where we get the stock exchange data which is used in
-comparison to the tweet trend TODO:ref -\ref{ref to tweet trend.}. 
-
-
 % The section about twitter. 
-\section{Twitter}
+\section{Tweets}
 
 Please note that Twitter's search service and, by extension, the Search API is
 not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
 or made available via the search interface. 
+
+\subsection{Tweet Structure}
+There are a lot of meta data in the tweets. In fact most of the data in a tweet
+object is not the tweet text itself.
+
+Tweets directly usable in python
 
 % data acquisition
 \subsection{Twitter API}
@@ -47,18 +40,9 @@ operators. Queries may additionally be limited by complexity.
 
 \end{itemize}
 
-\subsection{Mining tweets} % data retrieval.
-%Simple guide to access the twitter api:  http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/
+\paragraph{Mining optimization}
 
-Specifics about the api. 
-
-Volume
-
-Time constraints 
-
-Query constraints. 
-
-\subsection{Dataset(s)}
+\subsection{Tweet sets}
 We are aiming to use multiple sets of 10k tweets. 
 
 This many tweets in each set. etc. 
@@ -68,30 +52,23 @@ Split the original three sets into 10 subsets.
 Take one subset from each superset and manually classify them.Then
 automatically classify the 27 other sets.  
 
-\paragraph{10k-tweets-base}
-The first dataset.
-Based on tweets with the search term "Finance". 
-The interesting part is that 5206 of 10.000 tweets contain the word "finance".
-
-Usage. Splitting this dataset into 10 parts, so that I can use each set for a
-different version of the classification. 
-
-\subsection{Tweet structure}
-There are a lot of meta data in the tweets. In fact most of the data in a tweet
-object is not the tweet text itself.  
-
-Tweets directly usable in python 
-
-\subsection{Biased data}
+\subsection{Biased Data}
 Due to the necessity of a search term in the query, we only get tweets that are
-related to the 
+related to the given terms.
 
-\subsection{Problems and shortcomings}
+Further more the datasets of manually labeled tweets are biased based on my
+personal opinion and state of mind in the moment of classification.  
+
+\subsection{Trend Data}
+
+\subsection{Problems, Shortcomings, and Possible Improvements}
 The potential problems and shortcomings of the data. 
 
 % describing the dictionaries used in the classification of tweets. 
 \section{Dictionaries}\label{sec:dict}
 
+
+\subsection{Downloaded Dictionaries}
 Tim Loughran and Bill McDonald has a set of dictionaries available from the
 websites of University of Notre Dame \footnote{fiks tekst: nd.edu:
 \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}}. 
@@ -114,14 +91,10 @@ There are a lot of words that are not classified yet. Those words should be
 stored and classified later. This to improve the classifiers potential to
 correctly classify tweets.  
 
-\subsection{Expanded dictionaries}
-When classifying a tweet we get a number of words that does not have a previous
-classification. These words are classified and added to the expanded
-dictionaries to form better results. 
-
+\subsection{Compiled Dictionaries}
 
 % The financial data used in the thesis. 
-\section{Financial source}
+\section{Finance Data}
 * obtaining the data(potential mining operations)
 * about the dataset  
 * structure

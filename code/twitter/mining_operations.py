@@ -1,31 +1,12 @@
-
 import ast
 import codecs
-import datetime
-from twython import Twython
-import ConfigParser
-import io
 from time import strftime, sleep
 
-# reading twitter data from config file
-# Default path is '.' aka open needs the full path from home.
-# on windows it would be something like: "c:\Users\username\project\code\folder\twitter.cfg"
-conf = open('/home/kiro/ntnu/master/code/twitter/auth.cfg').read()
-config = ConfigParser.RawConfigParser(allow_no_value=True)
-config.readfp(io.BytesIO(conf))
-
-# getting data from conf object.
-APP_KEY = config.get('twtrauth', 'app_key')
-APP_SECRET = config.get('twtrauth', 'app_secret')
-OAUTH_TOKEN = config.get('twtrauth', 'oauth_token')
-OAUTH_TOKEN_SECRET = config.get('twtrauth', 'oauth_token_secret')
-
-# creating authentication object for twython twitter.
-twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-
-
 # getting 'count' amount of tweets before 'until', with 'term' as search word.
-def search(term='NTNU', count=15, until='2014-1-1'):
+from mining_utils import get_twython_instance, get_search_quota
+
+
+def search(term='NTNU', count=15, since="2014-01-01", until='2014-01-02'):
     """
 
     @param term: the search term. decides what tweets you get back.
@@ -33,31 +14,25 @@ def search(term='NTNU', count=15, until='2014-1-1'):
     @param until: the earliest date you want tweets from.
     @return:
     """
-    print "executing query on twitter"
+    twitter = get_twython_instance()
 
-    #results = twitter.search(q="NTNU", count="15", until="2013-11-20")
-    results = twitter.search(q=term, count=count, until=until)
-    for result in results:
-        print result
+    query = "NTNU OR Master OR Economy lang:en until:2014-04-15"
+
+    #results = twitter.search(q='NTNU', count='15', until='2014-04-15')
+    results = twitter.search(q=query, count='15')
+    #results = twitter.search(q=term, count=count, since=since, until=until)
+    #for result in results:
+    #    print result
         #print result['id_str']
 
-    print len(results['statuses'])
+    print "len, ", len(results['statuses'])
 
     for status in results['statuses']:
         # status is the tweet
         print status['id_str']
+        print status['created_at']
 
     return results['statuses']
-
-
-def date_range(start, end):
-    # yyyy-mm-dd
-    start = datetime.date(2014, 01, 01)
-    end = datetime.date(2014, 04, 01)
-
-    r = (end + datetime.timedelta(days=1) - start).days
-    return [start + datetime.timedelta(days=i) for i in range(r)]
-    #dateList = date_range(start, end)
 
 
 def cursor_extraction(query='twitter', language='en', max_tweets=15, destination_folder="./twitter"):
@@ -70,6 +45,8 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     @param query: the search term that decides what data you get from twitter.
     @param max_tweets: the amount of tweets that are retrieved from tiwtter and stored.
     """
+
+    twitter = get_twython_instance()
 
     # opens new file with today's date and time now as filename
     filename = destination_folder + "/dataset-" + strftime("%d-%b-%Y_%H:%M:%S")  # getting data-time string
@@ -86,7 +63,7 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
         totcount = i
 
         # executes query on twitter, creating a result object that yields tweets.
-        if len(previous_tweets_list)>0:
+        if len(previous_tweets_list) > 0:
             results = twitter.cursor(twitter.search, q=query, count="100", lauage=language,
                                      max_id=min(previous_tweets_list))
         else:
@@ -107,12 +84,12 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
 
         # for tweets yielded by the result object.
         for result in results:
-            # if we reach the desired amount of tweets we stop getting more.
+            # if we reach the max amount of unique tweets in this query we stop.
             if count >= 99:
                 break
             count += 1
 
-            # skip previously labeled tweets
+            # skip previously acquired tweets
             if str(result['id_str']) in str(previous_tweets_list):
                 continue
             else:
@@ -127,7 +104,7 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     # closing datafile and twitter result object.
     data_set.close()
 
-    print "Complete: ", count*totcount
+    print "Complete: ", count * totcount
 
     # create metadata file for each dataset
     meta_file = codecs.open(filename + ".meta", "a", "utf-8")  # opens the file for appending.
@@ -136,38 +113,6 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     meta_file.write("count:" + str(count))
     meta_file.close()
     print "Metadata file created"
-
-
-def create_time_intervals():
-    """
-    Creating a set of date intervals.
-    Might be useful for getting tweets distributed over time.
-
-    @return: list of intervals.
-    """
-    # 100 queries
-    # 100 tweets per query
-    # resulting in 10k tweets.
-    # first 100 days of 2013.
-
-    # 100 intervals
-    # until format: YYYY-MM-DD (unix time)
-    #intervals = [the list of until items] # from 2013-01-02
-
-    intervals = []
-    for mnd in range(1, 5):
-        for day in range(1, 26):
-            intervals.append("2013-" + str(mnd) + "-" + str(day))
-    print len(intervals)
-    return intervals
-
-
-def get_search_quota():
-    # create rate limit check. if less then 90 queries remain, sleep 5 sec.
-    status = ast.literal_eval(str(twitter.get_application_rate_limit_status()))
-    limit = status['resources']['search']['/search/tweets']['limit']
-    remaining_quota = status['resources']['search']['/search/tweets']['remaining']
-    return limit, remaining_quota
 
 
 def start_minig():
@@ -180,8 +125,8 @@ def start_minig():
 
     cursor_extraction(query, language, 1000, ".")
 
+
 if __name__ == "__main__":
-    start_minig()
     print "(limit, remaining)\n", get_search_quota()
-
-
+    #start_minig()
+    #search()

@@ -108,7 +108,7 @@ def get_lines_from_file(filename):
     lines = input_file.readlines()
     for i in range(len(lines)):
         # removed .rstrip() don't think we need this here. to much regex fixing elsewhere.
-        lines[i] = lines[i].lower()
+        lines[i] = lines[i].lower().strip("\n")
     input_file.close()
     return lines
 

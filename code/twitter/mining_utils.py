@@ -3,6 +3,7 @@ import ast
 import codecs
 import io
 import datetime
+from time import strftime
 from twython import Twython
 
 __author__ = 'kiro'
@@ -34,10 +35,11 @@ def create_meta_file(query, filename, previous_tweets_list):
 
     # create metadata file for each dataset
     meta_file = codecs.open(filename + ".meta", "w", "utf-8")  # opens the file for appending.
+    meta_file.write("last edited: " + strftime("%d-%b-%Y_%H:%M:%S") + "\n")
     meta_file.write("query:" + query + "\n")
-    meta_file.write("count:" + str(len(previous_tweets_list)))
+    meta_file.write("count:" + str(len(previous_tweets_list)) + "\n")
     meta_file.close()
-    print "Metadata file created"
+    print "Info -- Metadata file created"
 
 
 def get_search_quota():
@@ -46,7 +48,7 @@ def get_search_quota():
     limit = status['resources']['search']['/search/tweets']['limit']
     remaining_quota = status['resources']['search']['/search/tweets']['remaining']
     rate_remaining = status['resources']['application']['/application/rate_limit_status']['remaining']
-    print "quota, search, rate:", limit, remaining_quota, rate_remaining
+    print "Info -- quota, search, rate:", limit, remaining_quota, rate_remaining
     return limit, remaining_quota
 
 

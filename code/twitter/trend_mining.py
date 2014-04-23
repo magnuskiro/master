@@ -7,7 +7,7 @@ from mining_utils import date_range, get_lines_from_file, write_array_entries_to
 __author__ = 'kiro'
 
 # base folder for these operations
-base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
+trend_base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
 
 
 def trend_minig():
@@ -54,7 +54,7 @@ def return_unique_tweets_in_search(results, previous_tweets_list):
 
 def get_previous_tweet_ids(filename):
     tweets = []
-    lines = codecs.open(base + filename, 'r', "utf-8")
+    lines = codecs.open(trend_base + filename, 'r', "utf-8")
     for line in lines.readlines():
         #print line
         tweets.append(ast.literal_eval(line)['id'])
@@ -67,7 +67,7 @@ def mine_tweets(query):
     twitter = get_twython_instance()
 
     # opens new file with today's date and time now as filename
-    filename = base + query  # getting data-time string
+    filename = trend_base + query  # getting data-time string
     # opens the file for appending.
     data_set = open(filename, 'a')
 
@@ -78,9 +78,8 @@ def mine_tweets(query):
     if len(set(previous_tweets_list)) != len(previous_tweets_list):
         exit("duplicates in previous tweets.")
 
-    # do until we have reach date 2014-01-01, jan 1.
     while 1:
-        print "-new query"
+        print "NEW query"
 
         #print "(limit, remaining)\n", get_search_quota()
         # executes query on twitter, creating a result object that yields tweets.
@@ -92,41 +91,37 @@ def mine_tweets(query):
             #results = twitter.search(q=query, count='100')
             results = twitter.cursor(twitter.search, q=query, count="100")
 
-        print "(limit, remaining)\n", get_search_quota()
-        print "tot tweets", len(previous_tweets_list), "\n"
-
         # get the quota for this results run.
         quota = get_search_quota()[1]
+        print "tot tweets", len(previous_tweets_list)
+
         # used to keep track of the number of tweets acquired
         count = 0
 
         try:
             # for tweets yielded by the result object.
             for result in results:  # twitter.cursor
-            # if we use more then 10 queries to twitter, we expect this search to be exhausted.
-            # todo fined a good walue for this.
-                if count % 15 == 0:
-                    if quota - get_search_quota()[1] >= 10:
-                        break
-
                 # if we reach the max amount of unique tweets in this query we stop.
                 if count >= 99:
                     break
                 count += 1
                 print count
 
-                if result['id'] in previous_tweets_list:
-                    continue
-                else:
+                if result['id'] not in previous_tweets_list:
                     previous_tweets_list.append(result['id'])
                     data_set.write(str(result)+"\n")
+
+                # if we use more then 10 queries to twitter, we expect this search to be exhausted.
+                if count % 10 == 0:
+                    if quota - get_search_quota()[1] >= 10:
+                        print "Info -- count quota reached"
+                        break
         except:
             print "Rate limit exceeded"
             break
-        print "DONE trying"
 
-        # if we have low quota and a lot of tweets.
-        if len(previous_tweets_list) > 500 and quota <= 50:
+        # if we get less than 100 tweet from a query we stop.
+        if count <= 99:
             break
 
     # closing datafile and twitter result object.
@@ -137,26 +132,25 @@ def mine_tweets(query):
 
 
 def mine(term):
-    # TODO if user, format correctly.
-    if "@" in term:
-        term = "from:"+term
-    print term
-
     # Waiting for full quota to continue
-    while get_search_quota()[1] < 50:
-        print "sleeping"
-        sleep(60)
+    while get_search_quota()[1] < 70:
+        print "sleeping: waiting for full quota"
+        # 60 sec * number of min to sleep.
+        sleep(60*5)
+
+    print term
     mine_tweets(term)
-    print "(limit, remaining)\n", get_search_quota()
 
 
 def run_mining(filename):
-    terms = get_lines_from_file(base + filename)
+    terms = get_lines_from_file(trend_base + filename)
     # for all the search terms we want to mine, do the mining operation.
     for term in terms:
+        # get all tweets with containing the term we want.
         mine(term)
+
         # only do one term
-        exit()
+        #exit()
 
 
 if __name__ == "__main__":

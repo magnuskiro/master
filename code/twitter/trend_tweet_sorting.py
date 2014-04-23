@@ -57,7 +57,7 @@ def filename_separation(folder):
     feature_files = []
     files.sort().reverse()
     for filename in files:
-        #
+        # disregard special files.
         if filename[0] == "_":
             continue
         # skipping the metadata files.

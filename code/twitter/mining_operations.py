@@ -1,9 +1,8 @@
 import ast
-import codecs
 from time import strftime, sleep
 
 # getting 'count' amount of tweets before 'until', with 'term' as search word.
-from mining_utils import get_twython_instance, get_search_quota
+from mining_utils import get_twython_instance, get_search_quota, create_meta_file
 
 
 def search(term='NTNU', count=15, since="2014-01-01", until='2014-01-02'):
@@ -90,10 +89,10 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
             count += 1
 
             # skip previously acquired tweets
-            if str(result['id_str']) in str(previous_tweets_list):
+            if str(result['id']) in str(previous_tweets_list):
                 continue
             else:
-                previous_tweets_list.append(result['id_str'])
+                previous_tweets_list.append(result['id'])
 
             #print result['id_str']
             # store tweet to file for later use.
@@ -104,15 +103,7 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     # closing datafile and twitter result object.
     data_set.close()
 
-    print "Complete: ", count * totcount
-
-    # create metadata file for each dataset
-    meta_file = codecs.open(filename + ".meta", "a", "utf-8")  # opens the file for appending.
-    meta_file.write("query:" + query + "\n")
-    meta_file.write("language:" + language + "\n")
-    meta_file.write("count:" + str(count))
-    meta_file.close()
-    print "Metadata file created"
+    create_meta_file(query, filename, previous_tweets_list)
 
 
 def start_minig():
@@ -127,6 +118,6 @@ def start_minig():
 
 
 if __name__ == "__main__":
-    print "(limit, remaining)\n", get_search_quota()
+    get_search_quota()
     #start_minig()
     #search()

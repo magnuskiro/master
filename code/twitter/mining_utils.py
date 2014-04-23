@@ -49,7 +49,7 @@ def get_search_quota():
     remaining_quota = status['resources']['search']['/search/tweets']['remaining']
     rate_remaining = status['resources']['application']['/application/rate_limit_status']['remaining']
     print "Info -- quota, search, rate:", limit, remaining_quota, rate_remaining
-    return limit, remaining_quota
+    return limit, remaining_quota, rate_remaining
 
 
 def date_range():
@@ -90,6 +90,6 @@ def write_array_entries_to_file(array, filename, mode="w"):
     @return: null
     """
     output = codecs.open(filename, mode, "utf-8")
-    output.writelines([str(item)+"\n" for item in array])
+    output.writelines([str(item).strip("\n")+"\n" for item in array])
     output.close()
     return

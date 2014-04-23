@@ -10,46 +10,31 @@ __author__ = 'kiro'
 trend_base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
 
 
-def trend_minig():
-    dates = date_range()
-    for date in dates:
-        #query = "Finance OR Investment OR Economy OR Growth AND -RT"
-        query = "from:Norskoljeoggass OR " \
-                "from:oljedir OR " \
-                "from:oeddep OR " \
-                "from: OR " \
-                "from:tordlien " \
-                "OR from:sprellnar OR from:IndustriEnergi OR " \
-                "from:IndustriEnergiU OR from:_NITO_ " \
-                "OR from:NorskIndustri OR from:TekniskMuseum OR from:UniResearch OR " \
-                "from:linetrezz OR from:Geirseljeseth OR from:REINERTSENAS OR from:knebben OR " \
-                "from: OR from: OR from:kobbaen OR from:GroBraekken OR from:ErlendJordal OR " \
-                "from:nikolaiastrup OR from:AnnaLjunggren -RT"
+def trend_minig(query):
+    twitter = get_twython_instance()
 
-        since = "2014-01-01"
-        until = "2014-01-02"
+    # opens new file with today's date and time now as filename
+    filename = trend_base + query  # getting data-time string
+    # opens the file for appending.
+    data_set = open(filename, 'a')
 
-        language = "no"
+    # list of tweets we already have for this query.
+    previous_tweets_list = get_previous_tweet_ids(query)
 
-        # compile query
+    results = twitter.search(q=query, count='100')
 
-        # find ids matching days.
+    print "len, ", len(results['statuses'])
 
-        # do mining
+    for result in results['statuses']:
+        if result['id'] not in previous_tweets_list:
+            previous_tweets_list.append(result['id'])
+            data_set.write(str(result)+"\n")
 
-        # mine tweets for users, and terms we want
-        # sort tweets on date from _daterange
-        # remove duplicates from each day.
-        # add more terms to search for.
+    # closing datafile and twitter result object.
+    data_set.close()
 
-
-def return_unique_tweets_in_search(results, previous_tweets_list):
-    tweets = []
-
-            #print "--unique tweet"
-    #print "query count", count
-
-    return tweets
+    # create a file containing the metadata for the actual dataset.
+    #create_meta_file(query, filename, previous_tweets_list)
 
 
 def get_previous_tweet_ids(filename):
@@ -124,6 +109,8 @@ def mine_tweets(query):
         if count <= 99:
             break
 
+        print "tot tweets", len(previous_tweets_list)
+
     # closing datafile and twitter result object.
     data_set.close()
 
@@ -133,13 +120,14 @@ def mine_tweets(query):
 
 def mine(term):
     # Waiting for full quota to continue
-    while get_search_quota()[1] < 70:
+    while get_search_quota()[1] < 30 and get_search_quota()[2] < 30:
         print "sleeping: waiting for full quota"
         # 60 sec * number of min to sleep.
         sleep(60*5)
 
     print term
-    mine_tweets(term)
+    trend_minig(term)
+    #mine_tweets(term)
 
 
 def run_mining(filename):

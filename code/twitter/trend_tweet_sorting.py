@@ -55,7 +55,7 @@ def filename_separation(folder):
     files = [f for f in listdir(folder) if isfile(join(folder, f))]
     trend_files = []
     feature_files = []
-    files.sort().reverse()
+    files.sort()
     for filename in files:
         # disregard special files.
         if filename[0] == "_":

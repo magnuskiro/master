@@ -4,7 +4,7 @@ from dictionary_utils import get_lines_from_file, write_array_entries_to_file, c
     remove_duplicates_between_dictionaries, get_positive_negative_tweets_from_manually_labeled_tweets, \
     get_bigrams_from_text, file_to_lower
 
-base = "/home/kiro/ntnu/master/code/dictionaries/"
+dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"
 
 
 # method to check if a word exists in any dictionary or not.
@@ -25,11 +25,11 @@ def classify_word(word):
     """
     @param word:
     """
-    with codecs.open(base + "unclassified_words.txt", "a", "utf-8") as unclassified_words:
+    with codecs.open(dictionary_base + "unclassified_words.txt", "a", "utf-8") as unclassified_words:
         unclassified_words.write(word + '\n')
 
 
-def get_positve_dict(dict=base + 'positive.csv'):
+def get_positve_dict(dict=dictionary_base + 'positive.csv'):
     lines = get_lines_from_file(dict)
     words = {}
     for l in lines:
@@ -37,7 +37,7 @@ def get_positve_dict(dict=base + 'positive.csv'):
     return words
 
 
-def get_negative_dict(dict=base + 'negative.csv'):
+def get_negative_dict(dict=dictionary_base + 'negative.csv'):
     lines = get_lines_from_file(dict)
     words = {}
     for l in lines:

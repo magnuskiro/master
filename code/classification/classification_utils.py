@@ -37,7 +37,7 @@ def load_tweet_data_file(filename):
 
     # base folder to look for files.
     # needs to be changed to your specific path.
-    base = "/home/kiro/ntnu/master/code/twitter/"
+    tweet_base = "/home/kiro/ntnu/master/code/twitter/"
 
     # if filename not give, get it.
     if filename == '':
@@ -47,7 +47,7 @@ def load_tweet_data_file(filename):
     if filename == '':
         filename = "dataset-testset"
 
-    data_file = open(base + filename)
+    data_file = open(tweet_base + filename)
     # load all tweets in the file.
     tweets = []
 

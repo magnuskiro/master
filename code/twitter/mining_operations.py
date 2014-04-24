@@ -7,7 +7,7 @@ from mining_utils import get_twython_instance, get_search_quota, create_meta_fil
 
 def search(term='NTNU', count=15, since="2014-01-01", until='2014-01-02'):
     """
-
+    Executes a simple search on twitter and prints the id's of the returned tweets.
     @param term: the search term. decides what tweets you get back.
     @param count: the amount of tweets you want. (max 100)
     @param until: the earliest date you want tweets from.
@@ -55,11 +55,7 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     # list of tweets we already have for this wuery.
     previous_tweets_list = []
 
-    # total amount of tweets mined this execution
-    totcount = 0
-
     for i in range(max_tweets / 100):
-        totcount = i
 
         # executes query on twitter, creating a result object that yields tweets.
         if len(previous_tweets_list) > 0:
@@ -106,7 +102,12 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
     create_meta_file(query, filename, previous_tweets_list)
 
 
-def start_minig():
+def start_mining():
+    """
+    Start the mining process.
+    Get query, or use standard.
+    Execute mining.
+    """
     query = raw_input("input search query, press enter for standard. \n")
     if query == '':
         # all tweets containing one of the words and not 'RT'

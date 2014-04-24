@@ -72,6 +72,15 @@ def filename_separation(folder):
 
     sort_tweets_on_date(feature_files, trend_files)
 
+
+def do_tweet_trend_sorting(folder):
+    """
+    Run the trend tweet sorting.
+    @param folder: name of the directory to find trend files containing tweets.
+    """
+    print "Info -- Sorting trend tweets to dates."
+    filename_separation(folder)
+
 if __name__ == "__main__":
-    filename_separation(trend_base)
+    do_tweet_trend_sorting(trend_base)
 

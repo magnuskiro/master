@@ -1,8 +1,8 @@
+
 import ConfigParser
 import ast
 import codecs
 import io
-import datetime
 from time import strftime
 from twython import Twython
 
@@ -94,7 +94,6 @@ def write_array_entries_to_file(array, filename, mode="w"):
 
 def get_previous_tweet_ids(filename):
     """
-
     @param filename: the file with tweets
     @return: a list of ints, representing the tweet ids.
     """

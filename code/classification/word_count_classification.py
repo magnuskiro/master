@@ -33,6 +33,7 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
         # get word count of pos/neg words.
         pos = get_word_count(positive_dict, tweet) / word_count
         neg = get_word_count(negative_dict, tweet) / word_count
+        # TODO threshold.
 
         # storing the polarity value
         polarity.append(pos - neg)
@@ -89,6 +90,7 @@ def run_classification():
     dictionary_combinations = [
         ["compiled-positive.txt", "compiled-negative.txt", "Monogram, self compiled"],
         ["obama-negative.txt", "obama-positive.txt", "Monogram, obama"],
+        ["obama-compiled-positive.txt", "obama-compiled-negative.txt", "Monogram, obama self compiled"],
         ["LoughranMcDonald_Positive.txt", "LoughranMcDonald_Negative.txt", "Monogram LoughranMcDonald"],
         ["positive.txt", "negative.txt", "Monogram, combined Obama and LoughranMcDonald"],
         ["bigram-compiled-positive.txt", "bigram-compiled-negative.txt", "Bigram wordcount"]

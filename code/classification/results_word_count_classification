@@ -7,6 +7,10 @@ Info --  Monogram, obama
 {failed classifications, correct classifications}, accuracy of the classifier
 {False: 578, True: 419} 0.4203 
 
+Info --  Monogram, obama self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 567, True: 430} 0.4313 
+
 Info --  Monogram LoughranMcDonald
 {failed classifications, correct classifications}, accuracy of the classifier
 {False: 491, True: 506} 0.5075 
@@ -27,6 +31,10 @@ Info --  Monogram, self compiled
 Info --  Monogram, obama
 {failed classifications, correct classifications}, accuracy of the classifier
 {False: 855, True: 510} 0.3736 
+
+Info --  Monogram, obama self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 493, True: 872} 0.6388 
 
 Info --  Monogram LoughranMcDonald
 {failed classifications, correct classifications}, accuracy of the classifier

@@ -92,3 +92,19 @@ def write_array_entries_to_file(array, filename, mode="w"):
     output.writelines([str(item).strip("\n")+"\n" for item in array])
     output.close()
     return
+
+
+def get_previous_tweet_ids(filename):
+    """
+
+    @param filename: the file with tweets
+    @return: a list of ints, representing the tweet ids.
+    """
+    tweets = []
+    lines = codecs.open(filename, 'r', "utf-8")
+    for line in lines.readlines():
+        #print line
+        tweets.append(ast.literal_eval(line)['id'])
+        # 'ast.literal_eval(price)' interprets the json tweet string as a dictionary.
+        #print tweets.append(ast.literal_eval(line)['id_str'])
+    return tweets

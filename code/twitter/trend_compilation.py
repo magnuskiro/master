@@ -1,9 +1,9 @@
-import ast
 import codecs
 from os import listdir
 from os.path import isfile, join
 import random
 import matplotlib.pyplot as plt
+from trend_tweet_sorting import do_tweet_trend_sorting
 
 __author__ = 'kiro'
 
@@ -55,19 +55,24 @@ def filename_separation(folder):
     trend_files = []
     files.sort()
     for filename in files:
-        # disregard special files.
-        if filename[0] == "_":
-            continue
-        # skipping the metadata files.
-        if ".meta" in filename:
-            continue
-        # don't aggregate the trend files, the trend files contains already sorted tweets
+        # if it's a file we want append it to list of files.
         if "trend" in filename:
             trend_files.append(filename)
             continue
-        # append filename to list.
 
     compile_trend(trend_files)
 
+
+def do_tweet_trend_compiling(folder):
+    """
+    Run the trend tweet sorting.
+    @param folder: name of the directory to find trend files containing tweets.
+    """
+    print "Info -- Creating trend."
+    filename_separation(folder)
+
 if __name__ == "__main__":
-    filename_separation(trend_base)
+    # do the tweet sorting, in case we have new tweets not sorted.
+    do_tweet_trend_sorting(trend_base)
+    # start the trend compiling
+    do_tweet_trend_compiling(trend_base)

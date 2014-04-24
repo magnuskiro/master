@@ -57,7 +57,7 @@ def initialize_classifier(classifier_class, tweets):
     training_set = nltk.classify.apply_features(extract_features_from_text, tweets)
 
     # create the classifier.
-    #print "INFO -- Training classifier, this might take some time."
+    print "INFO -- Training classifier, this might take some time."
     classifier = classifier_class.train(training_set)
 
     #print "INFO -- Training complete."
@@ -74,7 +74,7 @@ def classify(classifier_class, tweets):
     # instantiate the classifier
     classifier = initialize_classifier(classifier_class, tweets)
 
-    #print "INFO -- Classifying tweets, this might take some time."
+    print "INFO -- Classifying tweets, this might take some time."
     results = []
     # for all tweets
     for tweet in [tweet[0] for tweet in tweets]:

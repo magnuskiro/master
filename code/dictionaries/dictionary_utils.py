@@ -93,7 +93,7 @@ def write_array_entries_to_file(array, filename):
     @return: null
     """
     output = codecs.open(filename, "w", "utf-8")
-    output.writelines(array)
+    output.writelines([str(item).strip("\n")+"\n" for item in array])
     output.close()
     return
 

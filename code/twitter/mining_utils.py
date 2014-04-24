@@ -31,7 +31,6 @@ def get_twython_instance():
 
 
 def create_meta_file(query, filename, previous_tweets_list):
-    print "Complete: ", len(previous_tweets_list)
 
     # create metadata file for each dataset
     meta_file = codecs.open(filename + ".meta", "w", "utf-8")  # opens the file for appending.
@@ -39,7 +38,7 @@ def create_meta_file(query, filename, previous_tweets_list):
     meta_file.write("query:" + query + "\n")
     meta_file.write("count:" + str(len(previous_tweets_list)) + "\n")
     meta_file.close()
-    print "Info -- Metadata file created"
+    print "Info -- Metadata file created, containing %.f tweets" % len(previous_tweets_list)
 
 
 def get_search_quota():

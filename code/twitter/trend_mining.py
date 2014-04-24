@@ -23,18 +23,20 @@ def trend_minig(query):
 
     results = twitter.search(q=query, count='100')
 
-    print "len, ", len(results['statuses'])
-
+    count = 0
     for result in results['statuses']:
         if result['id'] not in previous_tweets_list:
             previous_tweets_list.append(result['id'])
             data_set.write(str(result)+"\n")
+            count += 1
+
+    print "Info -- Found %.f new tweets" % count
 
     # closing datafile and twitter result object.
     data_set.close()
 
     # create a file containing the metadata for the actual dataset.
-    #create_meta_file(query, filename, previous_tweets_list)
+    create_meta_file(query, filename, previous_tweets_list)
 
 
 def get_previous_tweet_ids(filename):
@@ -134,11 +136,10 @@ def run_mining(filename):
     terms = get_lines_from_file(trend_base + filename)
     # for all the search terms we want to mine, do the mining operation.
     for term in terms:
+        if term == "":
+            continue
         # get all tweets with containing the term we want.
         mine(term)
-
-        # only do one term
-        #exit()
 
 
 if __name__ == "__main__":

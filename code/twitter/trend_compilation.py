@@ -12,10 +12,12 @@ trend_base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
 
 
 def calculate_trend_contribution(classifier, tweet):
+    # todo finish
     return
 
 
 def calculcate_polarity_by_day(intra_day):
+    # todo finish
     pass
 
 

@@ -1,7 +1,6 @@
-import ast
-import codecs
+
 from time import sleep
-from mining_utils import date_range, get_lines_from_file, write_array_entries_to_file, get_twython_instance, \
+from mining_utils import get_lines_from_file, get_twython_instance, \
     get_search_quota, create_meta_file, get_previous_tweet_ids
 
 __author__ = 'kiro'
@@ -20,11 +19,12 @@ def trend_mining(query):
 
     # opens new file with today's date and time now as filename
     filename = trend_base + query  # getting data-time string
-    # opens the file for appending.
-    data_set = open(filename, 'a')
 
     # list of tweets we already have for this query.
-    previous_tweets_list = get_previous_tweet_ids(query)
+    previous_tweets_list = get_previous_tweet_ids(filename)
+
+    # opens the file for appending.
+    data_set = open(filename, 'a')
 
     # get tweets from twitter.
     results = twitter.search(q=query, count='100')

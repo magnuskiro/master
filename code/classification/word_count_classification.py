@@ -33,13 +33,14 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
         # get word count of pos/neg words.
         pos = get_word_count(positive_dict, tweet) / word_count
         neg = get_word_count(negative_dict, tweet) / word_count
-        # TODO threshold.
 
         # storing the polarity value
         polarity.append(pos - neg)
 
-        # adding sentiment value (True/False)
-        if polarity[-1] > 0:
+        # TODO test threshold values .1 - .9
+        threshold = .0  # .2 = 60% positive.
+        # adding sentiment value (True/False), for the last classified tweet.
+        if polarity[-1] > threshold:
             # positive tweet
             results.append(True)
         else:

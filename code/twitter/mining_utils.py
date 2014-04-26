@@ -3,6 +3,7 @@ import ConfigParser
 import ast
 import codecs
 import io
+import os
 from time import strftime
 from twython import Twython
 
@@ -97,6 +98,10 @@ def get_previous_tweet_ids(filename):
     @param filename: the file with tweets
     @return: a list of ints, representing the tweet ids.
     """
+    # if the file don't exist return empty array.
+    if os.path.isfile(filename):
+        return []
+
     tweets = []
     lines = codecs.open(filename, 'r', "utf-8")
     for line in lines.readlines():

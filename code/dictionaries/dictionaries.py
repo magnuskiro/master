@@ -2,7 +2,7 @@
 import codecs
 from dictionary_utils import get_lines_from_file, write_array_entries_to_file, clean_text, \
     remove_duplicates_between_dictionaries, get_positive_negative_tweets_from_manually_labeled_tweets, \
-    get_bigrams_from_text, file_to_lower
+    get_bigrams_from_text, file_to_lower, get_trigrams_from_text
 
 classification_base = "/home/kiro/ntnu/master/code/classification/"
 dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"
@@ -73,7 +73,7 @@ def compile_monogram_dictionaries(tweets, filename):
 def compile_bigram_dictionaries(tweets, filename):
     """
     Takes labeled tweets and creates bigram dictionaries for positive and negative words.
-    @param tweets:
+    @param tweets: list of tweets that are labeled.
     @param filename: name base for output file.
     @return:
     """
@@ -94,6 +94,29 @@ def compile_bigram_dictionaries(tweets, filename):
     return
 
 
+def compile_trigram_dictionaries(tweets, filename):
+    """
+    Creating dictionaries of trigrams.
+    @param tweets: list of tweets that are labeled.
+    @param filename: name base for output file.
+    """
+    positive_dict = []
+    negative_dict = []
+
+    # positive
+    for text in tweets[0]:
+        trigrams_list = get_trigrams_from_text(text)
+        positive_dict = positive_dict + trigrams_list
+    # negative
+    for text in tweets[1]:
+        trigrams_list = get_trigrams_from_text(text)
+        negative_dict = negative_dict + trigrams_list
+
+    filename += "-trigram"
+    save_dictionaries(positive_dict, negative_dict, filename)
+    return
+
+
 def run_dictionary_compilation():
     """
     helper to run dictionary compilations in one go.
@@ -108,6 +131,7 @@ def run_dictionary_compilation():
 
     compile_monogram_dictionaries(tweets, name)
     compile_bigram_dictionaries(tweets, name)
+    compile_trigram_dictionaries(tweets, name)
 
 
 if __name__ == "__main__":

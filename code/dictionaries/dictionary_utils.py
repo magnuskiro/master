@@ -2,7 +2,34 @@
 import codecs
 import os
 import re
-from nltk import bigrams
+from nltk import bigrams, ngrams
+
+
+def get_trigrams_from_text(text):
+    """
+    Creates trigrams form text and returns them.
+    @param text: the text to create trigrams from.
+    @return: list of trigrams
+    """
+    # if we have no words to work with, return empty list.
+    text = clean_text(text)
+    if not text:
+        return []
+
+    trigrams_list = []
+    # for all tuples representing ngrams
+    for tup in ngrams(text.split(' '), 3):
+        # find the tuple texts
+        # (u'text1', u'text2', u'text3')
+        m_obj = re.search(r'\(u\'(.+)\', u\'(.+)\', u\'(.+)\'\)', str(tup).decode())
+        if m_obj:
+            # combine tuple parts to trigram
+            word = m_obj.group(1) + " " + m_obj.group(2) + " " + m_obj.group(3)
+            # if word don't exist
+            if word not in trigrams_list:
+                # add it to list.
+                trigrams_list.append(word)
+    return trigrams_list
 
 
 def get_bigrams_from_text(text):
@@ -11,6 +38,7 @@ def get_bigrams_from_text(text):
     @param text: the text to create bigrams from.
     @return: list of bigrams
     """
+    # if we have no words to work with, return empty list.
     text = clean_text(text)
     if not text:
         return []
@@ -23,11 +51,11 @@ def get_bigrams_from_text(text):
         m_obj = re.search(r'\(u\'(.+)\', u\'(.+)\'\)', str(tup).decode())
         if m_obj:
             # combine tuple parts to bigram
-            bigram = m_obj.group(1) + " " + m_obj.group(2)
+            word = m_obj.group(1) + " " + m_obj.group(2)
             # if bigram don't exist
-            if bigram not in bigrams_list:
+            if word not in bigrams_list:
                 # add it to list.
-                bigrams_list.append(bigram)
+                bigrams_list.append(word)
     return bigrams_list
 
 

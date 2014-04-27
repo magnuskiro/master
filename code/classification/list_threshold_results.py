@@ -39,7 +39,7 @@ def plot_data(threshold, acc_array):
 
 def print_threshold(files):
     thresholds = []
-    data = []
+    classification_accuracies = []
     for filename in files:
         if "-" in filename:
             name = filename[0:4]
@@ -53,10 +53,10 @@ def print_threshold(files):
             if "{F" in line:
                 # store all accuracy observations of this threshold.
                 results.append(line.split(" ")[-2])
-        data.append(results)
+        classification_accuracies.append(results)
         #print " ".join(results)
     #print data
-    plot_data(thresholds, data)
+    plot_data(thresholds, classification_accuracies)
 
 
 def filename_separation(folder):

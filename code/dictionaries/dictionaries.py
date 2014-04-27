@@ -122,16 +122,21 @@ def run_dictionary_compilation():
     helper to run dictionary compilations in one go.
     """
     # manually classified tweet files. and name of dataset.
-    name, tweet_file = "kiro", "tweets_classified_manually"
-    #name, tweet_file = "obama", "obama_tweets_classified_manually"
+    data_files = [
+        # [name/description, name of file containing tweets]
+        ["kiro", "tweets_classified_manually"],
+        ["obama", "obama_tweets_classified_manually"]
+    ]
 
-    # get labeled tweets
-    # tweets[0] are the positive ones, tweets[1] are the negative ones.
-    tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + tweet_file)
+    for item in data_files:
 
-    compile_monogram_dictionaries(tweets, name)
-    compile_bigram_dictionaries(tweets, name)
-    compile_trigram_dictionaries(tweets, name)
+        # get labeled tweets
+        # tweets[0] are the positive ones, tweets[1] are the negative ones.
+        tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + item[1])
+
+        compile_monogram_dictionaries(tweets, item[0])
+        compile_bigram_dictionaries(tweets, item[0])
+        compile_trigram_dictionaries(tweets, item[0])
 
 
 if __name__ == "__main__":

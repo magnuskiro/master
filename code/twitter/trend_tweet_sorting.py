@@ -31,14 +31,17 @@ def sort_tweets_on_date(feature_files, trend_files):
     # for all feature files:
     for filename in feature_files:
         lines = codecs.open(trend_base + filename, 'r', "utf-8")
+        # for all tweets in this feature_file
         for l in lines.readlines():
             # if we don't have the tweet already:
             if l not in trend_tweets:
                 line = ast.literal_eval(l)
                 # get the key for this tweet, it's the date of creation
                 key = "-".join(line['created_at'].split(" ")[1:3])
+                # if new key, create the array for that key
                 if key not in trend.keys():
                     trend[key] = []
+                # append tweet to date.
                 trend[key].append(line)
 
     # write tweets to file.

@@ -1,4 +1,5 @@
 # coding=utf-8
+import os
 from classification_utils import get_word_count, sanitize_tweet, \
     get_positive_negative_tweets_from_manually_labeled_tweets, get_lines_from_file, load_manually_labeled_tweets, \
     aggregate_results
@@ -85,7 +86,10 @@ def save_results_to_file(filename, counts, accuracy):
     @param counts: dict with false and true classified tweets counts.
     @param accuracy: to many correct classifications with this threshold.
     """
-    output_file = open(filename, "w")
+    if not os.path.isfile(filename):
+        output_file = open(filename, "w")
+    else:
+        output_file = open(filename, "a")
     line = str(counts) + " %.4f \n" % accuracy
     output_file.write(line)
     output_file.close()

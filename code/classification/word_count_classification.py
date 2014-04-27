@@ -89,12 +89,20 @@ def run_classification():
 
     # static data defining filename of dictionaries and output text.
     dictionary_combinations = [
-        ["compiled-positive.txt", "compiled-negative.txt", "Monogram, self compiled"],
+        # downloaded dictionaries.
         ["obama-negative.txt", "obama-positive.txt", "Monogram, obama"],
-        ["obama-compiled-positive.txt", "obama-compiled-negative.txt", "Monogram, obama self compiled"],
         ["LoughranMcDonald_Positive.txt", "LoughranMcDonald_Negative.txt", "Monogram LoughranMcDonald"],
-        ["positive.txt", "negative.txt", "Monogram, combined Obama and LoughranMcDonald"],
-        ["bigram-compiled-positive.txt", "bigram-compiled-negative.txt", "Bigram wordcount"]
+        ["obama+mcdonald-positive.txt", "obama+mcdonald-negative.txt", "Monogram, combined Obama and LoughranMcDonald"],
+        # selfcompiled dictionaries.
+        # monogram
+        ["kiro-monogram-positive.txt", "kiro-monogram-negative.txt", "Kiro, Monogram, self compiled"],
+        ["obama-monogram-positive.txt", "obama-monogram-negative.txt", "Obama, Monogram, self compiled"],
+        # bigram
+        ["kiro-bigram-positive.txt", "bigram-negative.txt", "Kiro, Bigram, self compiled"],
+        ["obama-bigram-positive.txt", "bigram-negative.txt", "Obama Bigram, self compiled"],
+        # trigram
+        ["kiro-trigram-positive.txt", "kiro-trigram-negative.txt", "Kiro, Trigram, self compiled"],
+        ["obama-trigram-positive.txt", "obama-trigram-negative.txt", "Obama Trigram, self compiled"]
     ]
 
     # executing classification

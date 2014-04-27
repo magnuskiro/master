@@ -48,3 +48,77 @@ Info --  Bigram wordcount
 {failed classifications, correct classifications}, accuracy of the classifier
 {False: 662, True: 703} 0.5150 
 
+-- Kiro compiled dataset --
+Info --  Monogram, obama
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 578, True: 419} 0.4203 
+
+Info --  Monogram LoughranMcDonald
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 491, True: 506} 0.5075 
+
+Info --  Monogram, combined Obama and LoughranMcDonald
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 416, True: 581} 0.5827 
+
+Info --  Kiro, Monogram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 115, True: 882} 0.8847 
+
+Info --  Obama, Monogram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 567, True: 430} 0.4313 
+
+Info --  Kiro, Bigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 17, True: 980} 0.9829 
+
+Info --  Obama Bigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 534, True: 463} 0.4644 
+
+Info --  Kiro, Trigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 18, True: 979} 0.9819 
+
+Info --  Obama Trigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 567, True: 430} 0.4313 
+
+-- Obama tweet set --
+Info --  Monogram, obama
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 855, True: 510} 0.3736 
+
+Info --  Monogram LoughranMcDonald
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 508, True: 857} 0.6278 
+
+Info --  Monogram, combined Obama and LoughranMcDonald
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 544, True: 821} 0.6015 
+
+Info --  Kiro, Monogram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 632, True: 733} 0.5370 
+
+Info --  Obama, Monogram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 493, True: 872} 0.6388 
+
+Info --  Kiro, Bigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 521, True: 844} 0.6183 
+
+Info --  Obama Bigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 37, True: 1328} 0.9729 
+
+Info --  Kiro, Trigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 498, True: 867} 0.6352 
+
+Info --  Obama Trigram, self compiled
+{failed classifications, correct classifications}, accuracy of the classifier
+{False: 39, True: 1326} 0.9714 
+

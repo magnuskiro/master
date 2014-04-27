@@ -90,7 +90,7 @@ def run_classification():
     # static data defining filename of dictionaries and output text.
     dictionary_combinations = [
         # downloaded dictionaries.
-        ["obama-negative.txt", "obama-positive.txt", "Monogram, obama"],
+        ["obama-negative-dl.txt", "obama-positive-dl.txt", "Monogram, obama"],
         ["LoughranMcDonald_Positive.txt", "LoughranMcDonald_Negative.txt", "Monogram LoughranMcDonald"],
         ["obama+mcdonald-positive.txt", "obama+mcdonald-negative.txt", "Monogram, combined Obama and LoughranMcDonald"],
         # selfcompiled dictionaries.

@@ -4,9 +4,10 @@ from classification_utils import get_word_count, sanitize_tweet, \
     aggregate_results
 
 
-def word_count_classification(tweets_list, negative_dict, positive_dict):
+def word_count_classification(tweets_list, negative_dict, positive_dict, threshold=0):
     """
     Classifies tweets based on the given dictionaries.
+    @param threshold:
     @param tweets_list: list of tweets to classify.
     @param negative_dict: list of negative words.
     @param positive_dict: list of positive words.
@@ -37,8 +38,6 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
         # storing the polarity value
         polarity.append(pos - neg)
 
-        # TODO test threshold values .1 - .9
-        threshold = .0  # .2 = 60% positive.
         # adding sentiment value (True/False), for the last classified tweet.
         if polarity[-1] > threshold:
             # positive tweet
@@ -53,9 +52,10 @@ def word_count_classification(tweets_list, negative_dict, positive_dict):
     return results
 
 
-def test_classifier(tweet_file, positive_dict, negative_dict, info_text):
+def test_classifier(tweet_file, positive_dict, negative_dict, info_text, threshold):
     """
     Loads the dataset I have acquired and then call classification of tweets. Prints the results of the classification.
+    @param threshold:
     @param tweet_file: the name of the file to load tweets from.
     @param positive_dict: name of file with positive words.
     @param negative_dict: name of file with negative words.
@@ -67,19 +67,34 @@ def test_classifier(tweet_file, positive_dict, negative_dict, info_text):
     tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + tweet_file)
 
     # classifying all tweets as positive or negative.
-    sentiment_classification = word_count_classification(tweets[0] + tweets[1], negative_dict, positive_dict)
+    sentiment_classification = word_count_classification(tweets[0] + tweets[1], negative_dict, positive_dict, threshold)
 
     # aggregate results
     counts, accuracy = aggregate_results(load_manually_labeled_tweets(tweet_file), sentiment_classification)
 
-    print "Info -- ", info_text
-    print "{failed classifications, correct classifications}, accuracy of the classifier"
-    print counts, "%.4f" % accuracy, "\n"
+    #print "Info -- ", info_text
+    #print "{failed classifications, correct classifications}, accuracy of the classifier"
+    #print counts, "%.4f" % accuracy, "\n"
+    save_results_to_file(str(threshold)+"word_count-threshold-variation", counts, accuracy)
 
 
-def run_classification():
+def save_results_to_file(filename, counts, accuracy):
+    """
+    Write threshold results to file.
+    @param filename: name of output file.
+    @param counts: dict with false and true classified tweets counts.
+    @param accuracy: to many correct classifications with this threshold.
+    """
+    output_file = open(filename, "w")
+    line = str(counts) + " %.4f \n" % accuracy
+    output_file.write(line)
+    output_file.close()
+
+
+def run_classification(threshold=0):
     """
     Run all the classification tests.
+    @param threshold:
     """
     # list of [filename, description]
     tweet_sets = [
@@ -98,8 +113,8 @@ def run_classification():
         ["kiro-monogram-positive.txt", "kiro-monogram-negative.txt", "Kiro, Monogram, self compiled"],
         ["obama-monogram-positive.txt", "obama-monogram-negative.txt", "Obama, Monogram, self compiled"],
         # bigram
-        ["kiro-bigram-positive.txt", "bigram-negative.txt", "Kiro, Bigram, self compiled"],
-        ["obama-bigram-positive.txt", "bigram-negative.txt", "Obama Bigram, self compiled"],
+        ["kiro-bigram-positive.txt", "kiro-bigram-negative.txt", "Kiro, Bigram, self compiled"],
+        ["obama-bigram-positive.txt", "obama-bigram-negative.txt", "Obama Bigram, self compiled"],
         # trigram
         ["kiro-trigram-positive.txt", "kiro-trigram-negative.txt", "Kiro, Trigram, self compiled"],
         ["obama-trigram-positive.txt", "obama-trigram-negative.txt", "Obama Trigram, self compiled"]
@@ -107,11 +122,23 @@ def run_classification():
 
     # executing classification
     for filename, description in tweet_sets:
-        print "--", description, "--"
+        #print "--", description, "--"
         for combo in dictionary_combinations:
             positive_dict, negative_dict, info_text = combo
-            test_classifier(filename, positive_dict, negative_dict, info_text)
+            test_classifier(filename, positive_dict, negative_dict, info_text, threshold)
+
+
+def threshold_variation():
+    """
+    Run the classification with a varying threshold to find out how positive a tweet should be to be positive.
+    """
+    # threshold = .0  # .2 = 60% positive.
+    for i in range(-9, 10):
+        #print i*1.0/10
+        run_classification(i*1.0/10)
+
 
 # easy running
 if __name__ == "__main__":
-    run_classification()
+    #run_classification()
+    threshold_variation()

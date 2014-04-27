@@ -99,7 +99,7 @@ def get_previous_tweet_ids(filename):
     @return: a list of ints, representing the tweet ids.
     """
     # if the file don't exist return empty array.
-    if os.path.isfile(filename):
+    if not os.path.isfile(filename):
         return []
 
     tweets = []

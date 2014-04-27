@@ -75,7 +75,7 @@ def test_classifier(tweet_file, positive_dict, negative_dict, info_text, thresho
     #print "Info -- ", info_text
     #print "{failed classifications, correct classifications}, accuracy of the classifier"
     #print counts, "%.4f" % accuracy, "\n"
-    save_results_to_file(str(threshold)+"word_count-threshold-variation", counts, accuracy)
+    save_results_to_file(str(threshold)+"word_count-threshold-variation.txt", counts, accuracy)
 
 
 def save_results_to_file(filename, counts, accuracy):

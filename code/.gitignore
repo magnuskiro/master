@@ -6,4 +6,4 @@ unclassified_words.txt
 server.log
 twitter/dataset-*
 pidfile
-classification/*threshold
+classification/*threshold*.txt

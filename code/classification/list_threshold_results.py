@@ -38,33 +38,48 @@ def plot_data(threshold, acc_array):
 
 
 def print_threshold(files):
+    """
+
+    @param files: list of filenames containing trend data.
+    """
     thresholds = []
     classification_accuracies = []
+    # for all filenames
     for filename in files:
-        if "-" in filename:
+        # get threshold value from name
+        if filename[0] == "-":
             name = filename[0:4]
         else:
             name = filename[0:3]
         #print name
+        # store the threshold value for this file.
         thresholds.append(float(name))
 
         results = []
+        #for all lines in the fiven filename
         for line in open(filename).readlines():
+            # if we have a line contining results
             if "{F" in line:
                 # store all accuracy observations of this threshold.
                 results.append(line.split(" ")[-2])
         classification_accuracies.append(results)
         #print " ".join(results)
-    #print data
-    plot_data(thresholds, classification_accuracies)
+    #print classification_accuracies
+    #plot_data(thresholds, classification_accuracies)
 
 
-def filename_separation(folder):
-    files = [f for f in listdir(folder) if isfile(join(folder, f))]
+def filename_separation(trend_folder):
+    """
+    Get list of wanted filenames from the trend data folder.
+    @param trend_folder: the directory to look for files.
+    """
+    files = [f for f in listdir(trend_folder) if isfile(join(trend_folder, f))]
     threshold_files = []
     files.sort()
     for filename in files:
         if ".py" in filename:
+            continue
+        if not ".txt" in filename:
             continue
         # if it's a file we want append it to list of files.
         if "threshold" in filename:

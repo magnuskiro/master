@@ -7,3 +7,4 @@ server.log
 twitter/dataset-*
 pidfile
 classification/*threshold*.txt
+twitter/trend-data

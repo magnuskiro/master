@@ -1,5 +1,6 @@
 # coding=utf-8
 import codecs
+import os
 import re
 from nltk import bigrams
 
@@ -11,13 +12,15 @@ def get_bigrams_from_text(text):
     @return: list of bigrams
     """
     text = clean_text(text)
+    if not text:
+        return []
 
     bigrams_list = []
     # for all bigram tuples
     for tup in bigrams(text.split(' ')):
         # find the tuple texts
         # (u'text1', u'text2')
-        m_obj = re.search(r'\(u\'(.+)\', u\'(.+)\'\)', str(tup))
+        m_obj = re.search(r'\(u\'(.+)\', u\'(.+)\'\)', str(tup).decode())
         if m_obj:
             # combine tuple parts to bigram
             bigram = m_obj.group(1) + " " + m_obj.group(2)
@@ -93,7 +96,7 @@ def write_array_entries_to_file(array, filename):
     @return: null
     """
     output = codecs.open(filename, "w", "utf-8")
-    output.writelines([str(item).strip("\n")+"\n" for item in array])
+    output.writelines([item.strip("\n") + "\n" for item in array])
     output.close()
     return
 
@@ -104,6 +107,10 @@ def get_lines_from_file(filename):
     @param filename: the location and name of the file.
     @return: array of lines from file.
     """
+    # if the file don't exist return empty array.
+    if not os.path.isfile(filename):
+        return []
+
     input_file = codecs.open(filename, 'r', "utf-8")
     lines = input_file.readlines()
     for i in range(len(lines)):
@@ -121,7 +128,8 @@ def file_to_lower(filename, output):
     """
     out = codecs.open(output, "a", "utf-8")
     for line in open(filename).readlines():
-        out.write(str(line[:-1]).lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~\r\n]') + "\n")
+        out.write(
+            str(line[:-1]).decode().lower().strip('[\u2013\u2026+()!\"\#$%&\'\()*+,-./:;<=>?@[]^_`{|}~\r\n]') + "\n")
     out.close()
 
 

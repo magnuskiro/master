@@ -144,5 +144,5 @@ def threshold_variation():
 
 # easy running
 if __name__ == "__main__":
-    #run_classification()
-    threshold_variation()
+    run_classification()
+    #threshold_variation()

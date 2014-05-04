@@ -17,7 +17,7 @@ def get_list_of_possible_words_in_tweets():
     @return:
     """
     # TODO fix the shortcomings of not having the option of dynamically changing the feature we use.
-    positive_dict, negative_dict = "compiled-positive.txt", "compiled-negative.txt"
+    positive_dict, negative_dict = "kiro-monogram-positive.txt", "kiro-monogram-negative.txt"
     #positive_dict, negative_dict = "bigram-compiled-positive.txt", "bigram-compiled-negative.txt"
 
     dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"

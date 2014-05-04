@@ -7,6 +7,7 @@ __author__ = 'kiro'
 
 # base folder for these operations
 trend_base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
+twitter_base = "/home/kiro/ntnu/master/code/twitter/"
 
 
 def trend_mining(query):
@@ -146,7 +147,7 @@ def run_mining(filename):
     for all search queries in file, extract tweets for that query.
     @param filename: the name of the file containing search terms for mining.
     """
-    terms = get_lines_from_file(trend_base + filename)
+    terms = get_lines_from_file(filename)
     # for all the search terms we want to mine, do the mining operation.
     for term in terms:
         if term == "":
@@ -156,4 +157,4 @@ def run_mining(filename):
 
 
 if __name__ == "__main__":
-    run_mining("_search-terms-norway")
+    run_mining(twitter_base+"_search-terms")

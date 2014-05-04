@@ -1,22 +1,21 @@
 
-\chapter{Sentiment Analysis}
+\chapter{Sentiment Classification}
 This section describes the experiments done. High level description and
 execution of experiments. Detailed execution and technical details in appendix. 
 
-\section{Why use sentiment analysis?}
-\section{Tweet sentiment}
+#TODO what is sentiment
+#TODO why do we get it
+#TODO how do we use it 
 
-\section{Sentiment Classification}
 % todo figure out what experiments are smart to do. 
 
 * Experiment with the time frame of the prediction of the trend. 
 	* Typically the variation of time. What's the longest into the future that
 we can predict the trend?
-* 
 
-\subsection{Word count. Comparison of positive vs negative words.} 
-Common experiment to acquire knowledge of the field, and see if the given
-dictionaries are usable. 
+\section{Word count classification}
+#TODO description of method. 
+Comparison of positive vs negative words.
 
 A basic approach to classification is to count words. Positive and negative
 words. To do this it is necessary have dictionaries to provide the
@@ -24,20 +23,44 @@ classification of simple words. Section:\ref{sec:dict} describes the
 dictionaries used. Some of them are quite simple, while others are more
 extensive. 
 
+#TODO calculating the polarity.  
 The polarity of a given tweet is based on the difference in the amount of
-positive verses negative words. 
+positive verses negative words.
 
-Todo: run an experiment with 100+ tweets to see to what extent the
-classification works. Further this has to be compared to a control set, of
-manually classified tweets.  
+pos/totw - neg/totw 
 
-\subsection{Support vector machine}
+#TODO write about the threshold variations.  
 
+#TODO write results from the classification of the different dictionaries.
 
-\subsection{Classification algorithm 3}
-\subsection{Classification algorithm 4}
-\subsection{Combined classification}
-\subsection{Comparison, comments, and conclusions.}
+#TODO write about drawbacks. 
 
+\section{With Classifiers}
 
-\section{Sentiment trend}
+#TODO write about drawbacks. 
+
+\subsection{SVM}
+With both datasets.
+Using the self compiled monogram dictionaries. 
+
+Results from svm testing. which kernel works best?
+
+\subsection{Naive Bayes}
+With both datasets.
+Using the self compiled monogram dictionaries. 
+
+Results from testing with different dictionaries. 
+
+\section{Comparison of classifiers}
+#TODO highlights of the classifiers
+#TODO common denominators. commonalities.   
+#TODO comparing the results of the classifiers.  
+
+\section{Comments}
+#TODO improvements
+#TODO drawbacks
+#TODO future work
+
+\section{Conclusions}
+#TODO summarize the stuff we have learned shortly. 
+#TODO mention future work. 

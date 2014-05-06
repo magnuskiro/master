@@ -37,3 +37,4 @@ nosetests.xml
 # swap and temporary files
 *.swp
 
+startnotat

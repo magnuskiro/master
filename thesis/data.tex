@@ -1,35 +1,46 @@
 \chapter{Data, retrieval and structure}
-The data. What used, how and why. Acquired data how and from where. 
+% The data. What used, how and why. Acquired data how and from where. 
 
-System specification and solutions. 
+This section describes the data sources, methods for acquisition, and the
+structure of the used data. \ref{data:tweets} describes twitter and the mined
+tweets. \ref{data:dictionaries} describe the different lists of words used in
+the classification process. And last the finance data is described in
+\ref{data:finance}.
 
-This section describes the data sources used in this thesis. 
-
-We describe the methods for acquiring data in each source. 
-
-Further, the structure, meta data, and characteristics of the data is
+For each section the structure, characteristics, metadata and usage are
 described. 
+%
 
-% The section about twitter. 
-\section{Tweets}
-
+% The section about twitter and tweets 
+\section{Tweets}\label{data:tweets}
+#TODO introduce and describe a tweet. 
 Please note that Twitter's search service and, by extension, the Search API is
 not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
 or made available via the search interface. 
+%
 
 \subsection{Tweet Structure}
+#TODO describe the json structure and the contents.
 There are a lot of meta data in the tweets. In fact most of the data in a tweet
 object is not the tweet text itself.
 
-Tweets directly usable in python
+Tweets directly usable in python, vie dictionary and literal eval thingy. 
+%
 
 % data acquisition
 \subsection{Twitter API}
+#TODO describe the API
+#TODO api setup
+#TODO API simple use.
+#TODO API restrictions
+
 Description of the api and which options we have with the search. 
 
 Simple guide to access the twitter api:  http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/
 
 This is a list of all the API calls that is used in this thesis.
+% 
+
 \paragraph{Search} 
 \begin{itemize}
 \item[q] A UTF-8, URL-encoded search query of 1,000 characters maximum, including
@@ -39,10 +50,17 @@ operators. Queries may additionally be limited by complexity.
 = 100. 
 
 \end{itemize}
+%
 
 \paragraph{Mining optimization}
+#TODO -rt, searching vs generator 
+%
 
 \subsection{Tweet sets}
+#TODO manual classification
+#TODO search terms
+#TODO limitations
+
 We are aiming to use multiple sets of 10k tweets. 
 
 This many tweets in each set. etc. 
@@ -53,6 +71,7 @@ Take one subset from each superset and manually classify them.Then
 automatically classify the 27 other sets.  
 
 \subsection{Biased Data}
+#TODO write this section
 Due to the necessity of a search term in the query, we only get tweets that are
 related to the given terms.
 
@@ -60,17 +79,35 @@ Further more the datasets of manually labeled tweets are biased based on my
 personal opinion and state of mind in the moment of classification.  
 
 \subsection{Trend Data}
+#TODO Briefly describe the mining and API shortcomings for this particular use.
+#TODO describe the trend search terms: '_search-terms'
+#TODO write shortcomings of the search terms. 
+#TODO Describe the tweet data sets and sorting.  
 
 \subsection{Problems, Shortcomings, and Possible Improvements}
 The potential problems and shortcomings of the data. 
 
-% describing the dictionaries used in the classification of tweets. 
-\section{Dictionaries}\label{sec:dict}
+#TODO retweets. 
+#TODO search terms.
+#TODO finance vs not finance.
+#  
 
+% describing the dictionaries used in the classification of tweets. 
+\section{Dictionaries}\label{data:dictionaries}
+#TODO introduction to dictionaries, of corpus whatever the name. 
+#TODO the purpose of the dictionary
+#TODO use of the dictionaries. 
+%
 
 \subsection{Downloaded Dictionaries}
+#TODO as an example of dictionaries not compiled. 
+
+\paragraph{Obama}
+#TODO describe obama dictionary. 
+\paragraph{Loughran & McDonald}
+#TODO describe this dictionary
 Tim Loughran and Bill McDonald has a set of dictionaries available from the
-websites of University of Notre Dame \footnote{fiks tekst: nd.edu:
+websites of University of Notre Dame \footnote{#TODO fiks tekst: nd.edu:
 \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}}. 
 
 List of Dictionaries:
@@ -85,13 +122,13 @@ category for the words. The words are not directly related to finance.
     \item modal words strong
     \item modal words weak
 \end{itemize}
-
-%Dictionary expansion. 
-There are a lot of words that are not classified yet. Those words should be
-stored and classified later. This to improve the classifiers potential to
-correctly classify tweets.  
+%
 
 \subsection{Compiled Dictionaries}
+
+#TODO describe the dictionary compilation.
+#TODO describe the different dictionaries 
+#TODO list all dictionaries with plot graph of threshold. 
 
 Monogram, obama
 1 and 10
@@ -119,11 +156,17 @@ Kiro, Trigram, self compiled
 
 Obama Trigram, self compiled
 9 and 18
+%
 
+\subsection{Error analysis og duplicate words removal}
+#TODO write about it and analyse:
+'duplicate-words-from-monogram-compilation.txt'
+%
 
 % The financial data used in the thesis. 
-\section{Finance Data}
-* obtaining the data(potential mining operations)
-* about the dataset  
-* structure
-* potential problems 
+\section{Finance Data}\label{data:finance}
+#TODO obtaining the data(potential mining operations)
+#TODO about the dataset, csv
+#TODO potential problems 
+%
+

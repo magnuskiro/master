@@ -41,11 +41,11 @@ def save_dictionaries(positive_dict, negative_dict, filename):
     @param filename: name base for output file.
     """
     # removing duplicates for each dictionary and writing to file.
-    compile_and_write_dictionary_from_array(positive_dict, filename+"-positive.txt")
-    compile_and_write_dictionary_from_array(negative_dict, filename+"-negative.txt")
+    compile_and_write_dictionary_from_array(positive_dict, filename + "-positive.txt")
+    compile_and_write_dictionary_from_array(negative_dict, filename + "-negative.txt")
 
     # remove duplicates between files.
-    remove_duplicates_between_dictionaries(filename+"-positive.txt", filename+"-negative.txt")
+    remove_duplicates_between_dictionaries(filename + "-positive.txt", filename + "-negative.txt")
 
 
 def compile_monogram_dictionaries(tweets, filename):
@@ -129,7 +129,6 @@ def run_dictionary_compilation():
     ]
 
     for item in data_files:
-
         # get labeled tweets
         # tweets[0] are the positive ones, tweets[1] are the negative ones.
         tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + item[1])
@@ -141,5 +140,11 @@ def run_dictionary_compilation():
 
 if __name__ == "__main__":
     run_dictionary_compilation()
+
+    # Run one dictionary compilation to get the duplicate words.
+    #compile_monogram_dictionaries(
+    #    get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + "tweets_classified_manually"),
+    #    "kiro")
+
     #file_to_lower("LoughranMcDonald_Negative.csv", "LoughranMcDonald_Negative.txt")
     #file_to_lower("LoughranMcDonald_Positive.csv", "LoughranMcDonald_Positive.txt")

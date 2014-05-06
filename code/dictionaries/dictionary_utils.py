@@ -107,6 +107,7 @@ def remove_duplicates_between_dictionaries(primary_dictionary_name, secondary_di
                 # remove word from both dictionaries.
                 primary_dictionary.remove(pw)
                 secondary_dictionary.remove(sw)
+                #print pw
                 # as we don't have duplicates within a list we skip to the next pw.
                 break
 

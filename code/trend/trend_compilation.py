@@ -1,21 +1,20 @@
-
 import ast
 import codecs
 from os import listdir
 from os.path import isfile, join
 import random
 from sklearn.svm import LinearSVC
+
 import matplotlib.pyplot as plt
 from nltk import SklearnClassifier
-from trend_tweet_sorting import do_tweet_trend_sorting
+
 from trend_classification_utils import extract_features_from_text, initialize_classifier, load_manually_labeled_tweets
+
 
 __author__ = 'kiro'
 
 
-trend_base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
-
-
+trend_base = "/home/kiro/ntnu/master/code/trend/trend-data/"
 
 
 def calculate_tweet_contribution_to_trend(classifier, tweet):

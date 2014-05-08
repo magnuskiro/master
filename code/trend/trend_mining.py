@@ -6,8 +6,8 @@ from mining_utils import get_lines_from_file, get_twython_instance, \
 __author__ = 'kiro'
 
 # base folder for these operations
-trend_base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
-twitter_base = "/home/kiro/ntnu/master/code/twitter/"
+trend_data_base = "/home/kiro/ntnu/master/code/trend/trend-data/"
+trend_base = "/home/kiro/ntnu/master/code/trend/"
 
 
 def trend_mining(query):
@@ -19,7 +19,7 @@ def trend_mining(query):
     twitter = get_twython_instance()
 
     # opens new file with today's date and time now as filename
-    filename = trend_base + query  # getting data-time string
+    filename = trend_data_base + query  # getting data-time string
 
     # list of tweets we already have for this query.
     previous_tweets_list = get_previous_tweet_ids(filename)
@@ -60,7 +60,7 @@ def mine_tweets(query):
     twitter = get_twython_instance()
 
     # opens new file with today's date and time now as filename
-    filename = trend_base + query  # getting data-time string
+    filename = trend_data_base + query  # getting data-time string
     # opens the file for appending.
     data_set = open(filename, 'a')
 
@@ -157,4 +157,4 @@ def run_mining(filename):
 
 
 if __name__ == "__main__":
-    run_mining(twitter_base+"_search-terms")
+    run_mining(trend_base+"_search-terms")

@@ -7,7 +7,7 @@ from mining_utils import write_array_entries_to_file
 
 __author__ = 'kiro'
 
-trend_base = "/home/kiro/ntnu/master/code/twitter/trend-data/"
+trend_base = "/home/kiro/ntnu/master/code/trend/trend-data/"
 
 
 def sort_tweets_on_date(feature_files, trend_files):

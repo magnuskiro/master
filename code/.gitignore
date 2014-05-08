@@ -7,5 +7,5 @@ server.log
 twitter/dataset-*
 pidfile
 classification/*threshold*.txt
-twitter/trend-data
+trend/trend-data
 dictionaries/duplicate-words

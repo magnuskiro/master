@@ -142,7 +142,7 @@ if __name__ == "__main__":
     run_dictionary_compilation()
 
     # Run one dictionary compilation to get the duplicate words.
-    #compile_monogram_dictionaries(
+    #compile_trigram_dictionaries(
     #    get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + "tweets_classified_manually"),
     #    "kiro")
 

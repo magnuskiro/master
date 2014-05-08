@@ -97,6 +97,8 @@ def remove_duplicates_between_dictionaries(primary_dictionary_name, secondary_di
     primary_dictionary = get_lines_from_file(primary_dictionary_name)
     secondary_dictionary = get_lines_from_file(secondary_dictionary_name)
 
+    duplicate_words = []
+
     # for all words in the primary dictionary.
     for pw in primary_dictionary:
         #print w
@@ -107,13 +109,14 @@ def remove_duplicates_between_dictionaries(primary_dictionary_name, secondary_di
                 # remove word from both dictionaries.
                 primary_dictionary.remove(pw)
                 secondary_dictionary.remove(sw)
-                #print pw
+                duplicate_words.append(pw)
                 # as we don't have duplicates within a list we skip to the next pw.
                 break
 
     # rewrite the updated lists to file
     write_array_entries_to_file(primary_dictionary, primary_dictionary_name)
     write_array_entries_to_file(secondary_dictionary, secondary_dictionary_name)
+    write_array_entries_to_file(duplicate_words, "duplicate-words")
     return
 
 

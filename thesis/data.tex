@@ -9,18 +9,20 @@ the classification process. And last the finance data is described in
 
 For each section the structure, characteristics, metadata and usage are
 described. 
+
+#TODO chapter outline
 %
 
 % The section about twitter and tweets 
 \section{Tweets}\label{data:tweets}
-#TODO introduce and describe a tweet. 
+#TODO introduce and describe a tweet. \\
 Please note that Twitter's search service and, by extension, the Search API is
 not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
 or made available via the search interface. 
 %
 
 \subsection{Tweet Structure}
-#TODO describe the json structure and the contents.
+#TODO describe the json structure and the contents.\\
 There are a lot of meta data in the tweets. In fact most of the data in a tweet
 object is not the tweet text itself.
 
@@ -29,10 +31,10 @@ Tweets directly usable in python, vie dictionary and literal eval thingy.
 
 % data acquisition
 \subsection{Twitter API}
-#TODO describe the API
-#TODO api setup
-#TODO API simple use.
-#TODO API restrictions
+#TODO describe the API\\
+#TODO api setup\\
+#TODO API simple use.\\
+#TODO API restrictions\\
 
 Description of the api and which options we have with the search. 
 
@@ -42,6 +44,8 @@ This is a list of all the API calls that is used in this thesis.
 % 
 
 \paragraph{Search} 
+\hspace{0pt}\\
+
 \begin{itemize}
 \item[q] A UTF-8, URL-encoded search query of 1,000 characters maximum, including
 operators. Queries may additionally be limited by complexity.
@@ -53,25 +57,18 @@ operators. Queries may additionally be limited by complexity.
 %
 
 \paragraph{Mining optimization}
-#TODO -rt, searching vs generator 
+\hspace{0pt}\\
+
+#TODO -rt, searching vs generator\\ 
 %
 
 \subsection{Tweet sets}
-#TODO manual classification
-#TODO search terms
-#TODO limitations
-
-We are aiming to use multiple sets of 10k tweets. 
-
-This many tweets in each set. etc. 
-
-Three sets based on three different search terms.
-Split the original three sets into 10 subsets. 
-Take one subset from each superset and manually classify them.Then
-automatically classify the 27 other sets.  
+#TODO manual classification\\
+#TODO search terms\\
+#TODO limitations\\
 
 \subsection{Biased Data}
-#TODO write this section
+#TODO write this section\\
 Due to the necessity of a search term in the query, we only get tweets that are
 related to the given terms.
 
@@ -79,32 +76,35 @@ Further more the datasets of manually labeled tweets are biased based on my
 personal opinion and state of mind in the moment of classification.  
 
 \subsection{Trend Data}
-#TODO Briefly describe the mining and API shortcomings for this particular use.
-#TODO describe the trend search terms: '_search-terms'
-#TODO write shortcomings of the search terms. 
-#TODO Describe the tweet data sets and sorting.  
+#TODO Briefly describe the mining and API shortcomings for this particular
+use.\\
+#TODO describe the trend search terms: '\_search-terms'\\
+#TODO write shortcomings of the search terms. \\
+#TODO Describe the tweet data sets and sorting. \\ 
 
 \subsection{Problems, Shortcomings, and Possible Improvements}
 The potential problems and shortcomings of the data. 
 
-#TODO retweets. 
-#TODO search terms.
-#TODO finance vs not finance.
-#  
+#TODO retweets.\\ 
+#TODO search terms.\\
+#TODO finance vs not finance.\\
 
 % describing the dictionaries used in the classification of tweets. 
 \section{Dictionaries}\label{data:dictionaries}
-#TODO introduction to dictionaries, of corpus whatever the name. 
-#TODO the purpose of the dictionary
-#TODO use of the dictionaries. 
+#TODO introduction to dictionaries, of corpus whatever the name. \\
+#TODO the purpose of the dictionary\\
+#TODO use of the dictionaries. \\
 %
 
 \subsection{Downloaded Dictionaries}
-#TODO as an example of dictionaries not compiled. 
+#TODO describe the distinctions of dl dict
 
 \paragraph{Obama}
-#TODO describe obama dictionary. 
+\hspace{0pt}\\
+#TODO describe obama dictionary.\\ 
+
 \paragraph{Loughran & McDonald}
+\hspace{0pt}\\
 #TODO describe this dictionary
 Tim Loughran and Bill McDonald has a set of dictionaries available from the
 websites of University of Notre Dame \footnote{#TODO fiks tekst: nd.edu:
@@ -125,43 +125,80 @@ category for the words. The words are not directly related to finance.
 %
 
 \subsection{Compiled Dictionaries}
+The compiled dictionaries are based on two manually labeled tweet sets. My own,
+the kiro dataset, and the obama tweet set.
+ 
+#TODO ref the used datasets.\\ 
 
-#TODO describe the dictionary compilation.
-#TODO describe the different dictionaries 
-#TODO list all dictionaries with plot graph of threshold. 
+Details about the process of manually classifying tweets can be found in section
+\ref{sentiment:manual_classification}.
 
-Monogram, obama
-1 and 10
+#TODO describe the dictionary compilation.\\
 
-Monogram LoughranMcDonald
-2 and 11
 
-Monogram, combined Obama and LoughranMcDonald
-3 and 12
+List of dictionaries:
 
-Kiro, Monogram, self compiled
-4 and 13
+#TODO describe the different dictionaries\\ 
+\begin{itemize}
+    \item Obama original, Monogram 
+	\subitem description
 
-Obama, Monogram, self compiled
-5 and 14
+    \item LoughranMcDonald, Monogram 
+	\subitem description
 
-Kiro, Bigram, self compiled
-6 and 15
+    \item Obama original and LoughranMcDonald, Monogram, combined
+	\subitem description
 
-Obama Bigram, self compiled
-7 and 16
+    \item Kiro, Monogram, self compiled 
+	\subitem description
 
-Kiro, Trigram, self compiled
-8 and 17
+    \item Obama, Monogram, self compiled 
+	\subitem description
 
-Obama Trigram, self compiled
-9 and 18
+    \item Kiro, Bigram, self compiled 
+	\subitem description
+
+    \item Obama, Bigram, self compiled 
+	\subitem description
+
+    \item Kiro, Trigram, self compiled 
+	\subitem description
+
+    \item Obama, Trigram, self compiled 
+	\subitem description
+	\label{data:dictionary_list}
+\end{itemize}
 %
 
-\subsection{Error analysis og duplicate words removal}
-#TODO write about it and analyse:
-'duplicate-words-from-monogram-compilation.txt'
-Most stop words and other insignificant words are removed. 
+\subsection{Error analysis, removal of duplicate words}
+When creating the different dictionaries we remove duplicates from the positive
+and negative dictionary set. Words that are present in both the positive and
+negative dictionary is removed. By doing this we remove words that has no
+significance in the classification. But we also risk removing words with
+significance.
+
+When looking at the duplicate words from the monogram dictionary based on the
+kiro dataset we found some errors.
+As a selection of words found, we have \textit{dangerous, bad, go, inc, let, up, or, need, good, if, no, are, and, of, on, the,
+is, as}.
+Here we can see that the words \textit{good} and \textit{bad} are represented.
+Which is not good. By removing the words from the dictionaries we have removed
+significant words in further classification, thus reducing correctness of the
+algorithm. This is one of the drawbacks of the monogram dictionaries.
+
+When looking at the removed duplicate words for bigram and trigrams we found no
+indication of the same problem. As the uniqueness of bigrams and trigrams are a
+lot greater we end up with very few duplicates and only duplicates that has no
+significance to the over all classification. Although we might have other
+unknown problems.  
+
+Most stop words and other insignificant words are removed with the removal of
+duplicate words. The same thing cannot be said about the bigram and trigram
+dictionaries. There we have no stop words present in themselves, but they are
+frequently part of other terms. For further improvements of classification with
+word counting and dictionary quality we should remove
+stop words, such as \textit{as, is, on, off, and, or} etc, from the
+tweet/sentence before creating bi- and trigrams.     
 %
 
 % The financial data used in the thesis. 

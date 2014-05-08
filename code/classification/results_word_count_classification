@@ -1,54 +1,4 @@
 -- Kiro compiled dataset --
-Info --  Monogram, self compiled
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 303, True: 694} 0.6961 
-
-Info --  Monogram, obama
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 578, True: 419} 0.4203 
-
-Info --  Monogram, obama self compiled
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 567, True: 430} 0.4313 
-
-Info --  Monogram LoughranMcDonald
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 491, True: 506} 0.5075 
-
-Info --  Monogram, combined Obama and LoughranMcDonald
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 416, True: 581} 0.5827 
-
-Info --  Bigram wordcount
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 29, True: 968} 0.9709 
-
--- Obama tweet set --
-Info --  Monogram, self compiled
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 521, True: 844} 0.6183 
-
-Info --  Monogram, obama
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 855, True: 510} 0.3736 
-
-Info --  Monogram, obama self compiled
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 493, True: 872} 0.6388 
-
-Info --  Monogram LoughranMcDonald
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 508, True: 857} 0.6278 
-
-Info --  Monogram, combined Obama and LoughranMcDonald
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 544, True: 821} 0.6015 
-
-Info --  Bigram wordcount
-{failed classifications, correct classifications}, accuracy of the classifier
-{False: 662, True: 703} 0.5150 
-
--- Kiro compiled dataset --
 Info --  Monogram, obama
 {failed classifications, correct classifications}, accuracy of the classifier
 {False: 578, True: 419} 0.4203 
@@ -59,7 +9,7 @@ Info --  Monogram LoughranMcDonald
 
 Info --  Monogram, combined Obama and LoughranMcDonald
 {failed classifications, correct classifications}, accuracy of the classifier
-{False: 416, True: 581} 0.5827 
+{False: 416, True: 581} 0.5827
 
 Info --  Kiro, Monogram, self compiled
 {failed classifications, correct classifications}, accuracy of the classifier

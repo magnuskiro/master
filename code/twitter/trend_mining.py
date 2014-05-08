@@ -132,7 +132,7 @@ def mine(term):
     While we can't get tweets from twitter: sleep, otherwise do mining with the given query.
     @param term: the search query we are going to use for gathering tweets.
     """
-    while get_search_quota()[1] < 30 and get_search_quota()[2] < 30:
+    while get_search_quota()[1] < 10 and get_search_quota()[2] < 10:
         print "sleeping: waiting for full quota"
         # 60 sec * number of min to sleep.
         sleep(60 * 5)

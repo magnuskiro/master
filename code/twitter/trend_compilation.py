@@ -92,9 +92,23 @@ def do_tweet_trend_compiling(folder):
     print "Info -- Creating trend."
     filename_separation(folder)
 
+
+def get_stock_exhange_values():
+    # get the stock exchange data from oslo bors.
+    #python 2.x
+    import urllib
+    stock_exchange_history = urllib.urlopen('http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv').readlines()
+    for record in stock_exchange_history:
+        # earlier records are not interesting.
+        if "20140411" in record:
+            break
+        print record
+
+
 if __name__ == "__main__":
     # do the tweet sorting, in case we have new tweets not sorted.
-    do_tweet_trend_sorting(trend_base)
+    #do_tweet_trend_sorting(trend_base)
     # start the trend compiling
-    do_tweet_trend_compiling(trend_base)
+    #do_tweet_trend_compiling(trend_base)
     #
+    get_stock_exhange_values()

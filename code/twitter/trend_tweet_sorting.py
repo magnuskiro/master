@@ -30,6 +30,7 @@ def sort_tweets_on_date(feature_files, trend_files):
     trend = {}
     # for all feature files:
     for filename in feature_files:
+        print filename
         lines = codecs.open(trend_base + filename, 'r', "utf-8")
         # for all tweets in this feature_file
         for l in lines.readlines():

@@ -3,9 +3,13 @@
 This section describes the experiments done. High level description and
 execution of experiments. Detailed execution and technical details in appendix. 
 
-#TODO what is sentiment
-#TODO why do we get it
-#TODO how do we use it 
+#TODO what is sentiment \\
+Sentiment is described as "an attitude toward something; regard; opinion."\footnote{Sentiment - Dictionary.com: \url{http://dictionary.reference.com/browse/sentiment?s=t}}
+
+
+
+#TODO why do we get it \\
+#TODO how do we use it \\
 
 % todo figure out what experiments are smart to do. 
 
@@ -14,7 +18,6 @@ execution of experiments. Detailed execution and technical details in appendix.
 we can predict the trend?
 
 \section{Word count classification}
-#TODO description of method. 
 Comparison of positive vs negative words.
 
 A basic approach to classification is to count words. Positive and negative
@@ -23,20 +26,113 @@ classification of simple words. Section:\ref{data:dictionaries} describes the
 dictionaries used. Some of them are quite simple, while others are more
 extensive. 
 
+#TODO description of method. 
+
+\subsection{Classification}
+
+\paragraph{Polarity} 
+\hspace{0pt}\\ 
 #TODO calculating the polarity.  
+
 The polarity of a given tweet is based on the difference in the amount of
 positive verses negative words.
 
 pos/totw - neg/totw 
 
-#TODO write about the threshold variations.  
+\paragraph{Threshold} 
+\hspace{0pt}\\ 
+Threshold is the ratio of positive vs negative words that has to be present for a
+tweet to be either positive of negative.
 
-#TODO write results from the classification of the different dictionaries.
+The percentage of positive words minus the percentage of negative words gives
+the polarity value, or the positivity(how positive a tweet is) of a tweet. 
+When actually deciding if a tweet is positive or negative we look at the
+polarity value. If the polarity value is above the threshold (polarity >
+threshold) the tweet is classified as positive. 
 
-#TODO error analysis of the discarded words:
-duplicate-words-from-monogram-compilation.txt
+\paragraph{Examples of classification follows:} 
+\hspace{0pt}\\ 
+Example tweets:
+\begin{itemize}
+    \item t1 = “good that he was decreasing badly”
+    \item t2 = “he was good for increase” 
+    \item t3 = “good or bad”
+\end{itemize}
 
+Classification of t1:
+\begin{itemize}
+    \item pos = 1 / 6 = 0.16666
+    \item neg = 2 / 6 = 0.33333
+    \item polarity = pos - neg = -0.1667
+    \item threshold of 0 gives negative classification
+    \item threshold of 0.1 gives negative classification
+    \item threshold of -0.2 gives positive classification
+\end{itemize}
+
+Classification of t2:
+\begin{itemize}
+    \item pos = 2 / 5 (to av fem ord) = 0.4
+    \item neg = 0 / 5 = 0
+    \item polarity = pos - neg = 0.4 - 0.0 = 0.4
+    \item threshold = 0.4 ⇒ positive
+    \item threshold = 0.5 ⇒ negative
+    \item threshold = -0.1 ⇒ positive
+\end{itemize}
+
+Classification of t3:
+\begin{itemize}
+    \item pos = 1 / 3 = 0.3333
+    \item neg = 1 / 3 = 0.3333
+    \item polarity = pos - neg = 0
+    \item threshold = 0 ⇒ positive
+    \item threshold = 0.1 ⇒ negative
+    \item threshold = -0.1 ⇒ positive
+\end{itemize}
+
+\subsection{Results}
+#TODO write results from the classification of the different dictionaries. \\
+#TODO write about the variations based on the datasets. \\
+
+\paragraph{Threshold variations}
+\hspace{0pt}\\
+By varying the threshold we hoped to find an optimal point of which we could
+separate tweets based on polarity. From the following
+graphs, figure \ref{fig:threshold_graphs}, we can see no clear distinction of
+one value being better than the other ones.  
+
+In figure \ref{fig:threshold_graphs} we list the results of the experimentation
+with the threshold. Table \ref{tbl:dictionary_to_threshold} lists the
+dictionaries and dataset used for which graphs in figure \ref{fig:threshold_graphs}.
+'kiro dataset' and 'obama dataset' columns tells which dataset that was
+classified in which graph.
+
+\begin{tabular}{ l c c }
+\hspace{0pt}\\
+Dictionary name and description & kiro dataset & obama dataset \\ 
+Obama original, Monogram & 1 & 10 \\
+LoughranMcDonald, Monogram & 2 & 11 \\
+Combined Obama original and \\ LoughranMcDonald, Monogram & 3 & 12 \\
+Kiro, Monogram, self compiled & 4 & 13 \\
+Obama, Monogram, self compiled & 5 & 14 \\
+Kiro, Bigram, self compiled & 6 & 15 \\
+Obama, Bigram, self compiled & 7 & 16 \\
+Kiro, Trigram, self compiled & 8 & 17 \\
+Obama, Trigram, self compiled & 9 & 18 \\
+
+\label{tbl:dictionary_to_threshold}
+\end{tabular}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{threshold_graphs.png} 
+    \caption{The graphs plot the different variations of threshold. Counting is
+columns first; top left is 1, top mid is 7, top right is 13.}
+    \label{fig:threshold_graphs}
+\end{figure}
+
+\subsection{Drawbacks}
 #TODO write about drawbacks.
+\paragraph{Dictionaries}
 \paragraph{Word positioning}
 The dictionaries are based on the manually labeled
 tweets, so we can't create bi and tri-grams based on the position of a word in a tweet.
@@ -60,15 +156,15 @@ Using the self compiled monogram dictionaries.
 Results from testing with different dictionaries. 
 
 \section{Comparison of classifiers}
-#TODO highlights of the classifiers
-#TODO common denominators. commonalities.   
-#TODO comparing the results of the classifiers.  
+#TODO highlights of the classifiers \\
+#TODO common denominators. commonalities.\\
+#TODO comparing the results of the classifiers. \\
 
 \section{Comments}
-#TODO improvements
-#TODO drawbacks
-#TODO future work
+#TODO improvements \\
+#TODO drawbacks \\
+#TODO future work \\
 
 \section{Conclusions}
-#TODO summarize the stuff we have learned shortly. 
-#TODO mention future work. 
+#TODO summarize the stuff we have learned shortly. \\
+#TODO mention future work. \\

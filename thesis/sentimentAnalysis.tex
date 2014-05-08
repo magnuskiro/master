@@ -3,30 +3,30 @@
 This section describes the experiments done. High level description and
 execution of experiments. Detailed execution and technical details in appendix. 
 
-#TODO what is sentiment \\
+%#TODO what is sentiment \\
 Sentiment is described as "an attitude toward something; regard; opinion."\footnote{Sentiment - Dictionary.com: \url{http://dictionary.reference.com/browse/sentiment?s=t}}
+The sentiment is the perceived positivity of the message that the user tries to
+communicate. Sentiment is in many cases a personal thing, and can change from
+person to person or from setting to setting.  
 
+%#TODO why do we get it \\
+Some of the motivation for acquiring the sentiment of a tweet or a sentence, is
+that we can say something about a persons state of mind and from that predict
+behaviour. We want to use the sentiment to make smart decisions alter. As an
+example of usage it would be ideal to find a correlation between sentiment and
+stock exchange, thus making us able to increase revenue based with decisions
+based on the sentiment. 
 
-
-#TODO why do we get it \\
-#TODO how do we use it \\
-
-% todo figure out what experiments are smart to do. 
-
-* Experiment with the time frame of the prediction of the trend. 
-	* Typically the variation of time. What's the longest into the future that
-we can predict the trend?
+%#TODO how do we use it \\
+In this thesis we have two main ways of classifying tweets. Word counting and
+training a classifier. Both methods require dictionaries of positive and
+negative words, \ref{data:dictionaries}. In the classifier we use the dictionary
+to extract features from a tweet. And with the word counting we count the
+number of positive and negative words. 
 
 \section{Word count classification}
-Comparison of positive vs negative words.
-
-A basic approach to classification is to count words. Positive and negative
-words. To do this it is necessary have dictionaries to provide the
-classification of simple words. Section:\ref{data:dictionaries} describes the
-dictionaries used. Some of them are quite simple, while others are more
-extensive. 
-
 #TODO description of method. 
+Simply put we count the positive vs negative words. 
 
 \subsection{Classification}
 

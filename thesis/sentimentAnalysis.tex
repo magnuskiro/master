@@ -92,6 +92,31 @@ Classification of t3:
     \item threshold = -0.1 ⇒ positive
 \end{itemize}
 
+#TODO write this in full. Threshold average acc == 0.1 best. 
+Further we found the best average threshold is 0.1.
+From the table under we have the threshold value, and the average
+classification accuracy among the 18 entries for each threshold. 
+
+-0.1 avg: 0.631616666667
+-0.2 avg: 0.616144444444
+-0.3 avg: 0.60595
+-0.4 avg: 0.598822222222
+-0.5 avg: 0.588833333333
+-0.6 avg: 0.571155555556
+-0.7 avg: 0.542322222222
+-0.8 avg: 0.508316666667
+-0.9 avg: 0.488105555556
+0.0 avg: 0.647972222222
+0.1 avg: 0.651616666667
+0.2 avg: 0.65115
+0.3 avg: 0.643016666667
+0.4 avg: 0.63055
+0.5 avg: 0.612277777778
+0.6 avg: 0.593483333333
+0.7 avg: 0.571272222222
+0.8 avg: 0.545783333333
+0.9 avg: 0.530727777778
+
 \subsection{Results}
 #TODO write results from the classification of the different dictionaries. \\
 Dictionaries based on their own dataset naturally scores the best. When cross
@@ -145,6 +170,34 @@ The dictionaries are based on the manually labeled
 tweets, so we can't create bi and tri-grams based on the position of a word in a tweet.
 Rather there is no way of automatically decide if a single word is positive or
 negative. 
+
+\paragraph{Threshold}
+#TODO write how many tweets that end to 0 when threshold is 0.
+pos-words == neg-words --> 0 but still the accuracy is quite high.
+
+Although we can se that in line 6 we have very few cases that this happens.
+From that we can can conclude that with the right choice of dictionary we don't
+have the problem of the threshold value. 
+
+0.0
+null cases, 0.0 : 234 of 997
+null cases, 0.0 : 543 of 997
+null cases, 0.0 : 178 of 997
+null cases, 0.0 : 53 of 997
+null cases, 0.0 : 14 of 997
+null cases, 0.0 : 7 of 997
+null cases, 0.0 : 446 of 997
+null cases, 0.0 : 28 of 997
+null cases, 0.0 : 931 of 997
+null cases, 0.0 : 335 of 1365
+null cases, 0.0 : 854 of 1365
+null cases, 0.0 : 345 of 1365
+null cases, 0.0 : 233 of 1365
+null cases, 0.0 : 37 of 1365
+null cases, 0.0 : 462 of 1365
+null cases, 0.0 : 52 of 1365
+null cases, 0.0 : 1221 of 1365
+null cases, 0.0 : 92 of 1365
 
 \section{With Classifiers}
 

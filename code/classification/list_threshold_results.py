@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 
 __author__ = 'kiro'
 
+classification_base = "/home/kiro/ntnu/master/code/classification/"
+
 
 def plot_data(threshold, acc_array):
     """
@@ -36,6 +38,22 @@ def plot_data(threshold, acc_array):
     plt.show()
 
 
+def get_results_from_file(filename):
+    """
+    Reads accuracy results from file and returns them.
+    @param filename: the name of the file to get accuracies from.
+    @return: list of accuracies.
+    """
+    results = []
+    #for all lines in the given filename
+    for line in open(filename).readlines():
+        # if we have a line containing results
+        if "{F" in line:
+            # store all accuracy observations of this threshold.
+            results.append(float(line.split(" ")[-2]))
+    return results
+
+
 def print_threshold(files):
     """
 
@@ -60,14 +78,7 @@ def print_threshold(files):
         # store the threshold value for this file.
         thresholds.append(float(name))
 
-        results = []
-        #for all lines in the given filename
-        for line in open(filename).readlines():
-            # if we have a line containing results
-            if "{F" in line:
-                # store all accuracy observations of this threshold.
-                results.append(line.split(" ")[-2])
-        classification_accuracies.append(results)
+        classification_accuracies.append(get_results_from_file(filename))
         #print " ".join(results)
 
     #print classification_accuracies
@@ -92,9 +103,24 @@ def filename_separation(trend_folder):
         if "threshold" in filename:
             threshold_files.append(filename)
             continue
-    print_threshold(threshold_files)
+    return threshold_files
+
+
+def average_accuracy_for_threshold(directory):
+    """
+    Find the average accuracy for all thresholds and print each one.
+    @param directory: the directory to find threshold variation results in.
+    """
+    threshold_files = filename_separation(directory)
+
+    for filename in threshold_files:
+        results = get_results_from_file(filename)
+        if filename[0] == "-":
+            print filename[0:4], "avg:", sum(results) / len(results)
+        else:
+            print filename[0:3], "avg:", sum(results) / len(results)
 
 
 if __name__ == "__main__":
-    folder = "/home/kiro/ntnu/master/code/classification/"
-    filename_separation(folder)
+    average_accuracy_for_threshold(classification_base)
+    print_threshold(filename_separation(classification_base))

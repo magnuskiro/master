@@ -23,6 +23,7 @@ def word_count_classification(tweets_list, negative_dict, positive_dict, thresho
     # init polarity results list.
     polarity = []
     results = []
+    edge_cases = 0
 
     # for all tweets to be classified.
     for tweet in tweets_list:
@@ -39,6 +40,9 @@ def word_count_classification(tweets_list, negative_dict, positive_dict, thresho
         # storing the polarity value
         polarity.append(pos - neg)
 
+        if polarity[-1] == threshold:
+            edge_cases += 1
+
         # adding sentiment value (True/False), for the last classified tweet.
         if polarity[-1] > threshold:
             # positive tweet
@@ -50,6 +54,7 @@ def word_count_classification(tweets_list, negative_dict, positive_dict, thresho
             # store classified words from a tweet
             #export_words(tweet, (True if negative_counts[-1] < positive_counts[-1] else False))
 
+    #print "null cases,", threshold, ":", edge_cases, "of", len(polarity)
     return results
 
 
@@ -145,4 +150,6 @@ def threshold_variation():
 # easy running
 if __name__ == "__main__":
     run_classification()
+
+    # remember to remove the old threshold variation result files before running it again.
     #threshold_variation()

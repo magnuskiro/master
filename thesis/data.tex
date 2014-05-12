@@ -15,16 +15,21 @@ described.
 
 % The section about twitter and tweets 
 \section{Tweets}\label{data:tweets}
-#TODO introduce and describe a tweet. \\
-Please note that Twitter's search service and, by extension, the Search API is
-not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
-or made available via the search interface. 
+A tweet is a massage posted on twitter. The message can be up to 140 characters
+long and in many ways it resembles the well known
+SMS\footnote{Wikipedia:\url{https://en.wikipedia.org/wiki/Short_Message_Service}}.
+
+Tweets are posted to the users profile. When other people posts a previously
+posted tweet again it is called a retweet.
+
+All users can follow other users on Twitter. Tweets from users you follow will
+appear in you stream of tweets on the main page of twitter.
 %
 
 \subsection{Tweet Structure}
 #TODO describe the json structure and the contents.\\
-There are a lot of meta data in the tweets. In fact most of the data in a tweet
-object is not the tweet text itself.
+There are a lot of metedata in the tweets. In fact most of the data in a tweet
+object is metadata. 
 
 Tweets directly usable in python, vie dictionary and literal eval thingy. 
 %
@@ -32,6 +37,12 @@ Tweets directly usable in python, vie dictionary and literal eval thingy.
 % data acquisition
 \subsection{Twitter API}
 #TODO describe the API\\
+
+Please note that Twitter's search service and, by extension, the Search API is
+not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
+or made available via the search interface.
+
+
 #TODO api setup\\
 #TODO API simple use.\\
 #TODO API restrictions\\

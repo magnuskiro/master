@@ -17,7 +17,7 @@ described.
 \section{Tweets}\label{data:tweets}
 A tweet is a massage posted on twitter. The message can be up to 140 characters
 long and in many ways it resembles the well known
-SMS\footnote{Wikipedia:\url{https://en.wikipedia.org/wiki/Short_Message_Service}}.
+SMS\footnote{Wikipedia on Short Messaging Service:\url{https://en.wikipedia.org/wiki/Short_Message_Service}}.
 
 Tweets are posted to the users profile. When other people posts a previously
 posted tweet again it is called a retweet.
@@ -27,36 +27,112 @@ appear in you stream of tweets on the main page of twitter.
 %
 
 \subsection{Tweet Structure}
-#TODO describe the json structure and the contents.\\
+\paragraph{Structure}
+\hspace{0pt}\\
 There are a lot of metedata in the tweets. In fact most of the data in a tweet
 object is metadata. 
 
-Tweets directly usable in python, vie dictionary and literal eval thingy. 
+The data we acquire from Twitter is in the JSON data format. JSON or \textit{JavaScript
+Object Notation} is an open standard format that uses human-readable text to
+transmit data objects consisting of attribute–value
+pairs\footnote{Wikipedia on JSON:\url{https://en.wikipedia.org/wiki/Json}}.
+
+
+A positive thing about the JSON data format is that we can directly evaluate it
+in python. By using literal evaluation in python the tweet object is
+interpreted as a dict. This makes the use of a tweet easy.  
+
+For an example of the data structure of a tweet, see appendix:
+\ref{appendix:tweetStructure}.
+
+\paragraph{Content}
+\hspace{0pt}\\
+A tweet is an astonishing compilation of data about who, where and when a tweet
+was posted.
+
+As for the content we have the text, the message itself. With the content we
+have fields for all the links, all the emoticons, and all hashtags that are
+present in a tweet. 
+
+Every tweet is posted by a user. All the data of a user is also present for
+each tweet. Here we have data on follower count, profile images, friend count,
+time zone, and many other profile related items. 
+
+For the sharing of a single tweet we have data fields such as favorite\_count
+and user\_mentions. We also have favorited, retweet\_count. 
+
+In addition we have the location of a given tweet. Where the tweet was posted,
+the name of the place, the coordinates of the tweet, the country, and the id of
+this place. 
+
+See all the different metadata types in appendix: \ref{appendix:tweetStructure}.
 %
 
 % data acquisition
 \subsection{Twitter API}
-#TODO describe the API\\
+The twitter API is a convenient way for lots of people to access data from
+twitter. Tweets, streams, timelines, profiles and more are available through
+the api. 
 
-Please note that Twitter's search service and, by extension, the Search API is
-not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
-or made available via the search interface.
+To provide easy easy access and conformity to industry standards, the api
+provides data in the JSON format. 
 
+While the api does not give access to 100\% of the data from twitter, it gives
+a good representation of the tweets from the last 7 days.
+%
 
-#TODO api setup\\
-#TODO API simple use.\\
-#TODO API restrictions\\
-
-Description of the api and which options we have with the search. 
-
-Simple guide to access the twitter api:  http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/
-
-This is a list of all the API calls that is used in this thesis.
-% 
-
-\paragraph{Search} 
+\paragraph{Setup}
 \hspace{0pt}\\
+To get access to the api there are a few requirements. You have to have a
+twitter account. You have to register the application you are going to use the
+api with, thereby getting authentication keys. Then you have to used the keys
+authenticate with twitter before you access the api. 
 
+For a simple guide to this we have
+\url{http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/} as
+a good example.
+
+The 4 authentication tokens you get from Twitter, app\_key, app\_secret, oauth\_token,a nd
+oauth\_token\_secret, is used with the Twython
+library\footnote{\url{https://pypi.python.org/pypi/twython/}} as described
+below.
+
+The simplest example of use of the api and the twython library can be described
+as follows:
+\begin{itemize}
+	\item Authenticate towards twitter.
+	\item Execute search query on twitter.
+	\item Print ID's of all retrieved tweets.
+\end{itemize} 
+
+The code of the example is as follows:
+\begin{listing}
+\begin{verbatim}
+twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+results = twitter.search(q='Search query', count='15')
+
+for status in results['statuses']:
+    print status['id']
+\end{verbatim}
+\end{listing}
+
+For more advanced use we have generators, and lots of parameters and api
+endpoints to use. Endpoints and search parameters will be described under
+section \ref{data:twitter:endpoints}, \textit{API endpoints options}. 
+The twyhon framework and its advanced usage can be explored more in the code and
+in the documentation of the framework
+\footnote{\url{https://twython.readthedocs.org/en/latest/usage/advanced_usage.html}}.
+%
+
+\paragraph{Restrictions}
+\hspace{0pt}\\
+#TODO API restrictions\\
+request restrictions.
+%
+
+\paragraph{API endpoint options}\label{data:twitter:endpoints}
+\hspace{0pt}\\
+This is a list of the most useful endpoints and those used in the thesis.
 \begin{itemize}
 \item[q] A UTF-8, URL-encoded search query of 1,000 characters maximum, including
 operators. Queries may additionally be limited by complexity.
@@ -67,16 +143,28 @@ operators. Queries may additionally be limited by complexity.
 \end{itemize}
 %
 
-\paragraph{Mining optimization}
+\paragraph{Searching}
 \hspace{0pt}\\
 
+%
+
+\paragraph{Mining optimization}
+\hspace{0pt}\\
 #TODO -rt, searching vs generator\\ 
+%
+
+\paragraph{Caveats}
+\hspace{0pt}\\
+Please note that Twitter's search service and, by extension, the Search API is
+not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
+or made available via the search interface.
 %
 
 \subsection{Tweet sets}
 #TODO manual classification\\
 #TODO search terms\\
 #TODO limitations\\
+%
 
 \subsection{Biased Data}
 #TODO write this section\\

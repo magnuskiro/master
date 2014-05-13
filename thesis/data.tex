@@ -126,67 +126,243 @@ in the documentation of the framework
 
 \paragraph{Restrictions}
 \hspace{0pt}\\
-#TODO API restrictions\\
-request restrictions.
+The api has some access restrictions. Or rather rate limitations. This is to be
+expected, as unlimited access would cripple the api.
+
+Twitter limits request of a particular kind at 180 requests per 15 minutes.
+Which means that we can do 180 searches spread evenly over the time interval. Or
+we could do 180 requests as fast as possible and then wait. The rate limits can
+be explored thoroughly in the twitter documentation\footnote{Twitter:
+\url{https://dev.twitter.com/docs/rate-limiting/1.1}}
+
+As for the practical implications  of the limitations. They are not a problem in
+our case. We get more then enough data. By using a generator and pour out tweets
+we get 1000 tweets in about 60 seconds. But then we have to wait 15 minutes.
+This is suboptimal. As we will crash the program at access denied from the api.  
 %
 
-\paragraph{API endpoint options}\label{data:twitter:endpoints}
+\paragraph{API endpoints}\label{data:twitter:endpoints}
 \hspace{0pt}\\
-This is a list of the most useful endpoints and those used in the thesis.
-\begin{itemize}
-\item[q] A UTF-8, URL-encoded search query of 1,000 characters maximum, including
-operators. Queries may additionally be limited by complexity.
+Twitter has made a lot of different endpoints available. The endpoints are
+divided into these categories: \textit{Timelines}, \textit{Tweets},
+\textit{Search}, \textit{Streaming}, \textit{Direct Messages}, \textit{Friends
+\& Followers}, \textit{Users}, \textit{Suggested Users}, \textit{Favorites},
+\textit{Lists}, \textit{Saved Searches}, \textit{Places \& Geo},
+\textit{Trends}, \textit{Spam Reporting}, \textit{OAuth}, and \textit{Help}.
 
-\item[count] The amount of tweets acquired in each request. Standard = 15, max
-= 100. 
+Of these categories we mainly use \textit{OAuth}, \textit{Help} and
+\textit{Search}.
+Listing the endpoints used with parameters we get this list: 
 
-\end{itemize}
+\begin{tabular}{ r l | p{7cm} }
+API endpoints:\\
+Category & Parameter & Description\\
+\hline
+
+\textit{search} & - & Used for acquisition of tweets. A query can take the
+following parameters: \\
+& q & A UTF-8, URL-encoded search query of 1,000 characters maximum,
+including operators. Queries may additionally be limited by complexity. \\
+& count & The amount of tweets acquired in each request. Standard =
+15, max = 100. \\
+& geocode & Get tweets close to these coordinates. \\
+& lang & The language we want tweets in. Very limited by the number of people that speaks that language. \\
+& locale & Language specific. If the query is in Norwegian we get tweets in Norwegian.\\
+& result\_type & mixed, recent or popular. This is the general mix of tweets
+returned in a search. Recent is the newest tweets, while popular are tweets that
+are retweeted a lot and tweets from users with many followers. \\
+& until & Gets tweets before the given time. \\
+& since\_id & We get tweets posted after the given time. \\
+& max\_id & We get tweets with ids lower then the one given. \\
+& include\_entities & This parameter has no practical application to us. \\
+& callback & An optional place where twitter can post tweets back to us. \\
+
+\hline
+\textit{authenticate} & - & How we login and get access to the api. \\
+& oauth\_token & It is the authentication code or password to access
+the api. \\
+
+\hline
+\textit{rate\_limit\_status} & - & The way we know if we are still inside
+the request limitations. \\
+& resources & The elements that we want the status of. Currently that
+is search and help. \\ 
+
+\label{tbl:twitterAPIendpoints}
+\end{tabular}
 %
 
 \paragraph{Searching}
 \hspace{0pt}\\
+To perform a search we use the parameters described in the \textit{API
+endpoints} table in section \ref{tbl:twitterAPIendpoints}.
 
+Mainly we need a query. The query is a normal search string where twitter will
+find tweets containing all words in the string. 
+\begin{verbatim}
+query = "Finance Increase"
+\end{verbatim}
+
+Further we can expand the search by using logic. 
+\begin{verbatim}
+query = "Finance OR Investment AND Economy OR Growth"
+\end{verbatim}
+
+The specific search used to compile the tweetset the dictionaries are based on is the
+following. Where we get all tweets containing one of the words: \textit{Finance}, \textit{Investment}, \textit{Economy}, and \textit{Growth}.
+\begin{verbatim}
+query = "Finance OR Investment OR Economy OR Growth"
+\end{verbatim}
+
+Adding other parameters such as count and language we can further improve our
+search. To execute such a search we get python code like the following, where
+'results' is a data structure containing tweets.
+\begin{verbatim}
+query = "Finance OR Investment OR Economy OR Growth"
+results = twitter.search(q=query, count='15', language='no')
+\end{verbatim}
 %
 
 \paragraph{Mining optimization}
 \hspace{0pt}\\
-#TODO -rt, searching vs generator\\ 
+The acquisition of tweets, or the mining operation went quite well. We got lots
+of tweets. But we ran into a problem. Retweets. In some cases we got up to 90\%
+retweets in a mining session. Many of the tweets being essentially the same
+one, only retweeted multiple times. 
+
+When we are using tweets to create dictionaries, we do not want duplicate data
+that we do not need. Retweets are after all mostly duplicate data. So we removed
+the retweets and got a lot more different tweets. 
+
+As nearly all retweets start with 'RT' we can easily sort them out. Then we get
+a query like this. 
+\begin{verbatim}
+query = "Finance OR Investment OR Economy OR Growth AND -RT"
+\end{verbatim}
+
+When using the twython framework and its cursor function we get a continuous
+stream of tweets. A problem with this is that twython's cursor basically
+executes multiple searches. Thus yielding the same tweets multiple times,
+unless you change the search. So we change the search to accommodate this and
+use the \textit{max\_id} parameter.
+\begin{verbatim}
+query = "Finance OR Investment OR Economy OR Growth"
+results = twitter.cursor(
+                twitter.search,
+                q=query,
+                count="100",
+                lauage=language,
+                max_id='the id of the last tweet')
+
+for result in results:
+    print result
+\end{verbatim}
 %
 
-\paragraph{Caveats}
+\paragraph{API Caveats}
 \hspace{0pt}\\
-Please note that Twitter's search service and, by extension, the Search API is
-not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed
-or made available via the search interface.
+The main caveats of the twitter API is the request limitations and the
+limitations of the search engine. 
+
+As twitter says themselves: 
+'\textit{Please note that Twitter's search service and, by extension, the Search
+API is not meant to be an exhaustive source of Tweets. Not all Tweets will be
+indexed or made available via the search interface.}' and 
+'\textit{The limitations of the search engine of twitter indexes only about a
+weeks worth of tweets.}'\footnote{Twitter:
+\url{https://dev.twitter.com/docs/faq#8650}}
+
+Although this is not a big problem, coding and data acquisition could have been
+simpler. The solution for the week limitation was to broaden the search to
+include more words. This resulted in a more varied dataset, but also more
+tweets. We initially wanted to analyse tweets related to finance, so this was a
+bit of a negative point.  
+
+Further caveats of the request limitations. This means that we have to mine
+tweets over time. We should really have set this up on a server and mined
+tweets with a cron job every 15 minutes\footnoe{Wikipedia on Cron:
+\url{https://en.wikipedia.org/wiki/Cron}}.
 %
 
 \subsection{Tweet sets}
-#TODO manual classification\\
-#TODO search terms\\
-#TODO limitations\\
+We ended up with two datasets to be used. The obama tweetset\footnote{Neal
+Caren of University of North Carolina. Tweet file: \url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}}, which is a set of
+tweets containing around 1300 tweets about obama and the election of 2008/2009.  
+And a self compile dataset, referenced as the kiro dataset, based on the words: \textit{Finance},
+\textit{Investment}, \textit{Economy}, and \textit{Growth}.
+
+\paragraph{Search terms}
+\hspace{0pt}\\
+The kiro dataset is based on only four words. This is a very limited part of
+twitter and in no way representative for it's full content. Neither does the
+search terms represent a full range of finance words.
+
+An improvement would use a wide variety of finance words to mine tweets. This
+would improve the relation to finance and the relevance of the dictionaries
+afterwords. 
+
+\paragraph{Structure}
+The self compiled datsets has one tweet per line. This is the JSON data object
+that is automatically imported into python. 
+
+As for the obama tweet set we only have the text, where we have one tweet text
+per line. 
+
+\paragraph{Caveats}
+\hspace{0pt}\\
+Obama tweets is not ideal for sentiment analysis. To much political nonsense to
+comprehend. A political statement is not positive or negative. It is positive
+in the eyes on some and negative in the eyes of others. And there are people
+that think it is neutral because they do not care. Retweets are also present,
+so the actual data we get out of the tweet set is limited. 
+
+The kiro dataset has a lot retweets and neutral tweets in it. Therefore we have
+only used positive and negative tweets later, ignoring all the neutral ones.
+This gives us more relevant data to work with and less noise. Although we
+should have used the neutral tweets to improve the dictionaries.
 %
 
-\subsection{Biased Data}
-#TODO write this section\\
-Due to the necessity of a search term in the query, we only get tweets that are
-related to the given terms.
-
-Further more the datasets of manually labeled tweets are biased based on my
-personal opinion and state of mind in the moment of classification.  
-
 \subsection{Trend Data}
-#TODO Briefly describe the mining and API shortcomings for this particular
-use.\\
-#TODO describe the trend search terms: '\_search-terms'\\
-#TODO write shortcomings of the search terms. \\
-#TODO Describe the tweet data sets and sorting. \\ 
+When mining larger sets of tweets, the rate limitations and week limitation is
+a challenge. But solved by broadening the mining. The mining in itself is quite
+easy. Just execute a search and store all the new unique tweets. 
+
+To get a broad search we have a list of search terms. The terms are mostly
+usernames, but also some hashtags and other words. A drawback with the search
+terms are that they might not resemble the area of tweets we want to get. That
+are the finance related terms. 
+
+The trend tweets are stored in files named with the search term. Each term
+having it's own file with tweets. Then we sort the tweets by date and get files
+containing tweets for an individual date.
+
+All the used search terms a stored in the file: '\_search-terms'
+\footnote{Search term file:
+\url{https://github.com/magnuskiro/master/blob/master/code/trend/_search-terms}}.
+Most of the search terms are based on an article from 'Teknisk Ukeblad' where
+they list the twitter handles that are most significant in the oil industry.
+Since Norway has a lot of oil, the financial market and the trend is greatly
+dependent on it. And we can see if there are any relations between the compiled
+trend and the value of the stock exchange.  
 
 \subsection{Problems, Shortcomings, and Possible Improvements}
-The potential problems and shortcomings of the data. 
+Retweets are a source of concern. The retweets does not give much in the sense
+of new and unique data. But they can provide a significance in sharing and
+importance of a given tweet. Retweets should be investigated more thoroughly in
+the future.  
 
-#TODO retweets.\\ 
-#TODO search terms.\\
-#TODO finance vs not finance.\\
+A shortcoming of the data mining is the search terms. Are the terms
+representative? Do we get good data or not? Are there other terms that are
+better suited to get accurate results? There are to many questions to ask about
+the data to rely on them to much. A wide array of tests and analysis should be
+done to remove this factor as a problem. 
+
+Another interesting point to consider is whether or not the choice of finance
+as the are of focus was smart. Is this area more or less difficult then other
+areas to navigate? We think that finance related tweets and news are more
+objective and has a firmer answer. And in total have less emotion and less room
+for interpretation.
+%
 
 % describing the dictionaries used in the classification of tweets. 
 \section{Dictionaries}\label{data:dictionaries}

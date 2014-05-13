@@ -22,7 +22,7 @@ def search(term='NTNU', count=15, since="2014-01-01", until='2014-01-02'):
     #results = twitter.search(q=term, count=count, since=since, until=until)
     #for result in results:
     #    print result
-        #print result['id_str']
+    #print result['id_str']
 
     print "len, ", len(results['statuses'])
 
@@ -59,8 +59,12 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
 
         # executes query on twitter, creating a result object that yields tweets.
         if len(previous_tweets_list) > 0:
-            results = twitter.cursor(twitter.search, q=query, count="100", lauage=language,
-                                     max_id=min(previous_tweets_list))
+            results = twitter.cursor(
+                twitter.search,
+                q=query,
+                count="100",
+                lauage=language,
+                max_id=min(previous_tweets_list))
         else:
             results = twitter.cursor(twitter.search, q=query, count="100", lauage=language)
 

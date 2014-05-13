@@ -25,10 +25,51 @@ to extract features from a tweet. And with the word counting we count the
 number of positive and negative words. 
 
 \section{Manual Classification}\label{sentiment:manual_classification}
-#TODO describe the process of manually classifying tweets. 
-
 #TODO write about the obama tweet set. That most of the content is rubbish and
 very difficult to label positive or negative.
+
+When labeling tweets manually there are a number of factors the complicates the
+process. Among them are the quality of the tweet, state of mind, language, and
+political affiliation.
+
+The quality of the tweet describes the content in many ways. Does the tweet
+contain links or hashtags? Are users mentioned?
+
+State of mind for a person dictates that persons actions in many cases. This
+also has an effect on labeling tweets. A positive state of mind classifies more
+tweets negative as positive then others.
+
+Political affiliation plays a huge role when labeling the obama tweet set. Do
+you like obama? Do you like Romney? Neither? This matters. The tweetset in
+itself is pro obama. So while labeling this tweet set we put aside political
+influence and looked at the core of the sentiment.
+
+Note that all this happens in the brain during 3 to 60 seconds while reading
+the tweet text and is a very rough description of the thoughts happening.
+Labeling a tweet follows this algorithm in many ways:
+
+\begin{tabular}{ l p{5cm} p{7cm} }
+Step & Thought & Description \\
+1 & Have we seen this tweet before? & Skip it or use previous classification. \\
+2 & \#Hashtags or links present? & Some hashtags are automatically positive or
+negative. Also remove noise such as users and links.\\
+3 & Sarcasm? & If sarcasm is present, put up a warning flag saying that it is
+the opposite of step 4.\\
+4 & Special words? & Find a word that triggers positive or negative
+impression.\\
+5 & Done & Label tweet as positive or negative.\\
+\end{tabular}
+
+\paragrap{Result files}
+\hspace{0pt}\\
+When classifying with manually we create files with the results. These files
+are comma separated files with three fields.
+\begin{itemize}
+    \item Sentiment: Positive, neutral or negative. Represented by 1, 0 or -1.
+    \item Tweet id, if it exists, else 'id'. It is a long number.
+    \item The tweet text. In some cases sanitized.
+\end{itemize}
+%
 
 \section{Word count classification}
 #TODO description of method. 
@@ -222,6 +263,13 @@ Results from testing with different dictionaries.
 #TODO highlights of the classifiers \\
 #TODO common denominators. commonalities.\\
 #TODO comparing the results of the classifiers. \\
+
+\section{Biased Mind}
+The datasets of manually labeled tweets are biased based on a persons 
+personal opinion and state of mind in the moment of classification.
+Therefore we have to keep in mind that all further results are based on the
+assumption that everyone agrees on the manual labeling. This is of course a big
+potential source of errors to be explored more in \ref{futurework}. 
 
 \section{Comments}
 #TODO improvements \\

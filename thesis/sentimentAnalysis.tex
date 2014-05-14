@@ -1,8 +1,17 @@
 
 \chapter{Sentiment Classification}
-This section describes the experiments done. High level description and
+This chapter describes the experiments done. High level description and
 execution of experiments. Detailed descriptions of execution and technical
 details in appendix. 
+
+Sections in this chapter are as follows. Manual classifications,
+\label{sentiment:manual_classification}, where we see how people classify
+tweets. Then we count words with 'Word count classification',
+\label{sentiment:word_count_classification}. Expanding with the use of
+classifiers in section \label{sentiment:classifier_classification}. A
+comparison of the classifiers and associated results can be found in section
+\label{sentiment:comparison_results}. And a brief discussion an comments come
+last, \label{sentiment:comments_discussion}.
 
 %what is sentiment
 Sentiment is described as "an attitude toward something; regard;
@@ -88,19 +97,39 @@ dataset is based on could be broader to increase the spectrum of tweets.
 %
 
 \section{Word count classification}\label{sentiment:word_count_classification}
-#TODO description of method. 
-Simply put we count the positive vs negative words. 
+We describe the classification process and the different parts of it, then we
+show the results and discuss the drawbacks of this method. The algorithm does,
+simply put, count the positive and negative words. More positive words than
+negative means the tweet is positive and vice versa. 
 
 \subsection{Classification}
-
 \paragraph{Polarity} 
 \hspace{0pt}\\ 
-#TODO calculating the polarity.  
-
 The polarity of a given tweet is based on the difference in the amount of
-positive verses negative words.
+positive verses negative words. 
 
-pos/totw - neg/totw 
+First we calculate the amount of positive words. Then divide that on the total
+amount of words. Giving us the percentage of positive words. Then we do the same thing for negative words.
+
+Then we look at the difference between the negative and the positive word
+percentage. If the difference is positive we have a positive tweet. And if the
+difference is negative we have a negative tweet.
+
+Code wise we get something like this: 
+\begin{verbatim}
+var positive_words_count
+var negative_words_count
+
+positivity = positive_words_count / total_number_words
+negativity = negative_words_count / total_number_words
+
+polarity = positivity - negativity
+
+if polarity > 0: 
+    tweet is positive
+else: 
+    tweet is negative
+\end{verbatim}
 
 \paragraph{Threshold} 
 \hspace{0pt}\\ 
@@ -152,30 +181,34 @@ Classification of t3:
     \item threshold = -0.1 ⇒ positive
 \end{itemize}
 
-#TODO write this in full. Threshold average acc == 0.1 best. 
-Further we found the best average threshold is 0.1.
+Further we found the best average threshold value to be 0.1.
 From the table under we have the threshold value, and the average
-classification accuracy among the 18 entries for each threshold. 
+classification accuracy among the 18 entries for each threshold value. 
 
--0.1 avg: 0.631616666667
--0.2 avg: 0.616144444444
--0.3 avg: 0.60595
--0.4 avg: 0.598822222222
--0.5 avg: 0.588833333333
--0.6 avg: 0.571155555556
--0.7 avg: 0.542322222222
--0.8 avg: 0.508316666667
--0.9 avg: 0.488105555556
-0.0 avg: 0.647972222222
-0.1 avg: 0.651616666667
-0.2 avg: 0.65115
-0.3 avg: 0.643016666667
-0.4 avg: 0.63055
-0.5 avg: 0.612277777778
-0.6 avg: 0.593483333333
-0.7 avg: 0.571272222222
-0.8 avg: 0.545783333333
-0.9 avg: 0.530727777778
+Average threshold accuracy table:
+\hspace{0pt}\\
+\begin{tabular}{ c c c c }
+Threshold & Accuracy & Threshold & Accuracy \\
+- & - & 0.0 & 0.6479 \\
+-0.1 & 0.6316 & 0.1 & 0.6516 \\
+-0.2 & 0.6161 & 0.2 & 0.6511 \\
+-0.3 & 0.6059 & 0.3 & 0.6430 \\
+-0.4 & 0.5988 & 0.4 & 0.6305 \\
+-0.5 & 0.5888 & 0.5 & 0.6122 \\
+-0.6 & 0.5711 & 0.6 & 0.5934 \\
+-0.7 & 0.5423 & 0.7 & 0.5712 \\
+-0.8 & 0.5083 & 0.8 & 0.5457 \\
+-0.9 & 0.4881 & 0.9 & 0.5307 \\
+\label{tbl:average_threshold_accuracy}
+\end{tabular}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{average_threshold_accuracy.png} 
+    \caption{Graph plot of the 'Average threshold accuracy' table.}
+    \label{fig:average_threshold_accuracy}
+\end{figure}
+%
 
 \subsection{Results}
 #TODO write results from the classification of the different dictionaries. \\
@@ -259,7 +292,7 @@ null cases, 0.0 : 52 of 1365
 null cases, 0.0 : 1221 of 1365
 null cases, 0.0 : 92 of 1365
 
-\section{With Classifiers}
+\section{With Classifiers}\label{sentiment:classifier_classification}
 
 #TODO write about drawbacks. 
 
@@ -275,23 +308,28 @@ Using the self compiled monogram dictionaries.
 
 Results from testing with different dictionaries. 
 
-\section{Comparison of classifiers}
+\section{Comparison and Results}\label{sentiment:comparison_results}
 #TODO highlights of the classifiers \\
 #TODO common denominators. commonalities.\\
 #TODO comparing the results of the classifiers. \\
 
-\section{Biased Mind}
+\section{Comments and Discussion}\label{sentiment:comments_discussion}
+
+\subsection{}
+#TODO Improvements \\
+
+\subsection{Biased Mind}
 The datasets of manually labeled tweets are biased based on a persons 
 personal opinion and state of mind in the moment of classification.
 Therefore we have to keep in mind that all further results are based on the
 assumption that everyone agrees on the manual labeling. This is of course a big
 potential source of errors to be explored more in \ref{futurework}. 
 
-\section{Comments}
-#TODO improvements \\
+\subsection{}
 #TODO drawbacks \\
-#TODO future work \\
 
-\section{Conclusions}
+\subsection{Conclusions}
 #TODO summarize the stuff we have learned shortly. \\
-#TODO mention future work. \\
+
+\subsection{}
+#TODO future work \\

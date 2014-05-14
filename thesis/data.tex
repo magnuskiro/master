@@ -541,8 +541,37 @@ tweet/sentence before creating bi- and trigrams.
 
 % The financial data used in the thesis. 
 \section{Finance Data}\label{data:finance}
-#TODO obtaining the data(potential mining operations)
-#TODO about the dataset, csv
-#TODO potential problems 
+
+\paragraph{Data acquisition}
+\hspace{0pt}\\
+Obtaining the financial data is easy. Point and click to receive a csv file
+containing the data we need. \url{Netfonds.no} provides the content we need.
+
+More specifically we get the data for the Oslo Stock exchange\footnote{Netfonds
+data on OSEBX
+\url{http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv}}. 
+
+By creating a little script we get fresh data every time we run the script.
+\begin{verbatim}
+stock_exchange_history = urllib.urlopen(urli_of_datafile).readlines()
+    for record in stock_exchange_history:
+        # do tomething with the data
+        print record
+\end{verbatim} 
+
+\paragraph{Structure}
+\hspace{0pt}\\
+The data file contains data back to 1997. Data for one day on each line. Only
+the days the exchange have been open are present.
+Fields in the csv file are: \textit{quote\_date},\textit{paper},
+\textit{exch}, \textit{open}, \textit{high}, \textit{low}, \textit{close},
+\textit{volume}, and \textit{value}.
+
+\paragraph{Usage}
+\hspace{0pt}\\
+The values we use are: \textit{quote\_date}, \textit{close}, and
+\textit{volume}.
+A potential drawback of the data are the days that the exchange is closed. This
+might complicate the coding of the trend comparison.
 %
 

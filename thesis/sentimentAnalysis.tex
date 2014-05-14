@@ -1,23 +1,26 @@
 
 \chapter{Sentiment Classification}
 This section describes the experiments done. High level description and
-execution of experiments. Detailed execution and technical details in appendix. 
+execution of experiments. Detailed descriptions of execution and technical
+details in appendix. 
 
-%#TODO what is sentiment \\
-Sentiment is described as "an attitude toward something; regard; opinion."\footnote{Sentiment - Dictionary.com: \url{http://dictionary.reference.com/browse/sentiment?s=t}}
-The sentiment is the perceived positivity of the message that the user tries to
+%what is sentiment
+Sentiment is described as "an attitude toward something; regard;
+opinion."\footnote{ Dictionary.com on Sentiment:
+\url{http://dictionary.reference.com/browse/sentiment?s=t}}. The sentiment is the perceived positivity of the message that the user tries to
 communicate. Sentiment is in many cases a personal thing, and can change from
-person to person or from setting to setting.  
+person to person or from setting to setting. We think of the sentiment as
+conveyed meaning of a message. 
 
-%#TODO why do we get it \\
+%why do we get it
 Some of the motivation for acquiring the sentiment of a tweet or a sentence, is
 that we can say something about a persons state of mind and from that predict
-behaviour. We want to use the sentiment to make smart decisions alter. As an
+behaviour. We want to use the sentiment to make smart decisions later. As an
 example of usage it would be ideal to find a correlation between sentiment and
-stock exchange, thus making us able to increase revenue based with decisions
+stock exchange, thus making us able to increase revenue with decisions
 based on the sentiment. 
 
-%#TODO how do we use it \\
+%how do we use it
 In this thesis we have two main ways of classifying tweets. Word counting and
 training a classifier. Both methods require dictionaries of positive and
 negative words, \ref{data:dictionaries}. In the classifier we use the dictionary
@@ -25,9 +28,6 @@ to extract features from a tweet. And with the word counting we count the
 number of positive and negative words. 
 
 \section{Manual Classification}\label{sentiment:manual_classification}
-#TODO write about the obama tweet set. That most of the content is rubbish and
-very difficult to label positive or negative.
-
 When labeling tweets manually there are a number of factors the complicates the
 process. Among them are the quality of the tweet, state of mind, language, and
 political affiliation.
@@ -60,7 +60,7 @@ impression.\\
 5 & Done & Label tweet as positive or negative.\\
 \end{tabular}
 
-\paragrap{Result files}
+\paragraph{Result files}
 \hspace{0pt}\\
 When classifying with manually we create files with the results. These files
 are comma separated files with three fields.
@@ -69,6 +69,22 @@ are comma separated files with three fields.
     \item Tweet id, if it exists, else 'id'. It is a long number.
     \item The tweet text. In some cases sanitized.
 \end{itemize}
+
+\paragraph{Obama tweet set}
+\hspace{0pt}\\
+When labeling the obama tweet set we found that the tweets present was rather
+rubbish. Whether or not the data is representative for twitter in general is
+difficult to say. But we observed lots of retweets and political related
+content. Tweets favoring obama are positive for poeple who support obama and
+negative for supporters of Romney at the same time. So while labeling the
+tweets we tried to remove personal political views from the equation, but that
+is very difficult in the long run.  
+
+\paragraph{Kiro tweet set}
+\hspace{0pt}\\
+The kiro tweet set also has a lot of retweets, but they are not use later,
+thereby removing the retweet reduced data uniqueness. Also the search terms the
+dataset is based on could be broader to increase the spectrum of tweets.  
 %
 
 \section{Word count classification}\label{sentiment:word_count_classification}

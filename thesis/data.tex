@@ -1,16 +1,18 @@
 \chapter{Data, retrieval and structure}
-% The data. What used, how and why. Acquired data how and from where. 
+We aim to describe the structure, the characteristics, the metadata and usage
+for the data used. 
 
-This section describes the data sources, methods for acquisition, and the
-structure of the used data. \ref{data:tweets} describes twitter and the mined
-tweets. \ref{data:dictionaries} describe the different lists of words used in
-the classification process. And last the finance data is described in
-\ref{data:finance}.
+In this data chapter we have three sections. 
 
-For each section the structure, characteristics, metadata and usage are
-described. 
+The section abut twitter and tweets, \ref{data:tweets}. Where we describe how we
+use tweets, what tweets to use and how we acquire them.
 
-#TODO chapter outline
+Then we have a section describing the dictionaries, \ref{data:dictionaries}. How
+we compile the dictionaries from tweets and how we use them. Their shortcomings
+and the possible improvements.  
+
+And last we have a section that describes the financial data that we use. Where
+we get them, the structure and how the data is used. 
 %
 
 % The section about twitter and tweets 
@@ -366,37 +368,84 @@ for interpretation.
 
 % describing the dictionaries used in the classification of tweets. 
 \section{Dictionaries}\label{data:dictionaries}
-#TODO introduction to dictionaries, of corpus whatever the name. \\
-#TODO the purpose of the dictionary\\
-#TODO use of the dictionaries. \\
+
+The dictionaries are lists of words used in the classification process. For
+each set we have a list of positive words and a list of negative words. 
+
+The dictionaries are self compiled or downloaded. The downloaded dictionaries
+are very specific in their area. The LoughranMcDonald dictionaries only contain
+financial terms, while the self compiled dictionaries contains everything. 
+
+The purpose of the dictionaries are to provide a way to separate words. And
+further to give a quantitative way to distinguish positive and negative tweets.
+We also want to look at the quality of the different dictionaries. And the
+method for dictionary compilation.  
+
+We use the dictionaries to count mono-, bi-, and tri-grams.
+And we can say something about the quality of the dictionaries and the method
+for compilation.
+
+The dictionaries are used in both classification methods. The simple
+word\_count(\ref{sentiment:word_count_classification}) classification and the
+more advanced classification using SVM(\ref{sentiment:svm_classification}) and
+Naive bayes(\ref{sentiment:naive_bayes_classification}) classifiers. 
 %
 
 \subsection{Downloaded Dictionaries}
-#TODO describe the distinctions of dl dict
+The downloaded dictionaries are dictionaries found on the Internet. They are
+compiled by others, and their quality is questioned. The most significant
+feature of the downloaded dictionaries are that they contain words form a
+certain domain. The obama dictionary contains more words linked to politics,
+while the LoughranMcDonald dictionary only has words from the financial domain.  
 
 \paragraph{Obama}
 \hspace{0pt}\\
-#TODO describe obama dictionary.\\ 
+The obama dictionary was created in relation to the obama tweet set
+\footnote{Neal Caren of University of North Carolina. Tweet file:
+\url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}}, and the us
+presidential election of 2008.
+
+In the positive list \footnote{Neal Caren of University of North Carolina.
+Positive words: \url{http://www.unc.edu/~ncaren/haphazard/positive.txt}} there
+are 2230 words. The frequency of political words over other types words are
+uncertain. We have not done any analysis on this part. \textit{wisdom},
+\textit{truthful}, \textit{profit}, and \textit{intact} are words found in
+the positive list. This in itself speaks for the incorrectness of the
+dictionary. Neither \textit{intact} nor \textit{wisdom} are words that in
+themselves can be described as positive or negative. 
+
+There are 3905 negative words in the list of negative words\footnote{Neal Caren
+of University of North Carolina. Negative words:
+\url{http://www.unc.edu/~ncaren/haphazard/negative.txt}}. 
+The negative list include words such as \textit{decrease}, \textit{worried} and
+\textit{tricky}. Duplicate words are also present, so some sort of improvement
+of this dictionary should be done.  
+%
 
 \paragraph{Loughran & McDonald}
 \hspace{0pt}\\
-#TODO describe this dictionary
 Tim Loughran and Bill McDonald has a set of dictionaries available from the
-websites of University of Notre Dame \footnote{#TODO fiks tekst: nd.edu:
+websites of University of Notre Dame \footnote{Bill McDonald, University of
+Notre Dame:
 \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}}. 
 
-List of Dictionaries:
-\begin{itemize}
-    \item negative words
-General list of negative words. No particular category. Used for basic   
-    \item positive words
-This dictionary contains a small set of positive words. There are no general
-category for the words. The words are not directly related to finance. 
-    \item Uncertainty words
-    \item litigious words
-    \item modal words strong
-    \item modal words weak
-\end{itemize}
+The lists of words:\\
+\begin{tabular}{ l p{9cm} }
+Negative words & General list of negative words. \\
+Positive words & General list of positive words. \\
+Uncertainty words & Words like \textit{may}, \textit{maybe}, and
+\textit{nearly}. Words that flag content to have no concrete sentiment.\\
+Litigious words & Law related words, not much use for us. \\
+Modal words strong & Strong descriptive words, such as \textit{Always}, and
+\textit{Strongly}\\
+Modal words weak & Weak words on moods, such as \texit{Somewhat}, and
+\textit{Depends}. \\
+\end{tabular}
+
+The potential of these dictionaries are big, and much unused. We only use the
+positive and negative lists of words. The other lists could be used for a
+better measure of polarity or weighting of bigrams. The best use of this
+dictionary is for comparison of the different dictionaries.  
 %
 
 \subsection{Compiled Dictionaries}
@@ -410,8 +459,8 @@ Details about the process of manually classifying tweets can be found in section
 
 #TODO describe the dictionary compilation.\\
 
-
-List of dictionaries:
+\subsection{List of dictionaries:}
+\hspace{0pt}\\
 
 #TODO describe the different dictionaries\\ 
 \begin{itemize}

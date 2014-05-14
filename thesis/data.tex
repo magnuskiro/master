@@ -449,49 +449,63 @@ dictionary is for comparison of the different dictionaries.
 %
 
 \subsection{Compiled Dictionaries}
-The compiled dictionaries are based on two manually labeled tweet sets. My own,
-the kiro dataset, and the obama tweet set.
- 
-#TODO ref the used datasets.\\ 
+The compiled dictionaries are based on the two manually labeled tweet sets. The
+kiro tweet set, and the obama tweet set.
 
 Details about the process of manually classifying tweets can be found in section
 \ref{sentiment:manual_classification}.
 
-#TODO describe the dictionary compilation.\\
+\paragraph{Dictionary Compilation}
+\hspace{0pt}\\
+The compilation of a dictionary is quite simple. We take a set of manually
+labeled tweets, and extract words, then sort them into positive and negative.
+\begin{itemize}
+    \item 1: We import all the tweets to create dictionaries from. 
+    \item 2: We take all the positive tweets and generate words from them.
+Mono-, bi- or tri-grams. 
+    \item 3: We repeat step 2 with the negative tweets. 
+    \item 4: We remove words that are present in both the positive and negative
+list. Removal of duplicate words. Resulting in two lists of unique words either
+positive or negative.  
+\end{itemize}
+
+\paragraph{Characteristics}
+For both datasets we compiled mono-, bi-, and trigrams. Giving us 6 sets of
+compiled dictionaries to test. All dictionaries has the drawback of personal
+bias. The mindset of the person labeling the dataset also effects the
+dictionaries. We also do not consider stemming and stop words, because we
+remove duplicate words.  
+%
 
 \subsection{List of dictionaries:}
-\hspace{0pt}\\
+Table, listing all the different sets dictionaries used. There are a list of
+negative and a list of positive words in each set. 
 
-#TODO describe the different dictionaries\\ 
-\begin{itemize}
-    \item Obama original, Monogram 
-	\subitem description
+\begin{tabular}{ p{5cm} p{7cm} }
+Name of dictionary & Description \\
+Downloaded:& \\
+\hline
+Obama original & Monograms, in relation to the obama tweet set. \\
+LoughranMcDonald & Monograms, acquired from Bill McDonald's webpage.\\
+Combined Obama original and LoughranMcDonald & Monogram. A combination of
+the previous two dictionaries. \\
 
-    \item LoughranMcDonald, Monogram 
-	\subitem description
+Compiled:& \\
+\hline
+Kiro, Monogram & Compiled from the kiro dataset. Containing
+monograms. \\
+Kiro, Bigram &  Containing terms consisting of two separate words. (\textit{an 
+example}) \\
+Kiro, Trigram & Containing terms consisting of three separate trigrams.
+(\textit{example of trigram})\\
+Obama, Monogram & Compile from the obama tweet set, monograms. \\
+Obama, Bigram & Containing terms consisting of two separate words.
+(\textit{another example}) \\
+Obama, Trigram & Containing terms consisting of three separate trigrams.
+(\textit{also an example})\\
 
-    \item Obama original and LoughranMcDonald, Monogram, combined
-	\subitem description
-
-    \item Kiro, Monogram, self compiled 
-	\subitem description
-
-    \item Obama, Monogram, self compiled 
-	\subitem description
-
-    \item Kiro, Bigram, self compiled 
-	\subitem description
-
-    \item Obama, Bigram, self compiled 
-	\subitem description
-
-    \item Kiro, Trigram, self compiled 
-	\subitem description
-
-    \item Obama, Trigram, self compiled 
-	\subitem description
 	\label{data:dictionary_list}
-\end{itemize}
+\end{tabular}
 %
 
 \subsection{Error analysis, removal of duplicate words}

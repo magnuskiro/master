@@ -185,10 +185,13 @@ Further we found the best average threshold value to be 0.1.
 From the table under we have the threshold value, and the average
 classification accuracy among the 18 entries for each threshold value. 
 
-Average threshold accuracy table:
-\hspace{0pt}\\
+\begin{table}
+\centering
+\label{tbl:average_threshold_accuracy}
+\caption{Average threshold accuracy table.}
 \begin{tabular}{ c c c c }
 Threshold & Accuracy & Threshold & Accuracy \\
+\hline
 - & - & 0.0 & 0.6479 \\
 -0.1 & 0.6316 & 0.1 & 0.6516 \\
 -0.2 & 0.6161 & 0.2 & 0.6511 \\
@@ -199,8 +202,8 @@ Threshold & Accuracy & Threshold & Accuracy \\
 -0.7 & 0.5423 & 0.7 & 0.5712 \\
 -0.8 & 0.5083 & 0.8 & 0.5457 \\
 -0.9 & 0.4881 & 0.9 & 0.5307 \\
-\label{tbl:average_threshold_accuracy}
 \end{tabular}
+\end{table}
 
 \begin{figure}[htb]
     \centering
@@ -215,6 +218,10 @@ The results from the word count classification can be plotted in the tabled
 \ref{tbl:sentiment_word_count_results} and in the graph
 \ref{tbl:sentiment_word_count_results}.
 
+\begin{table}
+\centering
+\label{tbl:sentiment_word_count_results}
+\caption{Word Count classification results table}
 \begin{tabular}{ r p{6cm} r r c }
 id & Dictionary & Failed & Correct & Accuracy \\
 & -- Kiro compiled dataset -- & a & b & b/(a+b) \\
@@ -228,7 +235,6 @@ id & Dictionary & Failed & Correct & Accuracy \\
 7 & Obama, Monogram, self compiled & 567 & 430 & 0.4313 \\
 8 & Obama Bigram, self compiled & 534 & 463 & 0.4644 \\
 9 & Obama Trigram, self compiled & 567 & 430 & 0.4313 \\
-
 & -- Obama tweet set -- & a & b & b/(a+b) \\
 \hline
 10 & Monogram, obama & 855 & 510 & 0.3736 \\
@@ -240,8 +246,8 @@ id & Dictionary & Failed & Correct & Accuracy \\
 16 & Obama, Monogram, self compiled & 493 & 872 & 0.6388 \\
 17 & Obama Bigram, self compiled & 37 & 1328 & 0.9729 \\
 18 & Obama Trigram, self compiled & 39 & 1326 & 0.9714 \\
-\label{tbl:sentiment_word_count_results}
 \end{tabular}
+\end{table}
 
 5, 6, 17, 18 are the dictionaries with best accuracy. Which is to be expected
 for the classification of the dataset the dictionary was created from. 
@@ -285,9 +291,13 @@ dictionaries and dataset used for which graphs in figure \ref{fig:threshold_grap
 'kiro dataset' and 'obama dataset' columns tells which dataset that was
 classified in which graph.
 
+\begin{table}
+\centering
+\label{tbl:dictionary_to_threshold}
+\caption{Dictionary to threshold graph plot table}
 \begin{tabular}{ l c c }
-\hspace{0pt}\\
 Dictionary name and description & kiro dataset & obama dataset \\ 
+\hline
 Obama original, Monogram & 1 & 10 \\
 LoughranMcDonald, Monogram & 2 & 11 \\
 Combined Obama original and \\ LoughranMcDonald, Monogram & 3 & 12 \\
@@ -297,9 +307,8 @@ Kiro, Bigram, self compiled & 6 & 15 \\
 Obama, Bigram, self compiled & 7 & 16 \\
 Kiro, Trigram, self compiled & 8 & 17 \\
 Obama, Trigram, self compiled & 9 & 18 \\
-
-\label{tbl:dictionary_to_threshold}
 \end{tabular}
+\end{table}
 
 \begin{figure}[htb]
     \centering
@@ -331,6 +340,10 @@ becomes 0. This results in a situation where we have no indication of a tweet
 being positive or negative. This is an area where we can improve the
 classification. 
 
+\begin{table}
+\centering
+\label{tbl:word_counting_polarity_null}
+\caption{Word Count results where Threshold value=0 table}
 \begin{tabular}{ r p{6cm} r c }
 id & Dictionary & Polarity=0 & Tweets \\
 & -- Kiro compiled dataset -- & & \\
@@ -356,8 +369,8 @@ id & Dictionary & Polarity=0 & Tweets \\
 16 & Obama, Monogram, self compiled & 37 & 1365 \\
 17 & Obama Bigram, self compiled & 52 & 1365 \\
 18 & Obama Trigram, self compiled & 92 & 1365 \\
-\label{tbl:word_counting_polarity_null}
 \end{tabular}
+\end{table}
 
 These numbers are significantly reduced if the threshold is set to 0.1.
 We can also see indications that the diversity and quality of the dictionary
@@ -395,6 +408,10 @@ the kiro monogram dictionary for feature extraction.
 
 Using the self compile monogram dictionaries and all the different SVM kernels we get these results:
 
+\begin{table}
+\centering
+\label{tbl:svm_classifier_kernal_test}
+\caption{SVM kernel test results table}
 \begin{tabular}{ l r r c }
 Kernel & Failed & Correct & Accuracy \\
 \hline
@@ -405,6 +422,7 @@ OneClassSVM & 575 & 422 & 0.4233 \\
 SVC & 422 & 575 & 0.5767 \\
 SVR & 422 & 575 & 0.5767 \\
 \end{tabular}
+\end{table}
 
 Naturally we used the LinearSVC kernel later. 
 
@@ -412,6 +430,10 @@ Naturally we used the LinearSVC kernel later.
 \hspace{0pt}\\
 Results from testing SVM with different dictionaries: 
 
+\begin{table}
+\centering
+\label{tbl:svm_classifier_results}
+\caption{SVM classifier results table}
 \begin{tabular}{ l l r r c }
 Dataset & Type & Failed & Correct & Accuracy \\
 \hline
@@ -420,6 +442,7 @@ Kiro & Bigram & 422 & 575 & 0.5767 \\
 Obama & Monogram & 35 & 1330 & 0.9744 \\
 Obama & Bigram & 507 & 858 & 0.6286 \\
 \end{tabular}
+\end{table}
 
 From this we can draw some conclusions. The monogram dictionary performed
 better than the bigram dictionary. Probably due to the number of features we
@@ -430,6 +453,10 @@ count classification method.
 \subsection{Naive Bayes}\label{sentiment:naive_bayes_classification}
 Results from testing Naive Bayes with different dictionaries: 
 
+\begin{table}
+\centering
+\label{tbl:naive_bayes_classification_results}
+\caption{Naive Bayes classifier results table}
 \begin{tabular}{ l l r r c }
 Dataset & Type & Failed & Correct & Accuracy \\
 \hline
@@ -438,6 +465,7 @@ Kiro & Bigram & 29 & 968 & 0.9709 \\
 Obama & Monogram & 59 & 1306 & 0.9568 \\
 Obama & Bigram & 59 & 1306 & 0.9568 \\
 \end{tabular}
+\end{table}
 
 As we can see the different dictionaries makes no difference for Naive Bayes.
 But if we compare the classifier with the results from the word count
@@ -460,6 +488,10 @@ In the following table, \ref{tbl:classification_comparison}, we highlight the
 results from the different classifications. We list the most noteworthy results
 from our experiments and compare them.
 
+\begin{table}
+\centering
+\label{tbl:classification_comparison}
+\caption{Comparison of classifiers table}
 \begin{tabular}{ l l p{3.5cm} r r c }
 Classifier & Dataset & Dictionary & Failed & Correct & Accuracy \\
 \hline
@@ -468,8 +500,8 @@ Word Count & Obama & LoughranMcDonald Monogram & 508 & 857 & 0.6278 \\
 Word Count & Obama & Kiro, Trigram & 498 & 867 & 0.6352 \\
 Naive Bayes & Kiro & Kiro Monogram & 29 & 968 & 0.9709 \\
 SVM & Kiro & Kiro Monogram & 7 & 990 & 0.9930 \\
-\label{tbl:classification_comparison}
 \end{tabular}
+\end{table}
 
 As we can see the classifiers give better results then the word count
 classification. And SVM is a bit better than Naive Bayes. Although the results

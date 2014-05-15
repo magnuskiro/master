@@ -8,5 +8,6 @@
 *.log
 *.out
 *.toc
+*.lot
 
 *.pdf

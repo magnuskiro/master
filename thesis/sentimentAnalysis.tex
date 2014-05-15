@@ -211,12 +211,66 @@ Threshold & Accuracy & Threshold & Accuracy \\
 %
 
 \subsection{Results}
-#TODO write results from the classification of the different dictionaries. \\
-Dictionaries based on their own dataset naturally scores the best. When cross
-classifying we see that the bigram dictionaries score the best. With the
-trigram dictionaries nearly as good as the bigram dictionaries.
+The results from the word count classification can be plotted in the tabled
+\ref{tbl:sentiment_word_count_results} and in the graph
+\ref{tbl:sentiment_word_count_results}.
 
-#TODO write about the variations based on the datasets. \\
+\begin{tabular}{ l p{6cm} c c c }
+id & Dictionary & Failed & Correct & Accuracy \\
+& -- Kiro compiled dataset -- & a & b & b/(a+b) \\
+\hline
+1 & Monogram, obama & 578 & 419 & 0.4203 \\
+2 & Monogram LoughranMcDonald & 491 & 506 & 0.5075 \\
+3 & Monogram, combined Obama and LoughranMcDonald & 416 & 581 & 0.5827 \\
+4 & Kiro, Monogram, self compiled & 115 & 882 & 0.8847 \\
+5 & Kiro, Bigram, self compiled & 17 & 980 & 0.9829 \\
+6 & Kiro, Trigram, self compiled & 18 & 979 & 0.9819 \\
+7 & Obama, Monogram, self compiled & 567 & 430 & 0.4313 \\
+8 & Obama Bigram, self compiled & 534 & 463 & 0.4644 \\
+9 & Obama Trigram, self compiled & 567 & 430 & 0.4313 \\
+
+& -- Obama tweet set -- & a & b & b/(a+b) \\
+\hline
+10 & Monogram, obama & 855 & 510 & 0.3736 \\
+11 & Monogram LoughranMcDonald & 508 & 857 & 0.6278 \\
+12 & Monogram, combined Obama and LoughranMcDonald & 544 & 821 & 0.6015 \\
+13 & Kiro, Monogram, self compiled & 632 & 733 & 0.5370 \\
+14 & Kiro, Bigram, self compiled & 521 & 844 & 0.6183 \\
+15 & Kiro, Trigram, self compiled & 498 & 867 & 0.6352 \\
+16 & Obama, Monogram, self compiled & 493 & 872 & 0.6388 \\
+17 & Obama Bigram, self compiled & 37 & 1328 & 0.9729 \\
+18 & Obama Trigram, self compiled & 39 & 1326 & 0.9714 \\
+\label{tbl:sentiment_word_count_results}
+\end{tabular}
+
+5, 6, 17, 18 are the dictionaries with best accuracy. Which is to be expected
+for the classification of the dataset the dictionary was created from. 
+
+But more interestingly, if we take the dictionaries created form one dataset,
+and look at the results of the classification on the other dataset. We compare
+7, 8, 9 with each other and 13, 14, 15 with each other. Then we can see that
+the bigram and trigram dictionaries perform overall better than the monogram
+dictionaries. 
+
+Further we see indications that the quality of the dictionary plays an
+important role. The LoguhranMcDonald monogram dictionary performs quite good
+with both datasets. Even on par with the compiled dictionaries on opposite
+dataset. This indicates that a well crafted dictionary can perform as well
+as compiled dictionaries.  
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{dictionary_accyracy.png} 
+    \caption{The graph shows the plotted accuracies from the word count
+classification. The ids represents the ids from the table above,
+\ref{tbl:sentiment_word_count_results}}
+    \label{fig:dictionary_accyracy}
+\end{figure}
+ 
+When comparing the results from one dataset to the other we can see indications
+of how the content of the dataset also plays a huge role in the results. Some
+tweets are more difficult to classify then others. 
+%
 
 \paragraph{Threshold variations}
 \hspace{0pt}\\

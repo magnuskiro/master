@@ -156,8 +156,12 @@ Of these categories we mainly use \textit{OAuth}, \textit{Help} and
 \textit{Search}.
 Listing the endpoints used with parameters we get this list: 
 
+
+\begin{table}
+\centering
+\label{tbl:twitterAPIendpoints}
+\caption{Used Twitter API endpoints table}
 \begin{tabular}{ r l | p{7cm} }
-API endpoints:\\
 Category & Parameter & Description\\
 \hline
 
@@ -190,8 +194,8 @@ the request limitations. \\
 & resources & The elements that we want the status of. Currently that
 is search and help. \\ 
 
-\label{tbl:twitterAPIendpoints}
 \end{tabular}
+\end{table}
 %
 
 \paragraph{Searching}
@@ -430,6 +434,10 @@ Notre Dame:
 \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}}. 
 
 The lists of words:\\
+\begin{table}
+\centering
+\label{tbl:loughran_mcdonald_dictionaries}
+\caption{LoughranMcDonald available dictionaries}
 \begin{tabular}{ l p{9cm} }
 Negative words & General list of negative words. \\
 Positive words & General list of positive words. \\
@@ -441,6 +449,7 @@ Modal words strong & Strong descriptive words, such as \textit{Always}, and
 Modal words weak & Weak words on moods, such as \texit{Somewhat}, and
 \textit{Depends}. \\
 \end{tabular}
+\end{table}
 
 The potential of these dictionaries are big, and much unused. We only use the
 positive and negative lists of words. The other lists could be used for a
@@ -477,10 +486,14 @@ dictionaries. We also do not consider stemming and stop words, because we
 remove duplicate words.  
 %
 
-\subsection{List of dictionaries:}
+\subsection{List of dictionaries}
 Table, listing all the different sets dictionaries used. There are a list of
 negative and a list of positive words in each set. 
 
+\begin{table}
+\centering
+\label{tbl:dictionaries}
+\caption{Dictionary table}
 \begin{tabular}{ p{5cm} p{7cm} }
 Name of dictionary & Description \\
 Downloaded:& \\
@@ -506,6 +519,7 @@ Obama, Trigram & Containing terms consisting of three separate trigrams.
 
 	\label{data:dictionary_list}
 \end{tabular}
+\end{table}
 %
 
 \subsection{Error analysis, removal of duplicate words}

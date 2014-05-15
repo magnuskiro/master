@@ -3,7 +3,7 @@ __author__ = 'kiro'
 import matplotlib.pyplot as plt
 
 
-def plot_graph():
+def plot_avgerage_threshold_accuracy():
     """
     Plot the threshold and average accuracy for all observations for that threshold value.
     """
@@ -38,5 +38,35 @@ def plot_graph():
     plt.plot(x, y, 'o')
     plt.show()
 
+
+def plot_dictionary_accyracy():
+    y = [0.4203,
+         0.5075,
+         0.5827,
+         0.8847,
+         0.9829,
+         0.9819,
+         0.4313,
+         0.4644,
+         0.4313,
+         0.3736,
+         0.6278,
+         0.6015,
+         0.5370,
+         0.6183,
+         0.6352,
+         0.6388,
+         0.9729,
+         0.9714]
+
+    x = [e for e in range(1, 19)]
+    plt.axis([0, 19, .3, 1.0])
+    plt.xlabel('id')
+    plt.ylabel('Accuracy')
+    plt.plot(x, y, 'o')
+    plt.show()
+
+
 if __name__ == "__main__":
-    plot_graph()
+    #plot_avgerage_threshold_accuracy()
+    plot_dictionary_accyracy()

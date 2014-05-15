@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from nltk import SklearnClassifier
 
 from trend_classification_utils import extract_features_from_text, initialize_classifier, load_manually_labeled_tweets
-
+import urllib
 
 __author__ = 'kiro'
 
@@ -26,6 +26,20 @@ def calculate_tweet_contribution_to_trend(classifier, tweet):
 def calculate_polarity_by_day(intra_day):
     # todo finish
     pass
+
+# for tweets in this day
+    # classify pos/neg
+    # value of day += value of tweet * popularity(the value that represents the spreading or what not of a tweet).
+    # return pos, neg, trend value
+
+# for all days
+    #create a dict containing:
+    #pos
+    #neg
+    #graph plot point / trend value.
+    #stock closing value.
+    #stock volume.
+    #calculate moving average for plotting.
 
 
 def get_calssifier():
@@ -92,11 +106,9 @@ def do_tweet_trend_compiling(folder):
     filename_separation(folder)
 
 
-def get_stock_exhange_values():
+def get_stock_exhange_values(url):
     # get the stock exchange data from oslo bors.
-    #python 2.x
-    import urllib
-    stock_exchange_history = urllib.urlopen('http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv').readlines()
+    stock_exchange_history = urllib.urlopen(url).readlines()
     for record in stock_exchange_history:
         # earlier records are not interesting.
         if "20140411" in record:
@@ -109,5 +121,4 @@ if __name__ == "__main__":
     #do_tweet_trend_sorting(trend_base)
     # start the trend compiling
     #do_tweet_trend_compiling(trend_base)
-    #
-    get_stock_exhange_values()
+    get_stock_exhange_values('http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv')

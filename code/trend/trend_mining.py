@@ -28,7 +28,7 @@ def trend_mining(query):
     data_set = open(filename, 'a')
 
     # get tweets from twitter.
-    results = twitter.search(q=query, count='100')
+    results = twitter.search(q=query, count='100', language='en OR no')
 
     count = 0
     # for all the results in the search

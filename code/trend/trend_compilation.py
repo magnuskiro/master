@@ -1,124 +1,247 @@
+
 import ast
 import codecs
-from os import listdir
-from os.path import isfile, join
-import random
-from sklearn.svm import LinearSVC
-
 import matplotlib.pyplot as plt
-from nltk import SklearnClassifier
-
-from trend_classification_utils import extract_features_from_text, initialize_classifier, load_manually_labeled_tweets
+from trend_classification_utils import extract_features_from_text, get_classifier, get_trend_data_filenames, \
+    sanitize_tweet
 import urllib
 
 __author__ = 'kiro'
 
-
 trend_base = "/home/kiro/ntnu/master/code/trend/trend-data/"
 
 
-def calculate_tweet_contribution_to_trend(classifier, tweet):
-    # todo finish
-    classifier.classify(extract_features_from_text(tweet))
-    return
-
-
-def calculate_polarity_by_day(intra_day):
-    # todo finish
-    pass
-
-# for tweets in this day
-    # classify pos/neg
-    # value of day += value of tweet * popularity(the value that represents the spreading or what not of a tweet).
-    # return pos, neg, trend value
-
-# for all days
-    #create a dict containing:
-    #pos
-    #neg
-    #graph plot point / trend value.
-    #stock closing value.
-    #stock volume.
-    #calculate moving average for plotting.
-
-
-def get_calssifier():
-    tweet_file = "tweets_classified_manually"
-    classification_base = "/home/kiro/ntnu/master/code/classification/"
-    tweets = load_manually_labeled_tweets(classification_base + tweet_file)
-    classifier_class = SklearnClassifier(LinearSVC())
-    # instantiate the classifier
-    classifier = initialize_classifier(classifier_class, tweets)
-    print "Info -- Classifier initialize."
-    return classifier
-
-
-def compile_trend(trend_files):
-
-    classifier = get_calssifier()
-    trend = []
-
-    # get all previously observed tweets.
-    # for all trend files
-    for filename in trend_files:
-        lines = codecs.open(trend_base + filename, 'r', "utf-8")
-        # for all lines in file
-        intra_day = []
-        for line in lines.readlines():
-            # calculate tweet trend contribution. aka Polarity of a tweet.
-
-            calculate_tweet_contribution_to_trend(classifier, ast.literal_eval(line))
-            #intra_day.append(calculate_tweet_contribution_to_trend(classifier, ast.literal_eval(line)))
-            intra_day.append(random.random()*10)
-        # calculate the polarity of given day based on input tweets.
-        #trend.append(["-".join(filename.split("-")[1:]), calculate_polarity_by_day(intra_day)])
-        trend = [i for i in intra_day]
-
-    x = [i for i in range(0, len(trend))]
-    plt.plot(x, trend)
-    plt.show()
-    return
-
-
-def filename_separation(folder):
+def get_stock_exchange_values(url):
     """
-    Run trend file compilation with all wanted files in the folder.
-    @param folder: the folder containing tweet files.
+    Code for getting stock exchange data from the internet.
+    @param url: the file / link where the data is stored.
+    @return: list of arrays, one for each day.
     """
-    files = [f for f in listdir(folder) if isfile(join(folder, f))]
-    trend_files = []
-    files.sort()
-    for filename in files:
-        # if it's a file we want append it to list of files.
-        if "trend" in filename:
-            trend_files.append(filename)
-            continue
-
-    compile_trend(trend_files)
-
-
-def do_tweet_trend_compiling(folder):
-    """
-    Run the trend tweet sorting.
-    @param folder: name of the directory to find trend files containing tweets.
-    """
-    print "Info -- Creating trend."
-    filename_separation(folder)
-
-
-def get_stock_exhange_values(url):
-    # get the stock exchange data from oslo bors.
+    # get data file from internet. (csv)
     stock_exchange_history = urllib.urlopen(url).readlines()
+    records = []
     for record in stock_exchange_history:
         # earlier records are not interesting.
-        if "20140411" in record:
+        if "2014" in record:
+            records.append(record.strip().lower().split(","))
+        if "20140414" in record:
             break
-        print record
+    return records
+
+
+def get_day_trend(trend_day_filename, classifier):
+    """
+    Extracting trend information from tweets in a specific day.
+    @param trend_day_filename: File containing tweets from the given day.
+    @param classifier: the classifier that will decide tweets as positive of negative.
+    @return: array with three int values, representing the number of positive tweets, number og negative tweets and the
+             total amount of tweets.
+    """
+    pos, neg = 0, 0
+
+    # get tweets for this day.
+    trend_day_tweets = [ast.literal_eval(tweet) for tweet in
+                        codecs.open(trend_base + trend_day_filename, 'r', "utf-8").readlines()]
+
+    # sentiment for each tweet.
+    sentiment = []
+
+    # for tweets in this day
+    for tweet in trend_day_tweets:
+        # get words of two or more characters.
+        tweet_text = [e.lower() for e in sanitize_tweet(tweet['text']).split() if len(e) >= 2]
+        #print tweet_text
+
+        sentiment.append(classifier.classify(extract_features_from_text(tweet_text)))
+
+        # classify pos/neg
+        # value of day += value of tweet * popularity(the value that represents the spread an credibility of the tweet).
+
+        # if the last tweet was positive.
+        if sentiment[-1]:
+            pos += 1
+        else:
+            neg += 1
+
+    return [pos, neg, pos + neg]
+
+
+def compile_pos_neg_for_tweets():
+    """
+    Compiling the trend data from tweets and returning it in a dict.
+    @return: dictionary of trend data for the mined days.
+    """
+
+    # trains the classifier and returns the ready object.
+    classifier = get_classifier()
+
+    days = get_trend_data_filenames(trend_base)
+    #compile_trend(trend_files)
+
+    trend_days = {}
+    # for all days
+    print "Info -- Classifying tweets for each trend day"
+    for day in days:
+        # skipping days with too few tweets.
+        if "Apr-19" in day or "Apr-20" in day or "Apr-21" in day or "Apr-22" in day:  # limit to 1 day in testing.
+            continue
+        # Storing stats for each day in dict.
+        print day
+        trend_days[day] = {}
+        trend_days[day]['pos'], trend_days[day]['neg'], trend_days[day]['tot'] = get_day_trend(day, classifier)
+
+    #print trend_days
+    return trend_days
+
+
+def get_stock_graph_data():
+    """
+    Function for to simplify plotting of financial data.
+    Calculate the percentage change from previous day.
+    @return: list of graph plot values.
+    """
+    # get stock data
+    #stock_records = get_stock_exchange_values(
+    #    'http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv')
+
+    stock_records = [
+        ['20140423', 'osebx', 'oslo b\xf8rs', '561.13', '562.45', '557.74', '559.41', '0', '3339937790'],
+        ['20140424', 'osebx', 'oslo b\xf8rs', '559.41', '565.65', '559.84', '562.89', '0', '4274186083'],
+        ['20140425', 'osebx', 'oslo b\xf8rs', '562.89', '566.24', '562.41', '566.24', '0', '2924826814'],
+        ['20140426', 'osebx', 'oslo b\xf8rs', '562.89', '566.24', '562.41', '566.24', '0', '2924826814'],  #
+        ['20140427', 'osebx', 'oslo b\xf8rs', '562.89', '566.24', '562.41', '566.24', '0', '2924826814'],  #
+        ['20140428', 'osebx', 'oslo b\xf8rs', '566.24', '567.14', '564.55', '566.82', '0', '2816490895'],
+        ['20140429', 'osebx', 'oslo b\xf8rs', '566.82', '576.29', '566.82', '576.12', '0', '4483198308'],
+        ['20140430', 'osebx', 'oslo b\xf8rs', '576.12', '580.93', '575.56', '578.37', '0', '5974359257'],
+        ['20140501', 'osebx', 'oslo b\xf8rs', '578.37', '583.44', '578.50', '583.44', '0', '3938763164'],  #
+        ['20140502', 'osebx', 'oslo b\xf8rs', '578.37', '583.44', '578.50', '583.44', '0', '3938763164'],
+        ['20140503', 'osebx', 'oslo b\xf8rs', '578.37', '583.44', '578.50', '583.44', '0', '3938763164'],  #
+        ['20140504', 'osebx', 'oslo b\xf8rs', '578.37', '583.44', '578.50', '583.44', '0', '3938763164'],  #
+        ['20140505', 'osebx', 'oslo b\xf8rs', '583.44', '584.11', '579.28', '582.04', '0', '2268264138'],
+        ['20140506', 'osebx', 'oslo b\xf8rs', '582.04', '585.01', '580.40', '582.77', '0', '3207736945'],
+        ['20140507', 'osebx', 'oslo b\xf8rs', '582.77', '586.10', '579.60', '583.78', '0', '4674766325'],
+        ['20140508', 'osebx', 'oslo b\xf8rs', '583.78', '589.11', '583.82', '589.05', '0', '4674766325'],
+        ['20140509', 'osebx', 'oslo b\xf8rs', '589.05', '589.45', '586.11', '589.37', '0', '4054523151'],
+        ['20140510', 'osebx', 'oslo b\xf8rs', '589.05', '589.45', '586.11', '589.37', '0', '4054523151'],  #
+        ['20140511', 'osebx', 'oslo b\xf8rs', '589.05', '589.45', '586.11', '589.37', '0', '4054523151'],  #
+        ['20140512', 'osebx', 'oslo b\xf8rs', '589.37', '596.02', '588.44', '596.01', '0', '3381405777'],
+        ['20140513', 'osebx', 'oslo b\xf8rs', '596.01', '597.15', '593.49', '595.47', '0', '3381405777'],
+        ['20140514', 'osebx', 'oslo b\xf8rs', '595.47', '598.00', '595.22', '597.78', '0', '3465552931'],
+        ['20140515', 'osebx', 'oslo b\xf8rs', '597.78', '600.75', '594.40', '595.49', '0', '4062064215'],
+        ['20140516', 'osebx', 'oslo b\xf8rs', '595.49', '597.49', '588.45', '593.60', '0', '3842116619']
+    ]
+
+    # convert to float.
+    for i in range(0, len(stock_records)):
+        #print stock_records[i]
+        stock_records[i][6] = float(stock_records[i][6])
+    # calculate graph plot points.
+    results = []
+    for i in range(1, len(stock_records)):
+        # calculate percentage diff sinse yesterday.
+        diff = (stock_records[i][6] - stock_records[i - 1][6]) / (
+            stock_records[i][6] + stock_records[i - 1][6] * 1.0)
+        results.append(diff * 100)
+
+    #print len(results)
+    #print stock_records
+    return results
+
+
+def get_median_change_tweets(trend_days):
+    """
+    Function for calculating trend differences between days, based on tweets.
+    @param trend_days: the data to calculate trend graph from.
+    @return: list fo points for a graph.
+    """
+    keys = sorted(trend_days.keys())
+    #print keys
+    results = []
+    for i in range(1, len(keys)):
+        # difference from yesterday til today.
+        # dif / tot
+        # change in positive tweets between this and the previous day.
+        pos_diff = (trend_days[keys[i]]['pos'] - trend_days[keys[i - 1]]['pos']) / (
+            trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+
+        # change in negative tweets between this and the previous day..
+        neg_diff = (trend_days[keys[i]]['neg'] - trend_days[keys[i - 1]]['neg']) / (
+            trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+
+        # median = the mid point between the positive and negative change points.
+        # change in sentiment volume between this and the previous day.
+        median = min([neg_diff, pos_diff]) + abs(pos_diff - neg_diff) / 2
+        results.append(median)
+
+        #print keys[i], "%.4f" % median, trend_days[keys[i]]['tot']
+        #print "pos", keys[i], trend_days[keys[i]]['neg'] - trend_days[keys[i-1]]['neg']
+
+    #print len(results)
+    return results
+
+
+def get_tweet_trend_data():
+    """
+    Method to simplify testing and plotting.
+    @return: tweet trend data in a dict.
+    """
+    trend_days = {'trend-Apr-30': {'neg': 112, 'pos': 131, 'tot': 243},
+                  'trend-May-15': {'neg': 1151, 'pos': 2255, 'tot': 3406},
+                  'trend-May-14': {'neg': 596, 'pos': 1178, 'tot': 1774},
+                  'trend-May-16': {'neg': 1793, 'pos': 4271, 'tot': 6064},
+                  'trend-May-11': {'neg': 121, 'pos': 169, 'tot': 290},
+                  'trend-May-10': {'neg': 98, 'pos': 141, 'tot': 239},
+                  'trend-May-13': {'neg': 1178, 'pos': 2108, 'tot': 3286},
+                  'trend-May-12': {'neg': 980, 'pos': 2013, 'tot': 2993},
+                  'trend-Apr-23': {'neg': 83, 'pos': 121, 'tot': 204},
+                  'trend-Apr-24': {'neg': 104, 'pos': 195, 'tot': 299},
+                  'trend-Apr-25': {'neg': 119, 'pos': 113, 'tot': 232},
+                  'trend-Apr-26': {'neg': 198, 'pos': 371, 'tot': 569},
+                  'trend-Apr-27': {'neg': 120, 'pos': 240, 'tot': 360},
+                  'trend-Apr-28': {'neg': 260, 'pos': 446, 'tot': 706},
+                  'trend-Apr-29': {'neg': 21, 'pos': 101, 'tot': 122},
+                  'trend-May-02': {'neg': 198, 'pos': 254, 'tot': 452},
+                  'trend-May-03': {'neg': 130, 'pos': 174, 'tot': 304},
+                  'trend-May-01': {'neg': 78, 'pos': 107, 'tot': 185},
+                  'trend-May-06': {'neg': 1608, 'pos': 3737, 'tot': 5345},
+                  'trend-May-07': {'neg': 206, 'pos': 391, 'tot': 597},
+                  'trend-May-04': {'neg': 215, 'pos': 422, 'tot': 637},
+                  'trend-May-05': {'neg': 227, 'pos': 437, 'tot': 664},
+                  'trend-May-08': {'neg': 840, 'pos': 1807, 'tot': 2647},
+                  'trend-May-09': {'neg': 117, 'pos': 215, 'tot': 332}}
+
+    return trend_days
+
+
+def plot(trend_days):
+    """
+    Plotting the graphs of the two datasets for comparison.
+    @param trend_days: the tweet trend data if we get it from somewhere else.
+    """
+    # plot stuffs.
+    #xlen = len(trend_days.keys())
+    xlen = 23
+
+    x = [e for e in range(0, xlen)]
+    plt.axis([0, len(x) - 1, -1.0, 1.0])
+    plt.xlabel('id')
+    plt.ylabel('Accuracy')
+
+    # plot changes in tweets
+    #y = get_median_change_tweets(trend_days)
+    if trend_days:
+        y = get_median_change_tweets(trend_days)
+    else:
+        y = get_median_change_tweets(get_tweet_trend_data())
+    plt.plot(x, y, '-r')  # twitter data
+
+    y = get_stock_graph_data()
+    plt.plot(x, y, '-g')  # finance data
+
+    plt.show()
 
 
 if __name__ == "__main__":
-    # do the tweet sorting, in case we have new tweets not sorted.
-    #do_tweet_trend_sorting(trend_base)
-    # start the trend compiling
-    #do_tweet_trend_compiling(trend_base)
-    get_stock_exhange_values('http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv')
+    #trend_data = compile_pos_neg_for_tweets()
+    #plot(trend_data)
+    plot(get_tweet_trend_data())

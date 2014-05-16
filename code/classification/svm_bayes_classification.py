@@ -39,6 +39,7 @@ def extract_features_from_text(text):
     document_words = set(text)
     features = {}
     # more precision to iterate the word of a tweet then the whole dictionary.
+    # extracts all words that are both in the dictionary and in the tweet
     for word in document_words:
         features['contains(%s)' % word] = (word in dictionary)
     return features
@@ -51,13 +52,12 @@ def initialize_classifier(classifier_class, tweets):
     @param classifier_class: the nltk classifier class. Currently NaiveBayesClassifier and DecisionTreeClassifier tested
     @return: a nltk classifier.
     """
-
     # get the training set.
     #print "INFO -- Compile training set for the classifier"
     training_set = nltk.classify.apply_features(extract_features_from_text, tweets)
 
     # create the classifier.
-    print "INFO -- Training classifier, this might take some time."
+    print "INFO -- Training the classifier, this might take some time."
     classifier = classifier_class.train(training_set)
 
     #print "INFO -- Training complete."
@@ -78,9 +78,11 @@ def classify(classifier_class, tweets):
     results = []
     # for all tweets
     for tweet in [tweet[0] for tweet in tweets]:
+        #print tweet
         # classify the tweet and append the result to list.
         # runs classify() on the given classifier class in the nltk library.
         results.append(classifier.classify(extract_features_from_text(tweet)))
+        #print results[-1], type(results[-1])
     return results
 
 

@@ -1,9 +1,9 @@
-
 import ast
 import codecs
 from os import listdir
 from os.path import isfile, join
 from mining_utils import write_array_entries_to_file
+from trend_classification_utils import get_trend_data_filenames
 
 __author__ = 'kiro'
 
@@ -47,8 +47,28 @@ def sort_tweets_on_date(feature_files, trend_files):
 
     # write tweets to file.
     for key in trend.keys():
-        write_array_entries_to_file(trend[key], trend_base + "trend-"+key, "w")
+        write_array_entries_to_file(trend[key], trend_base + "trend-" + key, "w")
     return
+
+
+def remove_norwegian(feature_files):
+    """
+    Ignoring norwegian specific tweets on sort.
+    @param feature_files:
+    @return:
+    """
+    base = "/home/kiro/ntnu/master/code/trend/"
+    filename = "_search-terms-norwegian"
+
+    norwegian_terms = [line.strip().lower() for line in
+                       codecs.open(base + filename, 'r', "utf-8").readlines()]
+    result = []
+    for term in feature_files:
+        if term not in norwegian_terms:
+            result.append(term)
+
+    #print result, len(result)
+    return result
 
 
 def filename_separation(folder):
@@ -74,6 +94,8 @@ def filename_separation(folder):
         # append filename to list.
         feature_files.append(filename)
 
+    feature_files = remove_norwegian(feature_files)
+
     sort_tweets_on_date(feature_files, trend_files)
 
 
@@ -85,6 +107,31 @@ def do_tweet_trend_sorting(folder):
     print "Info -- Sorting trend tweets to dates."
     filename_separation(folder)
 
-if __name__ == "__main__":
-    do_tweet_trend_sorting(trend_base)
 
+def language_elimination(folder):
+    #iso_language_code = no or en
+    """
+    Remove tweets of languages we cannot use.
+    @param folder: the folder containing files containing tweets to look through.
+    """
+    files = [f for f in listdir(folder) if isfile(join(folder, f))]
+    for filename in files:
+        if ".meta" in filename:
+            continue
+        # don't aggregate the trend files, the trend files contains already sorted tweets
+        if "trend" in filename:
+            continue
+        print filename
+        lines = [ast.literal_eval(tweet) for tweet in
+                 codecs.open(trend_base + filename, 'r', "utf-8").readlines()]
+        tweets = []
+        for line in lines:
+            lang = line['metadata']['iso_language_code']
+            if lang == "en" or lang == "no":
+                tweets.append(line)
+                #print line['metadata']['iso_language_code']
+        write_array_entries_to_file(tweets, trend_base + filename)
+
+if __name__ == "__main__":
+    #language_elimination(trend_base)
+    do_tweet_trend_sorting(trend_base)

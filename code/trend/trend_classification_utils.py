@@ -1,7 +1,11 @@
 # coding=utf-8
+from os import listdir
 import re
 import nltk
+from os.path import isfile, join
 from mining_utils import get_lines_from_file
+from nltk import SklearnClassifier
+from sklearn.svm import LinearSVC
 
 __author__ = 'kiro'
 
@@ -43,7 +47,7 @@ def get_list_of_possible_words_in_tweets():
     @return:
     """
     # TODO fix the shortcomings of not having the option of dynamically changing the feature we use.
-    positive_dict, negative_dict = "compiled-positive.txt", "compiled-negative.txt"
+    positive_dict, negative_dict = "kiro-monogram-positive.txt", "kiro-monogram-negative.txt"
     #positive_dict, negative_dict = "bigram-compiled-positive.txt", "bigram-compiled-negative.txt"
 
     dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"
@@ -70,6 +74,24 @@ def extract_features_from_text(text):
     return features
 
 
+def get_classifier():
+    """
+    Load tweets, trains the classifier, and returns it.
+    @return: classifier object.
+    """
+    classification_base = "/home/kiro/ntnu/master/code/classification/"
+    tweet_file = "tweets_classified_manually"
+
+    tweets = load_manually_labeled_tweets(classification_base + tweet_file)
+
+    # The kernel module to be used in the classifier.
+    classifier_class = SklearnClassifier(LinearSVC())
+    # instantiate the classifier
+    classifier = initialize_classifier(classifier_class, tweets)
+    print "Info -- Classifier initialized"
+    return classifier
+
+
 def initialize_classifier(classifier_class, tweets):
     """
     Train and initialize classifier, then return it.
@@ -77,12 +99,12 @@ def initialize_classifier(classifier_class, tweets):
     @param classifier_class: the nltk classifier class. Currently NaiveBayesClassifier and DecisionTreeClassifier tested
     @return: a nltk classifier.
     """
-    # get the training set.     s
+    # get the training set.
     #print "INFO -- Compile training set for the classifier"
     training_set = nltk.classify.apply_features(extract_features_from_text, tweets)
 
     # create the classifier.
-    print "INFO -- Training classifier, this might take some time."
+    print "INFO -- Training the classifier, this might take some time."
     classifier = classifier_class.train(training_set)
 
     #print "INFO -- Training complete."
@@ -151,3 +173,20 @@ def get_positive_negative_tweets_from_manually_labeled_tweets(filename):
         elif params[0] == '1':
             pos.append(''.join(params[2:]))
     return pos, neg
+
+
+def get_trend_data_filenames(folder):
+    """
+    Run trend file compilation with all wanted files in the folder.
+    @param folder: the folder containing tweet files.
+    """
+    files = [f for f in listdir(folder) if isfile(join(folder, f))]
+    trend_files = []
+    files.sort()
+    for filename in files:
+        # if it's a file we want append it to list of files.
+        if "trend" in filename:
+            trend_files.append(filename)
+            continue
+
+    return trend_files

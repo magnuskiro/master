@@ -3,7 +3,6 @@ import codecs
 from os import listdir
 from os.path import isfile, join
 from mining_utils import write_array_entries_to_file
-from trend_classification_utils import get_trend_data_filenames
 
 __author__ = 'kiro'
 

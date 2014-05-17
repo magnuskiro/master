@@ -1,8 +1,7 @@
 # helpers to read and update dictionaries.
-import codecs
-from dictionary_utils import get_lines_from_file, write_array_entries_to_file, clean_text, \
+from dictionary_utils import write_array_entries_to_file, clean_text, \
     remove_duplicates_between_dictionaries, get_positive_negative_tweets_from_manually_labeled_tweets, \
-    get_bigrams_from_text, file_to_lower, get_trigrams_from_text
+    get_bigrams_from_text, get_trigrams_from_text
 
 classification_base = "/home/kiro/ntnu/master/code/classification/"
 dictionary_base = "/home/kiro/ntnu/master/code/dictionaries/"

@@ -1,7 +1,6 @@
 # coding=utf-8
 import nltk
 from classification_utils import get_lines_from_file, load_manually_labeled_tweets, aggregate_results
-
 from sklearn.svm import LinearSVC, NuSVC, NuSVR, OneClassSVM, SVC, SVR
 from nltk.classify.scikitlearn import SklearnClassifier
 

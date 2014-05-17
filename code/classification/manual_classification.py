@@ -1,7 +1,6 @@
 # coding=utf-8
 import codecs
 import re
-import sys
 from classification_utils import load_tweet_data_file, export_words, sanitize_tweet, get_previous_tweets
 
 __author__ = 'kiro'

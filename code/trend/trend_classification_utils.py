@@ -1,11 +1,10 @@
 # coding=utf-8
-from os import listdir
 import re
-import nltk
+from os import listdir
 from os.path import isfile, join
-from mining_utils import get_lines_from_file
-from nltk import SklearnClassifier
+from nltk import SklearnClassifier, nltk
 from sklearn.svm import LinearSVC
+from mining_utils import get_lines_from_file
 
 __author__ = 'kiro'
 

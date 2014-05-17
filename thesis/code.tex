@@ -5,18 +5,88 @@
 Description of the code. It's purpose, and what it does. 
 
 \section{Structure}
-#TODO folder structure and what files are relevant. 
+There are four main folders. One for classification, one for mining tweets, one
+for the dictionaries and on for the files associated with trend. 
+
+Code for classification is split into four files. One file for utilities,
+helper functions that does not touch logic. And the three was of classifying
+tweets, manual, word counting and with a classifier. List\_threshold\_results
+plots the results from the threshold variation in graphs with pyplot. 
+
+The dictionary code is split onto two files, helpers and utility in one, and
+logic and execution in the other. 
+
+Trend code is in the trend folder. There we have mining\_utils, which is a
+replica of the same file in the twitter folder. This file only helps with the
+acquisition of tweets. The trend\_mining file executes the mining operations,
+and acquires tweets from twitter based on a set of search terms. The
+trend\_tweet\_sorting file sorts tweets from all the raw search term data files
+into files based on date. So all tweets from the same date ends in the same
+file. And last we have the trend\_compilation file, which contains code for
+compiling and plotting trend data and financial data.  
+
+Last we have the 'twitter' directory which has code for extracting tweets from
+twitter. This code is used for creating the datasets that the dictionaries are
+built from. We have the mining\_utils which is helper code for connection and
+writing files and such. While the mining\_operations file does the logic of
+managing the acquired tweets. 
+
+The important files are listed under. '- something' are folders, while the
+others are actual python files. The indentation shows which files are in which
+folders.  
+\begin{verbatim}
+- code    
+    - classification
+        classification_utils.py
+		list_threshold_results.py
+        manual_classification.py
+        svm_bayes_classification.py
+        word_count_classification.py
+    - dictionaries
+        dictionaries.py
+        dictionary_utils.py
+    - trend    
+        mining_utils.py
+        trend_classification_utils.py
+        trend_compilation.py
+        trend_mining.py
+        trend_tweet_sorting.py
+    - twitter
+        mining_operations.py
+        mining_utils.py
+    graph_plots.py
+\end{verbatim}
 
 \section{Technology and Libraries}
 #TODO write down the technologies and tools used. 
 The technology used, frameworks etc.
 
-Python, twython
+The used python libraries are: ConfigParser, ast, codecs, io, os, twython,
+time, matplotlib, urllib, re, nltk, sklearn.
+Most of them are quite standard, while some are not. And some are self
+explanatory. 
 
-\paragraph{Twython (python bassert)}
-Rameverk for tilkobling og integrasjon mot twitter apiet.
-Se https://github.com/ryanmcgrath/twython/tree/master/examples for eksempler.
-https://github.com/ryanmcgrath/twython
+The libraries that are not shipped with standard python are described in the
+following paragraphs. 
+
+\paragraph{Twython}
+Library for connection and integration with the twitter api. 
+The source and documentation can be found on github:
+\url{https://github.com/ryanmcgrath/twython}
+
+\paragraph{nltk}
+The natural language tool kit (nltk) is a library that provides functionality
+for working with human language. It has functionality such as classifiers and
+tokenization tools. See more at \url{http://www.nltk.org/}.
+
+\paragraph{sklearn}
+Scikit-learn provides functionality for learning algorithms, machine learning
+and classification. We use this library to provide the kernels for out
+classification with classifiers. \url{http://scikit-learn.org/}
+
+\paragraph{matplotlib}
+Matplotlib is a library for graph plotting. And that is what we use it for.
+\url{http://matplotlib.org/}.
  
 \section{Data retrieval}
 #TODO running of the code and what output to expect. 

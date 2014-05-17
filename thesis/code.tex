@@ -1,10 +1,21 @@
 \chapter{The Code}
-#TODO write the chapter outline 
+The code is complete in the sense of doing what it should. Or making an attempt
+to. The results of the coding are up for discussion.
 
-#TODO the purpose of the code and the level of completeness. 
-Description of the code. It's purpose, and what it does. 
+For functionality we have code for mining tweets, compiling dictionaries,
+classifying tweets, and aggregating a trend based on data from twitter.  
 
-\section{Structure}
+For this chapter we start of with the structure of the code,
+\ref{code:structure}. Then touch the technology and libraries,
+\ref{code:technology_libraries}, used up to this point. Before we look at the
+data mining, \ref{data:data_retrieval}, dictionary compilation,
+\ref{code:dictionary_compilation}, classification,
+\ref{code:sentiment_classification}, and trend aggregation,
+\ref{code:trend_aggregation}. Last we describe the comparison,
+\ref{code:comparison}, of the finance trend and ending with the issues,
+\ref{code:issues}, of the code.  
+
+\section{Structure}\label{code:structure}
 There are four main folders. One for classification, one for mining tweets, one
 for the dictionaries and on for the files associated with trend. 
 
@@ -57,8 +68,7 @@ folders.
     graph_plots.py
 \end{verbatim}
 
-\section{Technology and Libraries}
-#TODO write down the technologies and tools used. 
+\section{Technology and Libraries}\label{code:technology_libraries}
 The technology used, frameworks etc.
 
 The used python libraries are: ConfigParser, ast, codecs, io, os, twython,
@@ -88,22 +98,378 @@ classification with classifiers. \url{http://scikit-learn.org/}
 Matplotlib is a library for graph plotting. And that is what we use it for.
 \url{http://matplotlib.org/}.
  
-\section{Data retrieval}
-#TODO running of the code and what output to expect. 
-\section{Dictionary compilation}
-#TODO running of the code and what output to expect. 
-\section{Sentiment classification}
-#TODO running of the code and what output to expect. 
-\section{Trend aggregation}
-#TODO running of the code and what output to expect. 
-\subsection{Mining}
+\section{Data retrieval}\label{data:data_retrieval}
+As we have to data sources we split it into finance data and data from twitter.
+
+\subsection{Twitter}
+The mining operation can be seen as three steps. This happens in
+\textit{mining\_operations.py} and \textit{mining\_utils.py}.
+
+\paragraph{Step 1}
+\hspace{0pt}\\
+Authenticating and connecting to twitter. 
+\begin{verbatim}
+conf = open('/home/kiro/ntnu/master/code/twitter/auth.cfg').read()
+config = ConfigParser.RawConfigParser(allow_no_value=True)
+config.readfp(io.BytesIO(conf))
+
+# getting data from conf object.
+APP_KEY = config.get('twtrauth', 'app_key')
+APP_SECRET = config.get('twtrauth', 'app_secret')
+OAUTH_TOKEN = config.get('twtrauth', 'oauth_token')
+OAUTH_TOKEN_SECRET = config.get('twtrauth', 'oauth_token_secret')
+
+# creating authentication object for twython twitter.
+twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+\end{verbatim}
+
+\paragraph{Step 2}
+\hspace{0pt}\\
+Query execution.
+\begin{verbatim}
+results = twitter.cursor(twitter.search, q=query, count="100", lauage=language)
+\end{verbatim}
+Where we have the query, and language as input variables to the
+\textit{cursor\_extraction} function. 
+
+\paragraph{Step 3}
+\hspace{0pt}\\
+Data extraction and storage.
+\begin{verbatim}
+# opens new file with today's date and time now as filename
+filename = destination_folder + "/dataset-" + strftime("%d-%b-%Y_%H:%M:%S") 
+# opens the file for appending.
+data_set = open(filename, 'a')
+
+for result in results:
+    # skip previously acquired tweets
+    if str(result['id']) in str(previous_tweets_list):
+        continue
+    else:
+        previous_tweets_list.append(result['id'])
+    
+    # store tweet to file for later use.
+    data_set.write(str(result) + "\n")
+\end{verbatim}
+
+We open the storage file for writing and gives it a name based on the time of
+creation. Then we traverse all results and store tweets we have not seen
+before. 
+
+\subsection{Finance}
+We get finance data from \url{http://www.netfonds.no/}. Specifically we get the
+data about Oslo stock exchange\fotnote{OSEBX data:
+\url{http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv}}
+We also sort out the data we do not want by breaking at a certain date. 
+
+We do this by using the urllib library in python: 
+\begin{verbatim}
+    # get data file from internet. (csv)
+    stock_exchange_history = urllib.urlopen(url).readlines()
+    records = []
+    for record in stock_exchange_history:
+        # earlier records are not interesting.
+        if "2014" in record:
+            records.append(record.strip().lower().split(","))
+        if "20140414" in record:
+            break
+    return records
+\end{verbatim}
+%
+
+\section{Dictionary compilation}\label{code:dictionary_compilation}
+For the dictionary compilation we use the manually classified datasets to
+create mono, bi and trigram dictionaries. 
+
+Starting off the process we run compilation for all datasets: 
+\begin{verbatim}
+data_files = [
+    # [name/description, name of file containing tweets]
+    ["kiro", "tweets_classified_manually"],
+    ["obama", "obama_tweets_classified_manually"]
+]
+
+for item in data_files:
+    # get labeled tweets
+    # tweets[0] are the positive ones, tweets[1] are the negative ones.
+    tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + item[1])
+
+    compile_monogram_dictionaries(tweets, item[0])
+    compile_bigram_dictionaries(tweets, item[0])
+    compile_trigram_dictionaries(tweets, item[0])
+\end{verbatim}
+ 
+Mono, bi and trigrams creation parts are quite similar: 
+\begin{verbatim}
+for text in tweets[0]:
+    positive_dict.extend(text.split(" "))
+# negative
+for text in tweets[1]:
+    negative_dict.extend(text.split(" "))
+
+filename += "-monogram"
+save_dictionaries(positive_dict, negative_dict, filename)
+\end{verbatim}
+
+Where the 'positive\_dict =' would be the only part changing.
+
+Bigram:
+\begin{verbatim}
+bigrams_list = get_bigrams_from_text(text)
+positive_dict = positive_dict + bigrams_list
+\end{verbatim}
+
+Trigram:
+\begin{verbatim}
+trigrams_list = get_trigrams_from_text(text)
+positive_dict = positive_dict + trigrams_list
+\end{verbatim}
+
+We get the bigrams and trigrams by: 
+\begin{verbatim}
+# if we have no words to work with, return empty list.
+text = clean_text(text)
+if not text:
+    return []
+
+bigrams_list = []
+# for all bigram tuples
+for tup in bigrams(text.split(' ')):
+    # find the tuple texts
+    # (u'text1', u'text2')
+    m_obj = re.search(r'\(u\'(.+)\', u\'(.+)\'\)', str(tup).decode())
+    if m_obj:
+        # combine tuple parts to bigram
+        word = m_obj.group(1) + " " + m_obj.group(2)
+        # if bigram don't exist
+        if word not in bigrams_list:
+            # add it to list.
+            bigrams_list.append(word)
+return bigrams_list
+\end{verbatim}
+Where we essentially generate sets of words in tuples and then extract the
+combined term by string conversion and regex. 
+
+Then we conveniently remove duplicates between the positive and negative
+dictionary before we write the dictionaries to file. 
+\begin{verbatim}
+primary_dictionary = get_lines_from_file(primary_dictionary_name)
+secondary_dictionary = get_lines_from_file(secondary_dictionary_name)
+
+duplicate_words = []
+# for all words in the primary dictionary.
+for pw in primary_dictionary:
+    #print w
+    # for all words in the secondary dictionary.
+    for sw in secondary_dictionary:
+        # if primary word equals secondary word
+        if pw == sw:
+            # remove word from both dictionaries.
+            primary_dictionary.remove(pw)
+            secondary_dictionary.remove(sw)
+            duplicate_words.append(pw)
+            # as we don't have duplicates within a list we skip to next pw
+            break
+
+# rewrite the updated lists to file
+write_array_entries_to_file(primary_dictionary, primary_dictionary_name)
+write_array_entries_to_file(secondary_dictionary, secondary_dictionary_name)
+write_array_entries_to_file(duplicate_words, "duplicate-words")
+\end{verbatim}
+%
+
+\section{Sentiment Classification}\label{code:sentiment_classification}
+For both classifiers we have utility code for loading data and dictionaries,
+but the important parts are the classification. Which is shown below. 
+
+\subsection{Word Count}
+For each tweet we do the same thing. Count words and find the difference
+between positive and negative words. Here is the code for doing so.   
+\begin{verbatim}
+# sanitize text.
+tweet = sanitize_tweet(tweet)
+
+# get word count for tweet
+word_count = len(tweet.split(' ')) * 1.0
+
+# get word count of pos and neg words.
+pos = get_word_count(positive_dict, tweet) / word_count
+neg = get_word_count(negative_dict, tweet) / word_count
+
+# storing the polarity value
+polarity.append(pos - neg)
+
+if polarity[-1] == threshold:
+    edge_cases += 1
+
+# adding sentiment value (True/False), for the last classified tweet.
+if polarity[-1] > threshold:
+    # positive tweet
+    results.append(True)
+else:
+    # negative tweet
+    results.append(False)
+\end{verbatim}
+
+\subsection{With classifier}
+The execution of the classification can be described in the following steps. 
+
+\paragraph{Classifier initialization}
+First we have to initialize the classifier, then train it. We send the class of
+the kernel as an input argument, such that \textit{classifier\_class} is
+'SklearnClassifier(LinearSVC())'.
+\begin{verbatim}
+# get the training set.
+training_set = nltk.classify.apply_features(extract_features_from_text,
+tweets)
+
+# create the classifier.
+classifier = classifier_class.train(training_set)
+\end{verbatim}
+
+Where the extract\_features\_from\_text function is rather important. Here the
+'dictionary' variable is the combined list of the kiro-monogram-negative.txt and
+kiro-monogram-positive.txt dictionaries.
+\begin{verbatim}
+dictionary = get_list_of_possible_words_in_tweets()
+document_words = set(text)
+features = {}
+# more precision to iterate the word of a tweet then the whole dictionary.
+# extracts all words that are both in the dictionary and in the tweet
+for word in document_words:
+    features['contains(%s)' % word] = (word in dictionary)
+return features
+\end{verbatim}
+
+\paragraph{Classification}
+The code for classifying a tweet is quite simple. 
+\begin{verbatim}
+# runs classify() on the given classifier class in the nltk library.
+results.append(classifier.classify(extract_features_from_text(tweet)))
+\end{verbatim}
+
+\section{Trend aggregation}\label{code:trend_aggregation}
+The trend aggregation is a split process. Where the mining of tweets, sorting,
+classification, and trend compilation happens in separate steps. Most important
+is the trend compilation. The sorting process only reads tweets
+and stores them the file that corresponds with the posting date of the tweet.
+Mining is done on the same principles as described earlier, only with other
+search terms. 
+
 \subsection{Compilation}
-\section{Comparison}
-#TODO running of the code and what output to expect. 
 
-\section{Issues}
-#TODO code shortcomings and potential improvements. 
-Problems in the implementation and the general solution.
+First we get positive and negative tweets from the dataset. And store that in a
+dict, with the filename, or day, as key. 
+\begin{verbatim}
+pos, neg = 0, 0
 
-#TODO the shortcomings of windows and mac. 
+# get tweets for this day.
+trend_day_tweets = [ast.literal_eval(tweet) for tweet in
+                    codecs.open(trend_base + trend_day_filename, 'r',
+"utf-8").readlines()]
 
+# sentiment for each tweet.
+sentiment = []
+
+# for tweets in this day
+for tweet in trend_day_tweets:
+    # get words of two or more characters.
+    tweet_text = [e.lower() for e in sanitize_tweet(tweet['text']).split()
+if len(e) >= 2]
+
+	# get sentiment
+    sentiment.append(classifier.classify(extract_features_from_text(tweet_text)))
+
+    # if the last tweet was positive.
+    if sentiment[-1]:
+        pos += 1
+    else:
+        neg += 1
+
+return [pos, neg, pos + neg]
+\end{verbatim}
+
+Then we calculate the average change of positive and negative tweets between
+toady and yesterday. 
+\begin{verbatim}
+keys = sorted(trend_days.keys())
+#print keys
+results = []
+for i in range(1, len(keys)):
+    # difference from yesterday til today.
+    # dif / tot
+    # change in positive tweets between this and the previous day.
+    pos_diff = (trend_days[keys[i]]['pos'] - trend_days[keys[i - 1]]['pos'])
+/ (
+        trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+
+    # change in negative tweets between this and the previous day..
+    neg_diff = (trend_days[keys[i]]['neg'] - trend_days[keys[i - 1]]['neg'])
+/ (
+        trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+
+    # median = the mid point between the positive and negative change
+points.
+    # change in sentiment volume between this and the previous day.
+    median = min([neg_diff, pos_diff]) + abs(pos_diff - neg_diff) / 2
+    results.append(median)
+
+    #print keys[i], "%.4f" % median, trend_days[keys[i]]['tot']
+    #print "pos", keys[i], trend_days[keys[i]]['neg'] -
+trend_days[keys[i-1]]['neg']
+
+#print len(results)
+return results
+\end{verbatim}
+
+\section{Comparison}\label{code:comparison}
+We do the same for the finance data as with the tweet data above. And multiplies
+the result with 100 to scale the graph plot.  
+\begin{verbatim}
+for i in range(1, len(stock_records)):
+    # calculate percentage diff sinse yesterday.
+    diff = (stock_records[i][6] - stock_records[i - 1][6]) / (
+        stock_records[i][6] + stock_records[i - 1][6] * 1.0)
+    results.append(diff * 100)
+\end{verbatim}
+
+And last we plot the data:(xlen is the number of observations) 
+\begin{verbatim}
+x = [e for e in range(0, xlen)]
+plt.axis([0, len(x) - 1, -1.0, 1.0])
+plt.xlabel('id')
+plt.ylabel('Accuracy')
+
+# plot changes in tweets
+#y = get_median_change_tweets(trend_days)
+if trend_days:
+    y = get_median_change_tweets(trend_days)
+else:
+    y = get_median_change_tweets(get_tweet_trend_data())
+plt.plot(x, y, '-r')  # twitter data
+
+y = get_stock_graph_data()
+plt.plot(x, y, '-g')  # finance data
+
+plt.show()
+\end{verbatim}
+
+And compares the two graphs plotted in the same view. 
+%
+ 
+\section{Issues}\label{code:issues}
+The  quality of the code in general is quite good. But whether or not the logic
+works out all the time is uncertain. Some of the functions and methods can also
+be improved.   
+
+\paragraph{Operating System Impediments}
+There might be some OS related specifics that we do not know about. Linux of
+the Debian family has been used. So we expect that you know what you are doing
+when testing the code on Windows or Mac.
+
+If a all a problem, if will be with pre installed packages that will not
+show up in the requirements or library parts discussed earlier. Thats because we
+do not know which packages was already installed.  
+
+Also some Linux tools has been used in scripts. Those will not work on Windows,
+but might on Mac.

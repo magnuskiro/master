@@ -2,7 +2,8 @@
 import re
 from os import listdir
 from os.path import isfile, join
-from nltk import SklearnClassifier, nltk
+import nltk
+from nltk import SklearnClassifier
 from sklearn.svm import LinearSVC
 from mining_utils import get_lines_from_file
 

@@ -1,4 +1,3 @@
-
 import ast
 import codecs
 import matplotlib.pyplot as plt
@@ -138,13 +137,20 @@ def get_stock_graph_data():
     # calculate graph plot points.
     results = []
     for i in range(1, len(stock_records)):
-        # calculate percentage diff sinse yesterday.
-        diff = (stock_records[i][6] - stock_records[i - 1][6]) / (
-            stock_records[i][6] + stock_records[i - 1][6] * 1.0)
+        closing_value_today = stock_records[i][6]
+        closing_value_yesterday = stock_records[i - 1][6]
+
+        average_value_today_yesterday = (stock_records[i][6] + stock_records[i - 1][6]) / 2
+
+        # calculate percentage diff between this and the previous day.
+        diff = (closing_value_today - closing_value_yesterday) / (
+            average_value_today_yesterday * 1.0)
+
+        # scaled to work with the tweet trend.
         results.append(diff * 100)
 
-    #print len(results)
-    #print stock_records
+    print len(results)
+    print results
     return results
 
 
@@ -159,14 +165,25 @@ def get_median_change_tweets(trend_days):
     results = []
     for i in range(1, len(keys)):
         # difference from yesterday til today.
-        # dif / tot
-        # change in positive tweets between this and the previous day.
-        pos_diff = (trend_days[keys[i]]['pos'] - trend_days[keys[i - 1]]['pos']) / (
-            trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+        # positive tweets
+        positive_tweets_today = trend_days[keys[i]]['pos']
+        positive_tweets_yesterday = trend_days[keys[i - 1]]['pos']
 
-        # change in negative tweets between this and the previous day..
-        neg_diff = (trend_days[keys[i]]['neg'] - trend_days[keys[i - 1]]['neg']) / (
-            trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+        # negative tweets
+        negative_tweets_today = trend_days[keys[i]]['neg']
+        negative_tweets_yesterday = trend_days[keys[i - 1]]['neg']
+
+        # total amount of tweets
+        total_amount_of_tweets = trend_days[keys[i]]['tot'] + \
+                                 trend_days[keys[i - 1]]['tot']
+
+        # change in positive tweets between this and the previous day.
+        pos_diff = (positive_tweets_today - positive_tweets_yesterday) / (
+            total_amount_of_tweets * 1.0)
+
+        # change in negative tweets between this and the previous day.
+        neg_diff = (negative_tweets_today - negative_tweets_yesterday) / (
+            total_amount_of_tweets * 1.0)
 
         # median = the mid point between the positive and negative change points.
         # change in sentiment volume between this and the previous day.
@@ -223,9 +240,6 @@ def plot(trend_days):
     xlen = 23
 
     x = [e for e in range(0, xlen)]
-    plt.axis([0, len(x) - 1, -1.0, 1.0])
-    plt.xlabel('id')
-    plt.ylabel('Accuracy')
 
     # plot changes in tweets
     #y = get_median_change_tweets(trend_days)
@@ -237,6 +251,11 @@ def plot(trend_days):
 
     y = get_stock_graph_data()
     plt.plot(x, y, '-g')  # finance data
+
+    # set axis, boundaries and labels.
+    plt.axis([0, len(x) - 1, -1.0, max(y)])
+    plt.xlabel('Days')
+    plt.ylabel('Percentage change')
 
     plt.show()
 

@@ -1,17 +1,71 @@
 \chapter{Results and Discussion}\label{results}
-All our results are in ones and zeroes. 
-And further we discuss why there are only zeroes. And how that affects the
-outcome and future endeavors for the pirates we are. 
+%All our results are in ones and zeroes. 
+%And further we discuss why there are only zeroes. And how that affects the
+%outcome and future endeavors for the pirates we are. 
+
+The results of our research and the following discussion of them happen here.
+We touch the three main parts of the thesis. The data sources, section
+\ref{results:data_sources}. Classification of sentiment in section
+\ref{results:classificaiton}. And the trend in section \ref{results:trend}.
+Last we have a general discussion about the results. 
+%
 
 \section{Data Source}
-#TODO twitter as a data source
-#TODO the dictionaries
+Twitter as a data source proved to be OK. It was quite easy to obtain data. But
+increasingly difficult to get good amounts of data and unbiased data. All the
+initial data have some restriction to search term or other limits. In total we
+should have mined a lot more data and classified more of it. 
+
+As far as the dictionaries go they work well. We have different results for
+different dictionaries and different datasets, but all in all the way to
+compile datasets work good. The dictionaries depend on the manually classified
+tweets, so a lot of the improvement lies there. Although we can improve the
+dictionaries by removing stop words and other words we know have no clear
+positive of negative contribution. 
+%
 
 \section{Classification}
-#TODO classifiers, svm over others. show it. 
-#TODO classification results and why. svm best, bla bla biased. 
+Manual labeling is a bit of a challenge to keep unbiased. The whole
+classification process is based on a persons opinion, which makes the results
+somewhat biased. To eliminate this error we should have multiple people do the
+manual classification and combine the results.  
+
+Word counting works to some extent. But presents varied results based on the
+dataset and the dictionary used. Again this comes down to the dataset and the
+dictionaries created. Also the way we separate tweets from each other with a
+threshold can be improved. All in all word counting works, but it is not very
+good. 
+
+Classifiers  improve the classification quite a bit. With the svm classifier we
+get around 98 percent correct classification on both data sets. Which is good.
+
+The uncertainties lie in the biased, or potentially biased, data. We do not
+know if the data in itself is fully representable for the content on twitter.
+Neither do we know if the manual classification is completely correct. 
+
+In total we gained some knowledge about dictionaries and their effect on
+classification. And we can confirm that classifiers work better than word
+counting.  
+%
 
 \section{Trend}
-#TODO did we get a trend? 
-#TODO and it's accuracy to finance plotting. 
+The attempt to create a trend succeeded, but it was not were good. The average
+change in sentiment between two days did not have any correlations with the
+average change in closing value of the stock exchange. 
 
+One of the limitations here is the low test coverage. This should have been
+tested with multiple exchanges and much more tweets. We used around 30 thousand
+tweets to create the tweet trend. But the amount does not matter if the data is
+used wrong.  
+
+Partial success, with plenty flaws. New knowledge gain and lots of new
+questions to be asked. 
+%
+
+\section{Discussion}
+From the three parts we have satisfying and unsatisfying results. We have good
+results and vague results. The vague results should be frowned upon. While the
+reasonable results should be expanded, retested and improved. 
+Most notably we have clear indications that dictionaries, automatically compiled
+from a manually classified tweets set, can be used when classifying sentiment. 
+%

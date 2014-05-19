@@ -5,7 +5,8 @@
 % reference manual(eng): http://ctan.uib.no/info/latex2e-help-texinfo/latex2e.html
 
 % The document class defines the type of document. Presentation, article, letter, etc. 
-\documentclass[12pt, a4paper]{report}
+%\documentclass[12pt, a4paper]{report}
+\documentclass[pdftex,10pt,b5paper,twoside]{book}
 
 % packages to be used. needed to use images and such things. 
 \usepackage[hidelinks, pdfborder=0 0 0]{hyperref}
@@ -26,18 +27,6 @@
 \DeclareGraphicsExtensions{.pdf, .png, .jpg, .jpeg}
 \graphicspath{{./images/}}
 
-\hypersetup{
-    pdfauthor={\thesisAuthor},
-    pdftitle={\thesisTitle},
-    pdfsubject={\thesisType},
-    pdfnewwindow=true,
-    colorlinks=true,
-    linkcolor=black,
-    filecolor=red,
-    urlcolor=blue,
-    citecolor=magenta
-}
-
 % Commands
 \renewcommand{\arraystretch}{1.2}
 
@@ -46,28 +35,46 @@
 \newcommand{\thesisAuthor}{Magnus L. Kirø}
 \newcommand{\thesisTitle}{Sentiment analysis of Tweets in correlation with financial investments}
 \newcommand{\thesisType}{Masters Thesis}
+\newcommand{\thesisKeywords}{Twitter, Sentiment, Finance}
+
+% setting the embedded pdf metadata. Visible under pdf properties in your
+% viewer. 
+\hypersetup{
+    pdfauthor={\thesisAuthor},
+    pdftitle={\thesisTitle},
+    pdfsubject={\thesisType},
+	pdfkeywords={\thesisKeywords},
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=red,
+    urlcolor=blue,
+    citecolor=magenta
+}
+
 
 % beginning of the document content, end of the configuration and setup. 
 \begin{document}
 \pagenumbering{RomanType}
 
+%TODO remove title page on completion of thesis. 
 % front page, contains: title, author, institution, and logo
 \input{titlePage.tex}
 
-% Abstract
-\input{abstract}
-
-% Acknowledgements and thanks to people that helped me. 
-\renewcommand{\abstractname}{Acknowledgements}
-	\input{acknowledgements}
-\renewcommand{\abstractname}{Metadata}
-	\input{metadata}
-\newpage
+% Summary and preface.
+\input{summary.tex}
 
 % listings
+\addcontentsline{toc}{chapter}{List of Contents}
 \tableofcontents
-\listoffigures
+
+\addcontentsline{toc}{chapter}{List of Tables}
 \listoftables
+
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+%\addcontentsline{toc}{chapter}{List of Listings}
 %\listoflistings
 
 \newpage

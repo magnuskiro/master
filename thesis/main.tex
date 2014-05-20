@@ -14,11 +14,16 @@
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{glossaries}
-\usepackage{listing}
-\usepackage{listings}
 \usepackage[options]{natbib}
 \usepackage{hyphenat}
 \PassOptionsToPackage{hyphens}{url}
+\usepackage{listing}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{setspace}
+
+% import syntax highlighting
+\input{syntax.tex}
 
 % hides the section numbering. 
 %\setcounter{secnumdepth}{-1}
@@ -52,7 +57,6 @@
     citecolor=magenta
 }
 
-
 % beginning of the document content, end of the configuration and setup. 
 \begin{document}
 \pagenumbering{RomanType}
@@ -74,8 +78,8 @@
 \addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures
 
-%\addcontentsline{toc}{chapter}{List of Listings}
-%\listoflistings
+\addcontentsline{toc}{chapter}{List of Listings}
+\listoflistings
 
 \newpage
 \pagenumbering{arabic}
@@ -86,7 +90,7 @@
 \input{data.tex} % how
 \input{sentimentAnalysis} % how
 \input{trending} % how
-\input{code.tex}
+\input{experiments.tex} % what
 \input{resultsAndDiscussion} % that
 \input{conclusion} % so what
 \input{futureWork} % what not
@@ -100,6 +104,7 @@
 % appendixes 
 \newpage
 \appendix
+\input{code.tex}
 \input{appendix/articles.tex}
 \input{appendix/tweetUsageOverview.tex}
 \input{appendix/webResources.tex}

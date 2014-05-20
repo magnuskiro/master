@@ -108,15 +108,13 @@ as follows:
 \end{itemize} 
 
 The code of the example is as follows:
-\begin{listing}
-\begin{verbatim}
+\begin{python}
 twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 results = twitter.search(q='Search query', count='15')
 
 for status in results['statuses']:
     print status['id']
-\end{verbatim}
-\end{listing}
+\end{python}
 
 For more advanced use we have generators, and lots of parameters and api
 endpoints to use. Endpoints and search parameters will be described under
@@ -205,28 +203,28 @@ endpoints} table in section \ref{tbl:twitterAPIendpoints}.
 
 Mainly we need a query. The query is a normal search string where twitter will
 find tweets containing all words in the string. 
-\begin{verbatim}
+\begin{python}
 query = "Finance Increase"
-\end{verbatim}
+\end{python}
 
 Further we can expand the search by using logic. 
-\begin{verbatim}
+\begin{python}
 query = "Finance OR Investment AND Economy OR Growth"
-\end{verbatim}
+\end{python}
 
 The specific search used to compile the tweetset the dictionaries are based on is the
 following. Where we get all tweets containing one of the words: \textit{Finance}, \textit{Investment}, \textit{Economy}, and \textit{Growth}.
-\begin{verbatim}
+\begin{python}
 query = "Finance OR Investment OR Economy OR Growth"
-\end{verbatim}
+\end{python}
 
 Adding other parameters such as count and language we can further improve our
 search. To execute such a search we get python code like the following, where
 'results' is a data structure containing tweets.
-\begin{verbatim}
+\begin{python}
 query = "Finance OR Investment OR Economy OR Growth"
 results = twitter.search(q=query, count='15', language='no')
-\end{verbatim}
+\end{python}
 %
 
 \paragraph{Mining optimization}
@@ -242,16 +240,16 @@ the retweets and got a lot more different tweets.
 
 As nearly all retweets start with 'RT' we can easily sort them out. Then we get
 a query like this. 
-\begin{verbatim}
+\begin{python}
 query = "Finance OR Investment OR Economy OR Growth AND -RT"
-\end{verbatim}
+\end{python}
 
 When using the twython framework and its cursor function we get a continuous
 stream of tweets. A problem with this is that twython's cursor basically
 executes multiple searches. Thus yielding the same tweets multiple times,
 unless you change the search. So we change the search to accommodate this and
 use the \textit{max\_id} parameter.
-\begin{verbatim}
+\begin{python}
 query = "Finance OR Investment OR Economy OR Growth"
 results = twitter.cursor(
                 twitter.search,
@@ -262,7 +260,7 @@ results = twitter.cursor(
 
 for result in results:
     print result
-\end{verbatim}
+\end{python}
 %
 
 \paragraph{API Caveats}
@@ -566,12 +564,12 @@ data on OSEBX
 \url{http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv}}. 
 
 By creating a little script we get fresh data every time we run the script.
-\begin{verbatim}
+\begin{python}
 stock_exchange_history = urllib.urlopen(urli_of_datafile).readlines()
     for record in stock_exchange_history:
         # do tomething with the data
         print record
-\end{verbatim} 
+\end{python} 
 
 \paragraph{Structure}
 \hspace{0pt}\\

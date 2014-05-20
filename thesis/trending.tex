@@ -68,7 +68,7 @@ average change graph.
 
 To be even more precise we took the percentage average change of change in
 positive and change in negative tweets. 
-\begin{verbatim}
+\begin{python}
 # difference from yesterday til today.
 # change in positive tweets between this and the previous day.
 pos_diff = (positive_tweets_today - positive_tweets_yesterday) / (
@@ -82,7 +82,7 @@ neg_diff = (negative_tweets_today - negative_tweets_yesterday) / (
 # change in sentiment volume between this and the previous day.
 median = min([neg_diff, pos_diff]) + abs(pos_diff - neg_diff) / 2
 results.append(median)
-\end{verbatim}
+\end{python}
 Plotting this we get the average change graph, figure: \ref{tweet_trend_plot.png}.
 
 \begin{figure}[htb]
@@ -104,14 +104,14 @@ the graph easier.
 To describe the calculation of the finance trend: we took the percentage of
 change in closing value from yesterday and today. Then we scaled the graph by a
 value of 100 to make the changes visible in the same plot as the tweet trend.
-\begin{verbatim}
+\begin{python}
 # calculate percentage diff between this and the previous day.
 diff = (closing_value_today - closing_value_yesterday) / (
     average_value_today_yesterday * 1.0)
 
 # scaled to work with the tweet trend.
 results.append(diff * 100)
-\end{verbatim}
+\end{python}
 
 Plotting the graph we got figure \ref{fig:trend_finance_plot}.
 \begin{figure}[htb]

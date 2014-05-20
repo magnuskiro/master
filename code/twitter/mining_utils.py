@@ -24,7 +24,10 @@ OAUTH_TOKEN = config.get('twtrauth', 'oauth_token')
 OAUTH_TOKEN_SECRET = config.get('twtrauth', 'oauth_token_secret')
 
 # creating authentication object for twython twitter.
-twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+twitter = Twython(APP_KEY,
+                  APP_SECRET,
+                  OAUTH_TOKEN,
+                  OAUTH_TOKEN_SECRET)
 
 
 def get_twython_instance():

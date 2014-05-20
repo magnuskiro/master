@@ -66,7 +66,10 @@ def cursor_extraction(query='twitter', language='en', max_tweets=15, destination
                 lauage=language,
                 max_id=min(previous_tweets_list))
         else:
-            results = twitter.cursor(twitter.search, q=query, count="100", lauage=language)
+            results = twitter.cursor(twitter.search,
+                                     q=query,
+                                     count="100",
+                                     lauage=language)
 
         # create rate limit check. if less then 90 queries remain, sleep 5 sec.
         status = ast.literal_eval(str(twitter.get_application_rate_limit_status()))

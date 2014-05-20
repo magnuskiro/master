@@ -108,8 +108,8 @@ The mining operation can be seen as three steps. This happens in
 \paragraph{Step 1}
 \hspace{0pt}\\
 Authenticating and connecting to twitter. 
-\begin{verbatim}
-conf = open('/home/kiro/ntnu/master/code/twitter/auth.cfg').read()
+\begin{python}
+conf = open('auth.cfg').read()
 config = ConfigParser.RawConfigParser(allow_no_value=True)
 config.readfp(io.BytesIO(conf))
 
@@ -117,27 +117,35 @@ config.readfp(io.BytesIO(conf))
 APP_KEY = config.get('twtrauth', 'app_key')
 APP_SECRET = config.get('twtrauth', 'app_secret')
 OAUTH_TOKEN = config.get('twtrauth', 'oauth_token')
-OAUTH_TOKEN_SECRET = config.get('twtrauth', 'oauth_token_secret')
+OAUTH_TOKEN_SECRET = config.get('twtrauth', 
+                                'oauth_token_secret')
 
 # creating authentication object for twython twitter.
-twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-\end{verbatim}
+twitter = Twython(APP_KEY, 
+                  APP_SECRET, 
+                  OAUTH_TOKEN, 
+                  OAUTH_TOKEN_SECRET)
+\end{python}
 
 \paragraph{Step 2}
 \hspace{0pt}\\
 Query execution.
-\begin{verbatim}
-results = twitter.cursor(twitter.search, q=query, count="100", lauage=language)
-\end{verbatim}
+\begin{python}
+results = twitter.cursor(twitter.search, 
+                         q=query, 
+                         count="100", 
+                         lauage=language)
+\end{python}
 Where we have the query, and language as input variables to the
 \textit{cursor\_extraction} function. 
 
 \paragraph{Step 3}
 \hspace{0pt}\\
 Data extraction and storage.
-\begin{verbatim}
+\begin{python}
 # opens new file with today's date and time now as filename
-filename = destination_folder + "/dataset-" + strftime("%d-%b-%Y_%H:%M:%S") 
+filename = destination_folder + "/dataset-" + \
+    strftime("%d-%b-%Y_%H:%M:%S") 
 # opens the file for appending.
 data_set = open(filename, 'a')
 
@@ -150,7 +158,7 @@ for result in results:
     
     # store tweet to file for later use.
     data_set.write(str(result) + "\n")
-\end{verbatim}
+\end{python}
 
 We open the storage file for writing and gives it a name based on the time of
 creation. Then we traverse all results and store tweets we have not seen
@@ -163,18 +171,18 @@ data about Oslo stock exchange\fotnote{OSEBX data:
 We also sort out the data we do not want by breaking at a certain date. 
 
 We do this by using the urllib library in python: 
-\begin{verbatim}
-    # get data file from internet. (csv)
-    stock_exchange_history = urllib.urlopen(url).readlines()
-    records = []
-    for record in stock_exchange_history:
-        # earlier records are not interesting.
-        if "2014" in record:
-            records.append(record.strip().lower().split(","))
-        if "20140414" in record:
-            break
-    return records
-\end{verbatim}
+\begin{python}
+# get data file from internet. (csv)
+stock_exchange_history = urllib.urlopen(url).readlines()
+records = []
+for record in stock_exchange_history:
+    # earlier records are not interesting.
+    if "2014" in record:
+        records.append(record.strip().lower().split(","))
+    if "20140414" in record:
+        break
+return records
+\end{python}
 %
 
 \section{Dictionary compilation}\label{code:dictionary_compilation}
@@ -182,7 +190,7 @@ For the dictionary compilation we use the manually classified datasets to
 create mono, bi and trigram dictionaries. 
 
 Starting off the process we run compilation for all datasets: 
-\begin{verbatim}
+\begin{python}
 data_files = [
     # [name/description, name of file containing tweets]
     ["kiro", "tweets_classified_manually"],
@@ -191,16 +199,18 @@ data_files = [
 
 for item in data_files:
     # get labeled tweets
-    # tweets[0] are the positive ones, tweets[1] are the negative ones.
-    tweets = get_positive_negative_tweets_from_manually_labeled_tweets(classification_base + item[1])
+    # tweets[0] are the positive ones, 
+    # tweets[1] are the negative ones.
+    tweets = get_tweets_from_manually_labeled_tweets(
+             classification_base + item[1])
 
     compile_monogram_dictionaries(tweets, item[0])
     compile_bigram_dictionaries(tweets, item[0])
     compile_trigram_dictionaries(tweets, item[0])
-\end{verbatim}
+\end{python}
  
 Mono, bi and trigrams creation parts are quite similar: 
-\begin{verbatim}
+\begin{python}
 for text in tweets[0]:
     positive_dict.extend(text.split(" "))
 # negative
@@ -209,24 +219,24 @@ for text in tweets[1]:
 
 filename += "-monogram"
 save_dictionaries(positive_dict, negative_dict, filename)
-\end{verbatim}
+\end{python}
 
 Where the 'positive\_dict =' would be the only part changing.
 
 Bigram:
-\begin{verbatim}
+\begin{python}
 bigrams_list = get_bigrams_from_text(text)
 positive_dict = positive_dict + bigrams_list
-\end{verbatim}
+\end{python}
 
 Trigram:
-\begin{verbatim}
+\begin{python}
 trigrams_list = get_trigrams_from_text(text)
 positive_dict = positive_dict + trigrams_list
-\end{verbatim}
+\end{python}
 
 We get the bigrams and trigrams by: 
-\begin{verbatim}
+\begin{python}
 # if we have no words to work with, return empty list.
 text = clean_text(text)
 if not text:
@@ -237,7 +247,8 @@ bigrams_list = []
 for tup in bigrams(text.split(' ')):
     # find the tuple texts
     # (u'text1', u'text2')
-    m_obj = re.search(r'\(u\'(.+)\', u\'(.+)\'\)', str(tup).decode())
+    m_obj = re.search(r'\(u\'(.+)\', u\'(.+)\'\)', 
+                      str(tup).decode())
     if m_obj:
         # combine tuple parts to bigram
         word = m_obj.group(1) + " " + m_obj.group(2)
@@ -246,15 +257,17 @@ for tup in bigrams(text.split(' ')):
             # add it to list.
             bigrams_list.append(word)
 return bigrams_list
-\end{verbatim}
+\end{python}
 Where we essentially generate sets of words in tuples and then extract the
 combined term by string conversion and regex. 
 
 Then we conveniently remove duplicates between the positive and negative
 dictionary before we write the dictionaries to file. 
-\begin{verbatim}
-primary_dictionary = get_lines_from_file(primary_dictionary_name)
-secondary_dictionary = get_lines_from_file(secondary_dictionary_name)
+\begin{python}
+primary_dictionary = get_lines_from_file(
+    primary_dictionary_name)
+secondary_dictionary = get_lines_from_file(
+    secondary_dictionary_name)
 
 duplicate_words = []
 # for all words in the primary dictionary.
@@ -268,14 +281,18 @@ for pw in primary_dictionary:
             primary_dictionary.remove(pw)
             secondary_dictionary.remove(sw)
             duplicate_words.append(pw)
-            # as we don't have duplicates within a list we skip to next pw
+            # as we don't have duplicates within a list,
+            # we skip to next pw
             break
 
 # rewrite the updated lists to file
-write_array_entries_to_file(primary_dictionary, primary_dictionary_name)
-write_array_entries_to_file(secondary_dictionary, secondary_dictionary_name)
-write_array_entries_to_file(duplicate_words, "duplicate-words")
-\end{verbatim}
+write_array_entries_to_file(primary_dictionary, 
+                            primary_dictionary_name)
+write_array_entries_to_file(secondary_dictionary, 
+                            secondary_dictionary_name)
+write_array_entries_to_file(duplicate_words, 
+                            "duplicate-words")
+\end{python}
 %
 
 \section{Sentiment Classification}\label{code:sentiment_classification}
@@ -285,7 +302,7 @@ but the important parts are the classification. Which is shown below.
 \subsection{Word Count}
 For each tweet we do the same thing. Count words and find the difference
 between positive and negative words. Here is the code for doing so.   
-\begin{verbatim}
+\begin{python}
 # sanitize text.
 tweet = sanitize_tweet(tweet)
 
@@ -302,14 +319,15 @@ polarity.append(pos - neg)
 if polarity[-1] == threshold:
     edge_cases += 1
 
-# adding sentiment value (True/False), for the last classified tweet.
+# adding sentiment value (True/False), 
+# for the last classified tweet.
 if polarity[-1] > threshold:
     # positive tweet
     results.append(True)
 else:
     # negative tweet
     results.append(False)
-\end{verbatim}
+\end{python}
 
 \subsection{With classifier}
 The execution of the classification can be described in the following steps. 
@@ -318,35 +336,40 @@ The execution of the classification can be described in the following steps.
 First we have to initialize the classifier, then train it. We send the class of
 the kernel as an input argument, such that \textit{classifier\_class} is
 'SklearnClassifier(LinearSVC())'.
-\begin{verbatim}
+\begin{python}
 # get the training set.
-training_set = nltk.classify.apply_features(extract_features_from_text,
-tweets)
+training_set = nltk.classify.apply_features(
+    extract_features_from_text,
+    tweets)
 
 # create the classifier.
 classifier = classifier_class.train(training_set)
-\end{verbatim}
+\end{python}
 
 Where the extract\_features\_from\_text function is rather important. Here the
 'dictionary' variable is the combined list of the kiro-monogram-negative.txt and
 kiro-monogram-positive.txt dictionaries.
-\begin{verbatim}
+\begin{python}
 dictionary = get_list_of_possible_words_in_tweets()
 document_words = set(text)
 features = {}
-# more precision to iterate the word of a tweet then the whole dictionary.
-# extracts all words that are both in the dictionary and in the tweet
+# more precision to iterate the word of a tweet then the 
+# whole dictionary.
+# extracts all words that are both in the dictionary and 
+# in the tweet
 for word in document_words:
     features['contains(%s)' % word] = (word in dictionary)
 return features
-\end{verbatim}
+\end{python}
 
 \paragraph{Classification}
 The code for classifying a tweet is quite simple. 
-\begin{verbatim}
-# runs classify() on the given classifier class in the nltk library.
-results.append(classifier.classify(extract_features_from_text(tweet)))
-\end{verbatim}
+\begin{python}
+# runs classify() on the given classifier class in the 
+# nltk library.
+results.append(classifier.classify(
+    extract_features_from_text(tweet)))
+\end{python}
 
 \section{Trend aggregation}\label{code:trend_aggregation}
 The trend aggregation is a split process. Where the mining of tweets, sorting,
@@ -360,13 +383,14 @@ search terms.
 
 First we get positive and negative tweets from the dataset. And store that in a
 dict, with the filename, or day, as key. 
-\begin{verbatim}
+\begin{python}
 pos, neg = 0, 0
 
 # get tweets for this day.
 trend_day_tweets = [ast.literal_eval(tweet) for tweet in
-                    codecs.open(trend_base + trend_day_filename, 'r',
-"utf-8").readlines()]
+    codecs.open(trend_base + trend_day_filename, 
+                'r',
+                "utf-8").readlines()]
 
 # sentiment for each tweet.
 sentiment = []
@@ -374,11 +398,12 @@ sentiment = []
 # for tweets in this day
 for tweet in trend_day_tweets:
     # get words of two or more characters.
-    tweet_text = [e.lower() for e in sanitize_tweet(tweet['text']).split()
-if len(e) >= 2]
+    tweet_text = [e.lower() for e in sanitize_tweet(
+          tweet['text']).split() if len(e) >= 2]
 
 	# get sentiment
-    sentiment.append(classifier.classify(extract_features_from_text(tweet_text)))
+    sentiment.append(classifier.classify(
+        extract_features_from_text(tweet_text)))
 
     # if the last tweet was positive.
     if sentiment[-1]:
@@ -387,26 +412,35 @@ if len(e) >= 2]
         neg += 1
 
 return [pos, neg, pos + neg]
-\end{verbatim}
+\end{python}
 
 Then we calculate the average change of positive and negative tweets between
 toady and yesterday. 
-\begin{verbatim}
+\begin{python}
 keys = sorted(trend_days.keys())
 #print keys
 results = []
 for i in range(1, len(keys)):
     # difference from yesterday til today.
-    # dif / tot
-    # change in positive tweets between this and the previous day.
-    pos_diff = (trend_days[keys[i]]['pos'] - trend_days[keys[i - 1]]['pos'])
-/ (
-        trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+    # positive tweets
+    positive_tweets_today = trend_days[keys[i]]['pos']
+    positive_tweets_yesterday = trend_days[keys[i - 1]]['pos']
 
-    # change in negative tweets between this and the previous day..
-    neg_diff = (trend_days[keys[i]]['neg'] - trend_days[keys[i - 1]]['neg'])
-/ (
-        trend_days[keys[i]]['tot'] + trend_days[keys[i - 1]]['tot'] * 1.0)
+    # negative tweets
+    negative_tweets_today = trend_days[keys[i]]['neg']
+    negative_tweets_yesterday = trend_days[keys[i - 1]]['neg']
+
+    # total amount of tweets
+    total_amount_of_tweets = trend_days[keys[i]]['tot'] + \
+                             trend_days[keys[i - 1]]['tot']
+
+    # change in positive tweets between this and the previous day.
+    pos_diff = (positive_tweets_today - positive_tweets_yesterday) / (
+        total_amount_of_tweets * 1.0)
+
+    # change in negative tweets between this and the previous day.
+    neg_diff = (negative_tweets_today - negative_tweets_yesterday) / (
+        total_amount_of_tweets * 1.0)
 
     # median = the mid point between the positive and negative change
 points.
@@ -420,21 +454,21 @@ trend_days[keys[i-1]]['neg']
 
 #print len(results)
 return results
-\end{verbatim}
+\end{python}
 
 \section{Comparison}\label{code:comparison}
 We do the same for the finance data as with the tweet data above. And multiplies
 the result with 100 to scale the graph plot.  
-\begin{verbatim}
+\begin{python}
 for i in range(1, len(stock_records)):
     # calculate percentage diff sinse yesterday.
     diff = (stock_records[i][6] - stock_records[i - 1][6]) / (
         stock_records[i][6] + stock_records[i - 1][6] * 1.0)
     results.append(diff * 100)
-\end{verbatim}
+\end{python}
 
 And last we plot the data:(xlen is the number of observations) 
-\begin{verbatim}
+\begin{python}
 x = [e for e in range(0, xlen)]
 plt.axis([0, len(x) - 1, -1.0, 1.0])
 plt.xlabel('id')
@@ -452,7 +486,7 @@ y = get_stock_graph_data()
 plt.plot(x, y, '-g')  # finance data
 
 plt.show()
-\end{verbatim}
+\end{python}
 
 And compares the two graphs plotted in the same view. 
 %

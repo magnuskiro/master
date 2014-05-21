@@ -1,25 +1,171 @@
 \chapter{Experiments}\label{experiments}
-#TODO chapter description an purpose
-#TODO experimental setup, explaining a plan and execution of experiments.  
+#TODO chapter description an purpose\\
+#TODO experimental setup, explaining a plan and execution of experiments.  \\
 #TODO By using my methods, described in earlier chapters, we can execute the
-necessary experiments to test the research questions. 
+necessary experiments to test the research questions. \\
+#TODO chapter outline. \\
+#TODO list the experiments done to achieve results. The concrete ones. \\
+#TODO link these experiments to methods in other chapters.  \\
+#TODO link the experiments to research questions. \\
 
+\section{Dictionary compilation}
+Section \ref{data:dictionaries} describes dictionaries and what they are used
+for. This section describes how the dictionaries are tested. 
+The dictionaries are compiled from manually labeled tweets.
 
-#TODO chapter outline. 
+As a step in the sentiment classification dictionaries was created for the
+word count classification \ref{sentiment:word_count_classification}.
+To find out which dictionaries performed well or not we tested the dictionaries
+with two data sets, the kiro dataset and the obama dataset. 
 
-% example. 
+This experiment enlightens part of research question 1,
+\ref{introduction:rq1}, how we can find the sentiment of a tweet.
+
+\paragraph{Dictionary quality}
+\hspace{0pt}\\
+To test the dictionary quality the word count classification
+\ref{experiments:word_count_classification} does it for us. All the
+dictionaries are tested with the two datasets and we can compare the results. 
+How the dictionaries are compiled are described in
+\ref{data:compiled_dictionaries} and \ref{code:dictionary_compilation}.
+
+\paragraph{Removal of duplicate words}
+\hspace{0pt}\\
+When creating the different dictionaries we remove duplicates from the positive
+and negative dictionary set. Words that are present in both the positive and
+negative dictionary is removed. By doing this we remove words that has no
+significance in the classification. But we also risk removing words with
+significance.
+
+The code is described in appendix \ref{code:remove_duplicate_words} on page
+\pageref{code:remove_duplicate_words}.
+
+\paragraph{Results}
+\hspace{0pt}\\
+Results from the testing of dictionaries are closely linked to the word count
+classification in \ref{experiments:word_count_classification} and described in
+table \ref{tbl:sentiment_word_count_results} on page
+\pageref{tbl:sentiment_word_count_results}.
+%
+
+\section{Word Count Classification}\label{experiments:word_count_classification}
+#TODO link to 3.1 and 4.2, 2.2
+\ref{sentiment:classification}
+
+#TODO Research question 1 and 2
+
+This experiment used the technique described in section
+\ref{sentiment:word_count_classification}. The word counting way of classifying
+a tweets sentiment.  
+
+Code wise we get something like this:
 \begin{python}
-def foo(bar):
-    print 'hello world!'
-	print 'testing'
+positivity = positive_words_count / total_number_words
+negativity = negative_words_count / total_number_words
+
+polarity = positivity - negativity
+
+if polarity > 0:
+    tweet is positive
+else:
+    tweet is negative
 \end{python}
 
-#TODO list the experiments done to achieve results. The concrete ones. 
-#TODO link these experiments to methods in other chapters.  
-#TODO link the experiments to research questions. 
-\section{Experiment 1}
+%
 
-\section{Experiment 2}
+\section{Threshold Variation}\label{experiments:threshold}
+In section \ref{sentiment:threshold}
 
-\section{Experiment 3}
+# TODO get stuff from results. 
+
+By varying the threshold we hoped to find an optimal point of which we could
+separate tweets based on polarity. From the following
+graphs, figure \ref{fig:threshold_graphs}, we can see no clear distinction of
+one value being better than the other ones.
+
+%
+
+
+\section{Choice of SVM Kernel}\label{experiments:svm_kernel}
+In extension of \ref{sentiment:svm_classification} all the SVM kernels were tested. 
+While testing which kernel was best we used the kiro dataset for training, and
+the kiro monogram dictionary for feature extraction.
+
+Using the self compile monogram dictionaries and all the different SVM kernels
+we get these results:
+
+\begin{table}
+\centering
+\label{tbl:svm_classifier_kernel_test}
+\caption{SVM kernel test results table}
+\begin{tabular}{ l r r c }
+Kernel & Failed & Correct & Accuracy \\
+\hline
+LinearSVC & 7 & 990 & 0.9930 \\
+NuSVC & 29 & 968 & 0.9709 \\
+NuSVR & 422 & 575 & 0.5767 \\
+OneClassSVM & 575 & 422 & 0.4233 \\
+SVC & 422 & 575 & 0.5767 \\
+SVR & 422 & 575 & 0.5767 \\
+\end{tabular}
+\end{table}
+%
+
+\section{With Classifiers}\label{experiments:calssifiers}
+link to 4.3, 3.2, 2.2
+research question 1 and 2
+
+#TODO describe the experiment of classifiers here.  
+
+\paragraph{SVM}\label{experiments:svm_classification}
+\hspace{0pt}\\
+Results from testing SVM with different dictionaries are described in table
+\ref{tbl:svm_classifier_results} on page
+\pageref{tbl:svm_classifier_results}.
+
+\begin{table}
+\centering
+\label{tbl:svm_classifier_results}
+\caption{SVM classifier results table}
+\begin{tabular}{ l l r r c }
+Dataset & Type & Failed & Correct & Accuracy \\
+\hline
+Kiro & Monogram & 7 & 990 & 0.9930 \\
+Kiro & Bigram & 422 & 575 & 0.5767 \\
+Obama & Monogram & 35 & 1330 & 0.9744 \\
+Obama & Bigram & 507 & 858 & 0.6286 \\
+\end{tabular}
+\end{table}
+
+
+\paragraph{Naive Bayes}\label{experiments:naive_bayes_classification}
+\hspace{0pt}\\
+Results from testing Naive Bayes with different dictionaries are described in
+table \ref{tbl:naive_bayes_classification_results} on page
+\pageref{tbl:naive_bayes_classification_results}.
+
+\begin{table}
+\centering
+\label{tbl:naive_bayes_classification_results}
+\caption{Naive Bayes classifier results table}
+\begin{tabular}{ l l r r c }
+Dataset & Type & Failed & Correct & Accuracy \\ 
+\hline 
+Kiro & Monogram & 29 & 968 & 0.9709 \\
+Kiro & Bigram & 29 & 968 & 0.9709 \\
+Obama & Monogram & 59 & 1306 & 0.9568 \\
+Obama & Bigram & 59 & 1306 & 0.9568 \\
+\end{tabular}
+\end{table}
+%
+
+
+\section{Trend aggregation}
+
+#TODO link to 5, 4.3, 3.3, 2.1, 2.4 
+\ref{sentiment:classifier_classification}
+\ref{sentiment:comparison_results}
+
+#TODO research question 2 and 3. 
+%
 

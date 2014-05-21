@@ -49,16 +49,28 @@ table \ref{tbl:sentiment_word_count_results} on page
 %
 
 \section{Word Count Classification}\label{experiments:word_count_classification}
-#TODO link to 3.1 and 4.2, 2.2
-\ref{sentiment:classification}
-
-#TODO Research question 1 and 2
+Inspiration from section \ref{previous_work:sentiment}, with knowledge of tweets
+and dictionaries in section \ref{data:tweets}, builds this experiment. The
+background for the experiment and how it's purpose is described in section
+\ref{sentiment:classification}. 
 
 This experiment used the technique described in section
-\ref{sentiment:word_count_classification}. The word counting way of classifying
+\ref{sentiment:word_count_classification}, the word count method of classifying
 a tweets sentiment.  
 
-Code wise we get something like this:
+This experiment tries to expand on the matter of how to determine the sentiment
+of a tweet, \ref{introduction:rq1}. And how Twitter can be used, indirectly, to
+aggregate a trend, \ref{introduction:rq2}.
+The method looks at at the amount of positive and negative words and use
+that to decide the sentiment.
+
+For all the dictionaries and datasets, the classification process is run. This
+gives the accuracy for all dictionaries and the two datasets. This in turn
+describes the efficiency of the word count classification.
+
+The code for calculating the sentiment is as follows. It is also described in
+appendix \ref{code:word_count_classification}, on page
+\pageref{code:word_count_classification}.
 \begin{python}
 positivity = positive_words_count / total_number_words
 negativity = negative_words_count / total_number_words
@@ -71,18 +83,34 @@ else:
     tweet is negative
 \end{python}
 
+The results of the classification can be found in section
+\ref{results:word_count_classification} on page
+\pageref{results:word_count_classification}.
 %
 
 \section{Threshold Variation}\label{experiments:threshold}
-In section \ref{sentiment:threshold}
-
-# TODO get stuff from results. 
+In section \ref{sentiment:threshold} the description an purpose of the
+threshold variation is described. The threshold aims to find out how positive a
+tweet has to be before it is actually positive. Or rather how many more
+positive words than negative words do we need to call the tweet positive. 
 
 By varying the threshold we hoped to find an optimal point of which we could
 separate tweets based on polarity. From the following
 graphs, figure \ref{fig:threshold_graphs}, we can see no clear distinction of
 one value being better than the other ones.
 
+In essence what is done is that the word count classification is run multiple
+times where the threshold value is changed between -0.9 and 0.9. This give a
+distribution of results which is plotted in graph
+\ref{fig:average_threshold_accuracy} on page
+\pageref{fig:average_threshold_accuracy}.
+The results will give an indication of what threshold is best for word
+word counting. 
+
+The results of the threshold variation is described in section
+\ref{results:threshold}, on page \pageref{results:threshold}. And in table
+\ref{tbl:average_threshold_accuracy} on page
+\pageref{tbl:average_threshold_accuracy}.
 %
 
 
@@ -112,10 +140,21 @@ SVR & 422 & 575 & 0.5767 \\
 %
 
 \section{With Classifiers}\label{experiments:calssifiers}
-link to 4.3, 3.2, 2.2
-research question 1 and 2
+For the classifiers the two datasets was tested with the two classifiers.
+This was done to find the best classifier and compare the results
+with the word count classification. By confirming that classifiers are better
+than word counting we can eliminate a factor in the classification
+uncertainties. 
 
-#TODO describe the experiment of classifiers here.  
+The description of the comparison on a conceptual level is described in section
+\ref{sentiment:comparison_results}. Also of interest there is the element of
+the dictionaries in section \ref{data:dictionaries}. While we have taken
+inspiration and ideas for the experiment from section
+\ref{previous_work:sentiment}.
+
+For the research questions to be enlightened further here is the trend
+aggregation in section \ref{introduction:rq1} and the sentiment determination
+in section \ref{introduction:rq2}.
 
 \paragraph{SVM}\label{experiments:svm_classification}
 \hspace{0pt}\\
@@ -136,7 +175,6 @@ Obama & Monogram & 35 & 1330 & 0.9744 \\
 Obama & Bigram & 507 & 858 & 0.6286 \\
 \end{tabular}
 \end{table}
-
 
 \paragraph{Naive Bayes}\label{experiments:naive_bayes_classification}
 \hspace{0pt}\\

@@ -304,7 +304,7 @@ write_array_entries_to_file(duplicate_words,
 For both classifiers we have utility code for loading data and dictionaries,
 but the important parts are the classification. Which is shown below. 
 
-\subsection{Word Count}
+\subsection{Word Count}\label{code:word_count_classification}
 For each tweet we do the same thing. Count words and find the difference
 between positive and negative words. Here is the code for doing so.   
 \begin{python}
@@ -334,7 +334,7 @@ else:
     results.append(False)
 \end{python}
 
-\subsection{With classifier}
+\subsection{With classifier}\label{code:classifier_classification}
 The execution of the classification can be described in the following steps. 
 
 \paragraph{Classifier initialization}

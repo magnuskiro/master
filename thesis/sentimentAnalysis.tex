@@ -95,13 +95,13 @@ thereby removing the retweet reduced data uniqueness. Also the search terms the
 dataset is based on could be broader to increase the spectrum of tweets.  
 %
 
-\section{Word count classification}\label{sentiment:word_count_classification}
+\section{Classification}\label{sentiment:classification}
+\subsection{Word Count Classification}\label{sentiment:word_count_classification}
 We describe the classification process and the different parts of it, then we
 show the results and discuss the drawbacks of this method. The algorithm does,
 simply put, count the positive and negative words. More positive words than
 negative means the tweet is positive and vice versa. 
 
-\subsection{Classification}
 \paragraph{Polarity} 
 \hspace{0pt}\\ 
 The polarity of a given tweet is based on the difference in the amount of
@@ -114,23 +114,20 @@ Then we look at the difference between the negative and the positive word
 percentage. If the difference is positive we have a positive tweet. And if the
 difference is negative we have a negative tweet.
 
-Code wise we get something like this: 
-\begin{python}
-var positive_words_count
-var negative_words_count
+\paragraph{Drawbacks}
+\hspace{0pt}\\
+There are some drawbacks to the word count classification. The dictionaries
+could be better and the threshold could be improved. The threshold results
+depends on the dictionaries, so if we improve the dictionaries we would reduce
+the threshold errors.
 
-positivity = positive_words_count / total_number_words
-negativity = negative_words_count / total_number_words
+The main drawbacks with the dictionaries are that they are based on the
+datasets we classified manually. Although we cross classify so we still get
+valid results. To improve the dictionaries we should expand the original
+datasets and combine the dictionaries. We should also remove stop words before
+creating bi and monograms.
 
-polarity = positivity - negativity
-
-if polarity > 0: 
-    tweet is positive
-else: 
-    tweet is negative
-\end{python}
-
-\paragraph{Threshold} 
+\subsection{Threshold in Word Count Classification}\label{sentiment:threshold} 
 \hspace{0pt}\\ 
 Threshold is the ratio of positive vs negative words that has to be present for a
 tweet to be either positive of negative.
@@ -141,7 +138,7 @@ When actually deciding if a tweet is positive or negative we look at the
 polarity value. If the polarity value is above the threshold (polarity >
 threshold) the tweet is classified as positive. 
 
-\paragraph{Examples of classification follows:} 
+\paragraph{Examples of classification} 
 \hspace{0pt}\\ 
 Example tweets:
 \begin{itemize}
@@ -180,160 +177,7 @@ Classification of t3:
     \item threshold = -0.1 ⇒ positive
 \end{itemize}
 
-Further we found the best average threshold value to be 0.1.
-From the table under we have the threshold value, and the average
-classification accuracy among the 18 entries for each threshold value. 
-
-\begin{table}
-\centering
-\label{tbl:average_threshold_accuracy}
-\caption{Average threshold accuracy table.}
-\begin{tabular}{ c c c c }
-Threshold & Accuracy & Threshold & Accuracy \\
-\hline
-- & - & 0.0 & 0.6479 \\
--0.1 & 0.6316 & 0.1 & 0.6516 \\
--0.2 & 0.6161 & 0.2 & 0.6511 \\
--0.3 & 0.6059 & 0.3 & 0.6430 \\
--0.4 & 0.5988 & 0.4 & 0.6305 \\
--0.5 & 0.5888 & 0.5 & 0.6122 \\
--0.6 & 0.5711 & 0.6 & 0.5934 \\
--0.7 & 0.5423 & 0.7 & 0.5712 \\
--0.8 & 0.5083 & 0.8 & 0.5457 \\
--0.9 & 0.4881 & 0.9 & 0.5307 \\
-\end{tabular}
-\end{table}
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=\textwidth]{average_threshold_accuracy.png} 
-    \label{fig:average_threshold_accuracy}
-    \caption{Average threshold accuracy}
-Graph plots of the 'Average threshold accuracy' table.
-\end{figure}
-%
-
-\subsection{Results}
-The results from the word count classification can be plotted in the tabled
-\ref{tbl:sentiment_word_count_results} and in the graph
-\ref{tbl:sentiment_word_count_results}.
-
-\begin{table}
-\centering
-\label{tbl:sentiment_word_count_results}
-\caption{Word Count classification results table}
-\begin{tabular}{ r p{6cm} r r c }
-id & Dictionary & Failed & Correct & Accuracy \\
-& -- Kiro compiled dataset -- & a & b & b/(a+b) \\
-\hline
-1 & Monogram, obama & 578 & 419 & 0.4203 \\
-2 & Monogram LoughranMcDonald & 491 & 506 & 0.5075 \\
-3 & Monogram, combined Obama and LoughranMcDonald & 416 & 581 & 0.5827 \\
-4 & Kiro, Monogram, self compiled & 115 & 882 & 0.8847 \\
-5 & Kiro, Bigram, self compiled & 17 & 980 & 0.9829 \\
-6 & Kiro, Trigram, self compiled & 18 & 979 & 0.9819 \\
-7 & Obama, Monogram, self compiled & 567 & 430 & 0.4313 \\
-8 & Obama Bigram, self compiled & 534 & 463 & 0.4644 \\
-9 & Obama Trigram, self compiled & 567 & 430 & 0.4313 \\
-& -- Obama tweet set -- & a & b & b/(a+b) \\
-\hline
-10 & Monogram, obama & 855 & 510 & 0.3736 \\
-11 & Monogram LoughranMcDonald & 508 & 857 & 0.6278 \\
-12 & Monogram, combined Obama and LoughranMcDonald & 544 & 821 & 0.6015 \\
-13 & Kiro, Monogram, self compiled & 632 & 733 & 0.5370 \\
-14 & Kiro, Bigram, self compiled & 521 & 844 & 0.6183 \\
-15 & Kiro, Trigram, self compiled & 498 & 867 & 0.6352 \\
-16 & Obama, Monogram, self compiled & 493 & 872 & 0.6388 \\
-17 & Obama Bigram, self compiled & 37 & 1328 & 0.9729 \\
-18 & Obama Trigram, self compiled & 39 & 1326 & 0.9714 \\
-\end{tabular}
-\end{table}
-
-5, 6, 17, 18 are the dictionaries with best accuracy. Which is to be expected
-for the classification of the dataset the dictionary was created from. 
-
-But more interestingly, if we take the dictionaries created form one dataset,
-and look at the results of the classification on the other dataset. We compare
-7, 8, 9 with each other and 13, 14, 15 with each other. Then we can see that
-the bigram and trigram dictionaries perform overall better than the monogram
-dictionaries. 
-
-Further we see indications that the quality of the dictionary plays an
-important role. The LoguhranMcDonald monogram dictionary performs quite good
-with both datasets. Even on par with the compiled dictionaries on opposite
-dataset. This indicates that a well crafted dictionary can perform as well
-as compiled dictionaries.  
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=\textwidth]{dictionary_accyracy.png} 
-    \label{fig:dictionary_accyracy}
-    \caption{Dictionary Accuracy plot}
-The graph shows the plotted accuracies from the word count
-classification. The ids represents the ids from the table above, \ref{tbl:sentiment_word_count_results}
-\end{figure}
- 
-When comparing the results from one dataset to the other we can see indications
-of how the content of the dataset also plays a huge role in the results. Some
-tweets are more difficult to classify then others. 
-%
-
-\paragraph{Threshold variations}
-\hspace{0pt}\\
-By varying the threshold we hoped to find an optimal point of which we could
-separate tweets based on polarity. From the following
-graphs, figure \ref{fig:threshold_graphs}, we can see no clear distinction of
-one value being better than the other ones.  
-
-In figure \ref{fig:threshold_graphs} we list the results of the experimentation
-with the threshold. Table \ref{tbl:dictionary_to_threshold} lists the
-dictionaries and dataset used for which graphs in figure \ref{fig:threshold_graphs}.
-'kiro dataset' and 'obama dataset' columns tells which dataset that was
-classified in which graph.
-
-\begin{table}
-\centering
-\label{tbl:dictionary_to_threshold}
-\caption{Dictionary to threshold graph plot table}
-\begin{tabular}{ l c c }
-Dictionary name and description & kiro dataset & obama dataset \\ 
-\hline
-Obama original, Monogram & 1 & 10 \\
-LoughranMcDonald, Monogram & 2 & 11 \\
-Combined Obama original and \\ LoughranMcDonald, Monogram & 3 & 12 \\
-Kiro, Monogram, self compiled & 4 & 13 \\
-Obama, Monogram, self compiled & 5 & 14 \\
-Kiro, Bigram, self compiled & 6 & 15 \\
-Obama, Bigram, self compiled & 7 & 16 \\
-Kiro, Trigram, self compiled & 8 & 17 \\
-Obama, Trigram, self compiled & 9 & 18 \\
-\end{tabular}
-\end{table}
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=\textwidth]{threshold_graphs.png} 
-    \label{fig:threshold_graphs}
-    \caption{Threshold variation accuracy plot}
-The graphs plot the different variations of threshold. Counting is
-columns first; top left is 1, top mid is 7, top right is 13.
-\end{figure}
-
-\subsection{Drawbacks}
-There are some drawbacks to the word count classification. The dictionaries
-could be better and the threshold could be improved. The threshold results
-depends on the dictionaries, so if we improve the dictionaries we would reduce
-the threshold errors. 
-
-\paragraph{Dictionaries}
-\hspace{0pt}\\
-The main drawbacks with the dictionaries are that they are based on the
-datasets we classified manually. Although we cross classify so we still get
-valid results. To improve the dictionaries we should expand the original
-datasets and combine the dictionaries. We should also remove stop words before
-creating bi and monograms.
-
-\paragraph{Threshold}
+\paragraph{Drawbacks with the Threshold}
 \hspace{0pt}\\
 When classifying with the word count classifier a potential problem is when we
 get an equal amount of positive and negative words. Then the polarity value
@@ -380,7 +224,7 @@ dictionary the more likely it is that we do not get an equal amount of positive
 and negative words. 
 %
 
-\section{With Classifiers}\label{sentiment:classifier_classification}
+\subsection{With Classifiers}\label{sentiment:classifier_classification}
 To test and compare to other classification methods we used Naive Bayes and
 Support Vector Machine classifiers. 
 
@@ -395,85 +239,26 @@ Each test with a classifier uses the kiro monogram dictionary for feature
 extraction, and the described dataset as training set and the dataset to be
 classified. 
 
-\subsection{SVM}\label{sentiment:svm_classification}
-\paragraph{Choice of kernel}
+\paragraph{SVM}\label{sentiment:svm_classification}
 \hspace{0pt}\\
+#TODO Write something here?
+
 When using SVM there are quite a few different kernel modules that can be used
 to improve results. The kernel is often chosen based on knowledge about the
 dataset. In the nltk\footnote{Natural Language Toolkt
 \url{http://www.nltk.org/}} library for python there are a number of different
 kernels. We tested all of them.  
 
-While testing which kernel was best we used the kiro dataset for training, and
-the kiro monogram dictionary for feature extraction. 
-
-Using the self compile monogram dictionaries and all the different SVM kernels we get these results:
-
-\begin{table}
-\centering
-\label{tbl:svm_classifier_kernal_test}
-\caption{SVM kernel test results table}
-\begin{tabular}{ l r r c }
-Kernel & Failed & Correct & Accuracy \\
-\hline
-LinearSVC & 7 & 990 & 0.9930 \\
-NuSVC & 29 & 968 & 0.9709 \\
-NuSVR & 422 & 575 & 0.5767 \\
-OneClassSVM & 575 & 422 & 0.4233 \\
-SVC & 422 & 575 & 0.5767 \\
-SVR & 422 & 575 & 0.5767 \\
-\end{tabular}
-\end{table}
-
-Naturally we used the LinearSVC kernel later. 
-
-\paragraph{Results}
-\hspace{0pt}\\
-Results from testing SVM with different dictionaries: 
-
-\begin{table}
-\centering
-\label{tbl:svm_classifier_results}
-\caption{SVM classifier results table}
-\begin{tabular}{ l l r r c }
-Dataset & Type & Failed & Correct & Accuracy \\
-\hline
-Kiro & Monogram & 7 & 990 & 0.9930 \\
-Kiro & Bigram & 422 & 575 & 0.5767 \\
-Obama & Monogram & 35 & 1330 & 0.9744 \\
-Obama & Bigram & 507 & 858 & 0.6286 \\
-\end{tabular}
-\end{table}
-
-From this we can draw some conclusions. The monogram dictionary performed
-better than the bigram dictionary. Probably due to the number of features we
-can extract from each tweet. Also classifiers are more accurate than the word
-count classification method.  
+We tested all the kernels available. Section \ref{experiments:svm_kernel}
+describes the experiment and the results of it. 
+As seen in the experiment the LinearSVC kernel later. 
 %
 
-\subsection{Naive Bayes}\label{sentiment:naive_bayes_classification}
-Results from testing Naive Bayes with different dictionaries: 
-
-\begin{table}
-\centering
-\label{tbl:naive_bayes_classification_results}
-\caption{Naive Bayes classifier results table}
-\begin{tabular}{ l l r r c }
-Dataset & Type & Failed & Correct & Accuracy \\
-\hline
-Kiro & Monogram & 29 & 968 & 0.9709 \\
-Kiro & Bigram & 29 & 968 & 0.9709 \\
-Obama & Monogram & 59 & 1306 & 0.9568 \\
-Obama & Bigram & 59 & 1306 & 0.9568 \\
-\end{tabular}
-\end{table}
-
-As we can see the different dictionaries makes no difference for Naive Bayes.
-But if we compare the classifier with the results from the word count
-classification we can clearly see improvement. 
+\paragraph{Naive Bayes}\label{sentiment:naive_bayes_classification}
+#TODO what to writer here ?!
 %
 
-\section{Comparison and Results}\label{sentiment:comparison_results}
+\section{Comparison}\label{sentiment:comparison_results}
 \paragraph{The Classifiers}
 \hspace{0pt}\\
 We have looked at three classifiers, Naive Bayes, SVM, and the word count
@@ -483,44 +268,28 @@ varying results.
 All methods of classification uses the manually labeled tweet sets as the data
 source. And we use the self compile dictionaries for feature extraction. 
 
-\paragraph{The Results}
+\paragraph{Experiments}
 \hspace{0pt}\\
-In the following table, \ref{tbl:classification_comparison}, we highlight the
-results from the different classifications. We list the most noteworthy results
-from our experiments and compare them.
+In section \ref{sentiment:word_count_classification},
+\ref{experiments:threshold}, \ref{experiments:svm_kernel}, and
+\ref{experiments:calssifiers} the methods described in this chapter are tested
+to validate the research questions, \ref{introduction:research_questions}.
 
-\begin{table}
-\centering
-\label{tbl:classification_comparison}
-\caption{Comparison of classifiers table}
-\begin{tabular}{ l l p{3.5cm} r r c }
-Classifier & Dataset & Dictionary & Failed & Correct & Accuracy \\
-\hline
-Word Count & Kiro & Obama Bigram & 534 & 463 & 0.4644 \\
-Word Count & Obama & LoughranMcDonald Monogram & 508 & 857 & 0.6278 \\
-Word Count & Obama & Kiro, Trigram & 498 & 867 & 0.6352 \\
-Naive Bayes & Kiro & Kiro Monogram & 29 & 968 & 0.9709 \\
-SVM & Kiro & Kiro Monogram & 7 & 990 & 0.9930 \\
-\end{tabular}
-\end{table}
-
-As we can see the classifiers give better results then the word count
-classification. And SVM is a bit better than Naive Bayes. Although the results
-from the word count classification indicates that the dictionaries play an
-important role in the results. We can also see that monograms are better for
-classifiers, while trigrams are better for word counting.
-
-For the classifiers and the good results with the monogram dictionaries, we think
-that has to do with the number of features we get from a tweet. The more
-features we have the easier it is to classify and the more accurate the result.
+\paragraph{Results}
+\hspace{0pt}\\
+The results of the classifiers are described in \ref{results:comparison}. There
+the good and bad parts of the classifiers are presented and discussed. Some of
+the conclusions we can draw are quite obvious while we still have some new
+knowledge to present.
 %
 
-\section{Comments and Discussion}\label{sentiment:comments_discussion}
+\section{Comments}\label{sentiment:comments_discussion}
 The work that is so far described potential for improvement and some
 uncertainty elements. We need to address this and criticise the findings we
 have.  
 
-\subsection{Improvements}
+\paragraph{Improvements}
+\hspace{0pt}\\
 There are a lot of improvements that could be done. 
 
 The word count classification is merely a convenient way to say something about
@@ -534,7 +303,8 @@ We should cross classify and test the classification with the SVM classifier a
 bit more and do quality assurance on the work with it. We should also look at
 other classifiers and other data to confirm the findings we have so far. 
 
-\subsection{Biased Mind}
+\paragraph{Biased Mind}
+\hspace{0pt}\\
 The datasets of manually labeled tweets are biased based on a persons 
 personal opinion and the state of mind in the moment of classification.
 Therefore we have to keep in mind that all the results are based on the
@@ -545,7 +315,8 @@ And we should explore the psychology of perception and classification. How do
 people perceive content differently? Is finance easier to label than politics?
 And what can we do to eliminate the human factor in manual labeling? 
 
-\subsection{Drawbacks}
+\paragraph{Drawbacks}
+\hspace{0pt}\\
 The drawbacks of psychology and the datasets renders some uncertainty in the
 results. Although some of our observations give insight into the use of natural
 language in association with dictionaries. 
@@ -555,13 +326,15 @@ should be addressed in some smart way.
 Code wise we should improve the testing of the classifiers, and remove the
 static use of dictionaries in the feature extraction.  
 
-\subsection{Conclusions}
+\paragraph{Conclusions}
+\hspace{0pt}\\
 Dictionaries can be compiled and used in classification of sentiment. While
 classifiers work better than word counting, we still rely on the manually
 labeled tweets for accuracy. We also know that the data we use
 to check the classification are biased and should be improved. 
 
-\subsection{Future Work}
+\paragraph{Future Work}
+\hspace{0pt}\\
 Analysis of the dictionaries and improvement of them would be a big task to
 undertake. While we should also look at the input data and sort the data
 smartly to remove spam. And find another way to decide the sentiment in the

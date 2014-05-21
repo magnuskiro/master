@@ -455,7 +455,7 @@ better measure of polarity or weighting of bigrams. The best use of this
 dictionary is for comparison of the different dictionaries.  
 %
 
-\subsection{Compiled Dictionaries}
+\subsection{Compiled Dictionaries}\label{data:compiled_dictionaries}
 The compiled dictionaries are based on the two manually labeled tweet sets. The
 kiro tweet set, and the obama tweet set.
 
@@ -518,37 +518,6 @@ Obama, Trigram & Containing terms consisting of three separate trigrams.
 	\label{data:dictionary_list}
 \end{tabular}
 \end{table}
-%
-
-\subsection{Error analysis, removal of duplicate words}
-When creating the different dictionaries we remove duplicates from the positive
-and negative dictionary set. Words that are present in both the positive and
-negative dictionary is removed. By doing this we remove words that has no
-significance in the classification. But we also risk removing words with
-significance.
-
-When looking at the duplicate words from the monogram dictionary based on the
-kiro dataset we found some errors.
-As a selection of words found, we have \textit{dangerous, bad, go, inc, let, up, or, need, good, if, no, are, and, of, on, the,
-is, as}.
-Here we can see that the words \textit{good} and \textit{bad} are represented.
-Which is not good. By removing the words from the dictionaries we have removed
-significant words in further classification, thus reducing correctness of the
-algorithm. This is one of the drawbacks of the monogram dictionaries.
-
-When looking at the removed duplicate words for bigram and trigrams we found no
-indication of the same problem. As the uniqueness of bigrams and trigrams are a
-lot greater we end up with very few duplicates and only duplicates that has no
-significance to the over all classification. Although we might have other
-unknown problems.  
-
-Most stop words and other insignificant words are removed with the removal of
-duplicate words. The same thing cannot be said about the bigram and trigram
-dictionaries. There we have no stop words present in themselves, but they are
-frequently part of other terms. For further improvements of classification with
-word counting and dictionary quality we should remove
-stop words, such as \textit{as, is, on, off, and, or} etc, from the
-tweet/sentence before creating bi- and trigrams.     
 %
 
 % The financial data used in the thesis. 

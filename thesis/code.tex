@@ -265,6 +265,7 @@ return bigrams_list
 Where we essentially generate sets of words in tuples and then extract the
 combined term by string conversion and regex. 
 
+\paragraph{Remove duplicate words}\label{code:remove_duplicate_words}
 Then we conveniently remove duplicates between the positive and negative
 dictionary before we write the dictionaries to file. 
 \begin{python}

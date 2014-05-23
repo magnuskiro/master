@@ -197,13 +197,48 @@ Obama & Bigram & 59 & 1306 & 0.9568 \\
 \end{table}
 %
 
-
-\section{Trend aggregation}
+\section{Trend aggregation}\label{experiments:trend}
 
 #TODO link to 5, 4.3, 3.3, 2.1, 2.4 
-\ref{sentiment:classifier_classification}
-\ref{sentiment:comparison_results}
 
-#TODO research question 2 and 3. 
+Before executing this experiment section \ref{trend:compared} describes the
+conceptual parts of the trend comparison. This is the basis for the results of
+this experiment. 
+
+This experiment aims to test the relevance of positive and negative tweets in
+correlation with change in finance. There are two parts of this experiment. The
+finance part, and the twitter part. Can twitter be used to create a trend,
+\ref{introduction:rq2}. And how can we compare this to a finance trend,
+\ref{introduction:rq3}.
+
+In the execution of the experiment the methods described in chapter \ref{trend}
+has been used. More specifically the trend aggregation under trends on twitter,
+\ref{trend:trends_on_twitter}. And the finance trend aggregation,
+\ref{trend:trends_in_finance}.
+
+To get results out of this experiment section
+\ref{sentiment:classifier_classification}, and section
+\ref{sentiment:comparison_results}. They are used to give indications of what
+methods, previously described, gives results. Specifics of how the trend
+aggregation happens are described in appendix \ref{code:trend_aggregation}.
+
+For the execution of the experiment the results of the two trend attempts are
+plotted in a graph. The graph plotting code is described in appendix
+\ref{code:comparison}.
+
+The trend plot in figure \ref{fig:trend_plot}, on page 
+\pageref{fig:trend_plot}. 
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{trend_plot.png}
+    \label{fig:trend_plot}
+    \caption{Comparing trend plot}
+The graph shows the two previously compiled trends. The red one is the tweet
+trend, while the green one is the finance trend.
+\end{figure}
+
+The results of the experiment are discussed in section \ref{results:trend}.
+
+
 %
 

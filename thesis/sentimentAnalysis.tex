@@ -1,32 +1,29 @@
 \chapter{Sentiment Classification}\label{sentiment}
-This chapter describes the experiments done. High level description and
-execution of experiments. Detailed descriptions of execution and technical
-details in appendix. 
 
+#TODO redo outline. 
 Sections in this chapter are as follows. Manual classifications,
-\label{sentiment:manual_classification}, where we see how people classify
+\ref{sentiment:manual_classification}, where we see how people classify
 tweets. Then we count words with 'Word count classification',
-\label{sentiment:word_count_classification}. Expanding with the use of
-classifiers in section \label{sentiment:classifier_classification}. A
+\ref{sentiment:word_count_classification}. Expanding with the use of
+classifiers in section \ref{sentiment:classifier_classification}. A
 comparison of the classifiers and associated results can be found in section
-\label{sentiment:comparison_results}. And a brief discussion an comments come
-last, \label{sentiment:comments_discussion}.
+\ref{sentiment:comparison_results}. And a brief discussion an comments come
+last, \ref{sentiment:comments_discussion}.
 
 %what is sentiment
 Sentiment is described as "an attitude toward something; regard;
 opinion."\footnote{ Dictionary.com on Sentiment:
 \url{http://dictionary.reference.com/browse/sentiment?s=t}}. The sentiment is the perceived positivity of the message that the user tries to
 communicate. Sentiment is in many cases a personal thing, and can change from
-person to person or from setting to setting. We think of the sentiment as
+person to person or from setting to setting. We think of the sentiment as a
 conveyed meaning of a message. 
 
 %why do we get it
 Some of the motivation for acquiring the sentiment of a tweet or a sentence, is
 that we can say something about a persons state of mind and from that predict
-behaviour. We want to use the sentiment to make smart decisions later. As an
-example of usage it would be ideal to find a correlation between sentiment and
-stock exchange, thus making us able to increase revenue with decisions
-based on the sentiment. 
+behaviour. Further the aspect of sentiment in trading is interesting. Can
+sentiment improve trading in any way? And how can the sentiment be used to
+predict trends.
 
 %how do we use it
 In this thesis we have two main ways of classifying tweets. Word counting and
@@ -36,7 +33,7 @@ to extract features from a tweet. And with the word counting we count the
 number of positive and negative words. 
 
 \section{Manual Classification}\label{sentiment:manual_classification}
-When labeling tweets manually there are a number of factors the complicates the
+When labeling tweets manually there are a number of factors the effects the
 process. Among them are the quality of the tweet, state of mind, language, and
 political affiliation.
 
@@ -45,12 +42,7 @@ contain links or hashtags? Are users mentioned?
 
 State of mind for a person dictates that persons actions in many cases. This
 also has an effect on labeling tweets. A positive state of mind classifies more
-tweets negative as positive then others.
-
-Political affiliation plays a huge role when labeling the obama tweet set. Do
-you like obama? Do you like Romney? Neither? This matters. The tweetset in
-itself is pro obama. So while labeling this tweet set we put aside political
-influence and looked at the core of the sentiment.
+actual negative tweets as positive then others.
 
 Note that all this happens in the brain during 3 to 60 seconds while reading
 the tweet text and is a very rough description of the thoughts happening.
@@ -70,12 +62,12 @@ impression.\\
 
 \paragraph{Result files}
 \hspace{0pt}\\
-When classifying with manually we create files with the results. These files
+When classifying manually we create files with the results. These files
 are comma separated files with three fields.
 \begin{itemize}
     \item Sentiment: Positive, neutral or negative. Represented by 1, 0 or -1.
     \item Tweet id, if it exists, else 'id'. It is a long number.
-    \item The tweet text. In some cases sanitized.
+    \item The tweet text.
 \end{itemize}
 
 \paragraph{Obama tweet set}

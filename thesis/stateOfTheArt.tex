@@ -1,6 +1,7 @@
 \chapter{Background and Previous Work}\label{previous_work}
-#TODO write a summary of the newest techniques and inventions in the field of twitter research related to finance. 
-#TODO read and rewrite this chapter. 
+#TODO write a summary of the newest techniques and inventions in the field of
+twitter research related to finance.\\ 
+#TODO read and rewrite this chapter. \\
 
 Somewhat a starting point for this thesis:
 \url{http://www.cs.ucr.edu/~vagelis/publications/wsdm2012-microblog-financial.pdf}
@@ -8,21 +9,20 @@ Somewhat a starting point for this thesis:
 #TODO writer outline of this chapter. 
 
 \section{Twitter}
-Twitter is a social and information network. 
+Twitter is a social informations network. 
 It's a real-time service for sharing and gathering small messages. These
-messages can represent everything form a persons opinion of ice cream, to the
+messages can represent everything from a persons opinion of ice cream, to the
 latest changes in the financial market or pictures from a Mars rover. 
 
 At the core of Twitter you have the Tweet. The Tweet is the 140 character
-message. These small pieces of information combined are the life line of Twitter.
+message. 
 Tweets lets you communicate with other users, share photos and post all kinds of
 information. The small size of the tweets are not a hindrance for the flow of
 information. 
 \footnote{About Twitter: \url{https://twitter.com/about}}
 
 The fast growing messaging service handles 1.6 billion search queries every day.
-As of 2012 the 500 million users would generate 3.2 queries each on any given
-day. 340 million tweets were posted every day. 
+In 2012 the 500 million users would generate 3.2 queries each day. 340 million tweets were posted every day. 
 \footnote{Wikipedia: \url{http://en.wikipedia.org/wiki/Twitter}} 
 
 Most medium and large companies have a presence on Twitter today. Posts can contain
@@ -30,13 +30,15 @@ any type of information, from promotional content to service status to
 financial reports. \cite[p8]{annikajubbega11:twitter_driver_stock_price} says
 that 77 of the Fortune 100 companies have a twitter account. 
 
-Companies use twitter for feedback and customer relations. Questions can be
-asked with a specific hashtag. Or with an at sign to target a specific user. This makes it easy to filter
-the messages, and therefore easier to get in contact with the customer. Best
-Buy demonstrated the successfulness of twitter in customer relations by
-answering questions with a specific hashtag. In 2009 they had answered nearly
-20 thousand questions using twitter. \cite[p1]{Li2013206}
-Market Intelligence is also a major aspect of the microbloggin sphere.
+Companies use Twitter to communicate with customers. Customers can post
+questions and feedback, while the company posts answers and information.
+Questions can be asked with a specific hashtag. Or with an at sign to target a
+specific user. This makes it easy to filter the messages, and therefore easier
+to get in contact with the customer. Best Buy demonstrated the successfulness of
+twitter in customer relations by answering questions with a specific hashtag. In
+2009 they had answered nearly 20 thousand questions using twitter.
+\cite[p1]{Li2013206} Market Intelligence is also a major aspect of the
+microblogging sphere.
 
 Twitter represents one of the largest and most dynamic datasets of user
 generated content. Along with Facebook twitter data is in real time. This has major
@@ -44,19 +46,18 @@ implications for anyone who are interested in sentiment, public opinion or
 customer interaction. \cite[]{sperious11}
 
 A typical tweet contains about 11 words and provides an opinion or state of
-mind or a piece of information. Tweets can contain hashtags: #something, user:
-@username, or other adaptations of prefixes such as \$STO which represents a
+mind or a piece of information. Tweets can contain hashtags: '\#something', user:
+'@username', or other adaptations of prefixes such as '\$STO' which represents a
 stock. The different prefixes or tags (\$, \#, @) easily distinguishes the
 content of the tweet. This also makes it easier to search and classify the
-content of tweets. Examples of tweets can be found in figure:\ref{fig:sto} and
-figure:\ref{fig:tweet1}.
+content of tweets. Figure:\ref{fig:sto} and figure:\ref{fig:tweet1} are
+examples of tweets as shown on twitter.
 
-The retrieval of tweets seems like a challenge and impractical with
-a web scraper. But Twitter has made this easy by providing an API
-\footnote{API: Application programming interface}. With the API you can write
-tweets and update the status of a user. But the best part of the API is that it
-provides search capabilities. To get a certain subset of all tweets, we can use
-the search function and view only the tweets we want. 
+The retrieval of tweets seems like a challenge. But Twitter has made this easy
+by providing an API \footnote{API: Application programming interface}. With the
+API you can write tweets and update the status of a user. But the best part of
+the API is that it provides search capabilities. To get a certain subset of all
+tweets, we can use the search function and view only the tweets we want. 
 
 On the front page of twitter we have the search function at the top right of
 the page. The search provides the ability to specify which types of tweets you
@@ -99,20 +100,21 @@ want. And gives you the opportunity to find the information you are looking for.
 
 \section{Sentiment}\label{previous_work:sentiment}
 
-Opinion mining on the web is not a new phenomenon. But in resent years it has
-become much more attractive to traders in the financial world. The usage of
-Twitter and other social media platforms is increasing. This means a surplus of raw data with
+Opinion mining on the web is not new. In resent years it has
+become attractive to traders. 
+The use of Twitter and social media is increasing in increasing. Both in
+business and with private users.
+This means a surplus of raw data with
 easy access. Companies all over the world has started to use the social
 networks to their benefit. The use of information from social media has become
 part of the trend, although there are some drawbacks and shortcomings. Noise and
-garbage is one of them. The difficulty of the huge amount of available data is
-that it's difficult to find only the information relevant for your use. Even if you're right 80\% of
-the time, the last 20\% can prove devastating.
-\cite[]{stevenson12:social_media_stock_pickers}
+garbage is one of them. Even if you're right 80\% of the time, the last 20\% can
+prove devastating. \cite[]{stevenson12:social_media_stock_pickers}
 
-Sentiment broadly refers to a persons state of mind. Based on the state of mind the person will do optimistic or
-pessimistic choices. A positive state of mind leads to optimistic judgements of
-future events, and a negative state of mind leads to pessimistic.
+Sentiment broadly refers to a persons state of mind. Based on the opinion the
+person will do optimistic or pessimistic choices. A positive mindset leads to
+optimistic judgements of future events, and a negative state of mind leads to
+pessimistic choices.
 \cite[p4]{doukas10:sentiment_and_momentum}
 
 The users may have different roles and intentions in different
@@ -204,7 +206,7 @@ In the light of resent changes in the financial world and the use
 of sentiment from social media, the notion that opinions and sentiment of
 investors and market actors affect the market is not a new observation.
 
-Use of sentiment can predict changes and momentum in the market.
+Use of sentiment can potentially predict changes and trends in the market.
 Bad news in an optimistic period creates cognitive dissonance in the small
 investors. This impacts the market by slowing down the selling rate of loosing
 stocks. \cite[p29]{doukas10:sentiment_and_momentum}
@@ -267,6 +269,10 @@ Technical analysis in finance.
 
 
 \section{The Trend}
+#TODO find some articles to reference for trends/trending. And finance.   
+#TODO rewrite to get a better description of what a trend is in trading.
+#TODO rewrite
+
 The trend is the general opinion of the masses. As defined by the Free
 Dictionary:  
 "The direction and momentum of a market, price, economy, or other measure. For
@@ -277,10 +283,6 @@ securities. Trends are especially important in technical analysis, which
 recommends buying at the bottom of a downward trend and selling at the top of an
 upward trend."
 \footnote{Dictionary description of trend: \url{http://financial-dictionary.thefreedictionary.com/Trend}}
-
-It's often talk about the fashion trend or the music trend when regular people
-talk about the trend. Or just the general direction of which a subject or
-subculture are moving. 
 
 Trends work in much the same way as opinions. An opinion is uttered then others start to think the same thing or
 feel the same way. The first group of people that move in the same direction
@@ -301,4 +303,3 @@ When looking for twitter and trends there are few of far between those who work
 on it. No material or indication is found to suggest that trending on twitter
 is researched in regards to sentiment analysis of tweets.
 
-#TODO find some articles to reference for trends/trending. And finance.   

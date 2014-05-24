@@ -4,28 +4,30 @@ for the data used.
 
 In this data chapter we have three sections. 
 
-The section abut twitter and tweets, \ref{data:tweets}. Where we describe how we
-use tweets, what tweets to use and how we acquire them.
+The section about twitter and tweets, \ref{data:tweets}, is where we describe
+how we use tweets, what tweets to use and how we acquire them.
 
 Then we have a section describing the dictionaries, \ref{data:dictionaries}. How
 we compile the dictionaries from tweets and how we use them. Their shortcomings
 and the possible improvements.  
 
-And last we have a section that describes the financial data that we use. Where
-we get them, the structure and how the data is used. 
+And last we have a section that describes the financial data,
+\ref{data:finance}, that we use. Where we get them, the structure and how the
+data is used. 
 %
 
 % The section about twitter and tweets 
 \section{Tweets}\label{data:tweets}
-A tweet is a massage posted on twitter. The message can be up to 140 characters
-long and in many ways it resembles the well known
-SMS\footnote{Wikipedia on Short Messaging Service:\url{https://en.wikipedia.org/wiki/Short_Message_Service}}.
+A tweet is a massage posted on twitter. The message in many ways resemble the
+well known SMS\footnote{Wikipedia on Short Messaging
+Service:\url{https://en.wikipedia.org/wiki/Short_Message_Service}}.
 
-Tweets are posted to the users profile. When other people posts a previously
-posted tweet again it is called a retweet.
+Tweets are posted to the users profile. When a user post an existing tweet
+again, it is referred to as a retweet. 
 
 All users can follow other users on Twitter. Tweets from users you follow will
-appear in you stream of tweets on the main page of twitter.
+appear in your stream of tweets on Twitter. The stream is the collection of
+tweets from users you are following.  
 %
 
 \subsection{Tweet Structure}
@@ -39,16 +41,14 @@ Object Notation} is an open standard format that uses human-readable text to
 transmit data objects consisting of attribute–value
 pairs\footnote{Wikipedia on JSON:\url{https://en.wikipedia.org/wiki/Json}}.
 
-
-A positive thing about the JSON data format is that we can directly evaluate it
-in python. By using literal evaluation in python the tweet object is
-interpreted as a dict. This makes the use of a tweet easy.  
-
-For an example of the data structure of a tweet, see appendix:
+For an example of the data structure of a tweet, see appendix
 \ref{appendix:tweetStructure}.
 
 \paragraph{Content}
 \hspace{0pt}\\
+
+#TODO fix examples. 
+
 A tweet is an astonishing compilation of data about who, where and when a tweet
 was posted.
 
@@ -76,7 +76,7 @@ The twitter API is a convenient way for lots of people to access data from
 twitter. Tweets, streams, timelines, profiles and more are available through
 the api. 
 
-To provide easy easy access and conformity to industry standards, the api
+To provide easy access and conformity to industry standards, the api
 provides data in the JSON format. 
 
 While the api does not give access to 100\% of the data from twitter, it gives
@@ -85,10 +85,10 @@ a good representation of the tweets from the last 7 days.
 
 \paragraph{Setup}
 \hspace{0pt}\\
-To get access to the api there are a few requirements. You have to have a
-twitter account. You have to register the application you are going to use the
-api with, thereby getting authentication keys. Then you have to used the keys
-authenticate with twitter before you access the api. 
+To get access to the api there are a few requirements. You must have a
+twitter account. The application to be used has to be registered with Twitter.
+Registering the application gives access to API keys. Then you have to used the
+keys authenticate with twitter before you access the api. 
 
 For a simple guide to this we have
 \url{http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/} as
@@ -99,8 +99,7 @@ oauth\_token\_secret, is used with the Twython
 library\footnote{\url{https://pypi.python.org/pypi/twython/}} as described
 below.
 
-The simplest example of use of the api and the twython library can be described
-as follows:
+A simple example of how to use the API with Twython is shown below. 
 \begin{itemize}
 	\item Authenticate towards twitter.
 	\item Execute search query on twitter.
@@ -212,8 +211,9 @@ Further we can expand the search by using logic.
 query = "Finance OR Investment AND Economy OR Growth"
 \end{python}
 
-The specific search used to compile the tweetset the dictionaries are based on is the
-following. Where we get all tweets containing one of the words: \textit{Finance}, \textit{Investment}, \textit{Economy}, and \textit{Growth}.
+The following query is the one used to create the original tweet sets. The
+original tweet sets are later used as the basis for the dictionaries.
+We get all tweets containing one of the words: \textit{Finance}, \textit{Investment}, \textit{Economy}, and \textit{Growth}.
 \begin{python}
 query = "Finance OR Investment OR Economy OR Growth"
 \end{python}
@@ -234,9 +234,9 @@ of tweets. But we ran into a problem. Retweets. In some cases we got up to 90\%
 retweets in a mining session. Many of the tweets being essentially the same
 one, only retweeted multiple times. 
 
-When we are using tweets to create dictionaries, we do not want duplicate data
-that we do not need. Retweets are after all mostly duplicate data. So we removed
-the retweets and got a lot more different tweets. 
+When we are using tweets to create dictionaries duplicate data was a problem.
+Retweets are mostly duplicate data, so we removed them to increase the quality
+of the tweet set.
 
 As nearly all retweets start with 'RT' we can easily sort them out. Then we get
 a query like this. 
@@ -279,8 +279,8 @@ weeks worth of tweets.}'\footnote{Twitter:
 Although this is not a big problem, coding and data acquisition could have been
 simpler. The solution for the week limitation was to broaden the search to
 include more words. This resulted in a more varied dataset, but also more
-tweets. We initially wanted to analyse tweets related to finance, so this was a
-bit of a negative point.  
+tweets. We initially wanted to analyse tweets related to finance, so the
+diversity of the dataset could be a problem. 
 
 Further caveats of the request limitations. This means that we have to mine
 tweets over time. We should really have set this up on a server and mined
@@ -295,6 +295,8 @@ tweets containing around 1300 tweets about obama and the election of 2008/2009.
 And a self compile dataset, referenced as the kiro dataset, based on the words: \textit{Finance},
 \textit{Investment}, \textit{Economy}, and \textit{Growth}.
 
+#TODO connect obama dataset to finance and trading.
+
 \paragraph{Search terms}
 \hspace{0pt}\\
 The kiro dataset is based on only four words. This is a very limited part of
@@ -306,19 +308,20 @@ would improve the relation to finance and the relevance of the dictionaries
 afterwords. 
 
 \paragraph{Structure}
+\hspace{0pt}\\
 The self compiled datsets has one tweet per line. This is the JSON data object
 that is automatically imported into python. 
 
-As for the obama tweet set we only have the text, where we have one tweet text
-per line. 
+The obama tweet set only have the tweet text. We have one tweet per line. And
+no metadata present. 
 
 \paragraph{Caveats}
 \hspace{0pt}\\
-Obama tweets is not ideal for sentiment analysis. To much political nonsense to
-comprehend. A political statement is not positive or negative. It is positive
-in the eyes on some and negative in the eyes of others. And there are people
-that think it is neutral because they do not care. Retweets are also present,
-so the actual data we get out of the tweet set is limited. 
+Obama tweets is not ideal for sentiment analysis. It has to much political
+content to be easily comprehended. A political statement is not positive or
+negative. It is positive in the eyes on some and negative in the eyes of others.
+And there are people that think it is neutral because they do not care. Retweets
+are also present, so the actual data we get out of the tweet set is limited. 
 
 The kiro dataset has a lot retweets and neutral tweets in it. Therefore we have
 only used positive and negative tweets later, ignoring all the neutral ones.
@@ -327,62 +330,62 @@ should have used the neutral tweets to improve the dictionaries.
 %
 
 \subsection{Trend Data}
+#TODO add examples.
+
+#TODO why a challenge??
 When mining larger sets of tweets, the rate limitations and week limitation is
-a challenge. But solved by broadening the mining. The mining in itself is quite
-easy. Just execute a search and store all the new unique tweets. 
+a challenge. The mining in itself is quite easy. Just execute a search and store
+all the new unique tweets. 
 
 To get a broad search we have a list of search terms. The terms are mostly
 usernames, but also some hashtags and other words. A drawback with the search
-terms are that they might not resemble the area of tweets we want to get. That
-are the finance related terms. 
+terms are that they might not resemble the area of research, finance.  
 
 The trend tweets are stored in files named with the search term. Each term
-having it's own file with tweets. Then we sort the tweets by date and get files
-containing tweets for an individual date.
+having it's own file with tweets. Before using the trend tweets they are sorted
+by date. 
 
 All the used search terms a stored in the file: '\_search-terms'
 \footnote{Search term file:
 \url{https://github.com/magnuskiro/master/blob/master/code/trend/_search-terms}}.
 Most of the search terms are based on an article from 'Teknisk Ukeblad' where
 they list the twitter handles that are most significant in the oil industry.
+
+#TODO describe how norways economy as OSEBX is largely based on oil. And why we
+take this assumption.  
 Since Norway has a lot of oil, the financial market and the trend is greatly
 dependent on it. And we can see if there are any relations between the compiled
 trend and the value of the stock exchange.  
 
+
 \subsection{Problems, Shortcomings, and Possible Improvements}
-Retweets are a source of concern. The retweets does not give much in the sense
-of new and unique data. But they can provide a significance in sharing and
-importance of a given tweet. Retweets should be investigated more thoroughly in
+Retweets are a source of concern, they provide no information that is not
+present in other tweets. But they can provide information about sharing and the importance of a given tweet. Retweets should be investigated more thoroughly in
 the future.  
 
 A shortcoming of the data mining is the search terms. Are the terms
 representative? Do we get good data or not? Are there other terms that are
-better suited to get accurate results? There are to many questions to ask about
-the data to rely on them to much. A wide array of tests and analysis should be
-done to remove this factor as a problem. 
-
-Another interesting point to consider is whether or not the choice of finance
-as the are of focus was smart. Is this area more or less difficult then other
-areas to navigate? We think that finance related tweets and news are more
-objective and has a firmer answer. And in total have less emotion and less room
-for interpretation.
+better suited to get accurate results? A wide array of tests and analysis should
+be done to improve this factor of the problem. 
 %
 
 % describing the dictionaries used in the classification of tweets. 
 \section{Dictionaries}\label{data:dictionaries}
 
-The dictionaries are lists of words used in the classification process. For
-each set we have a list of positive words and a list of negative words. 
+The dictionaries are lists of words used in the classification process. There
+are sets of dictionaries. In each set there are a list of positive words and a list of negative words. 
 
 The dictionaries are self compiled or downloaded. The downloaded dictionaries
 are very specific in their area. The LoughranMcDonald dictionaries only contain
-financial terms, while the self compiled dictionaries contains everything. 
+financial terms, while the self compiled dictionaries contains words of all
+sorts. 
 
-The purpose of the dictionaries are to provide a way to separate words. And
-further to give a quantitative way to distinguish positive and negative tweets.
+The purpose of the dictionaries are to separate groups of words. And
+further to give a quantitative way to classify positive and negative tweets.
 We also want to look at the quality of the different dictionaries. And the
 method for dictionary compilation.  
 
+#TODO define mono, bi and trigrams. 
 We use the dictionaries to count mono-, bi-, and tri-grams.
 And we can say something about the quality of the dictionaries and the method
 for compilation.
@@ -395,26 +398,26 @@ Naive bayes(\ref{sentiment:naive_bayes_classification}) classifiers.
 
 \subsection{Downloaded Dictionaries}
 The downloaded dictionaries are dictionaries found on the Internet. They are
-compiled by others, and their quality is questioned. The most significant
-feature of the downloaded dictionaries are that they contain words form a
-certain domain. The obama dictionary contains more words linked to politics,
+compiled by others, and their quality can be questioned. The most significant
+feature of the downloaded dictionaries are that they contain words from a
+certain domain. The obama dictionary contains words linked to politics,
 while the LoughranMcDonald dictionary only has words from the financial domain.  
 
 \paragraph{Obama}
 \hspace{0pt}\\
-The obama dictionary was created in relation to the obama tweet set
+The obama dictionary was created for the obama tweet set
 \footnote{Neal Caren of University of North Carolina. Tweet file:
-\url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}}, and the us
-presidential election of 2008.
+\url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}} in relation to the
+us presidential election of 2008.
 
 In the positive list \footnote{Neal Caren of University of North Carolina.
 Positive words: \url{http://www.unc.edu/~ncaren/haphazard/positive.txt}} there
-are 2230 words. The frequency of political words over other types words are
-uncertain. We have not done any analysis on this part. \textit{wisdom},
+are 2230 words. Whether or not the frequency of political words are higher than
+other types of words are uncertain. \textit{wisdom},
 \textit{truthful}, \textit{profit}, and \textit{intact} are words found in
-the positive list. This in itself speaks for the incorrectness of the
-dictionary. Neither \textit{intact} nor \textit{wisdom} are words that in
-themselves can be described as positive or negative. 
+the positive list. Neither \textit{intact} nor \textit{wisdom} are words that
+can be described as positive or negative. This gives a clear indication that
+the dictionary can be improved.
 
 There are 3905 negative words in the list of negative words\footnote{Neal Caren
 of University of North Carolina. Negative words:
@@ -431,7 +434,6 @@ websites of University of Notre Dame \footnote{Bill McDonald, University of
 Notre Dame:
 \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}}. 
 
-The lists of words:\\
 \begin{table}
 \centering
 \label{tbl:loughran_mcdonald_dictionaries}
@@ -449,7 +451,7 @@ Modal words weak & Weak words on moods, such as \texit{Somewhat}, and
 \end{tabular}
 \end{table}
 
-The potential of these dictionaries are big, and much unused. We only use the
+These dictionaries have a lot of potential. We only use the
 positive and negative lists of words. The other lists could be used for a
 better measure of polarity or weighting of bigrams. The best use of this
 dictionary is for comparison of the different dictionaries.  
@@ -464,29 +466,27 @@ Details about the process of manually classifying tweets can be found in section
 
 \paragraph{Dictionary Compilation}
 \hspace{0pt}\\
-The compilation of a dictionary is quite simple. We take a set of manually
-labeled tweets, and extract words, then sort them into positive and negative.
+The compilation of a dictionary is quite simple. 
 \begin{itemize}
-    \item 1: We import all the tweets to create dictionaries from. 
-    \item 2: We take all the positive tweets and generate words from them.
-Mono-, bi- or tri-grams. 
+    \item 1: We import manually labeled the tweets
+    \item 2: We take all the positive tweets and extract words from them. 
     \item 3: We repeat step 2 with the negative tweets. 
     \item 4: We remove words that are present in both the positive and negative
-list. Removal of duplicate words. Resulting in two lists of unique words either
-positive or negative.  
+dictionaries. Removal of duplicate words. Resulting in two dictionaries of
+unique words either positive or negative.  
 \end{itemize}
 
 \paragraph{Characteristics}
 For both datasets we compiled mono-, bi-, and trigrams. Giving us 6 sets of
 compiled dictionaries to test. All dictionaries has the drawback of personal
-bias. The mindset of the person labeling the dataset also effects the
-dictionaries. We also do not consider stemming and stop words, because we
-remove duplicate words.  
+bias. The personality of the person labeling the dataset also effects the
+dictionaries. 
 %
 
 \subsection{List of dictionaries}
-Table, listing all the different sets dictionaries used. There are a list of
-negative and a list of positive words in each set. 
+Table \ref{tbl:dictionaries}, listing all the different dictionaries used. 
+For each entry in the table there is a dictionary of negative words and a
+dictionary of positive words. 
 
 \begin{table}
 \centering
@@ -522,6 +522,9 @@ Obama, Trigram & Containing terms consisting of three separate trigrams.
 
 % The financial data used in the thesis. 
 \section{Finance Data}\label{data:finance}
+#TODO what does the finance data consist of?
+
+The values we use are: \textit{quote\_date}, and \textit{close}.
 
 \paragraph{Data acquisition}
 \hspace{0pt}\\
@@ -547,12 +550,5 @@ the days the exchange have been open are present.
 Fields in the csv file are: \textit{quote\_date},\textit{paper},
 \textit{exch}, \textit{open}, \textit{high}, \textit{low}, \textit{close},
 \textit{volume}, and \textit{value}.
-
-\paragraph{Usage}
-\hspace{0pt}\\
-The values we use are: \textit{quote\_date}, \textit{close}, and
-\textit{volume}.
-A potential drawback of the data are the days that the exchange is closed. This
-might complicate the coding of the trend comparison.
 %
 

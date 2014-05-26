@@ -1,14 +1,15 @@
 \chapter{Sentiment Classification}\label{sentiment}
 
-#TODO redo outline. 
 Sections in this chapter are as follows. Manual classifications,
 \ref{sentiment:manual_classification}, where we see how people classify
-tweets. Then we count words with 'Word count classification',
-\ref{sentiment:word_count_classification}. Expanding with the use of
-classifiers in section \ref{sentiment:classifier_classification}. A
-comparison of the classifiers and associated results can be found in section
-\ref{sentiment:comparison_results}. And a brief discussion an comments come
-last, \ref{sentiment:comments_discussion}.
+tweets. Classification with classifiers follows in section
+\ref{sentiment:classification}. Containing 'Word count classification',
+\ref{sentiment:word_count_classification}, and classification with classifiers
+such as SVM and Naive Bayes in section
+\ref{sentiment:classifier_classification}. A comparison of the classifiers and
+associated results can be found in section \ref{sentiment:comparison_results}.
+And a brief discussion come last, in section
+\ref{sentiment:comments_discussion}. 
 
 %what is sentiment
 Sentiment is described as "an attitude toward something; regard;
@@ -240,8 +241,19 @@ classified.
 
 \paragraph{SVM}\label{sentiment:svm_classification}
 \hspace{0pt}\\
-#TODO what is svm  
-#TODO how does it work.
+Support Vector Machine \footnote{Wikipedia:
+\url{https://en.wikipedia.org/wiki/Support_vector_machine}}, is a classification
+algorithm that uses a supervised learning model. The supervised learning is used
+with associated learning algorithms to recognize patterns and analyse data. 
+
+SVM builds a model, based on the training data, that split the data into two
+categories. New data will be assign one of the two categories. This makes the
+classifies a non-probabilistic binary linear classifier. 
+
+In more specific terms SVM creates multiple hyperplanes. The larger the
+distance from the hyperplane to the training data, the better the
+classification. The hyperplanes can be used for regression, classification or
+other tasks. 
 
 When using SVM there are different kernel modules that can be used
 to improve results. The kernel is often chosen based on knowledge about the
@@ -256,8 +268,38 @@ further experiments.
 %
 
 \paragraph{Naive Bayes}\label{sentiment:naive_bayes_classification}
-#TODO what is Naive Bayes. 
-#TODO how does it work.
+Naive Bayes \footnote{Wikipedia:
+\url{https://en.wikipedia.org/wiki/Naive_Bayes}}, is based on Bayes theorem. And
+is a simple probabilistic classifier. It uses strong(naive) independence
+assumptions with the theorem.
+
+The classifier assumes that the features are independent. That they have no
+connection to each other and that all features have equal importance. 
+A conditional model is used for with the probability model. Abstractly we get
+this: 
+
+\math{
+p(C \vert F_1,\dots,F_n)
+}\\
+
+In plain English we have the reformulated model that can handle larger datasets:
+
+\math{
+\mbox{posterior} = \frac{\mbox{prior} \times \mbox{likelihood}}{\mbox{evidence}} 
+}\\
+
+Even more specifically the implementation in nltk that we use are: 
+\begin{python}
+                   P(label) * P(f1|label) *...* P(fn|label)
+P(label|features)=-----------------------------------------
+                   SUM[l]( P(l) * P(f1|l) *...* P(fn|l) )
+\end{python}
+
+Naive Bayes is efficient to train in a setting with supervised
+learning. It requires only a small training set. The classifier have worked well
+with complex real-world problems. Good results despite simplicity have been
+found theoretically sound. But Naive Bayes is still outperformed by algorithms
+such as 'random forests'.
 %
 
 \section{Comparison}\label{sentiment:comparison_results}

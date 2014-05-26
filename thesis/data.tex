@@ -47,8 +47,6 @@ For an example of the data structure of a tweet, see appendix
 \paragraph{Content}
 \hspace{0pt}\\
 
-#TODO fix examples. 
-
 A tweet is an astonishing compilation of data about who, where and when a tweet
 was posted.
 
@@ -56,16 +54,85 @@ As for the content we have the text, the message itself. With the content we
 have fields for all the links, all the emoticons, and all hashtags that are
 present in a tweet. 
 
+Hashtags:
+\begin{verbatim}
+u'hashtags': [
+      {
+        u'indices': [
+          82,
+          87
+        ],
+        u'text': u'G01V'
+      },
+      {
+        u'indices': [
+          88,
+          95
+        ],
+        u'text': u'G01V11'
+      }
+\end{verbatim}
+
+
 Every tweet is posted by a user. All the data of a user is also present for
 each tweet. Here we have data on follower count, profile images, friend count,
 time zone, and many other profile related items. 
 
-For the sharing of a single tweet we have data fields such as favorite\_count
-and user\_mentions. We also have favorited, retweet\_count. 
+For the sharing of a single tweet we have data fields such as 'favorite\_count'
+and 'user\_mentions'. We also have 'favorited' and 'retweet\_count'. 
+
+\begin{verbatim}
+  u'in_reply_to_user_id': None,
+  u'retweet_count': 0,
+  u'id_str': u'390051769780142080',
+  u'favorited': False,
+  u'favorite_count': 0,
+  u'user_mentions': [      
+  ],
+\end{verbatim}
 
 In addition we have the location of a given tweet. Where the tweet was posted,
 the name of the place, the coordinates of the tweet, the country, and the id of
 this place. 
+
+\begin{verbatim}
+u'place': {
+    u'full_name': u'Stavanger, Rogaland',
+    u'url': u'https://api.twitter.com/1.1/geo/id/dee2255bd015b52c.json',
+    u'country': u'Norway',
+    u'place_type': u'city',
+    u'bounding_box': {
+      u'type': u'Polygon',
+      u'coordinates': [
+        [
+          [
+            5.5655417,
+            58.884420999999996
+          ],
+          [
+            5.8687141,
+            58.884420999999996
+          ],
+          [
+            5.8687141,
+            59.0608787
+          ],
+          [
+            5.5655417,
+            59.0608787
+          ]
+        ]
+      ]
+    },
+    u'contained_within': [
+    ],
+    u'country_code': u'NO',
+    u'attributes': {
+    },
+    u'id': u'dee2255bd015b52c',
+    u'name': u'Stavanger'
+  },
+\end{verbatim}
 
 See all the different metadata types in appendix: \ref{appendix:tweetStructure}.
 %
@@ -290,12 +357,16 @@ tweets with a cron job every 15 minutes\footnoe{Wikipedia on Cron:
 
 \subsection{Tweet sets}
 We ended up with two datasets to be used. The obama tweetset\footnote{Neal
-Caren of University of North Carolina. Tweet file: \url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}}, which is a set of
-tweets containing around 1300 tweets about obama and the election of 2008/2009.  
-And a self compile dataset, referenced as the kiro dataset, based on the words: \textit{Finance},
-\textit{Investment}, \textit{Economy}, and \textit{Growth}.
+Caren of University of North Carolina. Tweet file:
+\url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}}, which is a set of
+tweets containing around 1300 tweets about obama and the election of 2008/2009.
+And a self compile dataset, referenced as the kiro dataset, based on the words:
+\textit{Finance}, \textit{Investment}, \textit{Economy}, and \textit{Growth}. 
 
-#TODO connect obama dataset to finance and trading.
+In future work it would be natural to connect the search for tweets towards
+stocks in a better way. Another interesting thing would be to analyse how the
+obama tweet set can be used to predict the stock market after the election. And
+see if we could extract trends or other useful finance related information.  
 
 \paragraph{Search terms}
 \hspace{0pt}\\
@@ -329,34 +400,82 @@ This gives us more relevant data to work with and less noise. Although we
 should have used the neutral tweets to improve the dictionaries.
 %
 
-\subsection{Trend Data}
-#TODO add examples.
-
-#TODO why a challenge??
+\subsection{Trend Data}\label{data:trend_data}
 When mining larger sets of tweets, the rate limitations and week limitation is
 a challenge. The mining in itself is quite easy. Just execute a search and store
-all the new unique tweets. 
+all the new unique tweets. The problem appear when we need huge amounts of
+tweets and a setup for mining continuously. 
 
-To get a broad search we have a list of search terms. The terms are mostly
+Each request to Twitter can yield 100 tweets. This gives us a theoretical
+maximum of 1800 tweets per 15 min. Then we have to factor in the fact that we
+might already have the tweets we receive from Twitter. And that we might not
+get 100 tweets per query. In addition the Twitter API only indexes tweets a
+week back in time. Forcing us to mine tweets over a longer period of time.  
+
+As we have not set up a server to do the mining for us we, we did it manually
+every now and then. Resulting in very few tweets per day ratio. 
+An example of output from our mining script:
+\begin{verbatim}
+@chevron
+Info -- Found 18 new tweets
+Info -- Metadata file created, containing 1627 tweets
+\end{verbatim} 
+
+To get a broad search we have a list of search words. The words are mostly
 usernames, but also some hashtags and other words. A drawback with the search
-terms are that they might not resemble the area of research, finance.  
+words are that they might not resemble the area of research, finance.  
+A subset of the search words are:
+\begin{verbatim}
+@annaljunggren         @industrienergi        $sto
+@ap_energi_miljo       @industrienergiu       stock
+@asmundaukrust         @iraqoil_gas           @svheikki
+@bp_america            @janezpotocnikeu       @tageerlend
+@chedegaardeu          @knebben               @_tekna_
+@chevron               @kobbaen               @tekniskmuseum
+decrease               @linetrezz             @terjeaa
+@dn_no                 market                 @theoilcouncil
+\end{verbatim}
 
 The trend tweets are stored in files named with the search term. Each term
 having it's own file with tweets. Before using the trend tweets they are sorted
-by date. 
+by date. Example from the folder shows the structure of filenames. All the files
+with 'trend-' prefix contain tweets sorted by date.   
+\begin{verbatim}
+economy.meta           @nikolaiastrup.meta    trend-Apr-20
+@eiagov                @_nito_                trend-Apr-21
+@eiagov.meta           @_nito_.meta           trend-Apr-22
+@eirik_milde           @norskindustri         trend-Apr-23
+@eirik_milde.meta      @norskindustri.meta    trend-Apr-24
+@eirinolsen            @norskoljeoggass       trend-Apr-25
+@eirinolsen.meta       @norskoljeoggass.meta  trend-Apr-26
+@elonmusk              norway                 trend-Apr-27
+@elonmusk.meta         norway.meta            trend-Apr-28
+@energyindepth         @oeddep                trend-Apr-29
+@energyindepth.meta    @oeddep.meta           trend-Apr-30
+@enr_gop               @ogjonline             trend-May-01
+@enr_gop.meta          @ogjonline.meta        trend-May-02
+@erlendjordal          @oilandgasiq           trend-May-03
+\end{verbatim}
 
 All the used search terms a stored in the file: '\_search-terms'
 \footnote{Search term file:
 \url{https://github.com/magnuskiro/master/blob/master/code/trend/_search-terms}}.
-Most of the search terms are based on an article from 'Teknisk Ukeblad' where
-they list the twitter handles that are most significant in the oil industry.
+Most of the search terms are based on an article\footnote{Teknisk Ukeblad:
+\url{http://www.tu.no/petroleum/2014/04/05/dette-er-de-viktigste-twitrerne-for-oljebransjen}}
+from 'Teknisk Ukeblad' where they list the twitter handles that are most
+significant in the oil industry.
 
-#TODO describe how norways economy as OSEBX is largely based on oil. And why we
-take this assumption.  
-Since Norway has a lot of oil, the financial market and the trend is greatly
-dependent on it. And we can see if there are any relations between the compiled
-trend and the value of the stock exchange.  
-
+The majority of the Norwegian economy is based on oil and gas exports. This
+means that other parts of the Norwegian economy is dependent on the oil
+industry in many ways. As an example, we have all the service industry around
+oil and gas, such as food supply, air travel, financial services etc. If the
+oil industry has a hard time, all the dependent companies will have a hard time
+to. 
+ 
+This leads us to believe that OSEBX, the Oslo stock exchange, is largely
+dependant on the oil industry also. Which makes our choice of tweets
+reasonable. 
+%
 
 \subsection{Problems, Shortcomings, and Possible Improvements}
 Retweets are a source of concern, they provide no information that is not
@@ -385,7 +504,11 @@ further to give a quantitative way to classify positive and negative tweets.
 We also want to look at the quality of the different dictionaries. And the
 method for dictionary compilation.  
 
-#TODO define mono, bi and trigrams. 
+Monograms are words consisting of one word. 'This', 'That' and 'Finance' are
+examples of that. Bigrams are words consisting of two words. 'Apple cake' and
+'Operatin system' are two examples. For trigrams we have three words to a word,
+'big blue boots', 'fast lane car', and 'waterfall boat accident'. 
+
 We use the dictionaries to count mono-, bi-, and tri-grams.
 And we can say something about the quality of the dictionaries and the method
 for compilation.
@@ -522,8 +645,8 @@ Obama, Trigram & Containing terms consisting of three separate trigrams.
 
 % The financial data used in the thesis. 
 \section{Finance Data}\label{data:finance}
-#TODO what does the finance data consist of?
-
+The finance data consists of records from Oslo stock exchange, OSEBX, one
+record for each opening day. 
 The values we use are: \textit{quote\_date}, and \textit{close}.
 
 \paragraph{Data acquisition}

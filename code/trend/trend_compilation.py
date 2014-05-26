@@ -1,4 +1,3 @@
-
 import ast
 import codecs
 import matplotlib.pyplot as plt
@@ -90,7 +89,7 @@ def compile_pos_neg_for_tweets():
         trend_days[day] = {}
         trend_days[day]['pos'], trend_days[day]['neg'], trend_days[day]['tot'] = get_day_trend(day, classifier)
 
-    #print trend_days
+    print trend_days
     return trend_days
 
 
@@ -261,7 +260,64 @@ def plot(trend_days):
     plt.show()
 
 
+def print_osebx():
+    stock_records = [
+        "20140526,OSEBX,Oslo Bors,601.82,606.37,600.59,600.80,0,2516585043",
+        "20140523,OSEBX,Oslo Bors,599.06,601.85,597.25,601.82,0,2638282686",
+        "20140522,OSEBX,Oslo Bors,595.18,599.08,595.35,599.06,0,2843077553",
+        "20140521,OSEBX,Oslo Bors,591.75,595.35,591.50,595.18,0,2843077553",
+        "20140520,OSEBX,Oslo Bors,594.43,595.16,589.51,591.75,0,3431501995",
+        "20140519,OSEBX,Oslo Bors,593.60,595.95,591.57,594.43,0,2727302694",
+        "20140516,OSEBX,Oslo Bors,595.49,597.49,588.45,593.60,0,3842116619",
+        "20140515,OSEBX,Oslo Bors,597.78,600.75,594.40,595.49,0,4062064215",
+        "20140514,OSEBX,Oslo Bors,595.47,598.00,595.22,597.78,0,3465552931",
+        "20140513,OSEBX,Oslo Bors,596.01,597.15,593.49,595.47,0,3381405777",
+        "20140512,OSEBX,Oslo Bors,589.37,596.02,588.44,596.01,0,3381405777",
+        "20140509,OSEBX,Oslo Bors,589.05,589.45,586.11,589.37,0,4054523151",
+        "20140508,OSEBX,Oslo Bors,583.78,589.11,583.82,589.05,0,4674766325",
+        "20140507,OSEBX,Oslo Bors,582.77,586.10,579.60,583.78,0,4674766325",
+        "20140506,OSEBX,Oslo Bors,582.04,585.01,580.40,582.77,0,3207736945",
+        "20140505,OSEBX,Oslo Bors,583.44,584.11,579.28,582.04,0,2268264138",
+        "20140502,OSEBX,Oslo Bors,578.37,583.44,578.50,583.44,0,3938763164",
+        "20140430,OSEBX,Oslo Bors,576.12,580.93,575.56,578.37,0,5974359257",
+        "20140429,OSEBX,Oslo Bors,566.82,576.29,566.82,576.12,0,4483198308",
+        "20140428,OSEBX,Oslo Bors,566.24,567.14,564.55,566.82,0,2816490895",
+        "20140425,OSEBX,Oslo Bors,562.89,566.24,562.41,566.24,0,2924826814",
+        "20140424,OSEBX,Oslo Bors,559.41,565.65,559.84,562.89,0,4274186083",
+        "20140423,OSEBX,Oslo Bors,561.13,562.45,557.74,559.41,0,3339937790"
+    ]
+    for r in stock_records:
+        r = r.split(",")
+        #Date,close,high,low,open,volume
+        print str(r[0]) + "," + str(r[6]) + "," + str(r[4]) + str(",") + str(r[5]) + "," + str(r[3]) + "," + str(r[7])
+
+
+def transform_tweet_data():
+    #Date,close,high,low,open,volume
+    #'trend-Apr-29': {'neg': 21, 'pos': 101, 'tot': 122},
+    trend_days = get_tweet_trend_data()
+    #print "data,h-l,pos,neg,open,tot"
+    keys = sorted(trend_days.keys())
+    date = ""
+    for i in range(1, len(keys)):
+        if "Apr" in keys[i]:
+            date = "201404" + str(keys[i].split('-')[2])
+        elif "May" in keys[i]:
+            date = "201405" + str(keys[i].split('-')[2])
+        volume = trend_days[keys[i]]['tot'] * 1.0
+        # (positive_tweets / total_amount_of_tweets)*scale
+        high = (trend_days[keys[i]]['pos'] / volume) * 1000
+        # (negative_teets / total_amount_of_tweets)*scale
+        low = (trend_days[keys[i]]['neg'] / volume) * 1000
+        openv = 0
+        close = high - low
+        print str(date) + "," + str(close) + "," + str(high) + str(",") + str(low) + "," + str(volume / 10) + "," + str(
+            0)
+
+
 if __name__ == "__main__":
-    #trend_data = compile_pos_neg_for_tweets()
+    trend_data = compile_pos_neg_for_tweets()
     #plot(trend_data)
-    plot(get_tweet_trend_data())
+    #plot(get_tweet_trend_data())
+    #print_osebx()
+    #transform_tweet_data()

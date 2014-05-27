@@ -203,13 +203,20 @@ def get_tweet_trend_data():
     @return: tweet trend data in a dict.
     """
     trend_days = {'trend-Apr-30': {'neg': 112, 'pos': 131, 'tot': 243},
+                  'trend-May-19': {'neg': 523, 'pos': 1326, 'tot': 1849},
+                  'trend-May-18': {'neg': 59, 'pos': 110, 'tot': 169},
                   'trend-May-15': {'neg': 1151, 'pos': 2255, 'tot': 3406},
                   'trend-May-14': {'neg': 596, 'pos': 1178, 'tot': 1774},
-                  'trend-May-16': {'neg': 1793, 'pos': 4271, 'tot': 6064},
+                  'trend-May-17': {'neg': 49, 'pos': 83, 'tot': 132},
+                  'trend-May-16': {'neg': 1840, 'pos': 4320, 'tot': 6160},
                   'trend-May-11': {'neg': 121, 'pos': 169, 'tot': 290},
                   'trend-May-10': {'neg': 98, 'pos': 141, 'tot': 239},
                   'trend-May-13': {'neg': 1178, 'pos': 2108, 'tot': 3286},
                   'trend-May-12': {'neg': 980, 'pos': 2013, 'tot': 2993},
+                  'trend-May-22': {'neg': 149, 'pos': 295, 'tot': 444},
+                  'trend-May-24': {'neg': 341, 'pos': 1056, 'tot': 1397},
+                  'trend-May-25': {'neg': 148, 'pos': 272, 'tot': 420},
+                  'trend-May-23': {'neg': 256, 'pos': 468, 'tot': 724},
                   'trend-Apr-23': {'neg': 83, 'pos': 121, 'tot': 204},
                   'trend-Apr-24': {'neg': 104, 'pos': 195, 'tot': 299},
                   'trend-Apr-25': {'neg': 119, 'pos': 113, 'tot': 232},
@@ -217,15 +224,18 @@ def get_tweet_trend_data():
                   'trend-Apr-27': {'neg': 120, 'pos': 240, 'tot': 360},
                   'trend-Apr-28': {'neg': 260, 'pos': 446, 'tot': 706},
                   'trend-Apr-29': {'neg': 21, 'pos': 101, 'tot': 122},
+                  'trend-May-21': {'neg': 64, 'pos': 190, 'tot': 254},
                   'trend-May-02': {'neg': 198, 'pos': 254, 'tot': 452},
                   'trend-May-03': {'neg': 130, 'pos': 174, 'tot': 304},
+                  'trend-May-26': {'neg': 1691, 'pos': 4925, 'tot': 6616},
                   'trend-May-01': {'neg': 78, 'pos': 107, 'tot': 185},
                   'trend-May-06': {'neg': 1608, 'pos': 3737, 'tot': 5345},
                   'trend-May-07': {'neg': 206, 'pos': 391, 'tot': 597},
                   'trend-May-04': {'neg': 215, 'pos': 422, 'tot': 637},
                   'trend-May-05': {'neg': 227, 'pos': 437, 'tot': 664},
                   'trend-May-08': {'neg': 840, 'pos': 1807, 'tot': 2647},
-                  'trend-May-09': {'neg': 117, 'pos': 215, 'tot': 332}}
+                  'trend-May-09': {'neg': 117, 'pos': 215, 'tot': 332},
+                  'trend-May-20': {'neg': 33, 'pos': 62, 'tot': 95}}
 
     return trend_days
 
@@ -286,7 +296,7 @@ def print_osebx():
         "20140424,OSEBX,Oslo Bors,559.41,565.65,559.84,562.89,0,4274186083",
         "20140423,OSEBX,Oslo Bors,561.13,562.45,557.74,559.41,0,3339937790"
     ]
-    for r in stock_records:
+    for r in reversed(stock_records):
         r = r.split(",")
         #Date,close,high,low,open,volume
         print str(r[0]) + "," + str(r[6]) + "," + str(r[4]) + str(",") + str(r[5]) + "," + str(r[3]) + "," + str(r[7])
@@ -316,8 +326,8 @@ def transform_tweet_data():
 
 
 if __name__ == "__main__":
-    trend_data = compile_pos_neg_for_tweets()
+    #trend_data = compile_pos_neg_for_tweets()
     #plot(trend_data)
     #plot(get_tweet_trend_data())
-    #print_osebx()
+    print_osebx()
     #transform_tweet_data()

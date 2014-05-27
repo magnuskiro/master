@@ -1,3 +1,4 @@
+# coding=utf-8
 '''
 This code is copyright Harrison Kinsley.
 
@@ -394,5 +395,5 @@ def graphData(stock, MA1, MA2, dataset): # modified by kiro
 stock = "osebx.ol" # modified by kiro
 
 # stock name to plot,
-#graphData(stock, 3, 8, 'sampleData.txt') # modified by kiro
-graphData(stock, 3, 8, 'tweetData.txt') # modified by kiro
+graphData(stock, 3, 8, 'sampleData.txt') # modified by kiro
+#graphData(stock, 3, 8, 'tweetData.txt') # modified by kiro

@@ -1,14 +1,16 @@
 \chapter{Experiments}\label{experiments}
-#TODO chapter description an purpose\\
-#TODO experimental setup, explaining a plan and execution of experiments.  \\
-#TODO By using my methods, described in earlier chapters, we can execute the
-necessary experiments to test the research questions. \\
-#TODO chapter outline. \\
-#TODO list the experiments done to achieve results. The concrete ones. \\
-#TODO link these experiments to methods in other chapters.  \\
-#TODO link the experiments to research questions. \\
+This chapter aims to test methods described in earlier chapters. We describe
+setup and context for the experiments as well as what data was used.
 
-\section{Dictionary compilation}
+The experiments described in this chapter are the following. Dictionary
+compilation, \ref{experiments:dictionaries}. The word count classification, bag
+of words method, \ref{experiments:word_count_classification}. Threshold
+variation in section \ref{experiments:threshold}. Kernel choice for the SVM
+classifier is described in section \ref{experiments:svm_kernel}. With the
+testing of classifiers coming next, \ref{experiments:calssifiers}. And the trend
+aggregation comes last in section \ref{experiments:trend}.
+
+\section{Dictionary compilation}\label{experiments:dictionaries}
 Section \ref{data:dictionaries} describes dictionaries and what they are used
 for. This section describes how the dictionaries are tested. 
 The dictionaries are compiled from manually labeled tweets.
@@ -198,10 +200,6 @@ Obama & Bigram & 59 & 1306 & 0.9568 \\
 %
 
 \section{Trend aggregation}\label{experiments:trend}
-
-#TODO rewrite
-#TODO link to 5, 4.3, 3.3, 2.1, 2.4 
-
 Before executing this experiment section \ref{trend:compared} describes the
 conceptual parts of the trend comparison. This is the basis for the results of
 this experiment. 
@@ -217,12 +215,18 @@ has been used. More specifically the trend aggregation under trends on twitter,
 \ref{trend:trends_on_twitter}. And the finance trend aggregation,
 \ref{trend:trends_in_finance}.
 
+The tweet data used is described in section \ref{data:trend_data}, on page
+\pageref{data:trend_data}. And the finance data is described in section
+\ref{data:finance}, page \pageref{data:finance}.
+
 The results of the experiment are discussed in section \ref{results:trend}.
 
 \paragraph{Finance plot}
-#TODO describe experiment and code. 
+The plotting of the graph is described in better detail in appendix
+\ref{code:trend_aggregation}, page \pageref{code:trend_aggregation}.
 
-Plotting the graph we got figure \ref{fig:trend_finance_plot}.
+Plotting the finance trend we got figure \ref{fig:trend_finance_plot}, page
+\pageref{fig:trend_finance_plot}.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=\textwidth]{finance_trend_plot.png}
@@ -234,9 +238,10 @@ the Average directional graph at the bottom.
 
 
 \paragraph{Twitter plot}
-#TODO describe experiment and code. 
+Code for plotting the trend graph is described in appendix
+\ref{code:trend_aggregation}, page \pageref{code:trend_aggregation}.
 
-Plotting the moving average we get figure: \ref{tweet_trend_plot.png}, on page
+Plotting the moving average for the Twitter trend we get figure: \ref{tweet_trend_plot.png}, on page
 \pageref{tweet_trend_plot.png}.
 
 \begin{figure}[htb]

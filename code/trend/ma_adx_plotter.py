@@ -147,8 +147,8 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
         urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/' + stock + '/chartdata;type=quote;range=10y/csv'
         stockFile = []
         try:
-            sourceCode = urllib2.urlopen(urlToVisit).read()
-            #sourceCode = open(dataset, 'r').read()  # modified by kiro
+            #sourceCode = urllib2.urlopen(urlToVisit).read()
+            sourceCode = open(dataset, 'r').read()  # modified by kiro
             splitSource = sourceCode.split('\n')
             for eachLine in splitSource:
                 splitLine = eachLine.split(',')
@@ -395,6 +395,6 @@ stock = "osebx.ol"  # modified by kiro
 stock = "sto"  # modified by kiro
 
 # stock name to plot,
-graphData(stock, 12, 50, 'sampleData.txt')  # modified by kiro
+#graphData(stock, 12, 50, 'sampleData.txt')  # modified by kiro
 #graphData(stock, 3, 8, 'sampleData.txt') # modified by kiro
-#graphData(stock, 3, 8, 'tweetData.txt') # modified by kiro
+graphData(stock, 3, 8, 'tweetData.txt') # modified by kiro

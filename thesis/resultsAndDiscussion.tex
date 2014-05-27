@@ -13,20 +13,33 @@ Last we have a general discussion about the results.
 \section{Data Source}
 Twitter as a data source proved to be OK. It was quite easy to obtain data. But
 increasingly difficult to get good amounts of data and unbiased data. All the
-initial data have some restriction to search term or other limits. In total we
-should have mined a lot more data and classified more of it. 
+initial data have some restriction to search words or other limits. In total we
+should have mined a lot more data and manually classified more of it. 
 
 As far as the dictionaries go they work well. We have different results for
 different dictionaries and different datasets, but all in all the way to
 compile datasets work good. The dictionaries depend on the manually classified
-tweets, so a lot of the improvement lies there. Although we can improve the
-dictionaries by removing stop words and other words we know have no clear
-positive of negative contribution. 
+tweets, so a lot of the potential improvement lies there. Although we can
+improve the dictionaries by removing stop words and other words we know have no
+clear positive of negative sentiment. 
 
-#TODO link to research question 1 and 3. \ref{}
+In research question 1, \ref{introduction:rq1}, we asked what knowledge we can
+extract from tweets to find a sentiment. The dictionaries are a good way to
+compose sentiment from the different words in the manually labeled tweets.
+
+Research question 3, \ref{introduction:rq3}, asks if Twitter has been useful in
+comparison with technical analysis. To some  extent it has. We have mined and
+classified many tweets in the hope that the aggregated trend would show
+likeness to plots of technical analysis. The data from twitter that has been
+used to acquire positive and negative tweets for the trend aggregation. And has
+also provided useful insight into the use of the Twitter API. 
 %
 
 \section{Dictionaries}
+As for the use of the dictionaries in association with the trend and research
+question 3, \ref{introduction:rq3}, we use the dictionaries for feature
+extraction in the classifiers. Besides the use in classifiers the dictionaries
+have no other practical uses in this thesis in relation to sentiment.
 
 \paragraph{Error analysis}
 \hspace{0pt}\\
@@ -56,7 +69,7 @@ tweet/sentence before creating bi- and trigrams.
 %
 
 
-\section{Classification}
+\section{Classification}\label{results:classification}
 Manual labeling is a bit of a challenge to keep unbiased. The whole
 classification process is based on a persons opinion, which makes the results
 somewhat biased. To eliminate this error we should have multiple people do the
@@ -79,8 +92,15 @@ In total we gained some knowledge about dictionaries and their effect on
 classification. And we can confirm that classifiers work better than word
 counting.  
 
-#TODO link to research question 1 and 2 \ref{introduction:rq1}
-\ref{introduction:rq2}.
+We tested two ways of finding the sentiment of a tweet. The bag of words method
+described in section \ref{sentiment:word_count_classification}, and the
+classifier way with the SVM and Naive Bayes classifiers,
+\ref{sentiment:classification}.
+
+Research question 2, \ref{introduction:rq2}, the question of trend aggregation,
+the classification was useful. The sentiment worked to some extent. We do not
+know how well. And we have to look into the part of credibility in future work.   
+%
 
 \subsection{Word Count Classification}\label{results:word_count_classification}
 The results from the word count classification can be plotted in the tabled
@@ -216,11 +236,14 @@ columns first; top left is 1, top mid is 7, top right is 13.
 \end{figure}
 
 \subsection{With Classifiers}
-#TODO main results from the classifier classification
+Not surprisingly the classifiers have better results than the bag of words
+method of classification. Further the SVM classifier with the LinearSVC kernel
+module performed best. Naive Bayes classifier was nearly as good. This answers
+part of research question 1, \ref{introduction:rq1}.
 
 \paragraph{SVM}\label{results:svm_classification}
 \hspace{0pt}\\
-From results of the experiment, \ref{experiments:svm_classification} we can draw
+From results of the experiment, \ref{experiments:svm_classification}, we can draw
 some conclusions. The monogram dictionary performed
 better than the bigram dictionary. Probably due to the number of features we
 can extract from each tweet. Also classifiers are more accurate than the word
@@ -264,26 +287,20 @@ For the classifiers and the good results with the monogram dictionaries, we
 think
 that has to do with the number of features we get from a tweet. The more
 features we have the easier it is to classify and the more accurate the result.
-
 %
 
 \section{The Trend}\label{results:trend}
-The attempt to create a trend succeeded, but it was not were good. The average
-change in sentiment between two days did not have any correlations with the
-average change in closing value of the stock exchange. 
+Comparing the two graph plots, figure \ref{fig:trend_finance_plot} and figure
+\ref{fig:trend_tweet_plot}, we can see minor similarities. All the moving
+averages have rightward growth. While for the tweet trend the 3 day interval
+preforms worse than the 8 day interval. There are no certain correlations
+between the two trends. And it is difficult to conclude on specifics. 
 
-One of the limitations here is the low test coverage. This should have been
-tested with multiple exchanges and much more tweets. We used around 30 thousand
-tweets to create the tweet trend. But the amount does not matter if the data is
-used wrong.  
-
-Partial success, with plenty flaws. New knowledge gain and lots of new
-questions to be asked. 
-
-#TODO link to research question 2 and 3 \ref{}.
-
-
-
+For the research questions, 2(\ref{introduction:rq2}), and
+3(\ref{introduction:rq3}) are in some degree true. RQ2, we can aggregate a
+trend. But the use for it and the accuracy we know nothing of. RQ3 has the
+answer poor. The sentiment trend compares poorly to the trend from the technical
+analysis. 
 %
 
 \section{Discussion}
@@ -293,5 +310,6 @@ reasonable results should be expanded, retested and improved.
 Most notably we have clear indications that dictionaries, automatically compiled
 from a manually classified tweets set, can be used when classifying sentiment. 
 
-#TODO discuss the achieved research questions. 
+#TODO discuss the achieved research questions.
+ 
 %

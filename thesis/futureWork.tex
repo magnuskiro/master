@@ -1,61 +1,105 @@
 \chapter{Future Work}\label{future_work}
-All the things I didn't have time to do my self. 
+Through the time spend writing this thesis a lot of ideas and edging areas of
+research have touched. Many of them only briefly and only with little interest.
+This is the chapter we look further into all the things not quite touching the
+core of this thesis.   
+
+For the parts of future work we have Twitter, \ref{future_work:twitter},
+Dictionaries, \ref{future_work:dictionaries}, Sentiment,
+\ref{future_work:sentiment}, and Trend, \ref{future_work:trend}.
 %
 
-\section{Twitter}
-#TODO further use of twitter as data source and such.  
+\section{Twitter}\label{future_work:twitter}
+Mainly Twitter should be used further to mine specific areas of interest. Dig
+deeper into the finance section or focus on another category of knowledge.
 
 \paragraph{Twitter API}
-#TODO the unused parts of the API
-Look at the different endpoints and see how see how we can use them smartly.
-\footnot{Twitter: \url{https://dev.twitter.com/docs/api/1.1}}
+We should look at the different endpoints of the API and see how see how we can
+use them smartly \footnot{Twitter: \url{https://dev.twitter.com/docs/api/1.1}}.
+There are definitely unused options that can improve the sentiment analysis, or
+data mining aspects discussed in this thesis. 
 
-\paragraph{search terms for the tweet sets}
-#TODO search parameters and the query.
-the tweet sets should be expanded to use a wide range of finance words. then
-create dictionaries from the sets. 
+\paragraph{Tweet sets}
+One of the critiques that can be said about this thesis is the data used. It
+should have been a lot more of it and it should have been more diverse. To
+achieve this the natural path would be to define a set of finance words that we
+define as the finance area of twitter. Then use those words to mine tweets from
+twitter. The tweet sets should be expanded to use a wide range of finance words.
+Then create dictionaries from the sets. 
 
-\paragraph{implications of special twitter content}
-#TODO specifics of tweets to be used?
-@users, #hashtags, links? Does any of them matter much?
+\paragraph{Special Twitter content}
+Twitter has it's own convention of symbols that is used. Symbols like \#hashtags,
+@usernames and stock markers, \$STO. What is the contribution of those? Do these
+special symbols add special meaning to a tweet? Questions like these and other
+questions about use and frequency should be answered. 
 
 \paragraph{Language analysis}
-#TODO How is abbreviations used in tweets? Same as in SMS?
-example: bc=because
-
-Not computer science
+Some form or language analysis should be done with tweets. To see if the
+language used on twitter can be described in a good systematic way. And also to
+find specific words, sentences, punctuation and other syntactic sugar. 
+As an example of things to look for we have abbreviations such as 'bc'. 'bc'
+means because in the setting the word was found. The existing information from
+SMS linguistics should be tested on Twitter to see it's relevance.
 %
 
-\section{Dictionaries}
-#TODO the future of dictionaries.
+\section{Dictionaries}\label{future_work:dictionaries}
+For the dictionaries and the compilation of them we should look further into
+the quality of them. Improvements with stop words and further elimination of
+neutral words is also an option. This could be some kind of qualitative
+analysis of words and their sentiment. Combinations of mono, bi and trigrams
+should also be tested. Do we get better results if we extract features that are
+mono, bi and trigrams? 
 %
 
-\section{Sentiment}
-#TODO future of classifiers and research there.
-classifiers:
-should have crosstested. used kiro set for training and obama set for
-classification.
-
-\paragraph{Credibility}
-
+\section{Sentiment}\label{future_work:sentiment}
+The future of sentiment classification lies with the classifiers. But the
+feature extraction can be improved. This is a natural place to start further
+research into sentiment analysis. A further test of training data and test sets
+should be done to validate the accuracy of the classifiers.   
+ 
 \paragraph{Is neutral negative or positive?}
-#TODO if a tweet is classified as neutral, aka the amount of positivity and
-negativity is the same how do we then classify the tweet?
+If a tweet is neutral, where the amount of positive words and
+negative words are the same, how do we then classify the tweet? The edge case
+where we, with the threshold, found that many tweets were classified wrongly.
+How can this problem be improved?
 
 \paragraph{Word weighting} 
-#TODO How can we use weighting of words in sentiment classification ?
+How can we use weighting of words in sentiment classification? Are there a way
+where we can assign a value to some specific words to improve the bag of words
+classification? Is 'good' as positive as 'excellent'? Or 'bad' as negative as
+'evil'? 
 
 \paragraph{How people express sentiment}
-#TODO more of a psychology thing. But still relevant. 
+A bit of a psychological twist is to look into the natural language of people,
+and find out how we express a sentiment. What triggers the event and what part
+of the event is significant to the sentiment? And can knowledge about how
+people express sentiment improve upon the classification of sentiment? 
 
 \paragraph{Use of sentiment analysis on news}
-#TODO not the whole part of the news, but the title and ingress. 
+As a test we should change the dataset and focus on news. Particular finance
+news. And only use the title and ingress of the news. In many cases the
+sentiment and all the necessary information is presented in the title and
+ingress. The title and ingress can in many ways be compared to tweets. Short
+messages containing a sentiment.   
 %
 
-\section{trend}
-#TODO future of trend aggregation
+\section{Trend}\label{future_work:trend}
+\paragraph{Credibility}
+The credibility of a tweeter might have an impact on the sentiment. We do not
+know. Reputation and social reach are two factors that cannot be ignored when 
+classifying tweets. These factors should be considered when aggregating a
+trend. Do the factors have an effect on the trend at all? 
 
 \paragraph{Trend Data}
-The analysis of the trend data. There we ahve over 30k of tweets waiting to be
-analysed.
+The data we have acquired should be further analysed. Is the data good? Is the
+data representative for twitter? Can we use the data in other ways? Is the
+quality of the data any good?  The analysis of the trend data is important for
+further improvements for the trend aggregation. We have over 30k of tweets
+waiting to be analysed. 
+
+\paragraph{Trend Aggregation}
+We have to look for other methods of aggregating a trend. This to improve the
+Twitter trend we have created, but also to validate the accuracy and
+correctness of the trend we have created. Other parts of the tweet data might
+be used also. This should be explored.  
 %

@@ -1,9 +1,4 @@
 \chapter{The Code}\label{code}
-
-#TODO update, with new code. 
-#TODO examples of running in a conceptual spirit can be moved other places in the
-thesis. To their respective chapters. 
-
 The code is complete in the sense of doing what it should. Or making an attempt
 to. The results of the coding are up for discussion.
 
@@ -67,6 +62,7 @@ folders.
         trend_compilation.py
         trend_mining.py
         trend_tweet_sorting.py
+        ma_adx_plotter.py  
     - twitter
         mining_operations.py
         mining_utils.py
@@ -420,81 +416,69 @@ for tweet in trend_day_tweets:
 return [pos, neg, pos + neg]
 \end{python}
 
-Then we calculate the average change of positive and negative tweets between
-toady and yesterday. 
+Then we transform the tweet data to fit the structure of finance data. 
 \begin{python}
-keys = sorted(trend_days.keys())
-#print keys
-results = []
-for i in range(1, len(keys)):
-    # difference from yesterday til today.
-    # positive tweets
-    positive_tweets_today = trend_days[keys[i]]['pos']
-    positive_tweets_yesterday = trend_days[keys[i - 1]]['pos']
-
-    # negative tweets
-    negative_tweets_today = trend_days[keys[i]]['neg']
-    negative_tweets_yesterday = trend_days[keys[i - 1]]['neg']
-
-    # total amount of tweets
-    total_amount_of_tweets = trend_days[keys[i]]['tot'] + \
-                             trend_days[keys[i - 1]]['tot']
-
-    # change in positive tweets between this and the previous day.
-    pos_diff = (positive_tweets_today - positive_tweets_yesterday) / (
-        total_amount_of_tweets * 1.0)
-
-    # change in negative tweets between this and the previous day.
-    neg_diff = (negative_tweets_today - negative_tweets_yesterday) / (
-        total_amount_of_tweets * 1.0)
-
-    # median = the mid point between the positive and negative change
-points.
-    # change in sentiment volume between this and the previous day.
-    median = min([neg_diff, pos_diff]) + abs(pos_diff - neg_diff) / 2
-    results.append(median)
-
-    #print keys[i], "%.4f" % median, trend_days[keys[i]]['tot']
-    #print "pos", keys[i], trend_days[keys[i]]['neg'] -
-trend_days[keys[i-1]]['neg']
-
-#print len(results)
-return results
+def transform_tweet_data():
+    #Date,close,high,low,open,volume
+    #'trend-Apr-29': {'neg': 21, 'pos': 101, 'tot': 122},
+    #print "data,h-l,pos,neg,open,tot"
+    trend_days = get_tweet_trend_data()
+    keys = sorted(trend_days.keys())
+    date = ""
+    for i in range(1, len(keys)):
+        if "Apr" in keys[i]:
+            date = "201404" + str(keys[i].split('-')[2])
+        elif "May" in keys[i]:
+            date = "201405" + str(keys[i].split('-')[2])
+        volume = trend_days[keys[i]]['tot'] * 1.0
+        # (positive_tweets / total_amount_of_tweets)*scale
+        high = (trend_days[keys[i]]['pos'] / volume) * 1000
+        # (negative_teets / total_amount_of_tweets)*scale
+        low = (trend_days[keys[i]]['neg'] / volume) * 1000
+        openv = 0
+        close = high - low
+        print str(date) + "," + str(close) + "," + str(high) \
+              + str(",") + str(low) + "," + str(volume / 10) \
+              + "," + str(0)
 \end{python}
 
 \section{Comparison}\label{code:comparison}
-We do the same for the finance data as with the tweet data above. And multiplies
-the result with 100 to scale the graph plot.  
+
+For the comparison of trend graphs we have acquired some code.
+What we need is the moving average and the ADX.
+
+The moving average is calculate by: 
 \begin{python}
-for i in range(1, len(stock_records)):
-    # calculate percentage diff sinse yesterday.
-    diff = (stock_records[i][6] - stock_records[i - 1][6]) / (
-        stock_records[i][6] + stock_records[i - 1][6] * 1.0)
-    results.append(diff * 100)
+def movingaverage(values, window):
+    weigths = np.repeat(1.0, window) / window
+    smas = np.convolve(values, weigths, 'valid')
+    return smas  # as a numpy array
 \end{python}
 
-And last we plot the data:(xlen is the number of observations) 
+And for the ADX we have this: 
 \begin{python}
-x = [e for e in range(0, xlen)]
-plt.axis([0, len(x) - 1, -1.0, 1.0])
-plt.xlabel('id')
-plt.ylabel('Accuracy')
+def ADX():
+    window = 14  # modified by kiro
+    PositiveDI, NegativeDI = calcDIs(window)  # modified by kiro
 
-# plot changes in tweets
-#y = get_median_change_tweets(trend_days)
-if trend_days:
-    y = get_median_change_tweets(trend_days)
-else:
-    y = get_median_change_tweets(get_tweet_trend_data())
-plt.plot(x, y, '-r')  # twitter data
+    xxx = 0
+    DXs = []
 
-y = get_stock_graph_data()
-plt.plot(x, y, '-g')  # finance data
+    while xxx < len(date[1:]):
+        DX = 100 * ( (abs(PositiveDI[xxx] - NegativeDI[xxx])
+                      / (PositiveDI[xxx] + NegativeDI[xxx])))
 
-plt.show()
+        DXs.append(DX)
+        xxx += 1
+
+    #print len(DXs)
+    ADX = ExpMovingAverage(DXs, window)  # modified by kiro
 \end{python}
 
-And compares the two graphs plotted in the same view. 
+The hundred and some lines used to plot the fancy graphs can be seen in the
+code file:
+\url{https://github.com/magnuskiro/master/blob/master/code/trend/ma_adx_plotter.py}.
+
 %
  
 \section{Issues}\label{code:issues}

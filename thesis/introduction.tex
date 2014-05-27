@@ -1,24 +1,27 @@
 \chapter{Introduction}\label{introduction}
 
-\section{What}
+\section{Context}
+This thesis have largely three parts to it. The finance part, where we look at
+stock market prediction\footnote{Wikipedia:
+\url{http://en.wikipedia.org/wiki/stock_market_prediction}}, and technical
+analysis.  
 
-#TODO introduction of stock market prediction. 
-#TODO describe sentiment analysis as a new element in stock market prediction.  
-#TODO Express Twitter as an actor in sentiment analysis. 
+It is well known that people are affected by sentiment. Sentiment in finance is
+not new concept, but it is has not been explored very much yet. So we want to
+see if there are ways we can predict trends with the help of sentiment. We
+generate trends based on sentiment and stock exchange data. And we will look for
+correlations between them. 
 
-#TODO rewrite this section.
-This thesis looks into twitter as a data source for sentiment classification.
-The sentiment classification of tweets. And the correlation between tweets,
-sentiment and finance. 
+For the sentiment we need data. Twitter is a great source of data and a better
+place to express sentiment. So we chose twitter as our primary source of
+sentiment. To use the data in some smart ways we compile dictionaries from
+tweets. And use the dictionaries for sentiment classification. 
 
-How we can create dictionaries from labeled tweets. The sentiment classification
-of tweets. And trends in association with twitter and finance. 
-
-We will try to unveil connections between tweets and sentiment. And expand on
-the use of tweets in trends and finance. 
+The elements that are the most difficult are the creation a trend based on
+tweets, and getting representative data. 
 %
 
-\section{Motivation and the Why}
+\section{Motivation}
 We have an interest to find out how sentiment can be extracted from twitter and
 how it effects finance trends. Further we are motivated by the social media
 aspect of trends and how that effects finance. 
@@ -35,7 +38,7 @@ revenue in trade. Our work is relevant for further endeavors about twitter,
 sentiment and it's relation to finance. 
 
 \section{Research questions}\label{introduction:research_questions}
-#TODO specify a bit better. 
+#TODO specify a bit better.\\ 
 
 % How can we classify a tweet sentiment. 
 \subsection{How do we determine the sentiment of a
@@ -83,9 +86,21 @@ Previously researchers have managed to predict direction of the market the
 next few days based on the volume of tweets. 
 
 \section{Methods}
-#TODO describe the methods used in the thesis and their differences. 
-svm,  bayes, bag of words, moving average, 
 
+For the classification of sentiment we will use bag of words\footnote{Wikipedia:
+\url{https://en.wikipedia.org/wiki/Bag_of_words_model}}, SVM, and Naive Bayes.
+SVM and Naive Bayes to test if the classifiers perform better than bag of words
+with dictionaries in classification. Bag of words is mostly used to test
+dictionaries.
+
+Moving average\footnote{Wikipedia:
+\url{https://en.wikipedia.org/wiki/Moving_average}}, and average directional
+index\footnote{StockCharts.com
+\url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx}}
+are used to plot trend graphs. The trend graphs can be seen in section
+\ref{experiments:trend}, on
+page \pageref{experiments:trend}. Concepts and explanations of how the trend
+works can be found in section \ref{trend}, on page \pageref{trend}
 
 \section{Findings}
 We explore the usage of lists of words, dictionaries, in sentiment analysis.

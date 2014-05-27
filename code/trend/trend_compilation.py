@@ -305,8 +305,8 @@ def print_osebx():
 def transform_tweet_data():
     #Date,close,high,low,open,volume
     #'trend-Apr-29': {'neg': 21, 'pos': 101, 'tot': 122},
-    trend_days = get_tweet_trend_data()
     #print "data,h-l,pos,neg,open,tot"
+    trend_days = get_tweet_trend_data()
     keys = sorted(trend_days.keys())
     date = ""
     for i in range(1, len(keys)):

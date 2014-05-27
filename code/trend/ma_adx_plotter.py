@@ -63,7 +63,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 '''
 
-
 '''
 Code basis downloaded from http://sentdex.com, following one the ADX and Graph plot tutorials + vids.
 
@@ -137,7 +136,7 @@ def computeMACD(x, slow=26, fast=12):
     return emaslow, emafast, emafast - emaslow
 
 
-def graphData(stock, MA1, MA2, dataset): # modified by kiro
+def graphData(stock, MA1, MA2, dataset):  # modified by kiro
     '''
         Use this to dynamically pull a stock:
     '''
@@ -145,11 +144,11 @@ def graphData(stock, MA1, MA2, dataset): # modified by kiro
         print 'Currently Pulling', stock
         print str(datetime.datetime.fromtimestamp(int(time.time())).strftime('%Y-%m-%d %H:%M:%S'))
         #Keep in mind this is close high low open data from Yahoo
-        #urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/' + stock + '/chartdata;type=quote;range=10y/csv'
+        urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/' + stock + '/chartdata;type=quote;range=10y/csv'
         stockFile = []
         try:
-            #sourceCode = urllib2.urlopen(urlToVisit).read()
-            sourceCode = open(dataset, 'r').read()  # modified by kiro
+            sourceCode = urllib2.urlopen(urlToVisit).read()
+            #sourceCode = open(dataset, 'r').read()  # modified by kiro
             splitSource = sourceCode.split('\n')
             for eachLine in splitSource:
                 splitLine = eachLine.split(',')
@@ -300,9 +299,9 @@ def graphData(stock, MA1, MA2, dataset): # modified by kiro
 
         #print len(PosDMs)
 
-        expPosDM = ExpMovingAverage(PosDMs, window) # modified by kiro
-        expNegDM = ExpMovingAverage(NegDMs, window) # modified by kiro
-        ATR = ExpMovingAverage(TrueRanges, window) # modified by kiro
+        expPosDM = ExpMovingAverage(PosDMs, window)  # modified by kiro
+        expNegDM = ExpMovingAverage(NegDMs, window)  # modified by kiro
+        ATR = ExpMovingAverage(TrueRanges, window)  # modified by kiro
 
         xx = 0
         PDIs = []
@@ -321,8 +320,8 @@ def graphData(stock, MA1, MA2, dataset): # modified by kiro
 
 
     def ADX():
-        window = 14   # modified by kiro
-        PositiveDI, NegativeDI = calcDIs(window) # modified by kiro
+        window = 14  # modified by kiro
+        PositiveDI, NegativeDI = calcDIs(window)  # modified by kiro
 
         #print len(PositiveDI)
         #print len(NegativeDI)
@@ -339,7 +338,7 @@ def graphData(stock, MA1, MA2, dataset): # modified by kiro
             xxx += 1
 
         #print len(DXs)
-        ADX = ExpMovingAverage(DXs, window) # modified by kiro
+        ADX = ExpMovingAverage(DXs, window)  # modified by kiro
 
         #print len(ADX)
         #print len(date[1:])
@@ -392,8 +391,10 @@ def graphData(stock, MA1, MA2, dataset): # modified by kiro
 
 #while True:
 #stock = raw_input('Stock to plot: ')
-stock = "osebx.ol" # modified by kiro
+stock = "osebx.ol"  # modified by kiro
+stock = "sto"  # modified by kiro
 
 # stock name to plot,
-graphData(stock, 3, 8, 'sampleData.txt') # modified by kiro
+graphData(stock, 12, 50, 'sampleData.txt')  # modified by kiro
+#graphData(stock, 3, 8, 'sampleData.txt') # modified by kiro
 #graphData(stock, 3, 8, 'tweetData.txt') # modified by kiro

@@ -310,6 +310,32 @@ reasonable results should be expanded, retested and improved.
 Most notably we have clear indications that dictionaries, automatically compiled
 from a manually classified tweets set, can be used when classifying sentiment. 
 
-#TODO discuss the achieved research questions.
- 
+The accomplished research, based on the research questions(RQ), can be described as
+satisfactory. We set out to investigate how we can determine then sentiment of
+a tweet, \ref{introduction:rq1}, how twitter can be used to aggregate a trend,
+\ref{introduction:rq2}, and hod twitter based trends compare the technical
+analysis in stock markets, \ref{introduction:rq3}. 
+
+RQ1 more specifically aims at the information of tweets, the knowledge we
+can extract from them and classification of sentiment. In all respects we
+gained new knowledge. By creating dictionaries we extracted words from
+manually labeled tweets, giving us a way to classify new tweets. We ended up
+only using the tweet text for classification. Other metadata should have been
+explored. The best way of classifying tweets we found to be the SVM classifier.    
+RQ2 reaches the complicated part of aggregating a trend based on Twitter. This
+turned out to be difficult. Mainly by the lack of good ideas of how we could do
+it, but also the difficulty of transforming data to a usable format. In the end
+we transformed tweet data to the same format as stock data and used that for
+the trend aggregation. 
+
+RQ3 takes the trend a step further and compares technical analysis with the
+Twitter based trend. After plotting moving average and average directional
+index for both finance and Twitter data we compared the graphs. The two plots
+can be seen in figure \ref{fig:finance_trend_plot}, and figure
+\ref{fig:trend_tweet_plot}. In the figures we looked for similarities. 
+First the ADX, we have no similarities between the Twitter trend and the
+finance trend. For the moving average(MA) we can argue that the blue lines, MA
+with 8 day intervals, are quite similar. Although we can make no definite
+conclusion that the Twitter trend is representative for the finance market.
+Technical analysis is still better, but sentiment is a possibility. 
 %

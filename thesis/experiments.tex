@@ -199,6 +199,7 @@ Obama & Bigram & 59 & 1306 & 0.9568 \\
 
 \section{Trend aggregation}\label{experiments:trend}
 
+#TODO rewrite
 #TODO link to 5, 4.3, 3.3, 2.1, 2.4 
 
 Before executing this experiment section \ref{trend:compared} describes the
@@ -216,29 +217,34 @@ has been used. More specifically the trend aggregation under trends on twitter,
 \ref{trend:trends_on_twitter}. And the finance trend aggregation,
 \ref{trend:trends_in_finance}.
 
-To get results out of this experiment section
-\ref{sentiment:classifier_classification}, and section
-\ref{sentiment:comparison_results}. They are used to give indications of what
-methods, previously described, gives results. Specifics of how the trend
-aggregation happens are described in appendix \ref{code:trend_aggregation}.
-
-For the execution of the experiment the results of the two trend attempts are
-plotted in a graph. The graph plotting code is described in appendix
-\ref{code:comparison}.
-
-The trend plot in figure \ref{fig:trend_plot}, on page 
-\pageref{fig:trend_plot}. 
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=\textwidth]{trend_plot.png}
-    \label{fig:trend_plot}
-    \caption{Comparing trend plot}
-The graph shows the two previously compiled trends. The red one is the tweet
-trend, while the green one is the finance trend.
-\end{figure}
-
 The results of the experiment are discussed in section \ref{results:trend}.
 
+\paragraph{Finance plot}
+#TODO describe experiment and code. 
 
+Plotting the graph we got figure \ref{fig:trend_finance_plot}.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{finance_trend_plot.png}
+    \label{fig:trend_finance_plot}
+    \caption{Finance trend plot}
+This is the plot for OSEBX. The plot show the moving average in the middle and
+the Average directional graph at the bottom.
+\end{figure}
+
+
+\paragraph{Twitter plot}
+#TODO describe experiment and code. 
+
+Plotting the moving average we get figure: \ref{tweet_trend_plot.png}, on page
+\pageref{tweet_trend_plot.png}.
+
+\begin{figure}[htb]
+    \includegraphics[width=\textwidth]{tweet_trend_plot.png}
+    \label{fig:trend_tweet_plot}
+    \caption{Tweet trend plot}
+This is the Twitter trend plot. The plot show the moving average in the middle
+and the Average directional graph at the bottom.
+\end{figure}
 %
 

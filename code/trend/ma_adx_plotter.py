@@ -147,8 +147,9 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
         urlToVisit = 'http://chartapi.finance.yahoo.com/instrument/1.0/' + stock + '/chartdata;type=quote;range=10y/csv'
         stockFile = []
         try:
-            #sourceCode = urllib2.urlopen(urlToVisit).read()
-            sourceCode = open(dataset, 'r').read()  # modified by kiro
+            sourceCode = urllib2.urlopen(urlToVisit).read()
+            #sourceCode = open(dataset, 'r').read()  # modified by kiro
+
             splitSource = sourceCode.split('\n')
             for eachLine in splitSource:
                 splitLine = eachLine.split(',')
@@ -178,7 +179,7 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
     fig = plt.figure(facecolor='#07000d')
 
     ax1 = plt.subplot2grid((6, 4), (1, 0), rowspan=4, colspan=4, axisbg='#07000d')
-    candlestick(ax1, newAr[-SP:], width=.6, colorup='#53c156', colordown='#ff1717')
+    #candlestick(ax1, newAr[-SP:], width=.6, colorup='#53c156', colordown='#ff1717')
 
     Label1 = str(MA1) + ' SMA'
     Label2 = str(MA2) + ' SMA'
@@ -207,28 +208,28 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
 
     volumeMin = 0
 
-    ax0 = plt.subplot2grid((6, 4), (0, 0), sharex=ax1, rowspan=1, colspan=4, axisbg='#07000d')
+    #ax0 = plt.subplot2grid((6, 4), (0, 0), sharex=ax1, rowspan=1, colspan=4, axisbg='#07000d')
     rsi = rsiFunc(closep)
     rsiCol = '#c1f9f7'
     posCol = '#386d13'
     negCol = '#8f2020'
 
-    ax0.plot(date[-SP:], rsi[-SP:], rsiCol, linewidth=1.5)
-    ax0.axhline(70, color=negCol)
-    ax0.axhline(30, color=posCol)
-    ax0.fill_between(date[-SP:], rsi[-SP:], 70, where=(rsi[-SP:] >= 70), facecolor=negCol, edgecolor=negCol,
-                     alpha=0.5)
-    ax0.fill_between(date[-SP:], rsi[-SP:], 30, where=(rsi[-SP:] <= 30), facecolor=posCol, edgecolor=posCol,
-                     alpha=0.5)
-    ax0.set_yticks([30, 70])
-    ax0.yaxis.label.set_color("w")
-    ax0.spines['bottom'].set_color("#5998ff")
-    ax0.spines['top'].set_color("#5998ff")
-    ax0.spines['left'].set_color("#5998ff")
-    ax0.spines['right'].set_color("#5998ff")
-    ax0.tick_params(axis='y', colors='w')
-    ax0.tick_params(axis='x', colors='w')
-    plt.ylabel('RSI')
+    #ax0.plot(date[-SP:], rsi[-SP:], rsiCol, linewidth=1.5)
+    #ax0.axhline(70, color=negCol)
+    #ax0.axhline(30, color=posCol)
+    #ax0.fill_between(date[-SP:], rsi[-SP:], 70, where=(rsi[-SP:] >= 70), facecolor=negCol, edgecolor=negCol,
+    #                 alpha=0.5)
+    #ax0.fill_between(date[-SP:], rsi[-SP:], 30, where=(rsi[-SP:] <= 30), facecolor=posCol, edgecolor=posCol,
+    #                 alpha=0.5)
+    #ax0.set_yticks([30, 70])
+    #ax0.yaxis.label.set_color("w")
+    #ax0.spines['bottom'].set_color("#5998ff")
+    #ax0.spines['top'].set_color("#5998ff")
+    #ax0.spines['left'].set_color("#5998ff")
+    #ax0.spines['right'].set_color("#5998ff")
+    #ax0.tick_params(axis='y', colors='w')
+    #ax0.tick_params(axis='x', colors='w')
+    #plt.ylabel('RSI')
 
     ax1v = ax1.twinx()
     ax1v.fill_between(date[-SP:], volumeMin, volume[-SP:], facecolor='#00ffe8', alpha=.4)
@@ -349,25 +350,25 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
 
         plotDate = date[1:]
 
-        try:
-            ax2.plot(plotDate[-SP:], ADX[-SP:], 'w')
-            ax2.plot(plotDate[-SP:], PositiveDI[-SP:], 'g')
-            ax2.plot(plotDate[-SP:], NegativeDI[-SP:], 'r')
-            plt.ylabel('ADX(14)', color='w')
-        except Exception, error:
-            print str(error)
+     #   try:
+     #       ax2.plot(plotDate[-SP:], ADX[-SP:], 'w')
+     #       ax2.plot(plotDate[-SP:], PositiveDI[-SP:], 'g')
+     #       ax2.plot(plotDate[-SP:], NegativeDI[-SP:], 'r')
+     #       plt.ylabel('ADX(14)', color='w')
+     #   except Exception, error:
+     #       print str(error)
 
     ADX()
 
     # END NEW INDICATOR CODE #
 
     plt.gca().yaxis.set_major_locator(mticker.MaxNLocator(prune='upper'))
-    ax2.spines['bottom'].set_color("#5998ff")
-    ax2.spines['top'].set_color("#5998ff")
-    ax2.spines['left'].set_color("#5998ff")
-    ax2.spines['right'].set_color("#5998ff")
-    ax2.tick_params(axis='x', colors='w')
-    ax2.tick_params(axis='y', colors='w')
+    #ax2.spines['bottom'].set_color("#5998ff")
+    #ax2.spines['top'].set_color("#5998ff")
+    #ax2.spines['left'].set_color("#5998ff")
+    #ax2.spines['right'].set_color("#5998ff")
+    #ax2.tick_params(axis='x', colors='w')
+    #ax2.tick_params(axis='y', colors='w')
     ax2.yaxis.set_major_locator(mticker.MaxNLocator(nbins=5, prune='upper'))
 
     for label in ax2.xaxis.get_ticklabels():
@@ -375,7 +376,7 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
 
     plt.suptitle(stock.upper(), color='w')
 
-    plt.setp(ax0.get_xticklabels(), visible=False)
+    #plt.setp(ax0.get_xticklabels(), visible=False)
     plt.setp(ax1.get_xticklabels(), visible=False)
 
     '''ax1.annotate('Big news!',(date[510],Av1[510]),
@@ -384,7 +385,7 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
         fontsize=14, color = 'w',
         horizontalalignment='right', verticalalignment='bottom')'''
 
-    plt.subplots_adjust(left=.09, bottom=.14, right=.94, top=.95, wspace=.20, hspace=0)
+    #plt.subplots_adjust(left=.09, bottom=.14, right=.94, top=.95, wspace=.20, hspace=0)
     plt.show()
     #fig.savefig('example.png', facecolor=fig.get_facecolor())
 
@@ -392,9 +393,9 @@ def graphData(stock, MA1, MA2, dataset):  # modified by kiro
 #while True:
 #stock = raw_input('Stock to plot: ')
 stock = "osebx.ol"  # modified by kiro
-stock = "sto"  # modified by kiro
+#stock = "sto"  # modified by kiro
 
 # stock name to plot,
-#graphData(stock, 12, 50, 'sampleData.txt')  # modified by kiro
+graphData(stock, 12, 50, 'sampleData.txt')  # modified by kiro
 #graphData(stock, 3, 8, 'sampleData.txt') # modified by kiro
-graphData(stock, 3, 8, 'tweetData.txt') # modified by kiro
+#graphData(stock, 3, 8, 'tweetData.txt') # modified by kiro

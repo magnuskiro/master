@@ -1,25 +1,25 @@
 \chapter{Trending}\label{trend}
 
 We look at trends on twitter and in finance and try to see if there are any
-correlations between them. Before we got into the trends we made some
-assumptions to set the trend context.  
+correlations between them. While defining the context of our research we made
+some assumptions.
 
-The Norwegian stock exchange, OSEBX, is largely an oil based exchange. And
-therefore we assume that oil related data will give a good indications of the
+The Oslo stock exchange, OSEBX, is largely an oil based exchange, and
+therefore we assume that oil related data will give a good indication of the
 behavior of OSEBX. Section \ref{data:trend_data} says something about why we
-choose tweets based on oil for the trend aggregation.
+choose tweets related to oil for the trend aggregation.
 
 Further we wanted to look at trading that is not algorithm based, also
 known as speed trading. So we started looking at technical analysis. The
-technical analysis gives a base for decision support for the trader. The
+technical analysis gives a base for decision support to the trader. The
 techniques of technical analysis gives us good indications about trends, but we
-want to take it further by involving sentiment. 
+want to take it further by involving sentiment analysis. 
 
-We start of by describing and defining a trend in section
-\ref{trend:trend_is_your_friend}. Continuing with trends on an in relation to
-twitter, \ref{trend:trends_on_twitter}. To be followed by trends in finance,
-\ref{trend:trends_in_finance}. An last we Compare twitter trends with finance
-trends, \ref{trend:compared}.
+We start by describing and defining a trend in section
+\ref{trend:trend_is_your_friend}. 
+Followed by trends in finance, \ref{trend:trends_in_finance}. 
+Continuing with trends in relation to twitter, \ref{trend:trends_on_twitter}. 
+And last we compare trends based on Twitter with finance trends, \ref{trend:compared}.
 %
 
 \section{The trend is your friend}\label{trend:trend_is_your_friend}
@@ -29,12 +29,13 @@ definition of trend is "the general course or prevailing
 tendency"\footnote{Dictionary.com:
 \url{http://dictionary.referencs.com/browse/trend}}.
 
-In finance especially the trend can be a deciding factor in buying or selling
-of goods. You typically do not want to sell during a bullish trend, while the
-value is going up. And you want to sell before you get to the bearish trend,
-when the value goes down. Figure \ref{fig:stocktrends} shows basic trends on
-page \pageref{fig:stocktrends}. When markets do not trend they move sideways in
-trading ranges\footnote{Swing-trade-stocks.com \url{http://www.swing-trade-stocks.com/stock-trends.html}}.  
+In finance the trend can be the deciding factor in buying or selling. Traders want
+to buy during a bullish trend, while the value is going up. And they 
+want to sell before you get to the bearish trend, when the value goes down.
+Figure \ref{fig:stocktrends}, on page \pageref{fig:stocktrends}, shows basic
+trends. When markets do not trend they move
+sideways in trading ranges\footnote{Swing-trade-stocks.com
+\url{http://www.swing-trade-stocks.com/stock-trends.html}}.   
 
 \begin{figure}[htb]
     \centering
@@ -44,118 +45,128 @@ trading ranges\footnote{Swing-trade-stocks.com \url{http://www.swing-trade-stock
 Showing Higher Highs(HH), Lower Highs(LH), Higher Lows(HL), and Lower Lows(LL). 
 \end{figure}
 
-Average directional Index Indicator, ADX, gives clear, easy-to-read picture of
-the market, shown in figure \ref{fig:ADX-Example-Stock-Trading} on page
-\pageref{fig:ADX-Example-Stock-Trading}. It shows if the trend strengthens of
-weakens. Moving averages and parabolic SAR can help to confirm a move or
-determine a trend. Moving averages indicates change over a period of time. The
-time frame is adjusted to the time the trader likes to keep stocks. The
-parabolic SAR looks at the price of a stock and determines the trend as upwards
-or downwards. When upwards the plotted dots are below the price, and vice versa.
- 
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=\textwidth]{ADX-Example-Stock-Trading.jpg} 
-    \label{fig:ADX-Example-Stock-Trading}
-    \caption{Average Directional Index example}
-An example of ADX. Green line is showing increase in price. Red line is
-decrease. The black line is the ADX. 
-\end{figure}
+\textit{Moving average} and \textit{average directional index} are two
+techniques in technical analysis. Moving averages, MA, can help to confirm a
+move or determine a trend. Moving averages indicates average change over a
+period of time. The time frame is often adjusted to the time the trader likes to
+hold stocks before trading. Average directional Index Indicator, ADX, gives
+clear, easy-to-read picture of the market, shown in figure
+\ref{fig:ADX-Example-Stock-Trading}, on page
+\pageref{fig:ADX-Example-Stock-Trading}. It shows if the trend strengthens or
+weakens. We focus on the two described techniques later in this chapter.
 
-When using ADX or other trend tools it is difficult to spot the trend or at all
-predict it. The ADX graph has some indicators of trends. The further away from
-each other the red and green lines are, the stronger the trend is.  
-When trading based on the trend, the problem is to find the trend and predict
-it into the future. And this is where we combine Twitter with traditional
-trading. If we could predict the trend based on public opinion mined from
-twitter we would have an advantage. 
+When using ADX or other trend indicators it is difficult to spot or predict the
+trend. When trading is based on a trend, the problem is to find
+the trend and prolong it into the future. This is where we combine Twitter
+with traditional trading. If we could predict the trend based on public opinion
+mined from twitter, we would have an advantage over the traditional trader. 
 
 Data is increasingly important for trend prediction. The better data we have,
-the better trend we can predict. By focusing on sentiment we aim for the
-cooperation of information available on the Internet and the value of sentiment
-to predict trends. This will be more important in the future.  
+the more accurate the trend we predict can be. By focusing on sentiment we aim
+for the cooperation of information available on the Internet and the value of
+sentiment to predict trends. This will be more important in the future. 
 
 If the trend is your friend, you know how the market will move and make
-good decisions in accordance with the trend. 
+good decisions in accordance with it. 
 %
 
 \section{Trending in Finance}\label{trend:trends_in_finance}
-The average directional index and the moving average techniques for trend
-calculation is described.  
+Moving average(MA), and average directional index(ADX) are the two trend
+indication techniques we test in this thesis. 
 
 \paragraph{Moving Average(MA)}
 \hspace{0pt}\\
-MA is the unweighted mean of the previous n days.
-Given the closing price of the last n days as:
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{moving_average_example.png}
+    \label{fig:moving_average_example}
+    \caption{Moving Average example}
+The figure show the Moving Average for OSEBX from march 2005 until today. The
+blue MA has a time frame of 50 weeks, while the white MA has a time frame of 12
+weeks. 
+\end{figure}
+
+MA\footnote{Wikipedia: \url{https://en.wikipedia.org/wiki/Moving_average}} is
+the unweighted mean of the previous n days. Given the closing price of the last
+n days as: 
 
 \math{
 p_M, p_{M-1},\dots,p_{M-(n-1)}
 }\\
 
-We have that the simple moving average is : 
+We have that the simple moving average is: 
 
 \math{
 \textit{SMA} = { p_M + p_{M-1} + \cdots + p_{M-(n-1)} \over n }
 }\\
 
 There are also other variants of the moving average. Such as cumulative MA,
-weighted MA and exponential MA\footnote{Wikipedia:
-\url{https://en.wikipedia.org/wiki/Moving_average}}. 
+weighted MA and exponential MA. We use the simple version for MA trend. 
 
-\paragraph{ADX}
+\paragraph{Average Directional Index (ADX)}
 \hspace{0pt}\\
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{ADX-Example-Stock-Trading.jpg}
+    \label{fig:ADX-Example-Stock-Trading}
+    \caption{Average Directional Index example}
+An example of ADX. Green line is showing increase in price. Red line is
+decrease in price. The black line is the ADX.
+\end{figure}
+In ADX, the further away from each other the red and green lines are, the
+stronger the trend is. 
+
 ADX\footnote{Wikipedia:
 \url{https://en.wikipedia.org/wiki/Average_Directional_Index}} uses the positive directional indicator(+DI) and the negative directional
 indicator(-DI) in combination to determine a trend. The high, low and closing
 values are needed for the ADX to be calculated. The directional movement is
 calculated as follows: 
-
 \begin{verbatim}
-UpMove = today's high − yesterday's high
-DownMove = yesterday's low − today's low
+UpMove = today's high - yesterday's high
+DownMove = yesterday's low - today's low
 if UpMove > DownMove and UpMove > 0, then +DM = UpMove, else +DM = 0
 if DownMove > UpMove and DownMove > 0, then −DM = DownMove, else −DM = 0 
 \end{verbatim} 
 
 When the directions are calculated we choose the time frame we want to
-investigate. And get -DI and +DI:
-
+investigate. And get -DI and +DI as follows:
 \begin{verbatim}
 +DI = 100 times exponential moving average of +DM 
       divided by average true range
--DI = 100 times exponential moving average of −DM 
+-DI = 100 times exponential moving average of -DM 
       divided by average true range 
 \end{verbatim} 
 
 Where the time frame defines the number of periods used in the exponential
 moving average. And the average true is an exponential average of the true
 range. Resulting in the ADX:
-
 \begin{verbatim}
 ADX = 100 times the exponential moving average 
-      of the absolute value of (+DI − −DI) 
-      divided by (+DI + −DI)
+      of the absolute value of (+DI - -DI) 
+      divided by (+DI + -DI)
 \end{verbatim}
+%
 
 \paragraph{Experiments}
 \hspace{0pt}\\
 In the experiment, section \ref{experiments:trend} on page
-\pageref{experiments:trend} we plot the graph and look at coding details for
-the finance trends. In the experiment we used data from the Oslo stock exchange
-in the same period as we took tweets, Apr 26 - May 26.
+\pageref{experiments:trend}, we plot the graph for
+the finance trends. In the experiment we used data from OSEBX. The same time
+frame was used for stock data and tweet data, Apr 26 - May 26.
 %
 
-\section{Trends from Twitter}\label{trend:trends_on_twitter}
-There are two parts to trends with twitter. The trends Twitter themselves
-create based on words of hashtags that appear in many tweets. And the trend we
+\section{Twitter based Trends}\label{trend:trends_on_twitter}
+We have two trends with twitter. First the trends Twitter themselves
+create based on words or hashtags that appear in many tweets. Second the trend we
 compile ourselves based on the trend data described in section
 \ref{data:trend_data}, page \pageref{data:trend_data}. 
 
-\paragraph{On Twitter}
+\paragraph{Trends on Twitter}
 \hspace{0pt}\\
-On Twitter there is a feature called 'Trends'. It shows the words that are used
-the most lately. A screen capture of it can be seen in figure
-\ref{fig:trends_on_twitter}, on page \pageref{fig:trends_on_twitter}.
+On Twitter.com there is a feature called 'Trends'. It shows the words that are
+used the most recently. A screen capture of it can be seen in figure
+\ref{fig:trends_on_twitter}, page \pageref{fig:trends_on_twitter}.
+
 \begin{figure}[htb]
 	\centering
     \includegraphics[width=0.5\textwidth]{trends_on_twitter.png}
@@ -164,27 +175,38 @@ the most lately. A screen capture of it can be seen in figure
 Screen capture from Twitter.
 \end{figure}
 
-The trends on twitter are in many cases predictable and adds little value to trend
+The trends on Twitter are in many cases predictable and adds little value to trend
 compilation. The trend on twitter is also specialised for each user, based on
 that users subscriptions and location. As an example at the Norwegian national
-day(Mai 17.) we would have trending words like \texti{Norge}, \textit{Norway},
-and \textit{#17Mai}. Today we already know that this will happen again next year. 
+day(Mai 17.) we would have trending words like \texit{Norge}, \textit{Norway},
+and \textit{\#17Mai}. Today we already know that this will happen again next year. 
 %
 
-\paragraph{Our own}
+\paragraph{Twitter based sentiment trend} 
 \hspace{0pt}\\
-Using the trend data described in section \ref{data:trend_data} we construct a
-moving average graph and a ADX graph. 
+#TODO 
+Here we use two self developed trend indicators. 
 
-The referenced article lists the most important oil related account on twitter.
-In two parts. One for the Norwegian ones, and one for international ones. 
-To simplify the trend creation a bit we used mostly English tweets, ignoring
-most of the Norwegian twitter handles. 
+MA and ADX, based on  sentiment data. 
 
-After sorting the mined tweets by day we classify all tweets for each day. The
-classification from each day is referred to as a trend day. The trend day
-contains the amount of positive tweets, the amount of negative tweets, and the
-total amount of tweets.
+det er et c moment. 
+
+trend for/based on semantic analysis. --> sentiment analysis. 
+
+not tested before. 
+
+\\
+
+Using the trend data described in section \ref{data:trend_data} we construct
+the MA and ADX graphs based on sentiment. The data consists of tweets and is
+based on Twitter handles for users with big impact in the oil industry. There
+are two parts to the data. First tweets from Norwegian users, and secondly
+tweets from international users. To simplify the trend creation a bit we used
+English tweets, ignoring tweets in Norwegian. After sorting the mined tweets by
+day, we classify all tweets for each day. The classification from each day is
+referred to as a trend day. The trend day contains the amount of positive
+tweets, the amount of negative tweets, and the total amount of tweets collected
+for that day. 
 
 \begin{python}
 trend_days = {
@@ -197,7 +219,8 @@ trend_days = {
 
 Now we have some sentiment data to create a trend from. To simplify the trend
 aggregation and the graph plotting, we transform the data to fit into the
-format used for the finance data.  
+format used for the finance data. The format of the data is the well known
+'comma separated values', CSV.  
 
 \begin{verbatim}
 Date,close,high,low,open,volume
@@ -230,41 +253,45 @@ for i in range(1, len(keys)):
 \end{python}
 
 We scale the values to plot a more representative graph. All the
-proportions are kept intact, so the moving average and ADX is still valid.
+proportions are kept intact, so the MA and ADX are still valid.
 This method is tested in section \ref{experiments:trend} on page
 \pageref{experiments:trend}.
 % 
 
 \section{Comparing the trends}\label{trend:compared}
-Comparing the finance trend and the Twitter based trend is easy. We look at the
-two graphs and draw conclusions. Drawing the conclusions are the difficult
-part.
+Comparing the finance trend and the Twitter based trend is easy. We compare the
+two graphs, look for similarities, and draw conclusions. Drawing conclusions is
+the difficult part.
 
-We look at the two plotted trends, the moving average and the average direction
-index. More specifically we compare the white MA of both graphs with each other
-to. And the blue MA lines of each graph with each other. 
+For plot examples see figure \ref{fig:trend_finance_plot}, page
+\pageref{fig:trend_finance_plot}, and figure \ref{fig:trend_tweet_plot}, page
+\pageref{fig:trend_tweet_plot}.
 
-With the ADX we will look for similar movements and turning points for the
-graphs. Also areas where the red and green graphs stay separate. 
+We look at the two plotted trends, the MA and the ADX. More specifically we
+compare the white MA of both graphs with each other, and the blue MA lines of
+each graph with each other. And look for similarities. With the ADX we will look
+for similar movements and turning points in the graphs. Also areas where the
+red and green graphs stay apart.  
 
-Further comparison should give some conclusions of the trust worthiness of the
-sentiment trend. For traders to trust in the sentiment as a new way of
+Comparison should give some conclusions of the trustworthiness of the
+sentiment trend. For traders to trust in the sentiment analysis as a new way of
 predicting trends the sentiment would have to provide profit and scientifically
-proven results. At this stage there would be few who would rely on sentiment as
-a predictor of trends.
-The trust lies in the technical analysis.  
+proven results. At this stage there would be few who would rely on sentiment
+analysis as a trend indicator of the stock market. The trust lies in the
+technical analysis.  
 
 With the comparison we have the drawback of examining a stock exchange instead
-of one stock. Comparing one stock at a time would give better indications of
+of a single stock. Comparing one stock at a time would give better indications of
 the accuracy of the sentiment trend. This should be explored further in the
 future.   
 %
 
 \section{Future work}
-For future improvements of the trend aggregation we should into three aspects.
-The Norwegian market we started with, and explore the oil tweets. And find out
-whether or not they are a good indication of the OSEBX. 
+For future improvements of the trend aggregation we should explore three aspects.
+One, the Norwegian market we started with, two, the oil tweets, and three, find
+out whether or not oil tweets are a good indication of the OSEBX. 
 
-And we should look into single stocks in the comparison of trends. This way we
-can explore the stock vs stock Twitter trends, and find new information there.  
+Additionally we should look into single stocks in the comparison of indicators.
+This way we can explore 'stock vs stock' Twitter trends, and find new information
+there.
 %

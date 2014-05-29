@@ -1,15 +1,4 @@
 \chapter{Sentiment Classification}\label{sentiment}
-
-Sections in this chapter are as follows. Manual classifications,
-\ref{sentiment:manual_classification}, where we see how people classify
-tweets. Classification with classifiers follows in section
-\ref{sentiment:classification}. Containing 'Word count classification',
-\ref{sentiment:word_count_classification}, and classification with classifiers
-such as SVM and Naive Bayes in section
-\ref{sentiment:classifier_classification}. A comparison of the classifiers and
-associated results can be found in section \ref{sentiment:comparison_results}, and a brief discussion come last, in section
-\ref{sentiment:comments_discussion}. 
-
 %what is sentiment
 Sentiment is described as "an attitude toward something; regard;
 opinion."\footnote{ Dictionary.com on Sentiment:
@@ -28,9 +17,21 @@ to predict trends.
 %how do we use it
 In this thesis we have two main ways of classifying tweets. Word counting and
 training a classifier. Both methods require dictionaries of positive and
-negative words, \ref{data:dictionaries}. In the classifier we use the dictionary
+negative words. Classifier use the dictionary
 to extract features from a tweet. And with the word counting we count the
 number of positive and negative words. 
+
+Sections in this chapter are as follows. Manual classifications,
+\ref{sentiment:manual_classification}, where we see how people classify
+tweets. Classification with classifiers follows in section
+\ref{sentiment:classification}. Containing 'Word count classification',
+\ref{sentiment:word_count_classification}, and classification with classifiers
+such as SVM and Naive Bayes in section
+\ref{sentiment:classifier_classification}. A comparison of the classifiers and
+associated results can be found in section \ref{sentiment:comparison_results},
+and a brief discussion come last, in section
+\ref{sentiment:comments_discussion}.
+%
 
 \section{Manual Classification}\label{sentiment:manual_classification}
 When labeling tweets manually there are a number of factors that affects the
@@ -90,7 +91,7 @@ could be broader to increase the diversity of the tweets.
 \section{Classification}\label{sentiment:classification}
 \subsection{Word Count Classification}\label{sentiment:word_count_classification}
 We describe the classification process and the different parts of it. The
-results and discuss section looks at the drawbacks and results of this method.
+results and discussion section looks at the drawbacks and results of this method.
 The algorithm counts the positive and negative words. More positive words than
 negative means the tweet is positive and vice versa. 
 
@@ -248,14 +249,14 @@ relevant for the sentiment.
 
 \paragraph{SVM}\label{sentiment:svm_classification}
 \hspace{0pt}\\
-Support Vector Machine \footnote{Wikipedia:
+Support Vector Machine\footnote{Wikipedia:
 \url{https://en.wikipedia.org/wiki/Support_vector_machine}}, is a classification
-algorithm that uses a supervised learning model. The supervised learning is used
-with associated learning algorithms to recognize patterns and analyse data. 
+algorithm that uses a supervised learning model. Supervised learning is used
+with the algorithm to recognize patterns and analyse data. 
 
 SVM builds a model, based on the training data, that split the data into two
-categories. New data will be assign one of the two categories. This makes the
-classifies a non-probabilistic binary linear classifier. 
+categories. New data will be assigned one of the two categories. This makes the
+classifiers a non-probabilistic binary linear classifier. 
 
 In more specific terms SVM creates multiple hyperplanes. The larger the
 distance from the hyperplane to the training data, the better the
@@ -314,7 +315,7 @@ such as 'random forests'.
 \hspace{0pt}\\
 We have looked at three methods of classifying, Naive Bayes classifier, SVM
 classifier, and the word count classifier.
-Together they have classified the two dataset we have with varying results. 
+The classifiers have classified the two datasets with varying results. 
 
 All methods of classification uses the manually labeled tweet sets as the data
 source. We use the self compile dictionaries for feature extraction.
@@ -333,26 +334,14 @@ the good and bad parts of the classifiers are presented and discussed.
 %
 
 \section{Comments}\label{sentiment:comments_discussion}
-\paragraph{Improvements}
-\hspace{0pt}\\
-There are a lot of improvements that could be done. 
-
-The word count classification is merely a convenient way to say something about
-the dictionaries used. We should expand our knowledge toward the quality of the
-dictionaries, and look for ways to eliminate terms that are neither positive or
-negative. 
-
-We should cross classify and test the classification with the SVM classifier and
-do quality assurance on the work with it. We should also look at other
-classifiers and other data to confirm the findings we have so far. 
 
 \paragraph{Biased Mind}
 \hspace{0pt}\\
-The datasets of manually labeled tweets are biased, based on a personal opinion
-and the state of mind in the moment of classification. Therefore we have to keep
-in mind that all the results are based on the assumption that everyone agrees on
-the manual labeling. This is of course a source of errors to be
-explored more in \ref{future_work}. 
+Subjectivity is an issue. The datasets of manually labeled tweets are biased,
+based on a personal opinion and the state of mind in the moment of
+classification. Therefore we have to keep in mind that all the results are based
+on the assumption that everyone agrees on the manual labeling. This is of course
+a source of errors to be explored in chapter \ref{future_work}. 
 
 We should explore the psychology of perception and classification. How do
 people perceive content differently? Is finance easier to label than politics?

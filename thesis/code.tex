@@ -30,8 +30,8 @@ logic and execution in the other.
 Trend code is in the trend folder. There we have mining\_utils, which is a
 replica of the same file in the Twitter folder. This file only helps with the
 acquisition of tweets. The trend\_mining file executes the mining operations,
-and acquires tweets from Twitter based on a set of search terms. The
-trend\_tweet\_sorting file sorts tweets from all the raw search term data files
+and acquires tweets from Twitter based on a set of search words. The
+trend\_tweet\_sorting file sorts tweets from all the raw search word data files
 into files based on date. So all tweets from the same date ends in the same
 file. And last we have the trend\_compilation file, which contains code for
 compiling and plotting trend data and financial data.  
@@ -260,7 +260,7 @@ for tup in bigrams(text.split(' ')):
 return bigrams_list
 \end{python}
 Where we essentially generate sets of words in tuples and then extract the
-combined term by string conversion and regex. 
+combined word by string conversion and regex. 
 
 \paragraph{Remove duplicate words}\label{code:remove_duplicate_words}
 Then we conveniently remove duplicates between the positive and negative
@@ -379,7 +379,7 @@ classification, and trend compilation happens in separate steps. Most important
 is the trend compilation. The sorting process only reads tweets
 and stores them the file that corresponds with the posting date of the tweet.
 Mining is done on the same principles as described earlier, only with other
-search terms. 
+search words. 
 
 \subsection{Compilation}
 

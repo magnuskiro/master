@@ -346,11 +346,11 @@ stocks in a better way. Another interesting thing would be to analyse how the
 Obama tweet set can be used to predict the stock market after the election. And
 see if we could extract trends or other useful finance related information.  
 
-\paragraph{Search terms}
+\paragraph{Search words}
 \hspace{0pt}\\
 The Kiro dataset is based on a four word query. The dataset represents a very
 limited part of Twitter. Neither does the
-search terms represent a full range of finance words.
+search words represent a full range of finance words.
 
 An improvement would use a wide variety of finance words to mine tweets. This
 would improve the relation to finance and the relevance of the dictionaries
@@ -417,7 +417,7 @@ decrease               @linetrezz             @terjeaa
 @dn_no                 market                 @theoilcouncil
 \end{verbatim}
 
-The trend tweets are stored in files named with the search term. Each term
+The trend tweets are stored in files named with the search word. Each word
 having it's own file with tweets. Before using the trend tweets they are sorted
 by date. Example from the folder shows the structure of filenames. All the files
 with 'trend-' prefix contain tweets sorted by date.   
@@ -438,10 +438,10 @@ economy.meta           @nikolaiastrup.meta    trend-Apr-20
 @erlendjordal          @oilandgasiq           trend-May-03
 \end{verbatim}
 
-All the used search terms are stored in the file: '\_search-terms'
-\footnote{Search term file:
+All the used search words are stored in the file: '\_search-terms'
+\footnote{Search word file:
 \url{https://github.com/magnuskiro/master/blob/master/code/trend/_search-terms}}.
-Most of the search terms are based on an article\footnote{Teknisk Ukeblad:
+Most of the search words are based on an article\footnote{Teknisk Ukeblad:
 \url{http://www.tu.no/petroleum/2014/04/05/dette-er-de-viktigste-twitrerne-for-oljebransjen}}
 from 'Teknisk Ukeblad' where they list the Twitter handles that are most
 significant for the oil industry.
@@ -463,8 +463,8 @@ Retweets are a source of concern, they provide no new information. But they can
 provide information about impact and the importance of a given tweet. Retweets
 should be investigated more thoroughly in the future.  
 
-A shortcoming of the data mining is the search terms. Are the terms
-representative? Do we get good data or not? Are there other terms that are
+A shortcoming of the data mining is the search words. Are the words
+representative? Do we get good data or not? Are there other words that are
 better suited to get accurate results? A wide array of tests and analysis should
 be done to remove the problem. 
 %
@@ -478,7 +478,7 @@ words.
 
 The dictionaries are self compiled or downloaded. The downloaded dictionaries
 are very specific in their area. The LoughranMcDonald dictionaries only contain
-financial terms, while the self compiled dictionaries contains words of all
+financial words, while the self compiled dictionaries contains words of all
 sorts. 
 
 The purpose of the dictionaries are to separate groups of words, and
@@ -613,14 +613,14 @@ Compiled:& \\
 \hline
 Kiro, Monogram & Compiled from the Kiro dataset. Containing
 monograms. \\
-Kiro, Bigram &  Containing terms consisting of two separate words. (\textit{an 
+Kiro, Bigram &  Containing words consisting of two separate words. (\textit{an 
 example}) \\
-Kiro, Trigram & Containing terms consisting of three separate trigrams.
+Kiro, Trigram & Containing words consisting of three separate trigrams.
 (\textit{example of trigram})\\
 Obama, Monogram & Compile from the Obama tweet set, monograms. \\
-Obama, Bigram & Containing terms consisting of two separate words.
+Obama, Bigram & Containing words consisting of two separate words.
 (\textit{another example}) \\
-Obama, Trigram & Containing terms consisting of three separate trigrams.
+Obama, Trigram & Containing words consisting of three separate trigrams.
 (\textit{also an example})\\
 
 	\label{data:dictionary_list}

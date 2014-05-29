@@ -13,13 +13,13 @@ analysis.
 It is well known that people are affected by sentiment. Sentiment analysis in
 finance is not a new concept, but it is has not been explored very much yet.
 We want to see if there are ways we can predict trends with the help of
-sentiment analysis. We generate trends based on sentiment and stock exchange
-data. And we will look for correlations between them. 
+sentiment analysis. We generate trends based on sentiment, and stock exchange
+data.  
 
-For sentiment analysis we need data. Twitter is a great source of data and a
+Twitter is a great source of data, and a
 good place to express sentiment. So we chose Twitter as our primary source of
 sentiment. To use the data in some smart ways we compile dictionaries from
-tweets. And use the dictionaries for sentiment classification. 
+tweets. And use dictionaries for sentiment classification. 
 
 Our greatest problem is creating a sentiment trend graph based on data from
 tweets. 
@@ -36,21 +36,20 @@ a social media platform is a huge place for companies to post updates and
 provide customer support, so it is a natural place to gather data for sentiment
 analysis.
 
-We would hopefully find relations between Twitter content and financial trends.
-And use that to prove increase revenue in trade. Our work is relevant for
-further endeavors about Twitter, sentiment and it's relation to finance. 
+We would hopefully find relations between Twitter content and financial trends,
+and use that to prove increase revenue in trade. Our work is relevant for
+further endeavors about Twitter, sentiment and it's relation to finance.  
 
 \section{Research questions}\label{introduction:research_questions}
-
 % How can we classify a tweet sentiment. 
 \subsection{How can we determine the sentiment of a
 tweet?}\label{introduction:rq1}
 
 The factors we look at are how, if possible, can we extract knowledge from
 tweets and then use that to find the sentiment of said tweet. The usefulness of
-a tweet as a source for sentiment is in question. The different parts of a
-tweet are investigated to find information useful in sentiment analysis. To
-classify a tweet we use different methods and compare them to find the best. 
+a tweet as a source for sentiment is in question. What parts of a tweet are
+useful in sentiment analysis? Which methods can we use to classify a tweet, and
+which method is best?
 
 % Can we create a trend from data on Twitter.
 \subsection{How can Twitter be used to aggregate trends?}\label{introduction:rq2}
@@ -73,17 +72,21 @@ Twitter has data such as the amount of tweets posted today, the location where
 tweets are posted from, and which users has posted. Which Twitter sources are
 most suitable for predicting the stock market trend? Aggregated, can these data
 represent a trend? Previously researchers have managed to predict
-direction of the market the next few days based on the volume of tweets.  
+direction of the market the next few days based on the volume of
+tweets\cite[]{doukas10:sentiment_and_momentum}.  
 
 Ultimately we will compare trends in technical analysis with trends based on
 sentiment from twitter. 
 
 \section{Methods}
 
-For the classification of sentiment we use bag of words\footnote{Wikipedia:
-\url{https://en.wikipedia.org/wiki/Bag_of_words_model}}, SVM, and Naive Bayes.
-Bag of words is mostly used to test dictionaries, while the SVM and Naive Bayes
-classifiers provides insight into which classifying method is best. 
+In this thesis we have two main ways of classifying the sentiment of tweets.
+Word counting and training a classifier. The word counting is the known method
+'bag of words'
+\footnote{Wikipedia: \url{https://en.wikipedia.org/wiki/Bag_of_words_model}},
+and the training of classifiers use support vector machine, and Naive Bayes.
+The trained classifiers provide insight and comparison of which classifying
+method is best.  
 
 Moving average\footnote{Wikipedia:
 \url{https://en.wikipedia.org/wiki/Moving_average}} and average directional

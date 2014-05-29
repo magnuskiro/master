@@ -14,7 +14,7 @@ And last we have a section that describes the financial data, we use, section
 covered here. 
 %
 
-% The section about twitter and tweets 
+% The section about Twitter and tweets 
 \section{Tweets}\label{data:tweets}
 A tweet is a massage posted on twitter. The message in many ways resemble the
 well known SMS\footnote{Wikipedia on Short Messaging
@@ -117,7 +117,7 @@ See all the different metadata types in appendix: \ref{appendix:tweetStructure}.
 
 % data acquisition
 \subsection{Twitter API}
-The twitter API is a convenient way for lots of people to access data from
+The Twitter API is a convenient way for lots of people to access data from
 twitter. Tweets, streams, timelines, profiles and more are available through
 the api. 
 
@@ -133,7 +133,7 @@ a good representation of the tweets from the last 7 days.
 To get access to the api there are a few requirements. You must have a
 twitter account. The application to be used has to be registered with Twitter.
 Registering the application gives access to API keys. Then you have to used the
-keys authenticate with twitter before you access the api. 
+keys authenticate with Twitter before you access the api. 
 
 For a simple guide to this we have
 \url{http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/} as
@@ -176,7 +176,7 @@ expected, as unlimited access would cripple the API.
 Twitter limits request of a particular kind at 180 requests per 15 minutes.
 Which means that we can do 180 searches spread evenly over the time interval. Or
 we could do 180 requests as fast as possible and then wait. The rate limits can
-be explored thoroughly in the twitter documentation\footnote{Twitter:
+be explored thoroughly in the Twitter documentation\footnote{Twitter:
 \url{https://dev.twitter.com/docs/rate-limiting/1.1}}
 
 As for the practical implications  of the limitations, they are not a problem in
@@ -223,7 +223,7 @@ are retweeted a lot and tweets from users with many followers. \\
 & since\_id & We get tweets posted after the given time. \\
 & max\_id & We get tweets with ids lower then the one given. \\
 & include\_entities & This parameter has no practical application to us. \\
-& callback & An optional place where twitter can post tweets back to us. \\
+& callback & An optional place where Twitter can post tweets back to us. \\
 
 \hline
 \textit{authenticate} & - & How we login and get access to the api. \\
@@ -245,7 +245,7 @@ is search and help. \\
 To perform a search we use the parameters described in the \textit{API
 endpoints} table in section \ref{tbl:twitterAPIendpoints}.
 
-The query is a normal search string where twitter will
+The query is a normal search string where Twitter will
 find tweets containing all words in the string, a boolean search. 
 \begin{python}
 query = "Finance Increase"
@@ -310,14 +310,14 @@ for result in results:
 
 \paragraph{API Caveats}
 \hspace{0pt}\\
-The main caveats of the twitter API is the request limitations and the
+The main caveats of the Twitter API is the request limitations and the
 limitations of the search engine. 
 
 As Twitter says: 
 '\textit{Please note that Twitter's search service and, by extension, the Search
 API is not meant to be an exhaustive source of Tweets. Not all Tweets will be
 indexed or made available via the search interface.}' and 
-'\textit{The limitations of the search engine of twitter indexes only about a
+'\textit{The limitations of the search engine of Twitter indexes only about a
 weeks worth of tweets.}'\footnote{Twitter:
 \url{https://dev.twitter.com/docs/faq#8650}}
 
@@ -443,7 +443,7 @@ All the used search terms are stored in the file: '\_search-terms'
 \url{https://github.com/magnuskiro/master/blob/master/code/trend/_search-terms}}.
 Most of the search terms are based on an article\footnote{Teknisk Ukeblad:
 \url{http://www.tu.no/petroleum/2014/04/05/dette-er-de-viktigste-twitrerne-for-oljebransjen}}
-from 'Teknisk Ukeblad' where they list the twitter handles that are most
+from 'Teknisk Ukeblad' where they list the Twitter handles that are most
 significant for the oil industry.
 
 The main part of the Norwegian economy is based on oil and gas exports. This

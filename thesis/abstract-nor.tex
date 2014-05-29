@@ -1,44 +1,46 @@
 \section*{\Huge Abstrakt \small{Norsk versjon}}
 \addcontentsline{toc}{chapter}{Abstrakt - norsk versjon}
-$\\[0.5cm]$
+$\\[0.1cm]$
 \begin{abstract}\label{abstract-nor}
 
-
-\paragraph{Background:}
+\paragraph{Bakgrunn}
 \hspace{0pt}\\
-As Twitter has become a global microblogging site, its influence in the stock
-market has become significant. This makes tweets an interesting medium for
-gathering sentiment. A sentiment that might influence trends in the stock
-market. 
+Som Twitter har blitt en global microblogging nettstedet, sin innflytelse i
+aksjemarkedet har blitt betydelig. Dette gjør tweets et interessant medium for
+samle følelser. En følelse som kan påvirke utviklingen i aksjemarkemarkedet .
 
-\paragraph{Motivation:} 
+\paragraph{motivasjon}
 \hspace{0pt}\\
-If twitter can be used to predict trends in the stock market
-the casual investor would gain an advantage over the day-trader or the modern trading algorithms. 
+Hvis twitter kan brukes til å forutsi trender i aksjemarkedet den alminnelige
+investor ville få en fordel over en dagtrader eller de moderne
+handelsalgoritmer. Et annet interessant aspekt er rollen til Twitter i sentiment
+analyse. og hvordan Twitters rolle som en datakilde påvirker utviklingen i
+aksjemarkedet.
 
-Another interesting aspect is the role of twitter in sentiment
-analysis. And how twitters role as a data source influences trends in the stock
-market.   
-
-\paragraph{Methods and experiments:} 
+\paragraph{Data og eksperimenter}
 \hspace{0pt}\\
-%TODO use the right method descriptions and what I have used.
-Twitter is used as the data source. It provides easy access, lots of data, and
-many possibilities to utilise the available metadata. 
+Twitter brukes som datakilde. Det gir enkel tilgang, masse data, og mange
+muligheter til å bruke tilgjengelige metadata. For å finne den oppfatningen av
+en tweet vi bruke pose med ord, SVM, og Naive Bayes. For finans del og
+sammenligning av trendene vi bruker lager data fra Oslo Børs. Vi bruker glidende
+gjennomsnitt (MA) og gjennomsnittlig retnings indeks (ADX) som trend
+indikatorer. Trend sammenligning er basert på MA og ADX. Vi beregner MA og ADX
+med finansdataog sentiment data basert på tweets. Deretter sammenligner vi
+grafene.
 
-To improve and verify the sentiment classification and trend comparisons we use
-a variation of methods. Simple statistical methods, such as counting positive
-and negative words. More advanced methods such as part of speech and other NLP
-related magic.%TODO figure out what the magic is. 
-We also explore the use of mete data such as location and language tags. 
-
-\paragraph{Results:} 
+\paragraph{funn}
 \hspace{0pt}\\
-Rough results of my research. 
+Vi utforsker bruken av lister over ord, ordbøker, i sentiment analyse. Og vi ser
+på innhenting av data fra Twitter og trenden vi kan lage fra det. Med varierende
+resultater får vi positive resultater med ordbøkene, mens trend aggregering
+mangler finesse og resulterer det burde ha hatt.
 
-\paragraph{Conclusion:} 
+\paragraph{Konklusjon}
 \hspace{0pt}\\
-All OK ? No? 
+Sentiment klassifisering av tweets jobbet med begge metodene. Vi klarte å
+aggregere en trend basert på følelser. Men sammenligningen med finans trend
+fungerte ikke ut som vi håpet. Ingen likheter ble funnet mellom sentiment trend
+og finans trend.
 
 \end{abstract}
 

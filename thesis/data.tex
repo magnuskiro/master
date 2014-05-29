@@ -54,26 +54,6 @@ As for the content we have the text, the message itself. With the content we
 have fields for all the links, all the emoticons, and all hashtags that are
 present in a tweet. 
 
-Hashtags:
-\begin{verbatim}
-u'hashtags': [
-      {
-        u'indices': [
-          82,
-          87
-        ],
-        u'text': u'G01V'
-      },
-      {
-        u'indices': [
-          88,
-          95
-        ],
-        u'text': u'G01V11'
-      }
-\end{verbatim}
-
-
 Every tweet is posted by a user. All the data of a user is also present for
 each tweet. Here we have data on follower count, profile images, friend count,
 time zone, and many other profile related items. 
@@ -182,7 +162,7 @@ for status in results['statuses']:
     print status['id']
 \end{python}
 
-For more advanced use we have generators, and lots of parameters and api
+For more advanced use we have generators, and lots of parameters and API
 endpoints to use. Endpoints and search parameters will be described under
 section \ref{data:twitter:endpoints}, \textit{API endpoints options}. 
 The twyhon framework and its advanced usage can be explored more in the code and
@@ -192,8 +172,8 @@ in the documentation of the framework
 
 \paragraph{Restrictions}
 \hspace{0pt}\\
-The api has some access restrictions. Or rather rate limitations. This is to be
-expected, as unlimited access would cripple the api.
+The API has some access restrictions, or rather rate limitations. This is to be
+expected, as unlimited access would cripple the API.
 
 Twitter limits request of a particular kind at 180 requests per 15 minutes.
 Which means that we can do 180 searches spread evenly over the time interval. Or
@@ -201,10 +181,10 @@ we could do 180 requests as fast as possible and then wait. The rate limits can
 be explored thoroughly in the twitter documentation\footnote{Twitter:
 \url{https://dev.twitter.com/docs/rate-limiting/1.1}}
 
-As for the practical implications  of the limitations. They are not a problem in
+As for the practical implications  of the limitations, they are not a problem in
 our case. We get more then enough data. By using a generator and pour out tweets
 we get 1000 tweets in about 60 seconds. But then we have to wait 15 minutes.
-This is suboptimal. As we will crash the program at access denied from the api.  
+This is suboptimal. As we will crash the program at access denied from the API.  
 %
 
 \paragraph{API endpoints}\label{data:twitter:endpoints}
@@ -267,8 +247,8 @@ is search and help. \\
 To perform a search we use the parameters described in the \textit{API
 endpoints} table in section \ref{tbl:twitterAPIendpoints}.
 
-Mainly we need a query. The query is a normal search string where twitter will
-find tweets containing all words in the string. 
+The query is a normal search string where twitter will
+find tweets containing all words in the string, a boolean search. 
 \begin{python}
 query = "Finance Increase"
 \end{python}
@@ -335,7 +315,7 @@ for result in results:
 The main caveats of the twitter API is the request limitations and the
 limitations of the search engine. 
 
-As twitter says themselves: 
+As Twitter says: 
 '\textit{Please note that Twitter's search service and, by extension, the Search
 API is not meant to be an exhaustive source of Tweets. Not all Tweets will be
 indexed or made available via the search interface.}' and 
@@ -356,22 +336,22 @@ tweets with a cron job every 15 minutes\footnote{Wikipedia on Cron:
 %
 
 \subsection{Tweet sets}
-We ended up with two datasets to be used. The obama tweetset\footnote{Neal
+We ended up with two datasets to be used. The Obama tweetset\footnote{Neal
 Caren of University of North Carolina. Tweet file:
 \url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}}, which is a set of
-tweets containing around 1300 tweets about obama and the election of 2008/2009.
+tweets containing around 1300 tweets about Obama and the election of 2008/2009.
 And a self compile dataset, referenced as the kiro dataset, based on the words:
 \textit{Finance}, \textit{Investment}, \textit{Economy}, and \textit{Growth}. 
 
 In future work it would be natural to connect the search for tweets towards
 stocks in a better way. Another interesting thing would be to analyse how the
-obama tweet set can be used to predict the stock market after the election. And
+Obama tweet set can be used to predict the stock market after the election. And
 see if we could extract trends or other useful finance related information.  
 
 \paragraph{Search terms}
 \hspace{0pt}\\
-The kiro dataset is based on only four words. This is a very limited part of
-twitter and in no way representative for it's full content. Neither does the
+The kiro dataset is based on a four word query. The dataset represents a very
+limited part of Twitter. Neither does the
 search terms represent a full range of finance words.
 
 An improvement would use a wide variety of finance words to mine tweets. This
@@ -381,9 +361,9 @@ afterwords.
 \paragraph{Structure}
 \hspace{0pt}\\
 The self compiled datsets has one tweet per line. This is the JSON data object
-that is automatically imported into python. 
+that is automatically imported into Python. 
 
-The obama tweet set only have the tweet text. We have one tweet per line. And
+The Obama tweet set only have the tweet text. We have one tweet per line. And
 no metadata present. 
 
 \paragraph{Caveats}
@@ -395,24 +375,27 @@ And there are people that think it is neutral because they do not care. Retweets
 are also present, so the actual data we get out of the tweet set is limited. 
 
 The kiro dataset has a lot retweets and neutral tweets in it. Therefore we have
-only used positive and negative tweets later, ignoring all the neutral ones.
+only used positive and negative tweets, ignoring all the neutral ones.
 This gives us more relevant data to work with and less noise. Although we
 should have used the neutral tweets to improve the dictionaries.
 %
 
 \subsection{Trend Data}\label{data:trend_data}
 When mining larger sets of tweets, the rate limitations and week limitation is
-a challenge. The mining in itself is quite easy. Just execute a search and store
+a challenge. The rate limitation defines how many queries we can do towards the
+api every 15 minutes. The week limitation is on the search index of the API,
+the search engine only indexes tweets a week back in time and not all tweets
+are indexed. The mining itself is quite easy. Just execute a search and store
 all the new unique tweets. The problem appear when we need huge amounts of
-tweets and a setup for mining continuously. 
+tweets and a setup for continuous mining. 
 
-Each request to Twitter can yield 100 tweets. This gives us a theoretical
-maximum of 1800 tweets per 15 min. Then we have to factor in the fact that we
-might already have the tweets we receive from Twitter. And that we might not
+Each request to Twitter can return 100 tweets. This gives us a theoretical
+maximum of 1800 tweets per 15 min. Then the fact that we
+might already have the tweets we receive from Twitter, and that we might not
 get 100 tweets per query. In addition the Twitter API only indexes tweets a
-week back in time. Forcing us to mine tweets over a longer period of time.  
+week back, forcing us to mine tweets over a longer period of time.  
 
-As we have not set up a server to do the mining for us we, we did it manually
+As we do not have a server to do the mining for us, we did it manually
 every now and then. Resulting in very few tweets per day ratio. 
 An example of output from our mining script:
 \begin{verbatim}
@@ -457,35 +440,35 @@ economy.meta           @nikolaiastrup.meta    trend-Apr-20
 @erlendjordal          @oilandgasiq           trend-May-03
 \end{verbatim}
 
-All the used search terms a stored in the file: '\_search-terms'
+All the used search terms are stored in the file: '\_search-terms'
 \footnote{Search term file:
 \url{https://github.com/magnuskiro/master/blob/master/code/trend/_search-terms}}.
 Most of the search terms are based on an article\footnote{Teknisk Ukeblad:
 \url{http://www.tu.no/petroleum/2014/04/05/dette-er-de-viktigste-twitrerne-for-oljebransjen}}
 from 'Teknisk Ukeblad' where they list the twitter handles that are most
-significant in the oil industry.
+significant for the oil industry.
 
-The majority of the Norwegian economy is based on oil and gas exports. This
+The main part of the Norwegian economy is based on oil and gas exports. This
 means that other parts of the Norwegian economy is dependent on the oil
 industry in many ways. As an example, we have all the service industry around
 oil and gas, such as food supply, air travel, financial services etc. If the
 oil industry has a hard time, all the dependent companies will have a hard time
 to. 
  
-This leads us to believe that OSEBX, the Oslo stock exchange, is largely
-dependant on the oil industry also. Which makes our choice of tweets
+This leads us to conclude that OSEBX, the Oslo stock exchange, is largely
+dependant on the oil industry. This makes our choice of tweets
 reasonable. 
 %
 
 \subsection{Problems, Shortcomings, and Possible Improvements}
-Retweets are a source of concern, they provide no information that is not
-present in other tweets. But they can provide information about sharing and the importance of a given tweet. Retweets should be investigated more thoroughly in
-the future.  
+Retweets are a source of concern, they provide no new information. But they can
+provide information about impact and the importance of a given tweet. Retweets
+should be investigated more thoroughly in the future.  
 
 A shortcoming of the data mining is the search terms. Are the terms
 representative? Do we get good data or not? Are there other terms that are
 better suited to get accurate results? A wide array of tests and analysis should
-be done to improve this factor of the problem. 
+be done to remove the problem. 
 %
 
 % describing the dictionaries used in the classification of tweets. 
@@ -499,13 +482,13 @@ are very specific in their area. The LoughranMcDonald dictionaries only contain
 financial terms, while the self compiled dictionaries contains words of all
 sorts. 
 
-The purpose of the dictionaries are to separate groups of words. And
+The purpose of the dictionaries are to separate groups of words, and
 further to give a quantitative way to classify positive and negative tweets.
 We also want to look at the quality of the different dictionaries. And the
 method for dictionary compilation.  
 
-Monograms are words consisting of one word. 'This', 'That' and 'Finance' are
-examples of that. Bigrams are words consisting of two words. 'Apple cake' and
+Monograms are consisting of one word. 'This', 'That' and 'Finance' are
+examples. Bigrams consist of two words. 'Apple cake' and
 'Operatin system' are two examples. For trigrams we have three words to a word,
 'big blue boots', 'fast lane car', and 'waterfall boat accident'. 
 
@@ -513,7 +496,7 @@ We use the dictionaries to count mono-, bi-, and tri-grams.
 And we can say something about the quality of the dictionaries and the method
 for compilation.
 
-The dictionaries are used in both classification methods. The simple
+The dictionaries are used in both classification methods, the simple
 word\_count(\ref{sentiment:word_count_classification}) classification and the
 more advanced classification using SVM(\ref{sentiment:svm_classification}) and
 Naive bayes(\ref{sentiment:naive_bayes_classification}) classifiers. 
@@ -523,12 +506,12 @@ Naive bayes(\ref{sentiment:naive_bayes_classification}) classifiers.
 The downloaded dictionaries are dictionaries found on the Internet. They are
 compiled by others, and their quality can be questioned. The most significant
 feature of the downloaded dictionaries are that they contain words from a
-certain domain. The obama dictionary contains words linked to politics,
+certain domain. The Obama dictionary contains words linked to politics,
 while the LoughranMcDonald dictionary only has words from the financial domain.  
 
 \paragraph{Obama}
 \hspace{0pt}\\
-The obama dictionary was created for the obama tweet set
+The Obama dictionary was created for the Obama tweet set
 \footnote{Neal Caren of University of North Carolina. Tweet file:
 \url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}} in relation to the
 us presidential election of 2008.
@@ -576,13 +559,13 @@ Modal words weak & Weak words on moods, such as \textit{Somewhat}, and
 
 These dictionaries have a lot of potential. We only use the
 positive and negative lists of words. The other lists could be used for a
-better measure of polarity or weighting of bigrams. The best use of this
+better measure of polarity or weighting of n-grams. The best use of this
 dictionary is for comparison of the different dictionaries.  
 %
 
 \subsection{Compiled Dictionaries}\label{data:compiled_dictionaries}
 The compiled dictionaries are based on the two manually labeled tweet sets. The
-kiro tweet set, and the obama tweet set.
+Kiro tweet set, and the Obama tweet set.
 
 Details about the process of manually classifying tweets can be found in section
 \ref{sentiment:manual_classification}.
@@ -591,7 +574,7 @@ Details about the process of manually classifying tweets can be found in section
 \hspace{0pt}\\
 The compilation of a dictionary is quite simple. 
 \begin{itemize}
-    \item 1: We import manually labeled the tweets
+    \item 1: We import manually labeled tweets
     \item 2: We take all the positive tweets and extract words from them. 
     \item 3: We repeat step 2 with the negative tweets. 
     \item 4: We remove words that are present in both the positive and negative
@@ -619,7 +602,7 @@ dictionary of positive words.
 Name of dictionary & Description \\
 Downloaded:& \\
 \hline
-Obama original & Monograms, in relation to the obama tweet set. \\
+Obama original & Monograms, in relation to the Obama tweet set. \\
 LoughranMcDonald & Monograms, acquired from Bill McDonald's webpage.\\
 Combined Obama original and LoughranMcDonald & Monogram. A combination of
 the previous two dictionaries. \\
@@ -632,7 +615,7 @@ Kiro, Bigram &  Containing terms consisting of two separate words. (\textit{an
 example}) \\
 Kiro, Trigram & Containing terms consisting of three separate trigrams.
 (\textit{example of trigram})\\
-Obama, Monogram & Compile from the obama tweet set, monograms. \\
+Obama, Monogram & Compile from the Obama tweet set, monograms. \\
 Obama, Bigram & Containing terms consisting of two separate words.
 (\textit{another example}) \\
 Obama, Trigram & Containing terms consisting of three separate trigrams.
@@ -646,7 +629,7 @@ Obama, Trigram & Containing terms consisting of three separate trigrams.
 % The financial data used in the thesis. 
 \section{Finance Data}\label{data:finance}
 The finance data consists of records from Oslo stock exchange, OSEBX, one
-record for each opening day. 
+record for each day. 
 The values we use are: \textit{quote\_date}, and \textit{close}.
 
 \paragraph{Data acquisition}

@@ -1,19 +1,17 @@
 \chapter{Data, retrieval and structure}\label{data}
-We aim to describe the structure, the characteristics, the metadata and usage
-for the data used. 
+We describe the structure, the characteristics, the metadata and usage
+of the data used in this thesis. 
 
-In this data chapter we have three sections. 
-
-The section about twitter and tweets, \ref{data:tweets}, is where we describe
+Twitter and tweets, section \ref{data:tweets}, describe
 how we use tweets, what tweets to use and how we acquire them.
 
-Then we have a section describing the dictionaries, \ref{data:dictionaries}. How
-we compile the dictionaries from tweets and how we use them. Their shortcomings
-and the possible improvements.  
+We have a section describing the dictionaries, section \ref{data:dictionaries}.
+How we compile dictionaries from tweets and how we use them are covered there.
+Shortcomings and the possible improvements are also discussed briefly.   
 
-And last we have a section that describes the financial data,
-\ref{data:finance}, that we use. Where we get them, the structure and how the
-data is used. 
+And last we have a section that describes the financial data, we use, section
+\ref{data:finance}. Where we get them, the structure and how we use the data is
+covered here. 
 %
 
 % The section about twitter and tweets 
@@ -276,7 +274,7 @@ results = twitter.search(q=query, count='15', language='no')
 
 \paragraph{Mining optimization}
 \hspace{0pt}\\
-The acquisition of tweets, or the mining operation went quite well. We got lots
+The acquisition of tweets, the mining operation, was successful. We got lots
 of tweets. But we ran into a problem. Retweets. In some cases we got up to 90\%
 retweets in a mining session. Many of the tweets being essentially the same
 one, only retweeted multiple times. 
@@ -340,7 +338,7 @@ We ended up with two datasets to be used. The Obama tweetset\footnote{Neal
 Caren of University of North Carolina. Tweet file:
 \url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}}, which is a set of
 tweets containing around 1300 tweets about Obama and the election of 2008/2009.
-And a self compile dataset, referenced as the kiro dataset, based on the words:
+And a self compile dataset, referenced as the \textit{Kiro} dataset, based on the words:
 \textit{Finance}, \textit{Investment}, \textit{Economy}, and \textit{Growth}. 
 
 In future work it would be natural to connect the search for tweets towards
@@ -368,7 +366,7 @@ no metadata present.
 
 \paragraph{Caveats}
 \hspace{0pt}\\
-Obama tweets is not ideal for sentiment analysis. It has to much political
+Obama tweets are not ideal for sentiment analysis. It has much political
 content to be easily comprehended. A political statement is not positive or
 negative. It is positive in the eyes on some and negative in the eyes of others.
 And there are people that think it is neutral because they do not care. Retweets
@@ -474,8 +472,9 @@ be done to remove the problem.
 % describing the dictionaries used in the classification of tweets. 
 \section{Dictionaries}\label{data:dictionaries}
 
-The dictionaries are lists of words used in the classification process. There
-are sets of dictionaries. In each set there are a list of positive words and a list of negative words. 
+The dictionaries are lists of words used in the classification process. In each
+pair of dictionaries there are a list of positive words and a list of negative
+words.
 
 The dictionaries are self compiled or downloaded. The downloaded dictionaries
 are very specific in their area. The LoughranMcDonald dictionaries only contain
@@ -565,7 +564,8 @@ dictionary is for comparison of the different dictionaries.
 
 \subsection{Compiled Dictionaries}\label{data:compiled_dictionaries}
 The compiled dictionaries are based on the two manually labeled tweet sets. The
-Kiro tweet set, and the Obama tweet set.
+Kiro tweet set, and the Obama tweet set. We compiled three dictionaries from
+each dataset. 
 
 Details about the process of manually classifying tweets can be found in section
 \ref{sentiment:manual_classification}.
@@ -575,11 +575,13 @@ Details about the process of manually classifying tweets can be found in section
 The compilation of a dictionary is quite simple. 
 \begin{itemize}
     \item 1: We import manually labeled tweets
-    \item 2: We take all the positive tweets and extract words from them. 
-    \item 3: We repeat step 2 with the negative tweets. 
+    \item 2: We take all the positive tweets and extract words from them. This
+constitutes the positive words list. 
+    \item 3: We repeat step 2 with the negative tweets. This constitutes the
+negative words list. 
     \item 4: We remove words that are present in both the positive and negative
-dictionaries. Removal of duplicate words. Resulting in two dictionaries of
-unique words either positive or negative.  
+lists of words. The removal of duplicate words results in two dictionaries of
+unique words, either positive or negative.  
 \end{itemize}
 
 \paragraph{Characteristics}
@@ -590,9 +592,9 @@ dictionaries.
 %
 
 \subsection{List of dictionaries}
-Table \ref{tbl:dictionaries}, listing all the different dictionaries used. 
-For each entry in the table there is a dictionary of negative words and a
-dictionary of positive words. 
+Table \ref{tbl:dictionaries}, lists all the dictionaries used. For each entry in
+the table there is a dictionary of negative words and a dictionary of positive
+words.  
 
 \begin{table}
 \centering

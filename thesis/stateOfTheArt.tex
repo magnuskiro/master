@@ -1,15 +1,15 @@
 \chapter{Background and Previous Work}\label{previous_work}
-Previous work and the background information needed for the context of this
-thesis is described in this chapter. We look at how microblogging activity is
+Previous work and the background information needed for this
+thesis is described in this chapter. We look at how microblogging activity
 can be related to finance \cite{bollen2011}. And how sentiment can be used to
 predict stock markets.
 
 This chapter contains related research, context knowledge and introduction to
 the subjects discussed in this thesis. Twitter as a microblogging platform is
 introduced in \ref{previous_work:twitter}. Section
-\ref{previous_work:sentiment}, describes sentiment and what it can be used for.
+\ref{previous_work:sentiment}, describes sentiment analysis and what it can be used for.
 Finance and trading as a context is described in section
-\ref{previous_work:finance}. And last trends are talked about in section
+\ref{previous_work:finance}. And last trends are introduces in section
 \ref{previous_work:trends}.
 
 \section{Twitter}\label{previous_work:twitter}
@@ -18,7 +18,7 @@ It's a real-time service for sharing and gathering small messages. These
 messages can represent everything from a persons opinion of ice cream, to the
 latest changes in the financial market or pictures from a Mars rover. 
 
-At the core of Twitter you have the Tweet. The Tweet is the 140 character
+At the core of Twitter you have the Tweet. The Tweet is a 140 character
 message. 
 Tweets lets you communicate with other users, share photos and post all kinds of
 information. The small size of the tweets are not a hindrance for the flow of
@@ -26,7 +26,7 @@ information.
 \footnote{About Twitter: \url{https://twitter.com/about}}
 
 The fast growing messaging service handles 1.6 billion search queries every day.
-In 2012 the 500 million users would generate 3.2 queries each day. 340 million tweets were posted every day. 
+In 2012 the 500 million users would generate 3.2 queries evey day. 340 million tweets were posted every day. 
 \footnote{Wikipedia: \url{http://en.wikipedia.org/wiki/Twitter}} 
 
 Most medium and large companies have a presence on Twitter today. Posts can contain
@@ -36,9 +36,9 @@ that 77 of the Fortune 100 companies have a twitter account.
 
 Companies use Twitter to communicate with customers. Customers can post
 questions and feedback, while the company posts answers and information.
-Questions can be asked with a specific hashtag. Or with an at sign to target a
+Questions can be asked with a specific hashtag(\#). Or with an at(@) sign to target a
 specific user. This makes it easy to filter the messages, and therefore easier
-to get in contact with the customer. Best Buy demonstrated the successfulness of
+to get in contact with the customer. The company Best Buy demonstrated the successfulness of
 twitter in customer relations by answering questions with a specific hashtag. In
 2009 they had answered nearly 20 thousand questions using twitter.
 \cite[p1]{Li2013206} Market Intelligence is also a major aspect of the
@@ -106,7 +106,7 @@ want. And gives you the opportunity to find the information you are looking for.
 
 Opinion mining on the web is not new. In resent years it has
 become attractive to traders. 
-The use of Twitter and social media is increasing in increasing. Both in
+The use of Twitter and social media is increasing. Both in
 business and with private users.
 This means a surplus of raw data with
 easy access. Companies all over the world has started to use the social
@@ -126,20 +126,19 @@ communities in the microblogging sphere, \cite[]{java07}.
 A users intentions and its reasons for participation might be a factor in the sentiment analysis.
 
 \subsection{What is Sentiment Analysis}
-There are two main categories of approaches to sentiment analysis. 
-	The first is to use a classifier. The classifier can use methods such as
-naive Byes, maximum entropy or support vector model \cite[]{Li2013206} This is
-typically a method where it would be natural to use machine learning of
-evolutionary algorithms to increase the classification correctness over time. 
-	The other is to use linguistic resources, such as corpora of negative and
-positive words. The developed linguistic resources are used to classify the
-sentiment of the text \cite[]{Li2013206}.
+There are two main categories of approaches to sentiment analysis. The first is
+to use a classifier. The classifier can use methods such as naive Byes, maximum
+entropy or support vector machine \cite[]{Li2013206}. These classifiers are
+typical examples where it would be natural to use machine learning of
+evolutionary algorithms to increase the classification correctness over time.
+The other is to use linguistic resources, such as corpora of negative and
+positive words. The developed linguistic resources are used to classify the sentiment of the text \cite[]{Li2013206}.
 
 Li and Li has created a framework for sentiment analysis. The system
 consists of four main steps  and is tested with experiments on twitter. 
 	First they do topic detection, identifying and extracting the topics
 mentioned in the tweet. 
-	Secondly opinions are classified. The polarity of the opinion is decided and
+	Secondly opinions are classified. The polarity, how positive a tweets is, of the opinion is decided and
 the users impression is captured. 	
 	Third. Credibility is assessed. This creates a better summarization of the
 expresser's credibility. 
@@ -168,17 +167,20 @@ site\footnote{Amazon Mechanical Turk (AMT): \url{https://www.mturk.com/mturk/}}.
 
 \cite[]{barbosa10} explores the problem of noise in biased and noisy data. 
 They focus on noisy labels and add features to the tweets to increase the
-classification properties of the tweets. To filter out tweets that don't project a
-sentiment tweets are classified as subjective or objective. The subjective tweets are classified as positive or negative.
+classification properties of the tweets. Objective tweets have very little
+sentiment or no sentiment at all. To improve classification, tweets are
+classified as objective of subjective. Then the subjective tweets, that have a
+sentiment are classified as positive of negative. 
 
 Classification of tweets can be generalised by using features. Features are
-elements such as unigrams, bigrams, and part-of-speech tags. An abstract
-representation of a tweet would be beneficiary to the classification. In this
-abstract representation \cite[]{barbosa10} propose to use characteristics about
-how tweets are written and meta-information about the words in tweets. 
-Meta-features and tweet syntax features are further features that can improve
-classification. Meta-features are information about the tweet, such as
-location, language, and number of retweets. The tweet syntax features are things such as hashtags, retweet,
+small elements of a tweet, such as unigrams, bigrams, or part-of-speech tags.
+Bigrams are words consisting of two words, unigrams are words consisting of one
+word. An abstract representation of a tweet would be beneficiary to the
+classification. In this abstract representation \cite[]{barbosa10} propose to
+use characteristics about how tweets are written and meta-information about the
+words in tweets.  Meta-features and tweet syntax features that can further improve
+classification. Meta-features are information about the tweet, such as location,
+language, and number of retweets. Retweets are tweets that are posted again by other users. The tweet syntax features are things such as hashtags, retweet,
 reply, links, punctuation and emoticons \cite[]{barbosa10}. 
 
 Another approach to the sentiment challenges with twitter is explored by
@@ -233,7 +235,7 @@ fluctuations in the market. And opposite, lots of emotions(hope, worry, fear),
 gives speed to the market.
 
 \cite[p3]{Brown20041} indicates that the sentiment does not cause subsequent
-market returns. For a short-term marketing timing this is bad news. However
+market returns. For a short-term market timing this is bad news. However
 with the changes in social media over the last decade how is the situation
 today? With the microblogging sphere of today we can easily see the
 correlation of sentiment and the market indicators,
@@ -254,10 +256,11 @@ with the microblogging of today.
 
 The management of assets or liabilities and the management of funds over a
 period of time is called Finance. In finance the valuation of assets are time
-dependant. The same asset is not worth the same now and in a few minutes. Assets
-are priced based on expected returns and risk level. The three sub categories
-of finance are: personal, corporate and public \footnote{Wikipedia:\url{http://en.wikipedia.org/wiki/Finance}}.
-These categories describes very different parts of the financial world. 
+dependant. The value of an asses is always changing and might not have the same
+value five minutes from now. Assets are priced based on expected returns and
+risk level. The three sub categories of finance are: personal, corporate and
+public \footnote{Wikipedia:\url{http://en.wikipedia.org/wiki/Finance}}. These
+categories describes very different parts of the financial world.  
 
 Trading is the action of buying or selling financial instruments.
 Financial instruments can be stocks, bonds, derivatives or commodities 
@@ -265,7 +268,7 @@ Financial instruments can be stocks, bonds, derivatives or commodities
 Trades takes place in markets, stock markets, derivatives markets or commodity
 markets.
 
-A new aspect to trading the last decade has been online trading
+A new aspect to trading in the last decade has been online trading
 \footnote{Wikipedia: \url{https://en.wikipedia.org/wiki/Online_trading}}.
 Speed, ease of use, and low costs made the online brokers popular. Many brokers
 provide platforms for trade and analysis to select potential investments.  
@@ -276,15 +279,14 @@ the study of past market data. Mostly volume and price. The purpose of technical
 analysis is to forecast the direction of prices.  
 
 Among tools and techniques in technical analysis are charts, market indicators,
-moving average, and relative strength index. It is also quite common to combine
-techniques to acquire better predictions. When looking at put/call rations,
-short interest, implied volatility, and bull/bear indicators of sentiment is
-also important to take into consideration. 
+and relative strength index. It is also quite common to combine techniques to
+acquire better predictions. When looking at put/call ratios, short interest,
+implied volatility, and bull/bear indicators of sentiment is also important to take into consideration. 
 
 Technical analysis focus at numeric values, such as volume and price, where fundamental analysis \footnote{Wikipedia:
 \url{http://en.wikipedia.org/wiki/Fundamental_analysis}} analyse company health,
 financial statements, production rates, earnings, management, and competitive
-advantages. Day traders and pit traders prefer technical analysis over
+advantages. Day traders prefer technical analysis over
 financial analysis.   
 
 Two principles of technical analysis are, 'History repeats itself', and
@@ -310,22 +312,23 @@ Dictionary:
 "The direction and momentum of a market, price, economy, or other measure. For
 example, if the price of a security is going mainly downward with only a few
 gains, it is said to be on a downward trend. Identifying and
-predicting trends is important finding the right moment to buy and sell
+predicting trends is important for finding the right moment to buy or sell
 securities. Trends are especially important in technical analysis, which
 recommends buying at the bottom of a downward trend and selling at the top of an
 upward trend."
 \footnote{Dictionary description of trend: \url{http://financial-dictionary.thefreedictionary.com/Trend}}
 
-Trends work in much the same way as opinions. When an opinion or concept is
-presented to others they start to think the same thing or feel the same way or
-move in the same direction. The first group of people that move in the same
+Trends work in much the same way as opinions. People are affected by their
+environment all the time. And are often influenced by trends and opinions. When
+people are affected by trends they start to move in the same direction as
+others. The first group of people that move in the same
 direction are called trend setters. They are the people that show others how
 the trend works and what this trend is about. 
 
 On twitter we have lots of subcultures that all express themselves on their
 specific topic. It can be technology, art, finance, or fashion among others.  
-In the sense of twitter we can take a step back and look at the content of
-messages and from there see if we can find common topics that people talk
+In the sense of twitter we can look at the content of
+messages and see if we can find common topics that people talk
 about, this being the topic of a subculture or a subspace of twitter. To get
 the trend we have to look at the content of the messages in a subspace. Given
 that a trend is the combined general opinion of a group. We can analyse the
@@ -354,7 +357,5 @@ price direction within a primary trend. The small changes are often called
 market corrections. The short term correction is often between 5 and 20 percent.
 
 When looking for usage of twitter trends, we find little to confirm research in
-this area. No material or indication is found to suggest that trending on twitter
-is researched in regards to sentiment analysis of tweets and finance. 
-
+this area. 
 %

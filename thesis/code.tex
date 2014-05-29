@@ -43,7 +43,7 @@ writing files and such. While the mining\_operations file does the logic of
 managing the acquired tweets. 
 
 The important files are listed under. '- something' are folders, while the
-others are actual python files. The indentation shows which files are in which
+others are actual Python files. The indentation shows which files are in which
 folders.  
 \begin{verbatim}
 - code    
@@ -72,12 +72,12 @@ folders.
 \section{Technology and Libraries}\label{code:technology_libraries}
 The technology used, frameworks etc.
 
-The used python libraries are: ConfigParser, ast, codecs, io, os, twython,
+The used Python libraries are: ConfigParser, ast, codecs, io, os, twython,
 time, matplotlib, urllib, re, nltk, sklearn.
 Most of them are quite standard, while some are not. And some are self
 explanatory. 
 
-The libraries that are not shipped with standard python are described in the
+The libraries that are not shipped with standard Python are described in the
 following paragraphs. 
 
 \paragraph{Twython}
@@ -171,7 +171,7 @@ data about Oslo stock exchange\footnote{OSEBX data:
 \url{http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv}}
 We also sort out the data we do not want by breaking at a certain date. 
 
-We do this by using the urllib library in python: 
+We do this by using the urllib library in Python: 
 \begin{python}
 # get data file from internet. (csv)
 stock_exchange_history = urllib.urlopen(url).readlines()

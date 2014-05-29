@@ -1,41 +1,44 @@
 \chapter{Introduction}\label{introduction}
 
 \section{Context}
-This thesis have largely three parts to it. The finance part, where we look at
-stock market prediction\footnote{Wikipedia:
+This thesis consist of three parts. 
+
+First the Twitter aspect. Where we use Twitter as a data source for sentiment
+analysis. Second, the sentiment analysis in itself. Creation of dictionaries
+and how we determine the sentiment of a tweet. Third, the finance part, where we
+look at stock market prediction\footnote{Wikipedia:
 \url{http://en.wikipedia.org/wiki/stock_market_prediction}}, and technical
-analysis.  
+analysis. 
 
-It is well known that people are affected by sentiment. Sentiment in finance is
-not new concept, but it is has not been explored very much yet. So we want to
-see if there are ways we can predict trends with the help of sentiment. We
-generate trends based on sentiment and stock exchange data. And we will look for
-correlations between them. 
+It is well known that people are affected by sentiment. Sentiment analysis in
+finance is not a new concept, but it is has not been explored very much yet.
+We want to see if there are ways we can predict trends with the help of
+sentiment analysis. We generate trends based on sentiment and stock exchange
+data. And we will look for correlations between them. 
 
-For the sentiment we need data. Twitter is a great source of data and a better
-place to express sentiment. So we chose Twitter as our primary source of
+For sentiment analysis we need data. Twitter is a great source of data and a
+good place to express sentiment. So we chose Twitter as our primary source of
 sentiment. To use the data in some smart ways we compile dictionaries from
 tweets. And use the dictionaries for sentiment classification. 
 
-The elements that are the most difficult are the creation a trend based on
-tweets, and getting representative data. 
+Our greatest problem is creating a sentiment trend graph based on data from
+tweets. 
 %
 
 \section{Motivation}
-We have an interest to find out how sentiment can be extracted from Twitter and
-how it effects finance trends. Further we are motivated by the social media
-aspect of trends and how that effects finance. 
+We want to find how sentiment can be extracted from Twitter and
+how it effects finance trends. We are motivated by the fact that social media
+has become a bi part of peoples lives. 
 
-Why is this work done? Why do we benefit from this? Why do I want to do this?
-We believe that microblogging and social media plays a role in todays trends
-and we would like to explore that. Twitter as a social media platform is a huge
-place for companies to post updates and provide customer support, so it is a
-natural place to gather data for analysis. 
+Why is this work done? We believe that microblogging and social media are great
+places to find and observe trends, and we would like to explore that. Twitter as
+a social media platform is a huge place for companies to post updates and
+provide customer support, so it is a natural place to gather data for sentiment
+analysis.
 
-If everything works out and we strike gold, we would hopefully find relations
-between Twitter content and financial trends. And use that to prove increase
-revenue in trade. Our work is relevant for further endeavors about Twitter,
-sentiment and it's relation to finance. 
+We would hopefully find relations between Twitter content and financial trends.
+And use that to prove increase revenue in trade. Our work is relevant for
+further endeavors about Twitter, sentiment and it's relation to finance. 
 
 \section{Research questions}\label{introduction:research_questions}
 
@@ -46,26 +49,25 @@ tweet?}\label{introduction:rq1}
 The factors we look at are how, if possible, can we extract knowledge from
 tweets and then use that to find the sentiment of said tweet. The usefulness of
 a tweet as a source for sentiment is in question. The different parts of a
-tweet are investigated to find information useful to classify a sentiment. To
-classify a tweet we use different methods and compare them to find the best
-classifier. And lastly we as how we best can find the sentiment of tweets? 
+tweet are investigated to find information useful in sentiment analysis. To
+classify a tweet we use different methods and compare them to find the best. 
 
 % Can we create a trend from data on Twitter.
-\subsection{Can Twitter be used to aggregate a
-trend?}\label{introduction:rq2}
+\subsection{How can Twitter be used to aggregate trends?}\label{introduction:rq2}
 As trends are interesting and useful we aim to create a trend based on data
-from twitter. We ask ourselves if Twitter as a microblogging site be used as a
-data source in aggregation of trends. The credibility of a tweeter is also an
-aspect we would like to investigate. To create a trend we need to find out
-which parts of Twitter can be used. Combining these hopefully we can create
-trends. 
+from Twitter. We ask ourselves if Twitter as a microblogging site can be used as a
+data source in aggregation of trends. The credibility of a tweet is also an
+aspect we would like to investigate. To create a trend we need to find which
+parts of Twitter can be used. Combining these, hopefully, we can create trends. 
 
 % compare a Twitter trend with a financial one. 
 \subsection{How does trends from Twitter compare to technical analysis in the
 stock market?}\label{introduction:rq3}
-In finance, the moving average is a technique in technical analysis. This and
-other trend defining qualities of financial data is used to predict trends. We
-will look at possible applications for sentiment in the stock market. 
+In finance, the moving average is a method in technical analysis to predict
+trends. Can methods of technical analysis or other trend defining qualities of
+financial data be used to predict trends? This and other trend methods of
+technical analysis data is used to predict trends.  We will look at possible
+applications for sentiment in the stock market.
 
 Twitter has data such as the amount of tweets posted today, the location where
 tweets are posted from, and which users has posted. Which Twitter sources are
@@ -73,42 +75,58 @@ most suitable for predicting the stock market trend? Aggregated, can these data
 represent a trend? Previously researchers have managed to predict
 direction of the market the next few days based on the volume of tweets.  
 
-Ultimately we will compare technical analysis with trends based on twitter. 
+Ultimately we will compare trends in technical analysis with trends based on
+sentiment from twitter. 
 
 \section{Methods}
 
-For the classification of sentiment we will use bag of words\footnote{Wikipedia:
+For the classification of sentiment we use bag of words\footnote{Wikipedia:
 \url{https://en.wikipedia.org/wiki/Bag_of_words_model}}, SVM, and Naive Bayes.
-SVM and Naive Bayes to test if the classifiers perform better than bag of words
-with dictionaries in classification. Bag of words is mostly used to test
-dictionaries.
+Bag of words is mostly used to test dictionaries, while the SVM and Naive Bayes
+classifiers provides insight into which classifying method is best. 
 
 Moving average\footnote{Wikipedia:
-\url{https://en.wikipedia.org/wiki/Moving_average}}, and average directional
+\url{https://en.wikipedia.org/wiki/Moving_average}} and average directional
 index\footnote{StockCharts.com
 \url{http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx}}
-are used to plot trend graphs. The trend graphs can be seen in section
-\ref{experiments:trend}, on
-page \pageref{experiments:trend}. Concepts and explanations of how the trend
-works can be found in section \ref{trend}, on page \pageref{trend}
-
-\section{Findings}
-We explore the usage of lists of words, dictionaries, in sentiment analysis.
-And we look at data retrieval from Twitter and the trend we can create from it. 
-With varying results we get positive results with the dictionaries, while the
-trend aggregation lacks the finesse and results it should have had. 
+are used to plot trend graphs in finance.
+Based on the moving average and the average directional index we create our own
+adaption to create sentiment trends.  
+The trend graphs can be seen in section
+\ref{experiments:trend}, on page \pageref{experiments:trend}. Concepts and
+explanations of how the trend works can be found in section \ref{trend}, on page \pageref{trend}
 
 \section{Outline}
 The nine chapters of this thesis all describe different aspects of the work
-done. First we have this introduction, \ref{introduction}. Naturally we follow
-with previous word, \ref{previous_work}, the state of the art part, where we
-discuss the newest research in this field. The data retrieval is next in
-chapter \ref{data}. 
+done. 
+Introduction, chapter \ref{introduction}, introduces the context and describes
+what we aim to do and out goals. 
 
-Proceeding the data chapter we go for the core of the thesis, the sentiment
-analysis, \ref{sentiment}. The sentiment naturally leads up to the trend in
-chapter \ref{trend}. Code, \ref{code}, comes next to explain how we did things
-and go deeper in the specifics of implementation. Results and discussion comes
-in chapter \ref{results}. While conclusion, \ref{conclusion}, and future work,
-\ref{future_work}, rounds off the thesis.
+Background and Previous work, chapter \ref{previous_work}, presents other
+research in the same area and relevant background knowledge. 
+
+Data, retrieval and structure, chapter \ref{data}, describes the data sources,
+how we use them, and the structure of the data we use. 
+
+Sentiment Classification, chapter \ref{sentiment}, describes the methods we use
+to determine sentiment of tweets.  
+
+Trending, chapter \ref{trend}, considers the different aspects of a trend, on
+twitter and in finance. How trends are aggregated and how they are used is also
+covered.  
+
+Experiments, chapter \ref{experiments}, contains the specifics of how we used
+our methods, and how we test the research questions.
+
+Results and Discussion, chapter \ref{results}, presents what we find with our
+experiments. And have a discussion about the results we get.   
+
+Conclusion, chapter \ref{conclusion}, concludes this thesis and highlights the
+findings.  
+
+Future Work, chapter \ref{future_work}, covers the next logical steps in
+sentiment analysis with twitter and trends.  
+
+Also noteworthy is appendix \ref{code}, where we detailed describe what the
+code does.  
 %

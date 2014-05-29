@@ -1,8 +1,34 @@
 \section*{\Huge Abstract \small{English version}}
 \addcontentsline{toc}{chapter}{Abstract}
-$\\[0.5cm]$
+$\\[0.1cm]$
 \begin{abstract}\label{abstract}
 
+\paragraph{Background}
+\hspace{0pt}\\
+As Twitter has become a global microblogging site, its influence in the stock
+market has become significant. This makes tweets an interesting medium for
+gathering sentiment. A sentiment that might influence trends in the stock
+market. 
+
+\paragraph{Motivation} 
+\hspace{0pt}\\
+If twitter can be used to predict trends in the stock market
+the casual investor would gain an advantage over the day-trader or the modern trading algorithms. 
+
+Another interesting aspect is the role of Twitter in sentiment
+analysis. And how Twitters role as a data source influences trends in the stock
+market.   
+
+\paragraph{Data and Experiments} 
+\hspace{0pt}\\
+%TODO use the right method descriptions and what I have used.
+Twitter is used as the data source. It provides easy access, lots of data, and
+many possibilities to use available metadata. To find the sentiment of a tweet
+we use bag of words, SVM, and Naive Bayes. For the finance part and comparison
+of trends we use stock data from Oslo stock exchange. We use moving average(MA)
+and average directional index(ADX) as trend indicators. Trend comparison is
+based on MA and ADX. We calculate MA and ADX with finance data and sentiment
+data based on tweets. Then we compare the graphs. 
 
 \paragraph{Findings}
 \hspace{0pt}\\
@@ -11,38 +37,12 @@ And we look at data retrieval from Twitter and the trend we can create from it.
 With varying results we get positive results with the dictionaries, while the
 trend aggregation lacks the finesse and results it should have had.
 
-%%%%%%%%%%%%%%
-\paragraph{Background:}
+\paragraph{Conclusion} 
 \hspace{0pt}\\
-As Twitter has become a global microblogging site, its influence in the stock
-market has become significant. This makes tweets an interesting medium for
-gathering sentiment. A sentiment that might influence trends in the stock
-market. 
-
-\paragraph{Motivation:} 
-\hspace{0pt}\\
-If twitter can be used to predict trends in the stock market
-the casual investor would gain an advantage over the day-trader or the modern trading algorithms. 
-
-Another interesting aspect is the role of twitter in sentiment
-analysis. And how twitters role as a data source influences trends in the stock
-market.   
-
-\paragraph{Methods and experiments:} 
-\hspace{0pt}\\
-%TODO use the right method descriptions and what I have used.
-Twitter is used as the data source. It provides easy access, lots of data, and
-many possibilities to utilise the available metadata. 
-
-To improve and verify the sentiment classification and trend comparisons we use
-a variation of methods. Simple statistical methods, such as counting positive
-and negative words. More advanced methods such as part of speech and other NLP
-related magic.%TODO figure out what the magic is. 
-We also explore the use of mete data such as location and language tags. 
-
-\paragraph{Conclusion:} 
-\hspace{0pt}\\
-All OK ? No? 
+Sentiment classification of tweets worked with both methods. We managed to
+aggregate a trend based on sentiment. But the comparison with the finance trend
+did not work out as we hoped. No similarities was found between the sentiment
+trend and the finance trend.  
 
 \end{abstract}
 

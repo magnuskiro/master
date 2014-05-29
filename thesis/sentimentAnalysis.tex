@@ -7,8 +7,7 @@ tweets. Classification with classifiers follows in section
 \ref{sentiment:word_count_classification}, and classification with classifiers
 such as SVM and Naive Bayes in section
 \ref{sentiment:classifier_classification}. A comparison of the classifiers and
-associated results can be found in section \ref{sentiment:comparison_results}.
-And a brief discussion come last, in section
+associated results can be found in section \ref{sentiment:comparison_results}, and a brief discussion come last, in section
 \ref{sentiment:comments_discussion}. 
 
 %what is sentiment
@@ -23,8 +22,8 @@ conveyed meaning of a message.
 Some of the motivation for acquiring the sentiment of a tweet or a sentence, is
 that we can say something about a persons state of mind and from that predict
 behaviour. Further the aspect of sentiment in trading is interesting. Can
-sentiment improve trading in any way? And how can the sentiment be used to
-predict trends.
+sentiment analysis improve trading in any way? And how can the sentiment be used
+to predict trends.
 
 %how do we use it
 In this thesis we have two main ways of classifying tweets. Word counting and
@@ -34,19 +33,19 @@ to extract features from a tweet. And with the word counting we count the
 number of positive and negative words. 
 
 \section{Manual Classification}\label{sentiment:manual_classification}
-When labeling tweets manually there are a number of factors the effects the
-process. Among them are the quality of the tweet, state of mind, language, and
-political affiliation.
+When labeling tweets manually there are a number of factors that affects the
+process. Among them are the quality of the tweet, state of mind of the
+classifier, language, and political affiliation.
 
-The quality of the tweet describes the content in many ways. Does the tweet
+The content describes the quality of the tweet in many ways. Does the tweet
 contain links or hashtags? Are users mentioned?
 
 State of mind for a person dictates that persons actions in many cases. This
-also has an effect on labeling tweets. A positive state of mind classifies more
-actual negative tweets as positive then others.
+also has an effect on labeling tweets. A person with a positive state of mind
+classifies more negative tweets as positive.
 
 Note that all this happens in the brain during 3 to 60 seconds while reading
-the tweet text and is a very rough description of the thoughts happening.
+the tweet text and is a very simple description of the process.
 Labeling a tweet follows this algorithm in many ways:
 
 \begin{tabular}{ l p{3cm} p{6cm} }
@@ -63,22 +62,22 @@ impression.\\
 
 \paragraph{Result files}
 \hspace{0pt}\\
-When classifying manually we create files with the results. These files
-are comma separated files with three fields.
+The results file from the manual classification are comma separated variable
+files(csv) with three fields.
 \begin{itemize}
     \item Sentiment: Positive, neutral or negative. Represented by 1, 0 or -1.
     \item Tweet id, if it exists, else 'id'. It is a long number.
     \item The tweet text.
 \end{itemize}
 
-\paragraph{Obama tweet set}
+\paragraph{Obame tweet set}
 \hspace{0pt}\\
-When labeling the obama tweet set we found that there were many retweets of
-other tweets in the dataset. Whether or not the data is representative for
-twitter in general is difficult to say. Tweets favoring obama are positive for
-people who support obama and negative for supporters of Romney at the same
-time. This makes the tweet sset difficult to work with because tweets can be
-positive and negative at the same time, depending on who are reading them.  
+When labeling the Obame tweet set we found that there were many retweets in the
+dataset. Whether or not the data is representative for Twitter in general is
+difficult to say. Tweets favoring Obame are positive for people who support
+Obame and negative for supporters of Romney. This makes the
+tweet set difficult to work with because tweets can be positive and negative at
+the same time, depending on who are reading them. 
 
 \paragraph{Kiro tweet set}
 \hspace{0pt}\\
@@ -90,7 +89,7 @@ could be broader to increase the diversity of the tweets.
 
 \section{Classification}\label{sentiment:classification}
 \subsection{Word Count Classification}\label{sentiment:word_count_classification}
-We describe the classification process and the different parts of it. Then the
+We describe the classification process and the different parts of it. The
 results and discuss section looks at the drawbacks and results of this method.
 The algorithm counts the positive and negative words. More positive words than
 negative means the tweet is positive and vice versa. 
@@ -100,17 +99,18 @@ negative means the tweet is positive and vice versa.
 The polarity of a given tweet is based on the difference in the amount of
 positive versus negative words. 
 
-Polarity is the difference in positive and negative words. The difference is
-expressed in the percentage of the total amount of words.  
+Polarity is the difference between positive and negative words. The difference is
+expressed as the percentage of the total numbers of words.  
 
 We look at the difference between the negative and the positive word
-percentage. If the difference is positive we have a positive tweet. And if the
+percentage. If the difference is positive we have a positive tweet, and if the
 difference is negative we have a negative tweet.
 
 \paragraph{Drawbacks}
 \hspace{0pt}\\
-There are some drawbacks to the word count classification. The dictionaries
-and the threshold. 
+There are some drawbacks to the word count classification, the dictionaries
+and the threshold. The threshold is described in section
+\ref{sentiment:threshold}. 
 
 The threshold gives inaccuracy because tweets that have a polarity value that
 is the same as, or close to, the threshold might be classified wrong. 
@@ -122,8 +122,8 @@ improvements would be to remove stop words before creating bi and monograms.
 \subsection{Threshold in Word Count Classification}\label{sentiment:threshold} 
 \hspace{0pt}\\ 
 
-Threshold is line where tweets are either positive or negative. It is compared
-to the polarity value. For a tweet to be classified as positive the ration of
+Threshold where tweets are either positive or negative. It is compared
+to the polarity value. For a tweet to be classified as positive the ratio of
 positive and negative words has to be above the threshold value. 
 
 The percentage of positive words minus the percentage of negative words gives
@@ -131,7 +131,7 @@ the polarity value, or the positivity(how positive a tweet is) of a tweet.
 When actually deciding if a tweet is positive or negative we look at the
 polarity value. If the polarity value is greater than the threshold, the tweet is classified as positive. 
 
-The threshold is given to the classifier on initialization. We find out which
+The threshold is given to the classifier on initialization. We find which
 threshold is best in section \ref{experiments:threshold}, on page 
 \pageref{experiments:threshold}.
 
@@ -146,7 +146,9 @@ Example tweets:
 
 Classification of t1:
 \begin{itemize}
+	\item positive words: 'good' 
     \item pos = 1 / 6 = 0.16666
+	\item negative words: 'decreasing', 'badly'
     \item neg = 2 / 6 = 0.33333
     \item polarity = pos - neg = -0.1667
     \item threshold of 0 gives negative classification
@@ -156,8 +158,10 @@ Classification of t1:
 
 Classification of t2:
 \begin{itemize}
+	\item positive words: 'good', 'increase'
     \item pos = 2 / 5 (to av fem ord) = 0.4
     \item neg = 0 / 5 = 0
+	\item negative words: none
     \item polarity = pos - neg = 0.4 - 0.0 = 0.4
     \item threshold = 0.4 -- positive
     \item threshold = 0.5 -- negative 
@@ -166,7 +170,9 @@ Classification of t2:
 
 Classification of t3:
 \begin{itemize}
+	\item positive words: 'good'
     \item pos = 1 / 3 = 0.3333
+	\item negative words: 'bad'
     \item neg = 1 / 3 = 0.3333
     \item polarity = pos - neg = 0
     \item threshold = 0 -- positive
@@ -177,7 +183,7 @@ Classification of t3:
 
 \paragraph{Drawbacks with the Threshold}
 \hspace{0pt}\\
-When classifying with the word count classifier a problem is when we
+When classifying with the word count classifier a problem occurs when we
 get an equal amount of positive and negative words. Then the polarity value
 becomes 0. This results in a situation where we have no indication of a tweet
 being positive or negative. This is an area where we can improve the
@@ -191,54 +197,54 @@ classification.
 id & Dictionary & Polarity=0 & Tweets \\
 & -- Kiro compiled dataset -- & & \\
 \hline
-1 & Monogram, obama & 234 & 997 \\ 
+1 & Monogram, Obame & 234 & 997 \\ 
 2 & Monogram LoughranMcDonald & 543 & 997 \\ 
-3 & Monogram, combined Obama and LoughranMcDonald & 178 & 997 \\
+3 & Monogram, combined Obame and LoughranMcDonald & 178 & 997 \\
 4 & Kiro, Monogram, self compiled & 53 & 997 \\
 5 & Kiro, Bigram, self compiled & 7 & 997 \\
 6 & Kiro, Trigram, self compiled & 28 & 997 \\
-7 & Obama, Monogram, self compiled & 14 & 997 \\
-8 & Obama Bigram, self compiled & 446 & 997 \\
-9 & Obama Trigram, self compiled & 931 & 997 \\
+7 & Obame, Monogram, self compiled & 14 & 997 \\
+8 & Obame Bigram, self compiled & 446 & 997 \\
+9 & Obame Trigram, self compiled & 931 & 997 \\
 
-& -- Obama tweet set -- & & \\
+& -- Obame tweet set -- & & \\
 \hline
-10 & Monogram, obama & 335 & 1365 \\ 
+10 & Monogram, Obame & 335 & 1365 \\ 
 11 & Monogram LoughranMcDonald & 854 & 1365 \\
-12 & Monogram, combined Obama and LoughranMcDonald & 345 & 1365 \\
+12 & Monogram, combined Obame and LoughranMcDonald & 345 & 1365 \\
 13 & Kiro, Monogram, self compiled & 233 & 1365 \\
 14 & Kiro, Bigram, self compiled & 462 & 1365 \\
 15 & Kiro, Trigram, self compiled & 1221 & 1365 \\
-16 & Obama, Monogram, self compiled & 37 & 1365 \\
-17 & Obama Bigram, self compiled & 52 & 1365 \\
-18 & Obama Trigram, self compiled & 92 & 1365 \\
+16 & Obame, Monogram, self compiled & 37 & 1365 \\
+17 & Obame Bigram, self compiled & 52 & 1365 \\
+18 & Obame Trigram, self compiled & 92 & 1365 \\
 \end{tabular}
 \end{table}
 
 The amount of tweets where the threshold an polarity are equal is shown in table
-on page \pageref{tbl:word_counting_polarity_null}. The number of cases where we
+\ref{tbl:word_counting_polarity_null} on page \pageref{tbl:word_counting_polarity_null}. The number of cases where we
 get an equal amount of positive and negative words are significantly reduced if
 the threshold is set to 0.1. We can also see indications that the diversity and
 quality of the dictionary plays a role in the classification correctness. The
-more words in the dictionary the more likely it is that we do not get an equal
+larger the dictionary the more likely it is that we do not get an equal
 amount of positive and negative words.  
 %
 
-\subsection{With Classifiers}\label{sentiment:classifier_classification}
-To test and compare to other classification methods we used Naive Bayes and
+\subsection{Using Classifiers}\label{sentiment:classifier_classification}
+To test and compare classification methods we used Naive Bayes and
 Support Vector Machine classifiers. 
 
-Comparing the two classifiers we found that SVM proved to be the better
-classifier in this case. Although we see quite a span within the SVM results.
-Details of the results and classifiers are described in section
-\ref{experiments:svm_classification}. 
+Comparing the two classifiers we found that SVM best. Although we see quite a
+span within the SVM results. Details of the results of the two classifiers are
+described in section \ref{experiments:svm_classification}. 
 
 The self compiled dictionaries based on the kiro dataset was used to compare
 the two types of classifiers. 
 
 Each test with a classifier uses the kiro monogram dictionary for feature
-extraction, and the described dataset as training set and the dataset to be
-classified. 
+extraction. Both datasets are used in testing.
+Feature extraction is the process where we find elements of a tweet that is
+relevant for the sentiment.  
 
 \paragraph{SVM}\label{sentiment:svm_classification}
 \hspace{0pt}\\
@@ -270,7 +276,7 @@ further experiments.
 
 \paragraph{Naive Bayes}\label{sentiment:naive_bayes_classification}
 Naive Bayes \footnote{Wikipedia:
-\url{https://en.wikipedia.org/wiki/Naive_Bayes}}, is based on Bayes theorem. And
+\url{https://en.wikipedia.org/wiki/Naive_Bayes}}, is based on Bayes theorem. It
 is a simple probabilistic classifier. It uses strong(naive) independence
 assumptions with the theorem.
 
@@ -306,11 +312,12 @@ such as 'random forests'.
 \section{Comparison}\label{sentiment:comparison_results}
 \paragraph{The Classifiers}
 \hspace{0pt}\\
-We have looked at three classifiers, Naive Bayes, SVM, and the word classifier.
+We have looked at three methods of classifying, Naive Bayes classifier, SVM
+classifier, and the word count classifier.
 Together they have classified the two dataset we have with varying results. 
 
 All methods of classification uses the manually labeled tweet sets as the data
-source. And we use the self compile dictionaries for feature extraction. 
+source. We use the self compile dictionaries for feature extraction.
 
 \paragraph{Experiments}
 \hspace{0pt}\\
@@ -332,7 +339,7 @@ There are a lot of improvements that could be done.
 
 The word count classification is merely a convenient way to say something about
 the dictionaries used. We should expand our knowledge toward the quality of the
-dictionaries. And look for ways to eliminate terms that are neither positive or
+dictionaries, and look for ways to eliminate terms that are neither positive or
 negative. 
 
 We should cross classify and test the classification with the SVM classifier and
@@ -341,7 +348,7 @@ classifiers and other data to confirm the findings we have so far.
 
 \paragraph{Biased Mind}
 \hspace{0pt}\\
-The datasets of manually labeled tweets are biased based on a personal opinion
+The datasets of manually labeled tweets are biased, based on a personal opinion
 and the state of mind in the moment of classification. Therefore we have to keep
 in mind that all the results are based on the assumption that everyone agrees on
 the manual labeling. This is of course a source of errors to be
@@ -359,18 +366,4 @@ should be addressed in some smart way.
 
 Code wise we should improve the testing of the classifiers, and remove the
 static use of dictionaries in the feature extraction.  
-
-\paragraph{Conclusions}
-\hspace{0pt}\\
-Dictionaries can be compiled and used in classification of sentiment. While
-classifiers work better than word counting, we still rely on the manually
-labeled tweets for accuracy. We also know that the data we use
-to check the classification are biased and should be improved. 
-
-\paragraph{Future Work}
-\hspace{0pt}\\
-Analysis of the dictionaries and improvement of them is a natural place to
-continue research. While we should also look at the input data and sort the data
-smartly to remove spam. And find another way to decide the sentiment in the
-word count classification. 
 %

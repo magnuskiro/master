@@ -185,19 +185,29 @@ and \textit{\#17Mai}. Today we already know that this will happen again next yea
 
 \paragraph{Twitter based sentiment trend} 
 \hspace{0pt}\\
-#TODO 
-Here we use two self developed trend indicators. 
+% what & why.
+With the trend calculations based on sentiment we looked at methods used in
+finance and took inspiration from that. We ended up choosing to the two
+previously mentioned methods MA and ADX as a base for our own work. 
 
-MA and ADX, based on  sentiment data. 
+By using the two existing methods a base for our aggregated trend we gain a
+good indication of weather or not this is a viable way of creating trends with sentiment data.
 
-det er et c moment. 
+The new element we use with the MA and ADX methods is the sentiment analysis.
+By using sentiment data we hope to create a sentiment trend. As far as we have
+research no one else has done this before. 
 
-trend for/based on semantic analysis. --> sentiment analysis. 
+As we do new and untested things we have no guarantee of success. But we have a
+good opportunity to test uses for sentiment analysis. 
 
-not tested before. 
+The trick to our method lies in the data manipulation. We manipulate the
+sentiment data we have to fit the existing format of stock data. Then we run
+the MA and ADX methods with the sentiment data to see if it works.  
 
-\\
-
+What we do, results in two methods of trend aggregation. Sentiment based MA and
+sentiment based ADX. 
+ 
+% how
 Using the trend data described in section \ref{data:trend_data} we construct
 the MA and ADX graphs based on sentiment. The data consists of tweets and is
 based on Twitter handles for users with big impact in the oil industry. There

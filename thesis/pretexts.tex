@@ -1,0 +1,50 @@
+\clearpage
+\pagenumbering{roman} 				
+\setcounter{page}{1}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\headrulewidth}{0.1ex}
+\renewcommand{\footrulewidth}{0.1ex}
+\fancypagestyle{}{\fancyhf{}\renewcommand{\headrulewidth}{0ex}}
+
+% front page, contains: title, author, institution, and logo
+%\input{titlePage.tex}
+
+\noindent
+
+% abstract
+\input{abstract.tex}
+%\clearpage
+
+% abstract norwegian version
+%\input{abstract-nor.tex}
+%\clearpage
+
+% metadata
+\input{metadata.tex}
+\clearpage
+
+% Acknowledgements 
+\input{acknowledgements.tex}
+\clearpage
+
+% listings
+\tableofcontents
+\addcontentsline{toc}{chapter}{List of Contents}
+\clearpage
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\clearpage
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+\clearpage
+
+%\addcontentsline{toc}{chapter}{List of Listings}
+%\lstlistoflistings
+%\listoflistings
+

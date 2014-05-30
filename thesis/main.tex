@@ -61,33 +61,15 @@
 
 % beginning of the document content, end of the configuration and setup. 
 \begin{document}
-\pagenumbering{RomanType}
 
-%TODO remove title page on completion of thesis. 
-% front page, contains: title, author, institution, and logo
-\input{titlePage.tex}
+% pretexts: title page, abstract, metadata, acknowledgements, toc, lot, lof  
+\input{pretexts.tex}
 
-% Summary and preface.
-\input{summary.tex}
-
-% listings
-\addcontentsline{toc}{chapter}{List of Contents}
-\tableofcontents
-
-\addcontentsline{toc}{chapter}{List of Tables}
-\listoftables
-
-\addcontentsline{toc}{chapter}{List of Figures}
-\listoffigures
-
-%\addcontentsline{toc}{chapter}{List of Listings}
-%\lstlistoflistings
-%\listoflistings
-
-\newpage
+% staring the main content
 \pagenumbering{arabic}
+\setcounter{page}{0}
 
-% sections
+% Chapters
 \input{introduction} % why 
 \input{stateOfTheArt} % why / what 
 \input{data.tex} % how
@@ -108,7 +90,7 @@
 \newpage
 \appendix
 \input{code.tex}
-\input{appendix/articles.tex}
+%\input{appendix/articles.tex}
 %\input{appendix/tweetUsageOverview.tex}
 \input{appendix/webResources.tex}
 \input{appendix/tweetStructure.tex}

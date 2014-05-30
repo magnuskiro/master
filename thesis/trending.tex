@@ -9,11 +9,11 @@ therefore we assume that oil related data will give a good indication of the
 behavior of OSEBX. Section \ref{data:trend_data} says something about why we
 choose tweets related to oil for the trend aggregation.
 
-Further we wanted to look at trading that is not algorithm based, also
-known as speed trading. So we started looking at technical analysis. The
-technical analysis gives a base for decision support to the trader. The
-techniques of technical analysis gives us good indications about trends, but we
-want to take it further by involving sentiment analysis. 
+Further we wanted to look at trading that is not algorithm based. Algorithm
+trading is also known as speed trading. So we started looking at technical
+analysis. The technical analysis gives a base for decision support to the
+trader. The techniques of technical analysis gives us good indications about
+trends, but we want to take it further by involving sentiment analysis. 
 
 We start by describing and defining a trend in section
 \ref{trend:trend_is_your_friend}. 
@@ -34,14 +34,14 @@ to buy during a bullish trend, while the value is going up. And they
 want to sell before you get to the bearish trend, when the value goes down.
 Figure \ref{fig:stocktrends}, on page \pageref{fig:stocktrends}, shows basic
 trends. When markets do not trend they move
-sideways in trading ranges\footnote{Swing-trade-stocks.com
+sideways in trading ranges\footnote{Swing-trade-stocks.com:
 \url{http://www.swing-trade-stocks.com/stock-trends.html}}.   
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=\textwidth]{stocktrends.jpg} 
     \label{fig:stocktrends}
-    \caption{Basic trend}
+    \caption{Basic Trend}
 Showing Higher Highs(HH), Lower Highs(LH), Higher Lows(HL), and Lower Lows(LL). 
 \end{figure}
 
@@ -49,7 +49,7 @@ Showing Higher Highs(HH), Lower Highs(LH), Higher Lows(HL), and Lower Lows(LL).
 techniques in technical analysis. Moving averages, MA, can help to confirm a
 move or determine a trend. Moving averages indicates average change over a
 period of time. The time frame is often adjusted to the time the trader likes to
-hold stocks before trading. Average directional Index Indicator, ADX, gives
+hold stocks before trading. Average directional index indicator, ADX, gives
 clear, easy-to-read picture of the market, shown in figure
 \ref{fig:adx_example_stock_trading}, on page
 \pageref{fig:adx_example_stock_trading}. It shows if the trend strengthens or
@@ -59,7 +59,7 @@ When using ADX or other trend indicators it is difficult to spot or predict the
 trend. When trading is based on a trend, the problem is to find
 the trend and prolong it into the future. This is where we combine Twitter
 with traditional trading. If we could predict the trend based on public opinion
-mined from twitter, we would have an advantage over the traditional trader. 
+mined from Twitter, we would have an advantage over the traditional trader. 
 
 Data is increasingly important for trend prediction. The better data we have,
 the more accurate the trend we predict can be. By focusing on sentiment we aim
@@ -81,7 +81,7 @@ indication techniques we test in this thesis.
     \includegraphics[width=\textwidth]{moving_average_example.png}
     \label{fig:moving_average_example}
     \caption{Moving Average example}
-The figure show the Moving Average for OSEBX from march 2005 until today. The
+The figure show the Moving Average for OSEBX from march 2005 until May 2014. The
 blue MA has a time frame of 50 weeks, while the white MA has a time frame of 12
 weeks. 
 \end{figure}
@@ -130,7 +130,8 @@ if DownMove > UpMove and DownMove > 0, then -DM = DownMove, else -DM = 0
 \end{verbatim} 
 
 When the directions are calculated we choose the time frame we want to
-investigate. And get -DI and +DI as follows:
+investigate. And get -DI and +DI as follows:\footnote{Wikipedia:
+\url{https://en.wikipedia.org/wiki/Average_True_Range}}
 \begin{verbatim}
 +DI = 100 times exponential moving average of +DM 
       divided by average true range
@@ -173,21 +174,22 @@ used the most recently. A screen capture of it can be seen in figure
     \includegraphics[width=0.5\textwidth]{trends_on_twitter.png}
     \label{fig:trends_on_twitter}
     \caption{Trends on Twitter}
-Screen capture from Twitter.
+Screen capture of trends from Twitter.
 \end{figure}
 
 The trends on Twitter are in many cases predictable and adds little value to trend
 compilation. The trend on Twitter is also specialised for each user, based on
 that users subscriptions and location. As an example at the Norwegian national
-day(Mai 17.) we would have trending words like \textit{Norge}, \textit{Norway},
-and \textit{\#17Mai}. Today we already know that this will happen again next year. 
+day(May 17.) we would have trending words like \textit{Norge}, \textit{Norway},
+and \textit{\#17Mai}. Today we already know that this will happen again next
+year.
 %
 
 \paragraph{Twitter based sentiment trend} 
 \hspace{0pt}\\
 % what & why.
 With the trend calculations based on sentiment we looked at methods used in
-finance and took inspiration from that. We ended up choosing to the two
+finance and took inspiration from that. We ended up choosing the two
 previously mentioned methods MA and ADX as a base for our own work. 
 
 By using the two existing methods a base for our aggregated trend we gain a
@@ -269,7 +271,7 @@ This method is tested in section \ref{experiments:trend} on page
 \pageref{experiments:trend}.
 % 
 
-\section{Comparing the trends}\label{trend:compared}
+\section{Comparing the Trends}\label{trend:compared}
 Comparing the finance trend and the Twitter based trend is easy. We compare the
 two graphs, look for similarities, and draw conclusions. Drawing conclusions is
 the difficult part.
@@ -282,7 +284,7 @@ We look at the two plotted trends, the MA and the ADX. More specifically we
 compare the white MA of both graphs with each other, and the blue MA lines of
 each graph with each other. And look for similarities. With the ADX we will look
 for similar movements and turning points in the graphs. Also areas where the
-red and green graphs stay apart.  
+red and green lines stay apart.  
 
 Comparison should give some conclusions of the trustworthiness of the
 sentiment trend. For traders to trust in the sentiment analysis as a new way of
@@ -299,7 +301,7 @@ future.
 
 \section{Future work}
 For future improvements of the trend aggregation we should explore three aspects.
-One, the Norwegian market we started with, two, the oil tweets, and three, find
+One, the Norwegian market we started with. Two, the oil tweets. Three, find
 out whether or not oil tweets are a good indication of the OSEBX. 
 
 Additionally we should look into single stocks in the comparison of indicators.

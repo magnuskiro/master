@@ -24,26 +24,24 @@ number of positive and negative words.
 Sections in this chapter are as follows. Manual classifications,
 \ref{sentiment:manual_classification}, where we see how people classify
 tweets. Classification with classifiers follows in section
-\ref{sentiment:classification}. Containing 'Word count classification',
-\ref{sentiment:word_count_classification}, and classification with classifiers
-such as SVM and Naive Bayes in section
-\ref{sentiment:classifier_classification}. A comparison of the classifiers and
-associated results can be found in section \ref{sentiment:comparison_results},
-and a brief discussion come last, in section
-\ref{sentiment:comments_discussion}.
+\ref{sentiment:classification}, containing: 'Word count classification', and
+classification with classifiers such as SVM and Naive Bayes. A comparison of the
+classifiers and associated results can be found in section
+\ref{sentiment:comparison_results}, and a brief discussion come last, in
+section \ref{sentiment:comments_discussion}.
 %
 
 \section{Manual Classification}\label{sentiment:manual_classification}
-When labeling tweets manually there are a number of factors that affects the
+When labeling tweets manually there are a number of factors that affect the
 process. Among them are the quality of the tweet, state of mind of the
 classifier, language, and political affiliation.
 
 The content describes the quality of the tweet in many ways. Does the tweet
 contain links or hashtags? Are users mentioned?
 
-State of mind for a person dictates that persons actions in many cases. This
-also has an effect on labeling tweets. A person with a positive state of mind
-classifies more negative tweets as positive.
+In many cases will a persons state of mind dictate the persons actions. 
+This also has an effect on labeling tweets. A person with a positive state of mind
+can classify negative tweets as positive.
 
 Note that all this happens in the brain during 3 to 60 seconds while reading
 the tweet text and is a very simple description of the process.
@@ -83,7 +81,7 @@ the same time, depending on who are reading them.
 \paragraph{Kiro tweet set}
 \hspace{0pt}\\
 The Kiro tweet set also has a lot of retweets, but they are not used later.
-Removing the retweet increased the uniqueness of the data, as the same content
+Removing retweets increased the uniqueness of the data, as the same content
 do not show up multiple times. The search words the dataset is based on
 could be broader to increase the diversity of the tweets.
 %
@@ -118,12 +116,12 @@ is the same as, or close to, the threshold might be classified wrong.
 
 The quality of the dictionaries affects the word count classification. If the
 dictionaries had better quality we would get better results. An example of
-improvements would be to remove stop words before creating bi and monograms.
+improvements would be to remove stop words before creating bi-, and monograms.
 
 \subsection{Threshold in Word Count Classification}\label{sentiment:threshold} 
 \hspace{0pt}\\ 
 
-Threshold where tweets are either positive or negative. It is compared
+The threshold is where tweets are either positive or negative. It is compared
 to the polarity value. For a tweet to be classified as positive the ratio of
 positive and negative words has to be above the threshold value. 
 
@@ -179,7 +177,6 @@ Classification of t3:
     \item threshold = 0 -- positive
     \item threshold = 0.1 -- negative
     \item threshold = -0.1 -- positive
-	\item 
 \end{itemize}
 
 \paragraph{Drawbacks with the Threshold}
@@ -193,7 +190,7 @@ classification.
 \begin{table}
 \centering
 \label{tbl:word_counting_polarity_null}
-\caption{Word Count results where Threshold value=0 table}
+\caption{Word Count results where Threshold value=0}
 \begin{tabular}{ r p{6cm} r c }
 id & Dictionary & Polarity=0 & Tweets \\
 & -- Kiro compiled dataset -- & & \\
@@ -222,7 +219,7 @@ id & Dictionary & Polarity=0 & Tweets \\
 \end{tabular}
 \end{table}
 
-The amount of tweets where the threshold an polarity are equal is shown in table
+The amount of tweets where the threshold and polarity are equal is shown in table
 \ref{tbl:word_counting_polarity_null} on page \pageref{tbl:word_counting_polarity_null}. The number of cases where we
 get an equal amount of positive and negative words are significantly reduced if
 the threshold is set to 0.1. We can also see indications that the diversity and
@@ -235,7 +232,7 @@ amount of positive and negative words.
 To test and compare classification methods we used Naive Bayes and
 Support Vector Machine classifiers. 
 
-Comparing the two classifiers we found that SVM best. Although we see quite a
+Comparing the two classifiers we found that SVM is best. Although we see quite a
 span within the SVM results. Details of the results of the two classifiers are
 described in section \ref{experiments:svm_classification}. 
 
@@ -276,14 +273,14 @@ further experiments.
 %
 
 \paragraph{Naive Bayes}\label{sentiment:naive_bayes_classification}
-Naive Bayes \footnote{Wikipedia:
+Naive Bayes\footnote{Wikipedia:
 \url{https://en.wikipedia.org/wiki/Naive_Bayes}}, is based on Bayes theorem. It
 is a simple probabilistic classifier. It uses strong(naive) independence
 assumptions with the theorem.
 
-The classifier assumes that the features are independent. That they have no
-connection to each other and that all features have equal importance. 
-A conditional model is used for with the probability model. Abstractly we get
+The classifier assumes that the features are independent, that they have no
+connection to each other, and that all features have equal importance. 
+A conditional model is used with the probability model. Abstractly we get
 this: 
 
 \math{
@@ -296,7 +293,7 @@ In plain English we have the reformulated model that can handle larger datasets:
 \mbox{posterior} = \frac{\mbox{prior} \times \mbox{likelihood}}{\mbox{evidence}} 
 }\\
 
-Even more specifically the implementation in nltk that we use are: 
+Even more specifically the implementation that we use in 'nltk' are: 
 \begin{python}
                    P(label) * P(f1|label) *...* P(fn|label)
 P(label|features)=-----------------------------------------
@@ -313,7 +310,7 @@ such as 'random forests'.
 \section{Comparison}\label{sentiment:comparison_results}
 \paragraph{The Classifiers}
 \hspace{0pt}\\
-We have looked at three methods of classifying, Naive Bayes classifier, SVM
+We have looked at three methods of classifying sentiment, Naive Bayes classifier, SVM
 classifier, and the word count classifier.
 The classifiers have classified the two datasets with varying results. 
 
@@ -322,7 +319,7 @@ source. We use the self compile dictionaries for feature extraction.
 
 \paragraph{Experiments}
 \hspace{0pt}\\
-In section \ref{sentiment:word_count_classification},
+In section \ref{experiments:word_count_classification},
 \ref{experiments:threshold}, \ref{experiments:svm_kernel}, and
 \ref{experiments:calssifiers} the methods described in this chapter are tested
 to validate the research questions, \ref{introduction:research_questions}.
@@ -338,10 +335,10 @@ the good and bad parts of the classifiers are presented and discussed.
 \paragraph{Biased Mind}
 \hspace{0pt}\\
 Subjectivity is an issue. The datasets of manually labeled tweets are biased,
-based on a personal opinion and the state of mind in the moment of
+and based on a personal opinion and the state of mind in the moment of
 classification. Therefore we have to keep in mind that all the results are based
 on the assumption that everyone agrees on the manual labeling. This is of course
-a source of errors to be explored in chapter \ref{future_work}. 
+a source of errors to be explored in future work, chapter \ref{future_work}. 
 
 We should explore the psychology of perception and classification. How do
 people perceive content differently? Is finance easier to label than politics?

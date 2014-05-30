@@ -12,7 +12,7 @@ data mining, \ref{data:data_retrieval}, dictionary compilation,
 \ref{code:dictionary_compilation}, classification,
 \ref{code:sentiment_classification}, and trend aggregation,
 \ref{code:trend_aggregation}. Last we describe the comparison,
-\ref{code:comparison}, of the finance trend and ending with the issues,
+\ref{code:comparison}, of the trends and ending with the issues,
 \ref{code:issues}, of the code.  
 
 \section{Structure}\label{code:structure}
@@ -20,9 +20,10 @@ There are four main folders. One for classification, one for mining tweets, one
 for the dictionaries and on for the files associated with trend. 
 
 Code for classification is split into four files. One file for utilities,
-helper functions that does not touch logic. And the three was of classifying
-tweets, manual, word counting and with a classifier. List\_threshold\_results
-plots the results from the threshold variation in graphs with pyplot. 
+helper functions that does not touch logic. And three for classification:
+manual classification, word counting classification, and classification with
+classifiers. List\_threshold\_results plots the results from the threshold
+variation in graphs.  
 
 The dictionary code is split onto two files, helpers and utility in one, and
 logic and execution in the other. 
@@ -33,13 +34,13 @@ acquisition of tweets. The trend\_mining file executes the mining operations,
 and acquires tweets from Twitter based on a set of search words. The
 trend\_tweet\_sorting file sorts tweets from all the raw search word data files
 into files based on date. So all tweets from the same date ends in the same
-file. And last we have the trend\_compilation file, which contains code for
+file. We also have the trend\_compilation file, which contains code for
 compiling and plotting trend data and financial data.  
 
 Last we have the 'twitter' directory which has code for extracting tweets from
 twitter. This code is used for creating the datasets that the dictionaries are
 built from. We have the mining\_utils which is helper code for connection and
-writing files and such. While the mining\_operations file does the logic of
+writing files. While the mining\_operations file does the logic of
 managing the acquired tweets. 
 
 The important files are listed under. '- something' are folders, while the
@@ -49,7 +50,7 @@ folders.
 - code    
     - classification
         classification_utils.py
-		list_threshold_results.py
+        list_threshold_results.py
         manual_classification.py
         svm_bayes_classification.py
         word_count_classification.py
@@ -70,18 +71,16 @@ folders.
 \end{verbatim}
 
 \section{Technology and Libraries}\label{code:technology_libraries}
-The technology used, frameworks etc.
-
 The used Python libraries are: ConfigParser, ast, codecs, io, os, twython,
 time, matplotlib, urllib, re, nltk, sklearn.
-Most of them are quite standard, while some are not. And some are self
+Most of them are standard, while some are not. Some are self
 explanatory. 
 
 The libraries that are not shipped with standard Python are described in the
 following paragraphs. 
 
 \paragraph{Twython}
-Library for connection and integration with the Twitter api. 
+Library for connection and integration with the Twitter API. 
 The source and documentation can be found on github:
 \url{https://github.com/ryanmcgrath/twython}
 
@@ -92,15 +91,15 @@ tokenization tools. See more at \url{http://www.nltk.org/}.
 
 \paragraph{sklearn}
 Scikit-learn provides functionality for learning algorithms, machine learning
-and classification. We use this library to provide the kernels for out
+and classification. We use this library to provide the kernels for
 classification with classifiers. \url{http://scikit-learn.org/}
 
 \paragraph{matplotlib}
 Matplotlib is a library for graph plotting. And that is what we use it for.
 \url{http://matplotlib.org/}.
  
-\section{Data retrieval}\label{data:data_retrieval}
-As we have to data sources we split it into finance data and data from twitter.
+\section{Data Retrieval}\label{data:data_retrieval}
+As we have two data sources we split it into finance data and data from twitter.
 
 \subsection{Twitter}
 The mining operation can be seen as three steps. This happens in
@@ -188,7 +187,7 @@ return records
 
 \section{Dictionary compilation}\label{code:dictionary_compilation}
 For the dictionary compilation we use the manually classified datasets to
-create mono, bi and trigram dictionaries. 
+create mono-, bi-, and trigram dictionaries. 
 
 Starting off the process we run compilation for all datasets: 
 \begin{python}
@@ -210,7 +209,7 @@ for item in data_files:
     compile_trigram_dictionaries(tweets, item[0])
 \end{python}
  
-Mono, bi and trigrams creation parts are quite similar: 
+Mono-, bi-, and trigrams creation parts are quite similar: 
 \begin{python}
 for text in tweets[0]:
     positive_dict.extend(text.split(" "))
@@ -263,6 +262,7 @@ Where we essentially generate sets of words in tuples and then extract the
 combined word by string conversion and regex. 
 
 \paragraph{Remove duplicate words}\label{code:remove_duplicate_words}
+\hspace{0pt}\\
 Then we conveniently remove duplicates between the positive and negative
 dictionary before we write the dictionaries to file. 
 \begin{python}
@@ -299,11 +299,11 @@ write_array_entries_to_file(duplicate_words,
 
 \section{Sentiment Classification}\label{code:sentiment_classification}
 For both classifiers we have utility code for loading data and dictionaries,
-but the important parts are the classification. Which is shown below. 
+but the important parts are the classification. Which is shown here. 
 
 \subsection{Word Count}\label{code:word_count_classification}
 For each tweet we do the same thing. Count words and find the difference
-between positive and negative words. Here is the code for doing so.   
+between positive and negative words. Here is the code for classifying a tweet.   
 \begin{python}
 # sanitize text.
 tweet = sanitize_tweet(tweet)
@@ -335,6 +335,7 @@ else:
 The execution of the classification can be described in the following steps. 
 
 \paragraph{Classifier initialization}
+\hspace{0pt}\\
 First we have to initialize the classifier, then train it. We send the class of
 the kernel as an input argument, such that \textit{classifier\_class} is
 'SklearnClassifier(LinearSVC())'.
@@ -348,7 +349,7 @@ training_set = nltk.classify.apply_features(
 classifier = classifier_class.train(training_set)
 \end{python}
 
-Where the extract\_features\_from\_text function is rather important. Here the
+Where the extract\_features\_from\_text function is important. Here the
 'dictionary' variable is the combined list of the kiro-monogram-negative.txt and
 kiro-monogram-positive.txt dictionaries.
 \begin{python}
@@ -365,6 +366,7 @@ return features
 \end{python}
 
 \paragraph{Classification}
+\hspace{0pt}\\
 The code for classifying a tweet is quite simple. 
 \begin{python}
 # runs classify() on the given classifier class in the 
@@ -445,9 +447,9 @@ def transform_tweet_data():
 \section{Comparison}\label{code:comparison}
 
 For the comparison of trend graphs we have acquired some code.
-What we need is the moving average and the ADX.
+What we need is the MA and the ADX.
 
-The moving average is calculate by: 
+The MA is calculate by: 
 \begin{python}
 def movingaverage(values, window):
     weigths = np.repeat(1.0, window) / window
@@ -487,13 +489,14 @@ works out all the time is uncertain. Some of the functions and methods can also
 be improved.   
 
 \paragraph{Operating System Impediments}
+\hspace{0pt}\\
 There might be some OS related specifics that we do not know about. Linux of
 the Debian family has been used. So we expect that you know what you are doing
 when testing the code on Windows or Mac.
 
-If a all a problem, if will be with pre installed packages that will not
+If at all a problem, it will be with pre installed packages that will not
 show up in the requirements or library parts discussed earlier. Thats because we
-do not know which packages was already installed.  
+do not know which packages was preinstalled.  
 
 Also some Linux tools has been used in scripts. Those will not work on Windows,
 but might on Mac.

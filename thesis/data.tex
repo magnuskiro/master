@@ -1,5 +1,5 @@
 \chapter{Data, retrieval and structure}\label{data}
-We describe the structure, the characteristics, the metadata and usage
+This chapter describe the structure, the characteristics, the metadata and usage
 of the data used in this thesis. 
 
 Twitter and tweets, section \ref{data:tweets}, describe
@@ -9,7 +9,7 @@ We have a section describing the dictionaries, section \ref{data:dictionaries}.
 How we compile dictionaries from tweets and how we use them are covered there.
 Shortcomings and the possible improvements are also discussed briefly.   
 
-And last we have a section that describes the financial data, we use, section
+And last we have a section that describes the financial data we use, section
 \ref{data:finance}. Where we get them, the structure and how we use the data is
 covered here. 
 %
@@ -18,7 +18,7 @@ covered here.
 \section{Tweets}\label{data:tweets}
 A tweet is a massage posted on twitter. The message in many ways resemble the
 well known SMS\footnote{Wikipedia on Short Messaging
-Service:\url{https://en.wikipedia.org/wiki/Short_Message_Service}}.
+Service: \url{https://en.wikipedia.org/wiki/Short_Message_Service}}.
 
 Tweets are posted to the users profile. When a user post an existing tweet
 again, it is referred to as a retweet. 
@@ -37,24 +37,23 @@ object is metadata.
 The data we acquire from Twitter is in the JSON data format. JSON or \textit{JavaScript
 Object Notation} is an open standard format that uses human-readable text to
 transmit data objects consisting of attribute–value
-pairs\footnote{Wikipedia on JSON:\url{https://en.wikipedia.org/wiki/Json}}.
+pairs\footnote{Wikipedia on JSON: \url{https://en.wikipedia.org/wiki/Json}}.
 
 For an example of the data structure of a tweet, see appendix
 \ref{appendix:tweetStructure}.
 
 \paragraph{Content}
 \hspace{0pt}\\
-
 A tweet is an astonishing compilation of data about who, where and when a tweet
 was posted.
 
-As for the content we have the text, the message itself. With the content we
+The main content of a tweet is the message text itself. With the content we
 have fields for all the links, all the emoticons, and all hashtags that are
 present in a tweet. 
 
 Every tweet is posted by a user. All the data of a user is also present for
 each tweet. Here we have data on follower count, profile images, friend count,
-time zone, and many other profile related items. 
+time zone, and many other profile related subjects. 
 
 For the sharing of a single tweet we have data fields such as 'favorite\_count'
 and 'user\_mentions'. We also have 'favorited' and 'retweet\_count'. 
@@ -119,35 +118,35 @@ See all the different metadata types in appendix: \ref{appendix:tweetStructure}.
 \subsection{Twitter API}
 The Twitter API is a convenient way for lots of people to access data from
 twitter. Tweets, streams, timelines, profiles and more are available through
-the api. 
+the API. 
 
-To provide easy access and conformity to industry standards, the api
+To provide easy access and conformity to industry standards, the API
 provides data in the JSON format. 
 
-While the api does not give access to 100\% of the data from twitter, it gives
+While the API does not give access to 100\% of the data from twitter, it gives
 a good representation of the tweets from the last 7 days.
 %
 
 \paragraph{Setup}
 \hspace{0pt}\\
-To get access to the api there are a few requirements. You must have a
-twitter account. The application to be used has to be registered with Twitter.
+To get access to the API there are a few requirements. You must have a
+twitter account, and the application to be used has to be registered with Twitter.
 Registering the application gives access to API keys. Then you have to used the
-keys authenticate with Twitter before you access the api. 
+keys to authenticate with Twitter before you access the API. 
 
 For a simple guide to this we have
 \url{http://datascienceandprogramming.wordpress.com/2013/05/14/twitter-api/} as
 a good example.
 
-The 4 authentication tokens you get from Twitter, app\_key, app\_secret, oauth\_token,a nd
-oauth\_token\_secret, is used with the Twython
-library\footnote{\url{https://pypi.python.org/pypi/twython/}} as described
-below.
+The 4 authentication tokens you get from Twitter, app\_key, app\_secret,
+oauth\_token, and oauth\_token\_secret, is used with the Twython
+library\footnote{\url{https://pypi.python.org/pypi/twython/}}, as described
+below. 
 
 A simple example of how to use the API with Twython is shown below. 
 \begin{itemize}
-	\item Authenticate towards twitter.
-	\item Execute search query on twitter.
+	\item Authenticate towards Twitter.
+	\item Execute search query on Twitter.
 	\item Print ID's of all retrieved tweets.
 \end{itemize} 
 
@@ -163,9 +162,8 @@ for status in results['statuses']:
 For more advanced use we have generators, and lots of parameters and API
 endpoints to use. Endpoints and search parameters will be described under
 section \ref{data:twitter:endpoints}, \textit{API endpoints options}. 
-The twyhon framework and its advanced usage can be explored more in the code and
-in the documentation of the framework
-\footnote{\url{https://twython.readthedocs.org/en/latest/usage/advanced_usage.html}}.
+The Twyhon framework and its advanced usage can be explored more in the code and
+in the documentation of the framework\footnote{\url{https://twython.readthedocs.org/en/latest/usage/advanced_usage.html}}.
 %
 
 \paragraph{Restrictions}
@@ -173,7 +171,7 @@ in the documentation of the framework
 The API has some access restrictions, or rather rate limitations. This is to be
 expected, as unlimited access would cripple the API.
 
-Twitter limits request of a particular kind at 180 requests per 15 minutes.
+Twitter limits request of a particular kind to 180 requests per 15 minutes.
 Which means that we can do 180 searches spread evenly over the time interval. Or
 we could do 180 requests as fast as possible and then wait. The rate limits can
 be explored thoroughly in the Twitter documentation\footnote{Twitter:
@@ -196,13 +194,13 @@ divided into these categories: \textit{Timelines}, \textit{Tweets},
 
 Of these categories we mainly use \textit{OAuth}, \textit{Help} and
 \textit{Search}.
-Listing the endpoints used with parameters we get this list: 
-
+Listing the endpoints used with parameters we get the list on page
+\pageref{tbl:twitterAPIendpoints}. 
 
 \begin{table}
 \centering
 \label{tbl:twitterAPIendpoints}
-\caption{Used Twitter API endpoints table}
+\caption{Used Twitter API endpoints}
 \begin{tabular}{ r l | p{7cm} }
 Category & Parameter & Description\\
 \hline
@@ -226,9 +224,9 @@ are retweeted a lot and tweets from users with many followers. \\
 & callback & An optional place where Twitter can post tweets back to us. \\
 
 \hline
-\textit{authenticate} & - & How we login and get access to the api. \\
+\textit{authenticate} & - & How we login and get access to the API. \\
 & oauth\_token & It is the authentication code or password to access
-the api. \\
+the API. \\
 
 \hline
 \textit{rate\_limit\_status} & - & The way we know if we are still inside
@@ -279,7 +277,7 @@ of tweets. But we ran into a problem. Retweets. In some cases we got up to 90\%
 retweets in a mining session. Many of the tweets being essentially the same
 one, only retweeted multiple times. 
 
-When we are using tweets to create dictionaries duplicate data was a problem.
+When we are using tweets to create dictionaries, duplicate data is a problem.
 Retweets are mostly duplicate data, so we removed them to increase the quality
 of the tweet set.
 
@@ -310,7 +308,7 @@ for result in results:
 
 \paragraph{API Caveats}
 \hspace{0pt}\\
-The main caveats of the Twitter API is the request limitations and the
+The main caveats of the Twitter API are the request limitations and the
 limitations of the search engine. 
 
 As Twitter says: 
@@ -323,14 +321,14 @@ weeks worth of tweets.}'\footnote{Twitter:
 
 Although this is not a big problem, coding and data acquisition could have been
 simpler. The solution for the week limitation was to broaden the search to
-include more words. This resulted in a more varied dataset, but also more
+include more words. This resulted in a more varied dataset, and more
 tweets. We initially wanted to analyse tweets related to finance, so the
 diversity of the dataset could be a problem. 
 
-Further caveats of the request limitations. This means that we have to mine
-tweets over time. We should really have set this up on a server and mined
-tweets with a cron job every 15 minutes\footnote{Wikipedia on Cron:
-\url{https://en.wikipedia.org/wiki/Cron}}.
+One caveat of the API is the rate limitations. This means we have to mine
+tweets over time. We should have set up a server and mined
+tweets with a cron\footnote{Wikipedia on Cron:
+\url{https://en.wikipedia.org/wiki/Cron}} job every 15 minutes.
 %
 
 \subsection{Tweet sets}
@@ -353,8 +351,7 @@ limited part of Twitter. Neither does the
 search words represent a full range of finance words.
 
 An improvement would use a wide variety of finance words to mine tweets. This
-would improve the relation to finance and the relevance of the dictionaries
-afterwords. 
+would improve the relation to finance and the relevance of the dictionaries. 
 
 \paragraph{Structure}
 \hspace{0pt}\\
@@ -366,13 +363,13 @@ no metadata present.
 
 \paragraph{Caveats}
 \hspace{0pt}\\
-Obama tweets are not ideal for sentiment analysis. It has much political
+Obama tweets are not ideal for sentiment analysis. It has to much political
 content to be easily comprehended. A political statement is not positive or
 negative. It is positive in the eyes on some and negative in the eyes of others.
 And there are people that think it is neutral because they do not care. Retweets
 are also present, so the actual data we get out of the tweet set is limited. 
 
-The Kiro dataset has a lot retweets and neutral tweets in it. Therefore we have
+The Kiro dataset has a lot of retweets and neutral tweets in it. Therefore we have
 only used positive and negative tweets, ignoring all the neutral ones.
 This gives us more relevant data to work with and less noise. Although we
 should have used the neutral tweets to improve the dictionaries.
@@ -381,7 +378,7 @@ should have used the neutral tweets to improve the dictionaries.
 \subsection{Trend Data}\label{data:trend_data}
 When mining larger sets of tweets, the rate limitations and week limitation is
 a challenge. The rate limitation defines how many queries we can do towards the
-api every 15 minutes. The week limitation is on the search index of the API,
+API every 15 minutes. The week limitation is on the search index of the API,
 the search engine only indexes tweets a week back in time and not all tweets
 are indexed. The mining itself is quite easy. Just execute a search and store
 all the new unique tweets. The problem appear when we need huge amounts of
@@ -390,7 +387,7 @@ tweets and a setup for continuous mining.
 Each request to Twitter can return 100 tweets. This gives us a theoretical
 maximum of 1800 tweets per 15 min. Then the fact that we
 might already have the tweets we receive from Twitter, and that we might not
-get 100 tweets per query. In addition the Twitter API only indexes tweets a
+get 100 tweets per query has an effect. In addition the Twitter API only indexes tweets a
 week back, forcing us to mine tweets over a longer period of time.  
 
 As we do not have a server to do the mining for us, we did it manually
@@ -438,8 +435,7 @@ economy.meta           @nikolaiastrup.meta    trend-Apr-20
 @erlendjordal          @oilandgasiq           trend-May-03
 \end{verbatim}
 
-All the used search words are stored in the file: '\_search-terms'
-\footnote{Search word file:
+All the used search words are stored in the file: '\_search-terms'\footnote{Search word file:
 \url{https://github.com/magnuskiro/master/blob/master/code/trend/_search-terms}}.
 Most of the search words are based on an article\footnote{Teknisk Ukeblad:
 \url{http://www.tu.no/petroleum/2014/04/05/dette-er-de-viktigste-twitrerne-for-oljebransjen}}
@@ -449,7 +445,7 @@ significant for the oil industry.
 The main part of the Norwegian economy is based on oil and gas exports. This
 means that other parts of the Norwegian economy is dependent on the oil
 industry in many ways. As an example, we have all the service industry around
-oil and gas, such as food supply, air travel, financial services etc. If the
+oil and gas, such as food supply, air travel, financial services, etc. If the
 oil industry has a hard time, all the dependent companies will have a hard time
 to. 
  
@@ -458,7 +454,7 @@ dependant on the oil industry. This makes our choice of tweets
 reasonable. 
 %
 
-\subsection{Problems, Shortcomings, and Possible Improvements}
+\subsection{Problems, Shortcomings, and Improvements}
 Retweets are a source of concern, they provide no new information. But they can
 provide information about impact and the importance of a given tweet. Retweets
 should be investigated more thoroughly in the future.  
@@ -510,15 +506,14 @@ while the LoughranMcDonald dictionary only has words from the financial domain.
 
 \paragraph{Obama}
 \hspace{0pt}\\
-The Obama dictionary was created for the Obama tweet set
-\footnote{Neal Caren of University of North Carolina. Tweet file:
+The Obama dictionary was created for the Obama tweet set\footnote{Neal Caren of University of North Carolina. Tweet file:
 \url{http://www.unc.edu/~ncaren/haphazard/obama_tweets.txt}} in relation to the
 us presidential election of 2008.
 
-In the positive list \footnote{Neal Caren of University of North Carolina.
+In the positive list\footnote{Neal Caren of University of North Carolina.
 Positive words: \url{http://www.unc.edu/~ncaren/haphazard/positive.txt}} there
 are 2230 words. Whether or not the frequency of political words are higher than
-other types of words are uncertain. \textit{wisdom},
+other types of words are uncertain. \textit{Wisdom},
 \textit{truthful}, \textit{profit}, and \textit{intact} are words found in
 the positive list. Neither \textit{intact} nor \textit{wisdom} are words that
 can be described as positive or negative. This gives a clear indication that
@@ -535,7 +530,7 @@ of this dictionary should be done.
 \paragraph{Loughran \& McDonald}
 \hspace{0pt}\\
 Tim Loughran and Bill McDonald has a set of dictionaries available from the
-websites of University of Notre Dame \footnote{Bill McDonald, University of
+websites of University of Notre Dame\footnote{Bill McDonald, University of
 Notre Dame:
 \url{http://www3.nd.edu/~mcdonald/Word_Lists.html}}. 
 
@@ -585,13 +580,14 @@ unique words, either positive or negative.
 \end{itemize}
 
 \paragraph{Characteristics}
+\hspace{0pt}\\
 For both datasets we compiled mono-, bi-, and trigrams. Giving us 6 sets of
 compiled dictionaries to test. All dictionaries has the drawback of personal
 bias. The personality of the person labeling the dataset also effects the
 dictionaries. 
 %
 
-\subsection{List of dictionaries}
+\subsection{List of Dictionaries}
 Table \ref{tbl:dictionaries}, lists all the dictionaries used. For each entry in
 the table there is a dictionary of negative words and a dictionary of positive
 words.  
@@ -599,7 +595,7 @@ words.
 \begin{table}
 \centering
 \label{tbl:dictionaries}
-\caption{Dictionary table}
+\caption{List of used Dictionaries}
 \begin{tabular}{ p{5cm} p{7cm} }
 Name of dictionary & Description \\
 Downloaded:& \\
@@ -632,7 +628,8 @@ Obama, Trigram & Containing words consisting of three separate trigrams.
 \section{Finance Data}\label{data:finance}
 The finance data consists of records from Oslo stock exchange, OSEBX, one
 record for each day. 
-The values we use are: \textit{quote\_date}, and \textit{close}.
+The values we use are: \textit{quote\_date}, \textit{high},
+\textit{low}, and \textit{close}.
 
 \paragraph{Data acquisition}
 \hspace{0pt}\\
@@ -640,12 +637,12 @@ Obtaining the financial data is easy. Point and click to receive a csv file
 containing the data we need. \url{Netfonds.no} provides the content we need.
 
 More specifically we get the data for the Oslo Stock exchange\footnote{Netfonds
-data on OSEBX
+data on OSEBX:
 \url{http://www.netfonds.no/quotes/paperhistory.php?paper=OSEBX.OSE&csv_format=csv}}. 
 
 By creating a little script we get fresh data every time we run the script.
 \begin{python}
-stock_exchange_history = urllib.urlopen(urli_of_datafile).readlines()
+stock_exchange_history = urllib.urlopen(url_of_datafile).readlines()
     for record in stock_exchange_history:
         # do tomething with the data
         print record

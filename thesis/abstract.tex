@@ -3,45 +3,40 @@
 $\\[0.1cm]$
 \begin{abstract}\label{abstract}
 
-\paragraph{Background}
-\hspace{0pt}\\
+\paragraph{Background:}
 As Twitter has become a global microblogging site, it's influence in the stock
-market has become significant. This makes tweets an interesting medium for
+market has become noticeable. This makes tweets an interesting medium for
 gathering sentiment. A sentiment that might influence trends in the stock
 market. 
 
-\paragraph{Motivation} 
-\hspace{0pt}\\
-If Twitter can be used to predict trends in the stock market
-the casual investor would gain an advantage over the day-trader or the modern trading algorithms. 
+\paragraph{Motivation:} 
+If Twitter can be used to predict future prices in the stock market
+the casual investor would gain an advantage over the day-trader and the modern trading algorithms. 
 
 Another interesting aspect is the role of Twitter in sentiment
 analysis. And how Twitters role as a data source influences trends in the stock
 market.   
 
-\paragraph{Data and Experiments} 
-\hspace{0pt}\\
+\paragraph{Data and Experiments:} 
 Twitter is used as the data source. It provides easy access, lots of data, and
-many possibilities to use available metadata. To find the sentiment of a tweet
-we use bag of words, SVM, and Naive Bayes. For the finance part and comparison
-of trends we use stock data from Oslo stock exchange. We use moving average(MA)
-and average directional index(ADX) as trend indicators. Trend comparison is
-based on MA and ADX. We calculate MA and ADX with finance data and sentiment
-data based on tweets. Then we compare the graphs. 
+many possibilities to use available metadata. 
+To find the sentiment of a tweet we use two methods, counting positive and
+negative words(bag of words), and classifiers (SVM and Naive Bayes). 
+We use moving average(MA) and average directional index(ADX) as trend
+indicators. We calculate MA and ADX with data from Oslo stock exchange, and we
+created our own indicators, based on MA and ADX, using data from Twitter. Then we
+compare the graphs.  
 
-\paragraph{Findings}
-\hspace{0pt}\\
+\paragraph{Findings:}
 We explore the usage of lists of words, dictionaries, in sentiment analysis.
 And we look at data retrieval from Twitter and the trend we can create from it.
 To a varying degree we get positive results with the dictionaries, while the
-trend aggregation lacks the finesse and results it should have had.
+trend aggregation lacks the finesse and results we hoped for.
 
-\paragraph{Conclusion} 
-\hspace{0pt}\\
-Sentiment classification of tweets worked with both methods. We managed to
-aggregate a trend based on sentiment. But the comparison with the finance trend
-did not work out as hoped. No similarities was found between the sentiment
-trend and the finance trend.  
+\paragraph{Conclusion:} 
+Sentiment classification of tweets worked with both bag of words, and trained
+classifiers. We also managed to aggregate a trend based on sentiment, but we
+found no correlation between the financial trend indicators and the sentiment indicators. 
 
 \end{abstract}
 
